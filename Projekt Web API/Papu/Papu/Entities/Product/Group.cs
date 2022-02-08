@@ -1,8 +1,8 @@
 ﻿namespace Papu.Entities
 {
-    public class KindOf
+    public class Group
     {
-        //Id i Nazwa rodzaju do którego należy danie
+        //Id i Nazwa grupy do której należy produkt
         public int Id { get; set; }
         public string Name { get; set; }
     }
