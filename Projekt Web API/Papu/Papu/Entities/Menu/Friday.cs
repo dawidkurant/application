@@ -13,6 +13,7 @@ namespace Papu.Entities
         //Dania przypisane do piątku
         public virtual List<Dish> Dishes { get; set; }
 
+        public virtual Menu Menu { get; set; }
 
     }
 }

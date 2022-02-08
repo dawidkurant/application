@@ -12,5 +12,8 @@ namespace Papu.Entities
 
         //Dania przypisane do niedzieli
         public virtual List<Dish> Dishes { get; set; }
+
+        public virtual Menu Menu { get; set; }
+
     }
 }

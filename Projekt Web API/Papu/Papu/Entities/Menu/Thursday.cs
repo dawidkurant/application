@@ -12,5 +12,8 @@ namespace Papu.Entities
 
         //Dania przypisane do czwartku
         public virtual List<Dish> Dishes { get; set; }
+
+        public virtual Menu Menu { get; set; }
+
     }
 }
