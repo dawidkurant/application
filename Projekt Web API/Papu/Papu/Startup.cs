@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Papu.Data;
+using Papu.Entities;
 using Papu.Models;
 
 namespace Papu
@@ -29,6 +30,9 @@ namespace Papu
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDbContext<PapuDbContext>();
+            services.AddScoped<PapuSeeder>();
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -50,8 +54,9 @@ namespace Papu
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, PapuSeeder seeder)
         {
+            seeder.Seed();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

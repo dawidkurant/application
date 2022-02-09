@@ -7,94 +7,120 @@ namespace Papu.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Categories",
+                columns: table => new
+                {
+                    CategoryId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Categories", x => x.CategoryId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Fridays",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    FridayId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Fridays", x => x.Id);
+                    table.PrimaryKey("PK_Fridays", x => x.FridayId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Mondays",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    MondayId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Mondays", x => x.Id);
+                    table.PrimaryKey("PK_Mondays", x => x.MondayId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Saturdays",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    SaturdayId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Saturdays", x => x.Id);
+                    table.PrimaryKey("PK_Saturdays", x => x.SaturdayId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Sundays",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    SundayId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Sundays", x => x.Id);
+                    table.PrimaryKey("PK_Sundays", x => x.SundayId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Thursdays",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    ThursdayId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Thursdays", x => x.Id);
+                    table.PrimaryKey("PK_Thursdays", x => x.ThursdayId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Tuesdays",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    TuesdayId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tuesdays", x => x.Id);
+                    table.PrimaryKey("PK_Tuesdays", x => x.TuesdayId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Units",
+                columns: table => new
+                {
+                    UnitId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Units", x => x.UnitId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Wednesdays",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    WednesdayId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Wednesdays", x => x.Id);
+                    table.PrimaryKey("PK_Wednesdays", x => x.WednesdayId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Dishes",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    DishId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -112,48 +138,48 @@ namespace Papu.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Dishes", x => x.Id);
+                    table.PrimaryKey("PK_Dishes", x => x.DishId);
                     table.ForeignKey(
                         name: "FK_Dishes_Fridays_FridayId",
                         column: x => x.FridayId,
                         principalTable: "Fridays",
-                        principalColumn: "Id",
+                        principalColumn: "FridayId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Dishes_Mondays_MondayId",
                         column: x => x.MondayId,
                         principalTable: "Mondays",
-                        principalColumn: "Id",
+                        principalColumn: "MondayId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Dishes_Saturdays_SaturdayId",
                         column: x => x.SaturdayId,
                         principalTable: "Saturdays",
-                        principalColumn: "Id",
+                        principalColumn: "SaturdayId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Dishes_Sundays_SundayId",
                         column: x => x.SundayId,
                         principalTable: "Sundays",
-                        principalColumn: "Id",
+                        principalColumn: "SundayId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Dishes_Thursdays_ThursdayId",
                         column: x => x.ThursdayId,
                         principalTable: "Thursdays",
-                        principalColumn: "Id",
+                        principalColumn: "ThursdayId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Dishes_Tuesdays_TuesdayId",
                         column: x => x.TuesdayId,
                         principalTable: "Tuesdays",
-                        principalColumn: "Id",
+                        principalColumn: "TuesdayId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Dishes_Wednesdays_WednesdayId",
                         column: x => x.WednesdayId,
                         principalTable: "Wednesdays",
-                        principalColumn: "Id",
+                        principalColumn: "WednesdayId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -161,92 +187,94 @@ namespace Papu.Migrations
                 name: "Menus",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    MenuId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MondayId = table.Column<int>(type: "int", nullable: false),
-                    TuesdayId = table.Column<int>(type: "int", nullable: false),
-                    WednesdayId = table.Column<int>(type: "int", nullable: false),
-                    ThursdayId = table.Column<int>(type: "int", nullable: false),
-                    FridayId = table.Column<int>(type: "int", nullable: false),
-                    SaturdayId = table.Column<int>(type: "int", nullable: false),
-                    SundayId = table.Column<int>(type: "int", nullable: false)
+                    MondayId = table.Column<int>(type: "int", nullable: true),
+                    TuesdayId = table.Column<int>(type: "int", nullable: true),
+                    WednesdayId = table.Column<int>(type: "int", nullable: true),
+                    ThursdayId = table.Column<int>(type: "int", nullable: true),
+                    FridayId = table.Column<int>(type: "int", nullable: true),
+                    SaturdayId = table.Column<int>(type: "int", nullable: true),
+                    SundayId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Menus", x => x.Id);
+                    table.PrimaryKey("PK_Menus", x => x.MenuId);
                     table.ForeignKey(
                         name: "FK_Menus_Fridays_FridayId",
                         column: x => x.FridayId,
                         principalTable: "Fridays",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "FridayId",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Menus_Mondays_MondayId",
                         column: x => x.MondayId,
                         principalTable: "Mondays",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "MondayId",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Menus_Saturdays_SaturdayId",
                         column: x => x.SaturdayId,
                         principalTable: "Saturdays",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "SaturdayId",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Menus_Sundays_SundayId",
                         column: x => x.SundayId,
                         principalTable: "Sundays",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "SundayId",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Menus_Thursdays_ThursdayId",
                         column: x => x.ThursdayId,
                         principalTable: "Thursdays",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ThursdayId",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Menus_Tuesdays_TuesdayId",
                         column: x => x.TuesdayId,
                         principalTable: "Tuesdays",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "TuesdayId",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Menus_Wednesdays_WednesdayId",
                         column: x => x.WednesdayId,
                         principalTable: "Wednesdays",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "WednesdayId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
                 name: "KindsOf",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    KindOfId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DishId = table.Column<int>(type: "int", nullable: true)
+                    DishId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_KindsOf", x => x.Id);
+                    table.PrimaryKey("PK_KindsOf", x => x.KindOfId);
                     table.ForeignKey(
                         name: "FK_KindsOf_Dishes_DishId",
                         column: x => x.DishId,
                         principalTable: "Dishes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "DishId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    ProductId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    UnitId = table.Column<int>(type: "int", nullable: false),
                     Weight = table.Column<double>(type: "float", nullable: false),
                     DishId = table.Column<int>(type: "int", nullable: true),
                     FridayId = table.Column<int>(type: "int", nullable: true),
@@ -259,54 +287,66 @@ namespace Papu.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Products", x => x.Id);
+                    table.PrimaryKey("PK_Products", x => x.ProductId);
+                    table.ForeignKey(
+                        name: "FK_Products_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "CategoryId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Products_Dishes_DishId",
                         column: x => x.DishId,
                         principalTable: "Dishes",
-                        principalColumn: "Id",
+                        principalColumn: "DishId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Products_Fridays_FridayId",
                         column: x => x.FridayId,
                         principalTable: "Fridays",
-                        principalColumn: "Id",
+                        principalColumn: "FridayId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Products_Mondays_MondayId",
                         column: x => x.MondayId,
                         principalTable: "Mondays",
-                        principalColumn: "Id",
+                        principalColumn: "MondayId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Products_Saturdays_SaturdayId",
                         column: x => x.SaturdayId,
                         principalTable: "Saturdays",
-                        principalColumn: "Id",
+                        principalColumn: "SaturdayId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Products_Sundays_SundayId",
                         column: x => x.SundayId,
                         principalTable: "Sundays",
-                        principalColumn: "Id",
+                        principalColumn: "SundayId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Products_Thursdays_ThursdayId",
                         column: x => x.ThursdayId,
                         principalTable: "Thursdays",
-                        principalColumn: "Id",
+                        principalColumn: "ThursdayId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Products_Tuesdays_TuesdayId",
                         column: x => x.TuesdayId,
                         principalTable: "Tuesdays",
-                        principalColumn: "Id",
+                        principalColumn: "TuesdayId",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Products_Units_UnitId",
+                        column: x => x.UnitId,
+                        principalTable: "Units",
+                        principalColumn: "UnitId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Products_Wednesdays_WednesdayId",
                         column: x => x.WednesdayId,
                         principalTable: "Wednesdays",
-                        principalColumn: "Id",
+                        principalColumn: "WednesdayId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -314,60 +354,40 @@ namespace Papu.Migrations
                 name: "Types",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    TypeId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DishId = table.Column<int>(type: "int", nullable: true)
+                    DishId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Types", x => x.Id);
+                    table.PrimaryKey("PK_Types", x => x.TypeId);
                     table.ForeignKey(
                         name: "FK_Types_Dishes_DishId",
                         column: x => x.DishId,
                         principalTable: "Dishes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "DishId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Groups",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    GroupId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ProductId = table.Column<int>(type: "int", nullable: true)
+                    ProductId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Groups", x => x.Id);
+                    table.PrimaryKey("PK_Groups", x => x.GroupId);
                     table.ForeignKey(
                         name: "FK_Groups_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Units",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ProductId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Units", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Units_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "ProductId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -451,6 +471,12 @@ namespace Papu.Migrations
                 column: "WednesdayId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Products_CategoryId",
+                table: "Products",
+                column: "CategoryId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Products_DishId",
                 table: "Products",
                 column: "DishId");
@@ -486,6 +512,12 @@ namespace Papu.Migrations
                 column: "TuesdayId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Products_UnitId",
+                table: "Products",
+                column: "UnitId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Products_WednesdayId",
                 table: "Products",
                 column: "WednesdayId");
@@ -494,11 +526,6 @@ namespace Papu.Migrations
                 name: "IX_Types_DishId",
                 table: "Types",
                 column: "DishId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Units_ProductId",
-                table: "Units",
-                column: "ProductId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -516,13 +543,16 @@ namespace Papu.Migrations
                 name: "Types");
 
             migrationBuilder.DropTable(
-                name: "Units");
-
-            migrationBuilder.DropTable(
                 name: "Products");
 
             migrationBuilder.DropTable(
+                name: "Categories");
+
+            migrationBuilder.DropTable(
                 name: "Dishes");
+
+            migrationBuilder.DropTable(
+                name: "Units");
 
             migrationBuilder.DropTable(
                 name: "Fridays");

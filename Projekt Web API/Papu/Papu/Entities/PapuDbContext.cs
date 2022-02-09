@@ -11,6 +11,7 @@ namespace Papu.Entities
         public DbSet<Menu> Menus { get; set; }
         public DbSet<Dish> Dishes { get; set; }
         public DbSet<Group> Groups { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public DbSet<Unit> Units { get; set; }
         public DbSet<Friday> Fridays { get; set; }
         public DbSet<Monday> Mondays { get; set; }

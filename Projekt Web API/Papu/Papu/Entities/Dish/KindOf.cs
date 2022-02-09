@@ -3,7 +3,7 @@
     public class KindOf
     {
         //Id i Nazwa rodzaju do którego należy danie
-        public int Id { get; set; }
+        public int KindOfId { get; set; }
         public string Name { get; set; }
 
         public int DishId { get; set; }

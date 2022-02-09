@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Papu.Entities
 {
@@ -7,7 +8,7 @@ namespace Papu.Entities
         //Podstawowe informacje dotyczące potrawy
 
         //Id
-        public int Id { get; set; }
+        public int DishId { get; set; }
 
         //Nazwa
         public string Name { get; set; }
@@ -35,22 +36,7 @@ namespace Papu.Entities
 
 
         //Produkty zawierające się w daniu
+        [JsonIgnore]
         public virtual List<Product> Products { get; set; }
-
-
-        public int MondayId { get; set; }
-        public virtual Monday Monday { get; set; }
-        public int TuesdayId { get; set; }
-        public virtual Tuesday Tuesday { get; set; }
-        public int WednesdayId { get; set; }
-        public virtual Wednesday Wednesday { get; set; }
-        public int ThursdayId { get; set; }
-        public virtual Thursday Thursday { get; set; }
-        public int FridayId { get; set; }
-        public virtual Friday Friday { get; set; }
-        public int SaturdayId { get; set; }
-        public virtual Saturday Saturday { get; set; }
-        public int SundayId { get; set; }
-        public virtual Sunday Sunday { get; set; }
     }
 }

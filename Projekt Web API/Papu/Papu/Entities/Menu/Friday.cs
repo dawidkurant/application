@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Papu.Entities
 {
     public class Friday
     {
-        public int Id { get; set; }
+        public int FridayId { get; set; }
 
 
         //Produkty przypisane do piątku
@@ -12,8 +13,6 @@ namespace Papu.Entities
 
         //Dania przypisane do piątku
         public virtual List<Dish> Dishes { get; set; }
-
-        public virtual Menu Menu { get; set; }
 
     }
 }
