@@ -29,7 +29,7 @@ namespace Papu.Entities
         public virtual List<KindOf> KindsOf { get; set; }
 
         //Rozmiar
-        public string Size { get; set; }
+        public int Size { get; set; }
 
         //Typ
         public virtual List<Type> Types { get; set; }

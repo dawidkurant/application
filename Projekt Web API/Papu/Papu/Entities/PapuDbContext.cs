@@ -36,15 +36,51 @@ namespace Papu.Entities
                 //Maksymalna długość
                 .HasMaxLength(50);
 
+            modelBuilder.Entity<Menu>()
+                .Property(r => r.Description)
+                .IsRequired()
+                .HasMaxLength(500);
+
             modelBuilder.Entity<Product>()
                 .Property(r => r.Name)
                 .IsRequired()
                 .HasMaxLength(50);
 
+            modelBuilder.Entity<Product>()
+                .Property(r => r.Weight)
+                .IsRequired()
+                .HasMaxLength(8)
+                .HasColumnType("decimal(7,2)");
+
             modelBuilder.Entity<Dish>()
                 .Property(r => r.Name)
                 .IsRequired()
                 .HasMaxLength(50);
+
+            modelBuilder.Entity<Dish>()
+                .Property(r => r.Description)
+                .IsRequired()
+                .HasMaxLength(500);
+
+            modelBuilder.Entity<Dish>()
+                .Property(r => r.MethodOfPeparation)
+                .IsRequired()
+                .HasMaxLength(1300);
+
+            modelBuilder.Entity<Dish>()
+                .Property(r => r.PreparationTime)
+                .IsRequired()
+                .HasMaxLength(3);
+
+            modelBuilder.Entity<Dish>()
+                .Property(r => r.Portions)
+                .IsRequired()
+                .HasMaxLength(3);
+
+            modelBuilder.Entity<Dish>()
+                .Property(r => r.Size)
+                .IsRequired()
+                .HasMaxLength(3);
         }
 
         //Konfiguracja połączenia do bazy danych

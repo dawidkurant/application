@@ -25,7 +25,7 @@ namespace Papu.Entities
         public virtual Unit Unit { get; set; }
 
         //Waga jednostki miary
-        public double Weight { get; set; }
+        public decimal Weight { get; set; }
 
 
         public virtual Dish Dish { get; set; }

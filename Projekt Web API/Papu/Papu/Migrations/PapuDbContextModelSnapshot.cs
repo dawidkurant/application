@@ -42,13 +42,17 @@ namespace Papu.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<int?>("FridayId")
                         .HasColumnType("int");
 
                     b.Property<string>("MethodOfPeparation")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(1300)
+                        .HasColumnType("nvarchar(1300)");
 
                     b.Property<int?>("MondayId")
                         .HasColumnType("int");
@@ -59,16 +63,19 @@ namespace Papu.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("Portions")
+                        .HasMaxLength(3)
                         .HasColumnType("int");
 
                     b.Property<int>("PreparationTime")
+                        .HasMaxLength(3)
                         .HasColumnType("int");
 
                     b.Property<int?>("SaturdayId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Size")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Size")
+                        .HasMaxLength(3)
+                        .HasColumnType("int");
 
                     b.Property<int?>("SundayId")
                         .HasColumnType("int");
@@ -161,7 +168,9 @@ namespace Papu.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<int?>("FridayId")
                         .HasColumnType("int");
@@ -170,7 +179,9 @@ namespace Papu.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int?>("SaturdayId")
                         .HasColumnType("int");
@@ -260,8 +271,9 @@ namespace Papu.Migrations
                     b.Property<int?>("WednesdayId")
                         .HasColumnType("int");
 
-                    b.Property<double>("Weight")
-                        .HasColumnType("float");
+                    b.Property<decimal>("Weight")
+                        .HasMaxLength(8)
+                        .HasColumnType("decimal(7,2)");
 
                     b.HasKey("ProductId");
 
