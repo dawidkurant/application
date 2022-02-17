@@ -14,14 +14,12 @@ namespace Papu.Entities
         public string ProductName { get; set; }
 
         //Kategoria
-        public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
 
         //Grupa
         public virtual List<Group> Groups { get; set; }
 
         //Jednostka miary
-        public int UnitId { get; set; }
         public virtual Unit Unit { get; set; }
 
         //Waga jednostki miary

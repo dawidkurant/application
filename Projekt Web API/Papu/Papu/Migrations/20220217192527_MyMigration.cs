@@ -12,7 +12,7 @@ namespace Papu.Migrations
                 {
                     CategoryId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    CategoryName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -97,7 +97,7 @@ namespace Papu.Migrations
                 {
                     UnitId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    UnitName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -122,8 +122,8 @@ namespace Papu.Migrations
                 {
                     DishId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    DishName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    DishDescription = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     MethodOfPeparation = table.Column<string>(type: "nvarchar(1300)", maxLength: 1300, nullable: false),
                     Portions = table.Column<int>(type: "int", maxLength: 3, nullable: false),
                     PreparationTime = table.Column<int>(type: "int", maxLength: 3, nullable: false),
@@ -189,8 +189,8 @@ namespace Papu.Migrations
                 {
                     MenuId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    MenuName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    MenuDescription = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     MondayId = table.Column<int>(type: "int", nullable: true),
                     TuesdayId = table.Column<int>(type: "int", nullable: true),
                     WednesdayId = table.Column<int>(type: "int", nullable: true),
@@ -252,8 +252,8 @@ namespace Papu.Migrations
                 {
                     KindOfId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DishId = table.Column<int>(type: "int", nullable: false)
+                    KindOfName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    DishId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -263,7 +263,7 @@ namespace Papu.Migrations
                         column: x => x.DishId,
                         principalTable: "Dishes",
                         principalColumn: "DishId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -272,9 +272,9 @@ namespace Papu.Migrations
                 {
                     ProductId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: false),
-                    UnitId = table.Column<int>(type: "int", nullable: false),
+                    ProductName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: true),
+                    UnitId = table.Column<int>(type: "int", nullable: true),
                     Weight = table.Column<decimal>(type: "decimal(7,2)", maxLength: 8, nullable: false),
                     DishId = table.Column<int>(type: "int", nullable: true),
                     FridayId = table.Column<int>(type: "int", nullable: true),
@@ -293,7 +293,7 @@ namespace Papu.Migrations
                         column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "CategoryId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Products_Dishes_DishId",
                         column: x => x.DishId,
@@ -341,7 +341,7 @@ namespace Papu.Migrations
                         column: x => x.UnitId,
                         principalTable: "Units",
                         principalColumn: "UnitId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Products_Wednesdays_WednesdayId",
                         column: x => x.WednesdayId,
@@ -356,8 +356,8 @@ namespace Papu.Migrations
                 {
                     TypeId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DishId = table.Column<int>(type: "int", nullable: false)
+                    TypeName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    DishId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -367,7 +367,7 @@ namespace Papu.Migrations
                         column: x => x.DishId,
                         principalTable: "Dishes",
                         principalColumn: "DishId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -376,8 +376,8 @@ namespace Papu.Migrations
                 {
                     GroupId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ProductId = table.Column<int>(type: "int", nullable: false)
+                    GroupName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -387,7 +387,7 @@ namespace Papu.Migrations
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "ProductId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -473,8 +473,7 @@ namespace Papu.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Products_CategoryId",
                 table: "Products",
-                column: "CategoryId",
-                unique: true);
+                column: "CategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_DishId",
@@ -514,8 +513,7 @@ namespace Papu.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Products_UnitId",
                 table: "Products",
-                column: "UnitId",
-                unique: true);
+                column: "UnitId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_WednesdayId",

@@ -7,7 +7,5 @@ namespace Papu.Entities
         //Id i Nazwa jednostki miary produktu 
         public int UnitId { get; set; }
         public string UnitName { get; set; }
-        public virtual Product Product { get; set; }
-
     }
 }

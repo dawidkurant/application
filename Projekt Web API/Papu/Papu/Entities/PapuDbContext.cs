@@ -81,6 +81,31 @@ namespace Papu.Entities
                 .Property(r => r.Size)
                 .IsRequired()
                 .HasMaxLength(3);
+
+            modelBuilder.Entity<Category>()
+                .Property(r => r.CategoryName)
+                .IsRequired()
+                .HasMaxLength(50);
+
+            modelBuilder.Entity<Unit>()
+                .Property(r => r.UnitName)
+                .IsRequired()
+                .HasMaxLength(50);
+
+            modelBuilder.Entity<Group>()
+                .Property(r => r.GroupName)
+                .IsRequired()
+                .HasMaxLength(50);
+
+            modelBuilder.Entity<KindOf>()
+                .Property(r => r.KindOfName)
+                .IsRequired()
+                .HasMaxLength(50);
+
+            modelBuilder.Entity<Type>()
+                .Property(r => r.TypeName)
+                .IsRequired()
+                .HasMaxLength(50);
         }
 
         //Konfiguracja połączenia do bazy danych

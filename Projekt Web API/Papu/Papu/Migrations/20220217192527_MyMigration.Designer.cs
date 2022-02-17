@@ -10,8 +10,8 @@ using Papu.Entities;
 namespace Papu.Migrations
 {
     [DbContext(typeof(PapuDbContext))]
-    [Migration("20220217170707_MyMigration1")]
-    partial class MyMigration1
+    [Migration("20220217192527_MyMigration")]
+    partial class MyMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,7 +29,9 @@ namespace Papu.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("CategoryName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("CategoryId");
 
@@ -130,9 +132,11 @@ namespace Papu.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("GroupName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("ProductId")
+                    b.Property<int?>("ProductId")
                         .HasColumnType("int");
 
                     b.HasKey("GroupId");
@@ -149,11 +153,13 @@ namespace Papu.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("DishId")
+                    b.Property<int?>("DishId")
                         .HasColumnType("int");
 
                     b.Property<string>("KindOfName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("KindOfId");
 
@@ -238,7 +244,7 @@ namespace Papu.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CategoryId")
+                    b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<int?>("DishId")
@@ -267,7 +273,7 @@ namespace Papu.Migrations
                     b.Property<int?>("TuesdayId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UnitId")
+                    b.Property<int?>("UnitId")
                         .HasColumnType("int");
 
                     b.Property<int?>("WednesdayId")
@@ -279,8 +285,7 @@ namespace Papu.Migrations
 
                     b.HasKey("ProductId");
 
-                    b.HasIndex("CategoryId")
-                        .IsUnique();
+                    b.HasIndex("CategoryId");
 
                     b.HasIndex("DishId");
 
@@ -296,8 +301,7 @@ namespace Papu.Migrations
 
                     b.HasIndex("TuesdayId");
 
-                    b.HasIndex("UnitId")
-                        .IsUnique();
+                    b.HasIndex("UnitId");
 
                     b.HasIndex("WednesdayId");
 
@@ -359,11 +363,13 @@ namespace Papu.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("DishId")
+                    b.Property<int?>("DishId")
                         .HasColumnType("int");
 
                     b.Property<string>("TypeName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("TypeId");
 
@@ -380,7 +386,9 @@ namespace Papu.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("UnitName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("UnitId");
 
@@ -432,24 +440,16 @@ namespace Papu.Migrations
 
             modelBuilder.Entity("Papu.Entities.Group", b =>
                 {
-                    b.HasOne("Papu.Entities.Product", "Product")
+                    b.HasOne("Papu.Entities.Product", null)
                         .WithMany("Groups")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
+                        .HasForeignKey("ProductId");
                 });
 
             modelBuilder.Entity("Papu.Entities.KindOf", b =>
                 {
-                    b.HasOne("Papu.Entities.Dish", "Dish")
+                    b.HasOne("Papu.Entities.Dish", null)
                         .WithMany("KindsOf")
-                        .HasForeignKey("DishId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Dish");
+                        .HasForeignKey("DishId");
                 });
 
             modelBuilder.Entity("Papu.Entities.Menu", b =>
@@ -500,10 +500,8 @@ namespace Papu.Migrations
             modelBuilder.Entity("Papu.Entities.Product", b =>
                 {
                     b.HasOne("Papu.Entities.Category", "Category")
-                        .WithOne("Product")
-                        .HasForeignKey("Papu.Entities.Product", "CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany()
+                        .HasForeignKey("CategoryId");
 
                     b.HasOne("Papu.Entities.Dish", "Dish")
                         .WithMany("Products")
@@ -534,10 +532,8 @@ namespace Papu.Migrations
                         .HasForeignKey("TuesdayId");
 
                     b.HasOne("Papu.Entities.Unit", "Unit")
-                        .WithOne("Product")
-                        .HasForeignKey("Papu.Entities.Product", "UnitId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany()
+                        .HasForeignKey("UnitId");
 
                     b.HasOne("Papu.Entities.Wednesday", null)
                         .WithMany("Products")
@@ -552,18 +548,9 @@ namespace Papu.Migrations
 
             modelBuilder.Entity("Papu.Entities.Type", b =>
                 {
-                    b.HasOne("Papu.Entities.Dish", "Dish")
+                    b.HasOne("Papu.Entities.Dish", null)
                         .WithMany("Types")
-                        .HasForeignKey("DishId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Dish");
-                });
-
-            modelBuilder.Entity("Papu.Entities.Category", b =>
-                {
-                    b.Navigation("Product");
+                        .HasForeignKey("DishId");
                 });
 
             modelBuilder.Entity("Papu.Entities.Dish", b =>
@@ -620,11 +607,6 @@ namespace Papu.Migrations
                     b.Navigation("Dishes");
 
                     b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("Papu.Entities.Unit", b =>
-                {
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Papu.Entities.Wednesday", b =>

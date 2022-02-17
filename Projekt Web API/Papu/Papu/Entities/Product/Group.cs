@@ -8,8 +8,5 @@ namespace Papu.Entities
         //Id i Nazwa grupy do której należy produkt
         public int GroupId { get; set; }
         public string GroupName { get; set; }
-        public int ProductId { get; set; }
-        public virtual Product Product { get; set; }
-
     }
 }

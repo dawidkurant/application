@@ -489,7 +489,7 @@ namespace Papu
                 new Product()
                 {
                     ProductName = "Pomidor",
-                    Category = new Category()
+                    /*Category = new Category()
                     {
                         CategoryName = "Owoce i Warzywa"
                     },
@@ -497,19 +497,19 @@ namespace Papu
                     {
                         new Group()
                         {
-                            GroupName = "Warzywa"
+                            GroupName = "Algi"
                         }
                     },
                     Unit = new Unit()
                     {
                         UnitName = "Sztuka"
-                    },
+                    },*/
                     Weight = 100
                 },
                 new Product()
                 {
                     ProductName = "Cytryna",
-                    Category = new Category()
+                    /*Category = new Category()
                     {
                         CategoryName = "Owoce i Warzywa"
                     },
@@ -517,13 +517,13 @@ namespace Papu
                     {
                         new Group()
                         {
-                            GroupName = "Owoce"
+                            GroupName = "Drożdże"
                         }
                     },
                     Unit = new Unit()
                     {
                         UnitName = "Sztuka"
-                    },
+                    },*/
                     Weight = 200
                 }
             };
@@ -545,7 +545,7 @@ namespace Papu
                         new Product()
                         {
                             ProductName = "Cytryna",
-                            Category = new Category()
+                            /*Category = new Category()
                             {
                                 CategoryName = "Owoce i Warzywa"
                             },
@@ -553,17 +553,17 @@ namespace Papu
                             {
                                 new Group()
                                 {
-                                    GroupName = "Owoce"
+                                    GroupName = "Algi"
                                 }
                             },
                             Unit = new Unit()
                             {
                                 UnitName = "Sztuka"
-                            },
+                            },*/
                             Weight = 200
                         }
                     },
-                    KindsOf = new List<KindOf>()
+                    /*KindsOf = new List<KindOf>()
                     {
                         new KindOf()
                         {
@@ -576,7 +576,7 @@ namespace Papu
                         {
                             TypeName = "Typ1"
                         }
-                    },
+                    },*/
                     DishDescription = "Przykładowy opis",
                     Size = 1,
                     MethodOfPeparation = "Mięso opłukać pod bieżącą " +
@@ -595,7 +595,7 @@ namespace Papu
                         new Product()
                         {
                             ProductName = "Cytryna",
-                            Category = new Category()
+                            /*Category = new Category()
                             {
                                 CategoryName = "Owoce i Warzywa"
                             },
@@ -603,17 +603,17 @@ namespace Papu
                             {
                                 new Group()
                                 {
-                                    GroupName = "Owoce"
+                                    GroupName = "Algi"
                                 }
                             },
                             Unit = new Unit()
                             {
                                 UnitName = "Sztuka"
-                            },
+                            },*/
                             Weight = 200
                         }
                     },
-                    KindsOf = new List<KindOf>()
+                    /*KindsOf = new List<KindOf>()
                     {
                         new KindOf()
                         {
@@ -626,7 +626,7 @@ namespace Papu
                         {
                             TypeName = "Typ2"
                         }
-                    },
+                    },*/
                     DishDescription = "Przykładowy opis",
                     Size = 2,
                     MethodOfPeparation = "Mięso opłukać pod bieżącą " +
@@ -660,7 +660,7 @@ namespace Papu
                             new Product()
                             {
                                 ProductName = "Cytryna",
-                                Category = new Category()
+                                /*Category = new Category()
                             {
                                 CategoryName = "Owoce i Warzywa"
                             },
@@ -668,13 +668,13 @@ namespace Papu
                             {
                                 new Group()
                                 {
-                                    GroupName = "Owoce"
+                                    GroupName = "Algi"
                                 }
                             },
                             Unit = new Unit()
                             {
                                 UnitName = "Sztuka"
-                            },
+                            },*/
                             Weight = 400
                             }
                         },
@@ -714,7 +714,7 @@ namespace Papu
                             new Product()
                             {
                                 ProductName = "Jajko",
-                                Category = new Category()
+                                /*Category = new Category()
                             {
                                 CategoryName = "Owoce i Warzywa"
                             },
@@ -722,13 +722,13 @@ namespace Papu
                             {
                                 new Group()
                                 {
-                                    GroupName = "Owoce"
+                                    GroupName = "Algi"
                                 }
                             },
                             Unit = new Unit()
                             {
                                 UnitName = "Sztuka"
-                            },
+                            },*/
                             Weight = 120
                             }
                         },
@@ -766,7 +766,7 @@ namespace Papu
                             new Product()
                             {
                                 ProductName = "Chleb",
-                                Category = new Category()
+                                /*Category = new Category()
                             {
                                 CategoryName = "Owoce i Warzywa"
                             },
@@ -774,13 +774,13 @@ namespace Papu
                             {
                                 new Group()
                                 {
-                                    GroupName = "Owoce"
+                                    GroupName = "Algi"
                                 }
                             },
                             Unit = new Unit()
                             {
                                 UnitName = "Sztuka"
-                            },
+                            },*/
                             Weight = 500
                             }
                         },
@@ -818,7 +818,7 @@ namespace Papu
                             new Product()
                             {
                                 ProductName = "Chleb tostowy",
-                                Category = new Category()
+                                /*Category = new Category()
                             {
                                 CategoryName = "Owoce i Warzywa"
                             },
@@ -826,13 +826,13 @@ namespace Papu
                             {
                                 new Group()
                                 {
-                                    GroupName = "Owoce"
+                                    GroupName = "Algi"
                                 }
                             },
                             Unit = new Unit()
                             {
                                 UnitName = "Sztuka"
-                            },
+                            },*/
                             Weight = 350
                             }
                         },
@@ -871,7 +871,7 @@ namespace Papu
                             new Product()
                             {
                                 ProductName = "Kiełbasa",
-                                Category = new Category()
+                                /*Category = new Category()
                             {
                                 CategoryName = "Owoce i Warzywa"
                             },
@@ -879,13 +879,13 @@ namespace Papu
                             {
                                 new Group()
                                 {
-                                    GroupName = "Owoce"
+                                    GroupName = "Algi"
                                 }
                             },
                             Unit = new Unit()
                             {
                                 UnitName = "Sztuka"
-                            },
+                            },*/
                             Weight = 240
                             }
                         },
@@ -922,7 +922,7 @@ namespace Papu
                             new Product()
                             {
                                 ProductName = "Dynia",
-                                Category = new Category()
+                                /*Category = new Category()
                             {
                                 CategoryName = "Owoce i Warzywa"
                             },
@@ -930,13 +930,13 @@ namespace Papu
                             {
                                 new Group()
                                 {
-                                    GroupName = "Owoce"
+                                    GroupName = "Algi"
                                 }
                             },
                             Unit = new Unit()
                             {
                                 UnitName = "Sztuka"
-                            },
+                            },*/
                             Weight = 1000
                             }
                         },
@@ -974,7 +974,7 @@ namespace Papu
                                 new Product()
                                 {
                                     ProductName = "Kura",
-                                    Category = new Category()
+                                    /*Category = new Category()
                                     {
                                         CategoryName = "Owoce i Warzywa"
                                     },
@@ -982,13 +982,13 @@ namespace Papu
                                     {
                                         new Group()
                                         {
-                                            GroupName = "Owoce"
+                                            GroupName = "Algi"
                                         }
                                     },
                                     Unit = new Unit()
                                     {
                                         UnitName = "Sztuka"
-                                    },
+                                    },*/
                                     Weight = 2000
                                 }
                             },
@@ -1033,7 +1033,7 @@ namespace Papu
                                     new Product()
                                     {
                                         ProductName = "Kura",
-                                        Category = new Category()
+                                        /*Category = new Category()
                                         {
                                         CategoryName = "Owoce i Warzywa"
                                         },
@@ -1041,13 +1041,13 @@ namespace Papu
                                         {
                                             new Group()
                                             {
-                                                GroupName = "Owoce"
+                                                GroupName = "Algi"
                                             }
                                         },
                                         Unit = new Unit()
                                         {
                                             UnitName = "Sztuka"
-                                        },
+                                        },*/
                                         Weight = 2000
                                     }
                                 },
@@ -1077,7 +1077,7 @@ namespace Papu
                                     new Product()
                                     {
                                         ProductName = "Ziemniaki",
-                                        Category = new Category()
+                                        /*Category = new Category()
                                         {
                                             CategoryName = "Owoce i Warzywa"
                                         },
@@ -1085,13 +1085,13 @@ namespace Papu
                                         {
                                             new Group()
                                             {
-                                                GroupName = "Owoce"
+                                                GroupName = "Algi"
                                             }
                                         },
                                         Unit = new Unit()
                                         {
                                             UnitName = "Sztuka"
-                                        },
+                                        },*/
                                         Weight = 5000
                                     }
                                 },
