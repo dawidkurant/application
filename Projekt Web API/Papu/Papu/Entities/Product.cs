@@ -11,7 +11,7 @@ namespace Papu.Entities
         public int ProductId { get; set; }
 
         //Nazwa
-        public string Name { get; set; }
+        public string ProductName { get; set; }
 
         //Kategoria
         public int CategoryId { get; set; }

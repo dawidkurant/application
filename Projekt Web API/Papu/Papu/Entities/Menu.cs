@@ -8,10 +8,10 @@
         public int MenuId { get; set; }
 
         //Nazwa
-        public string Name { get; set; }
+        public string MenuName { get; set; }
 
         //Opis
-        public string Description { get; set; }
+        public string MenuDescription { get; set; }
 
         //Poniedziałek
         public virtual Monday Monday { get; set; }

@@ -1,20 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using Papu.Entities;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace Papu.Entities
+namespace Papu.Models
 {
-    public class Dish
+    public class DishDto
     {
-        //Podstawowe informacje dotyczące potrawy
+        //Podstawowe informacje dotyczące potrawy dostępne dla klienta
 
         //Id
         public int DishId { get; set; }
 
         //Nazwa
-        public string DishName { get; set; }
+        public string Name { get; set; }
 
         //Opis
-        public string DishDescription { get; set; }
+        public string Description { get; set; }
 
         //Sposób przygotowania
         public string MethodOfPeparation { get; set; }
@@ -34,9 +35,8 @@ namespace Papu.Entities
         //Typ
         public virtual List<Type> Types { get; set; }
 
-
         //Produkty zawierające się w daniu
         [JsonIgnore]
-        public virtual List<Product> Products { get; set; }
+        public virtual List<ProductDto> Products { get; set; }
     }
 }

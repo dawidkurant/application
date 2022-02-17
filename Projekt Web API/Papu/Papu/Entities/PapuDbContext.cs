@@ -28,7 +28,7 @@ namespace Papu.Entities
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Menu>()
-                .Property(r => r.Name)
+                .Property(r => r.MenuName)
 
                 //Wymagana nazwa
                 .IsRequired()
@@ -37,12 +37,12 @@ namespace Papu.Entities
                 .HasMaxLength(50);
 
             modelBuilder.Entity<Menu>()
-                .Property(r => r.Description)
+                .Property(r => r.MenuDescription)
                 .IsRequired()
                 .HasMaxLength(500);
 
             modelBuilder.Entity<Product>()
-                .Property(r => r.Name)
+                .Property(r => r.ProductName)
                 .IsRequired()
                 .HasMaxLength(50);
 
@@ -53,12 +53,12 @@ namespace Papu.Entities
                 .HasColumnType("decimal(7,2)");
 
             modelBuilder.Entity<Dish>()
-                .Property(r => r.Name)
+                .Property(r => r.DishName)
                 .IsRequired()
                 .HasMaxLength(50);
 
             modelBuilder.Entity<Dish>()
-                .Property(r => r.Description)
+                .Property(r => r.DishDescription)
                 .IsRequired()
                 .HasMaxLength(500);
 

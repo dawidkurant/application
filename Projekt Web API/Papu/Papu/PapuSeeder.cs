@@ -109,41 +109,41 @@ namespace Papu
             {
                 new Product()
                 {
-                    Name = "Pomidor",
+                    ProductName = "Pomidor",
                     Category = new Category()
                     {
-                        Name = "Owoce i Warzywa"
+                        CategoryName = "Owoce i Warzywa"
                     },
                     Groups = new List<Group>()
                     {
                         new Group()
                         {
-                            Name = "Warzywa"
+                            GroupName = "Warzywa"
                         }
                     },
                     Unit = new Unit()
                     {
-                        Name = "Sztuka"
+                        UnitName = "Sztuka"
                     },
                     Weight = 100
                 },
                 new Product()
                 {
-                    Name = "Cytryna",
+                    ProductName = "Cytryna",
                     Category = new Category()
                     {
-                        Name = "Owoce i Warzywa"
+                        CategoryName = "Owoce i Warzywa"
                     },
                     Groups = new List<Group>()
                     {
                         new Group()
                         {
-                            Name = "Owoce"
+                            GroupName = "Owoce"
                         }
                     },
                     Unit = new Unit()
                     {
-                        Name = "Sztuka"
+                        UnitName = "Sztuka"
                     },
                     Weight = 200
                 }
@@ -160,26 +160,26 @@ namespace Papu
             {
                 new Dish()
                 {
-                    Name = "Pomidorowa",
+                    DishName = "Pomidorowa",
                     Products = new List<Product>()
                     {
                         new Product()
                         {
-                            Name = "Cytryna",
+                            ProductName = "Cytryna",
                             Category = new Category()
                             {
-                                Name = "Owoce i Warzywa"
+                                CategoryName = "Owoce i Warzywa"
                             },
                             Groups = new List<Group>()
                             {
                                 new Group()
                                 {
-                                    Name = "Owoce"
+                                    GroupName = "Owoce"
                                 }
                             },
                             Unit = new Unit()
                             {
-                                Name = "Sztuka"
+                                UnitName = "Sztuka"
                             },
                             Weight = 200
                         }
@@ -188,17 +188,17 @@ namespace Papu
                     {
                         new KindOf()
                         {
-                            Name = "Rodzaj1"
+                            KindOfName = "Rodzaj1"
                         }
                     },
                     Types = new List<Type>()
                     {
                         new Type()
                         {
-                            Name = "Typ1"
+                            TypeName = "Typ1"
                         }
                     },
-                    Description = "Przykładowy opis",
+                    DishDescription = "Przykładowy opis",
                     Size = 1,
                     MethodOfPeparation = "Mięso opłukać pod bieżącą " +
                     "chłodną wodą, włożyć do garnka, dodać szczyptę soli, " +
@@ -210,26 +210,26 @@ namespace Papu
                 },
                 new Dish()
                 {
-                    Name = "Pomidorowa",
+                    DishName = "Pomidorowa",
                     Products = new List<Product>()
                     {
                         new Product()
                         {
-                            Name = "Cytryna",
+                            ProductName = "Cytryna",
                             Category = new Category()
-                            {   
-                                Name = "Owoce i Warzywa"
+                            {
+                                CategoryName = "Owoce i Warzywa"
                             },
                             Groups = new List<Group>()
                             {
                                 new Group()
                                 {
-                                    Name = "Owoce"
+                                    GroupName = "Owoce"
                                 }
                             },
                             Unit = new Unit()
                             {
-                                Name = "Sztuka"
+                                UnitName = "Sztuka"
                             },
                             Weight = 200
                         }
@@ -238,17 +238,17 @@ namespace Papu
                     {
                         new KindOf()
                         {
-                            Name = "Rodzaj2"
+                            KindOfName = "Rodzaj2"
                         }
                     },
                     Types = new List<Type>()
                     {
                         new Type()
                         {
-                            Name = "Typ2"
+                            TypeName = "Typ2"
                         }
                     },
-                    Description = "Przykładowy opis",
+                    DishDescription = "Przykładowy opis",
                     Size = 2,
                     MethodOfPeparation = "Mięso opłukać pod bieżącą " +
                     "chłodną wodą, włożyć do garnka, dodać szczyptę soli, " +
@@ -275,31 +275,31 @@ namespace Papu
                     {
                         new Dish()
                         {
-                        Name = "Buraczki",
+                        DishName = "Buraczki",
                         Products = new List<Product>()
                         {
                             new Product()
                             {
-                                Name = "Cytryna",
+                                ProductName = "Cytryna",
                                 Category = new Category()
                             {
-                                Name = "Owoce i Warzywa"
+                                CategoryName = "Owoce i Warzywa"
                             },
                             Groups = new List<Group>()
                             {
                                 new Group()
                                 {
-                                    Name = "Owoce"
+                                    GroupName = "Owoce"
                                 }
                             },
                             Unit = new Unit()
                             {
-                                Name = "Sztuka"
+                                UnitName = "Sztuka"
                             },
                             Weight = 400
                             }
                         },
-                        Description = "Przykładowy opis",
+                        DishDescription = "Przykładowy opis",
                         Size = 3,
                         MethodOfPeparation = "Cebule obieram, szatkuję w drobniutką " +
                         "kostkę i podsmażam na oleju. Buraki studzę, ścieram na " +
@@ -310,7 +310,7 @@ namespace Papu
                         PreparationTime = 1,
                         Portions = 3
                         }
-                    } 
+                    }
                 }
             };
 
@@ -329,31 +329,31 @@ namespace Papu
                     {
                         new Dish()
                         {
-                        Name = "Jajko na twardo",
+                        DishName = "Jajko na twardo",
                         Products = new List<Product>()
                         {
                             new Product()
                             {
-                                Name = "Jajko",
+                                ProductName = "Jajko",
                                 Category = new Category()
                             {
-                                Name = "Owoce i Warzywa"
+                                CategoryName = "Owoce i Warzywa"
                             },
                             Groups = new List<Group>()
                             {
                                 new Group()
                                 {
-                                    Name = "Owoce"
+                                    GroupName = "Owoce"
                                 }
                             },
                             Unit = new Unit()
                             {
-                                Name = "Sztuka"
+                                UnitName = "Sztuka"
                             },
                             Weight = 120
                             }
                         },
-                        Description = "Przykładowy opis",
+                        DishDescription = "Przykładowy opis",
                         Size = 1,
                         MethodOfPeparation = "Nalej do garnka wodę i włóż " +
                         "do niej jajka. Czekaj aż woda się zagotuje. " +
@@ -381,31 +381,31 @@ namespace Papu
                     {
                         new Dish()
                         {
-                        Name = "Grzanki",
+                        DishName = "Grzanki",
                         Products = new List<Product>()
                         {
                             new Product()
                             {
-                                Name = "Chleb",
+                                ProductName = "Chleb",
                                 Category = new Category()
                             {
-                                Name = "Owoce i Warzywa"
+                                CategoryName = "Owoce i Warzywa"
                             },
                             Groups = new List<Group>()
                             {
                                 new Group()
                                 {
-                                    Name = "Owoce"
+                                    GroupName = "Owoce"
                                 }
                             },
                             Unit = new Unit()
                             {
-                                Name = "Sztuka"
+                                UnitName = "Sztuka"
                             },
                             Weight = 500
                             }
                         },
-                        Description = "Przykładowy opis",
+                        DishDescription = "Przykładowy opis",
                         Size = 2,
                         MethodOfPeparation = "Chleb pokroić na kromki. Każdą " +
                         "kromkę posmarować ok. 1 łyżeczką masła czosnkowo-ziołowego. " +
@@ -433,31 +433,31 @@ namespace Papu
                     {
                         new Dish()
                         {
-                        Name = "Tosty",
+                        DishName = "Tosty",
                         Products = new List<Product>()
                         {
                             new Product()
                             {
-                                Name = "Chleb tostowy",
+                                ProductName = "Chleb tostowy",
                                 Category = new Category()
                             {
-                                Name = "Owoce i Warzywa"
+                                CategoryName = "Owoce i Warzywa"
                             },
                             Groups = new List<Group>()
                             {
                                 new Group()
                                 {
-                                    Name = "Owoce"
+                                    GroupName = "Owoce"
                                 }
                             },
                             Unit = new Unit()
                             {
-                                Name = "Sztuka"
+                                UnitName = "Sztuka"
                             },
                             Weight = 350
                             }
                         },
-                        Description = "Przykładowy opis",
+                        DishDescription = "Przykładowy opis",
                         Size = 3,
                         MethodOfPeparation = "Chleb posmaruj masłem, na 2 " +
                         "kromkach połóż ser, szynkę, ogórka, pomidora, przykryj " +
@@ -486,31 +486,31 @@ namespace Papu
                     {
                         new Dish()
                         {
-                        Name = "Żurek",
+                        DishName = "Żurek",
                         Products = new List<Product>()
                         {
                             new Product()
                             {
-                                Name = "Kiełbasa",
+                                ProductName = "Kiełbasa",
                                 Category = new Category()
                             {
-                                Name = "Owoce i Warzywa"
+                                CategoryName = "Owoce i Warzywa"
                             },
                             Groups = new List<Group>()
                             {
                                 new Group()
                                 {
-                                    Name = "Owoce"
+                                    GroupName = "Owoce"
                                 }
                             },
                             Unit = new Unit()
                             {
-                                Name = "Sztuka"
+                                UnitName = "Sztuka"
                             },
                             Weight = 240
                             }
                         },
-                        Description = "Przykładowy opis",
+                        DishDescription = "Przykładowy opis",
                         Size = 1,
                         MethodOfPeparation = "Bulion lub wywar zagotować z " +
                         "dodatkiem pokrojonych na 2 - 3 części wędzonych żeberek " +
@@ -537,31 +537,31 @@ namespace Papu
                     {
                         new Dish()
                         {
-                        Name = "Zupa z dyni",
+                        DishName = "Zupa z dyni",
                         Products = new List<Product>()
                         {
                             new Product()
                             {
-                                Name = "Dynia",
+                                ProductName = "Dynia",
                                 Category = new Category()
                             {
-                                Name = "Owoce i Warzywa"
+                                CategoryName = "Owoce i Warzywa"
                             },
                             Groups = new List<Group>()
                             {
                                 new Group()
                                 {
-                                    Name = "Owoce"
+                                    GroupName = "Owoce"
                                 }
                             },
                             Unit = new Unit()
                             {
-                                Name = "Sztuka"
+                                UnitName = "Sztuka"
                             },
                             Weight = 1000
                             }
                         },
-                        Description = "Przykładowy opis",
+                        DishDescription = "Przykładowy opis",
                         Size = 2,
                         MethodOfPeparation = "Dynię umyć, przekroić na pół, " +
                         "oczyścić z pestek i włókien. Następnie pokroić w kostkę " +
@@ -589,31 +589,31 @@ namespace Papu
                     {
                         new Dish()
                         {
-                            Name = "Kurczak",
+                            DishName = "Kurczak",
                             Products = new List<Product>()
                             {
                                 new Product()
                                 {
-                                    Name = "Kura",
+                                    ProductName = "Kura",
                                     Category = new Category()
                                     {
-                                        Name = "Owoce i Warzywa"
+                                        CategoryName = "Owoce i Warzywa"
                                     },
                                     Groups = new List<Group>()
                                     {
                                         new Group()
                                         {
-                                            Name = "Owoce"
+                                            GroupName = "Owoce"
                                         }
                                     },
                                     Unit = new Unit()
                                     {
-                                        Name = "Sztuka"
+                                        UnitName = "Sztuka"
                                     },
                                     Weight = 2000
                                 }
                             },
-                            Description = "Przykładowy opis",
+                            DishDescription = "Przykładowy opis",
                             Size = 3,
                             MethodOfPeparation = "Wyciśnij sok z pomarańczy. " +
                                 "Na patelni na rozgrzanej oliwie podsmaż pokrojoną " +
@@ -640,39 +640,39 @@ namespace Papu
             {
                 new Menu()
                 {
-                    Name = "Treningowy",
-                    Description = "Jadłospis na rzeźbę",
+                    MenuName = "Treningowy",
+                    MenuDescription = "Jadłospis na rzeźbę",
                     Monday = new Monday()
                     {
                         Dishes = new List<Dish>()
                         {
                             new Dish()
                             {
-                                Name = "Kurczak",
+                                DishName = "Kurczak",
                                 Products = new List<Product>()
                                 {
                                     new Product()
                                     {
-                                        Name = "Kura",
+                                        ProductName = "Kura",
                                         Category = new Category()
                                         {
-                                        Name = "Owoce i Warzywa"
+                                        CategoryName = "Owoce i Warzywa"
                                         },
                                         Groups = new List<Group>()
                                         {
                                             new Group()
                                             {
-                                                Name = "Owoce"
+                                                GroupName = "Owoce"
                                             }
                                         },
                                         Unit = new Unit()
                                         {
-                                            Name = "Sztuka"
+                                            UnitName = "Sztuka"
                                         },
                                         Weight = 2000
                                     }
                                 },
-                                Description = "Przykładowy opis",
+                                DishDescription = "Przykładowy opis",
                                 Size = 1,
                                 MethodOfPeparation = "Wyciśnij sok z pomarańczy. " +
                                 "Na patelni na rozgrzanej oliwie podsmaż pokrojoną " +
@@ -692,31 +692,31 @@ namespace Papu
                         {
                             new Dish()
                             {
-                                Name = "Pyzy",
+                                DishName = "Pyzy",
                                 Products = new List<Product>()
                                 {
                                     new Product()
                                     {
-                                        Name = "Ziemniaki",
+                                        ProductName = "Ziemniaki",
                                         Category = new Category()
                                         {
-                                            Name = "Owoce i Warzywa"
+                                            CategoryName = "Owoce i Warzywa"
                                         },
                                         Groups = new List<Group>()
                                         {
                                             new Group()
                                             {
-                                                Name = "Owoce"
+                                                GroupName = "Owoce"
                                             }
                                         },
                                         Unit = new Unit()
                                         {
-                                            Name = "Sztuka"
+                                            UnitName = "Sztuka"
                                         },
                                         Weight = 5000
                                     }
                                 },
-                                Description = "Przykładowy opis",
+                                DishDescription = "Przykładowy opis",
                                 Size = 2,
                                 MethodOfPeparation = "Połowę ziemniaków ugotować w " +
                                 "osolonej wodzie do miękkości, odcedzić i rozgnieść " +

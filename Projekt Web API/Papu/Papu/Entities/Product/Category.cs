@@ -6,7 +6,7 @@ namespace Papu.Entities
     {
         //Id i Nazwa kategorii do której należy produkt
         public int CategoryId { get; set; }
-        public string Name { get; set; }
+        public string CategoryName { get; set; }
         public virtual Product Product { get; set; }    
     }
 }
