@@ -35,6 +35,46 @@ namespace Papu
                     _dbContext.SaveChanges();
                 }
 
+                //Sprawdzamy czy tabela z rodzajami potraw jest pusta
+                if (!_dbContext.KindsOf.Any())
+                {
+                    var kindsOf = GetKindsOf();
+                    _dbContext.KindsOf.AddRange(kindsOf);
+                    _dbContext.SaveChanges();
+                }
+
+                //Sprawdzamy czy tabela z typami potraw jest pusta
+                if (!_dbContext.Types.Any())
+                {
+                    var types = GetTypes();
+                    _dbContext.Types.AddRange(types);
+                    _dbContext.SaveChanges();
+                }
+
+                //Sprawdzamy czy tabela z kategoriami produktów jest pusta
+                if (!_dbContext.Categories.Any())
+                {
+                    var categories = GetCategories();
+                    _dbContext.Categories.AddRange(categories);
+                    _dbContext.SaveChanges();
+                }
+
+                //Sprawdzamy czy tabela z jednostkami miar produktów jest pusta
+                if (!_dbContext.Units.Any())
+                {
+                    var units = GetUnits();
+                    _dbContext.Units.AddRange(units);
+                    _dbContext.SaveChanges();
+                }
+
+                //Sprawdzamy czy tabela z grupami produktów jest pusta
+                if (!_dbContext.Groups.Any())
+                {
+                    var groups = GetGroups();
+                    _dbContext.Groups.AddRange(groups);
+                    _dbContext.SaveChanges();
+                }
+
                 //Sprawdzamy czy tabela z poniedziałkami jest pusta
                 if (!_dbContext.Mondays.Any())
                 {
@@ -99,6 +139,345 @@ namespace Papu
                     _dbContext.SaveChanges();
                 }
             }
+        }
+
+        //Metoda zwracająca kolekcję grup produktów, które będą zawsze istnieć w tabeli group
+        //baza automatycznie przydzieli id
+        private IEnumerable<Group> GetGroups()
+        {
+            var groups = new List<Group>()
+            {
+                new Group()
+                {
+                    GroupName = "Algi"
+                },
+                new Group()
+                {
+                    GroupName = "Drożdże"
+                },
+                new Group()
+                {
+                    GroupName = "Grzyby"
+                },
+                new Group()
+                {
+                    GroupName = "Inne"
+                },
+                new Group()
+                {
+                    GroupName = "Jaja"
+                },
+                new Group()
+                {
+                    GroupName = "Kawa herbata"
+                },
+                new Group()
+                {
+                    GroupName = "Konserwanty"
+                },
+                new Group()
+                {
+                    GroupName = "Mięso"
+                },
+                new Group()
+                {
+                    GroupName = "Nasiona i orzechy"
+                },
+                new Group()
+                {
+                    GroupName = "Owoce"
+                },
+                new Group()
+                {
+                    GroupName = "Owoce morza"
+                },
+                new Group()
+                {
+                    GroupName = "Pozostałe"
+                },
+                new Group()
+                {
+                    GroupName = "Produkty mleczne"
+                },
+                new Group()
+                {
+                    GroupName = "Produkty słodzące"
+                },
+                new Group()
+                {
+                    GroupName = "Przyprawy i zioła"
+                },
+                new Group()
+                {
+                    GroupName = "Ryby"
+                },
+                new Group()
+                {
+                    GroupName = "Sałaty"
+                },
+                new Group()
+                {
+                    GroupName = "Warzywa"
+                },
+                new Group()
+                {
+                    GroupName = "Warzywa strączkowe"
+                },
+                new Group()
+                {
+                    GroupName = "Zagęstniki"
+                },
+                new Group()
+                {
+                    GroupName = "Zamienniki zbóż"
+                },
+                new Group()
+                {
+                    GroupName = "Zboża niezawierające glutenu"
+                },
+                new Group()
+                {
+                    GroupName = "Zboża zawierające gluten"
+                }
+            };
+
+            return groups;
+        }
+
+        //Metoda zwracająca kolekcję jednostek miary produktów, które będą zawsze istnieć w tabeli unit
+        //baza automatycznie przydzieli id
+        private IEnumerable<Unit> GetUnits()
+        {
+            var units = new List<Unit>()
+            {
+                new Unit()
+                {
+                    UnitName = "Garść"
+                },
+                new Unit()
+                {
+                    UnitName = "Łyżka"
+                },
+                new Unit()
+                {
+                    UnitName = "Sztuka"
+                },
+                new Unit()
+                {
+                    UnitName = "Litr"
+                },
+                new Unit()
+                {
+                    UnitName = "Plaster"
+                },
+                new Unit()
+                {
+                    UnitName = "Porcja"
+                },
+                new Unit()
+                {
+                    UnitName = "Plasterek"
+                },
+                new Unit()
+                {
+                    UnitName = "Opakowanie"
+                },
+                new Unit()
+                {
+                    UnitName = "Łyżeczka"
+                },
+                new Unit()
+                {
+                    UnitName = "Listek"
+                },
+                new Unit()
+                {
+                    UnitName = "Kromka"
+                },
+                new Unit()
+                {
+                    UnitName = "Szklanka"
+                },
+                new Unit()
+                {
+                    UnitName = "Kostka"
+                },
+                new Unit()
+                {
+                    UnitName = "Ząbek"
+                },
+                new Unit()
+                {
+                    UnitName = "Liść"
+                },
+                new Unit()
+                {
+                    UnitName = "Łodyga"
+                },
+                new Unit()
+                {
+                    UnitName = "Kieliszek"
+                },
+                new Unit()
+                {
+                    UnitName = "Kropla"
+                },
+                new Unit()
+                {
+                    UnitName = "Szczypta"
+                },
+                new Unit()
+                {
+                    UnitName = "Płat"
+                },
+                new Unit()
+                {
+                    UnitName = "Rurka"
+                },
+                new Unit()
+                {
+                    UnitName = "Kapsułka"
+                },
+                new Unit()
+                {
+                    UnitName = "Miarka"
+                },
+                new Unit()
+                {
+                    UnitName = "Pęczek"
+                },
+                new Unit()
+                {
+                    UnitName = "Gałka"
+                },
+                new Unit()
+                {
+                    UnitName = "Kawałek"
+                },
+            };
+
+            return units;
+        }
+
+        //Metoda zwracająca kolekcję kategorii produktów, które będą zawsze istnieć w tabeli category
+        //baza automatycznie przydzieli id
+        private IEnumerable<Category> GetCategories()
+        {
+            var categories = new List<Category>()
+            {
+                new Category()
+                {
+                    CategoryName = "Nabiał"
+                },
+                new Category()
+                {
+                    CategoryName = "Mięso i wyroby mięsne"
+                },
+                new Category()
+                {
+                    CategoryName = "Ryby i owoce morza"
+                },
+                new Category()
+                {
+                    CategoryName = "Pieczywo"
+                },
+                new Category()
+                {
+                    CategoryName = "Zbożowe"
+                },
+                new Category()
+                {
+                    CategoryName = "Orzechy i ziarna"
+                },
+                new Category()
+                {
+                    CategoryName = "Napoje"
+                },
+                new Category()
+                {
+                    CategoryName = "Tłuszcze"
+                },
+                new Category()
+                {
+                    CategoryName = "Inne"
+                },
+                new Category()
+                {
+                    CategoryName = "Owoce i Warzywa"
+                },
+                new Category()
+                {
+                    CategoryName = "Przyprawy i zioła"
+                }
+            };
+
+            return categories;
+        }
+
+        //Metoda zwracająca kolekcję typów potraw, które będą zawsze istnieć w tabeli type
+        //baza automatycznie przydzieli id
+        private IEnumerable<Type> GetTypes()
+        {
+            var types = new List<Type>()
+            {
+                new Type()
+                {
+                    TypeName = "Śniadanie"
+                },
+                new Type()
+                {
+                    TypeName = "Drugie śniadanie"
+                },
+                new Type()
+                {
+                    TypeName = "Obiad"
+                },
+                new Type()
+                {
+                    TypeName = "Podwieczorek"
+                },
+                new Type()
+                {
+                    TypeName = "Kolacja"
+                },
+                new Type()
+                {
+                    TypeName = "Przekąska"
+                }
+            };
+
+            return types;
+        }
+
+        //Metoda zwracająca kolekcję rodzajów potraw, które będą zawsze istnieć w tabeli kindOf
+        //baza automatycznie przydzieli id
+        private IEnumerable<KindOf> GetKindsOf()
+        {
+            var kindsOf = new List<KindOf>()
+            {
+                new KindOf()
+                {
+                    KindOfName = "Paleo"
+                },
+                new KindOf()
+                {
+                    KindOfName = "Potreningowy"
+                },
+                new KindOf()
+                {
+                    KindOfName = "Szybki"
+                },
+                new KindOf()
+                {
+                    KindOfName = "Fit"
+                },
+                new KindOf()
+                {
+                    KindOfName = "Z niskim IG"
+                }
+            };
+
+            return kindsOf;
         }
 
         //Metoda zwracająca kolekcję produktów, które będą zawsze istnieć w tabeli product
