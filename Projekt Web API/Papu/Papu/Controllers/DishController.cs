@@ -15,7 +15,8 @@ namespace Papu.Controllers
             _dbContext = dbContext;
         }
 
-        //pobranie wszystkich potraw z bazy i zwrócenie ich do klienta z kodem 200 czyli OK
+        //Pobranie wszystkich potraw z bazy i zwrócenie ich do klienta z kodem 200 czyli OK
+        [HttpGet]
         public ActionResult<IEnumerable<Dish>> GetAll()
         {
             var dishes = _dbContext
@@ -23,6 +24,22 @@ namespace Papu.Controllers
                 .ToList();
 
             return Ok(dishes);
+        }
+
+        //Pobranie konkretnej potrawy
+        [HttpGet("{id}")]
+        public ActionResult<Dish> Get([FromRoute] int id)
+        {
+            var dish = _dbContext
+                .Dishes
+                .FirstOrDefault(r => r.DishId == id);
+
+            if(dish is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(dish);
         }
     }
 }
