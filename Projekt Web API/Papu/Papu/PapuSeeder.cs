@@ -650,7 +650,7 @@ namespace Papu
             {
                 new Monday()
                 {
-                    Dishes = new List<Dish>()
+                    MondayDishes = new List<Dish>()
                     {
                         new Dish()
                         {
@@ -704,7 +704,7 @@ namespace Papu
             {
                 new Saturday()
                 {
-                    Dishes = new List<Dish>()
+                    SaturdayDishes = new List<Dish>()
                     {
                         new Dish()
                         {
@@ -756,7 +756,7 @@ namespace Papu
             {
                 new Friday()
                 {
-                    Dishes = new List<Dish>()
+                    FridayDishes = new List<Dish>()
                     {
                         new Dish()
                         {
@@ -808,7 +808,7 @@ namespace Papu
             {
                 new Tuesday()
                 {
-                    Dishes = new List<Dish>()
+                    TuesdayDishes = new List<Dish>()
                     {
                         new Dish()
                         {
@@ -861,7 +861,7 @@ namespace Papu
             {
                 new Wednesday()
                 {
-                    Dishes = new List<Dish>()
+                    WednesdayDishes = new List<Dish>()
                     {
                         new Dish()
                         {
@@ -912,7 +912,7 @@ namespace Papu
             {
                 new Thursday()
                 {
-                    Dishes = new List<Dish>()
+                    ThursdayDishes = new List<Dish>()
                     {
                         new Dish()
                         {
@@ -964,7 +964,7 @@ namespace Papu
             {
                 new Sunday()
                 {
-                    Dishes = new List<Dish>()
+                    SundayDishes = new List<Dish>()
                     {
                         new Dish()
                         {
@@ -1023,7 +1023,7 @@ namespace Papu
                     MenuDescription = "Jadłospis na rzeźbę",
                     Monday = new Monday()
                     {
-                        Dishes = new List<Dish>()
+                        MondayDishes = new List<Dish>()
                         {
                             new Dish()
                             {
@@ -1067,7 +1067,7 @@ namespace Papu
                     },
                     Friday = new Friday()
                     {
-                        Dishes = new List<Dish>()
+                        FridayDishes = new List<Dish>()
                         {
                             new Dish()
                             {

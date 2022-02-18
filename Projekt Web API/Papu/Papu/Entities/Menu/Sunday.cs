@@ -9,9 +9,9 @@ namespace Papu.Entities
 
 
         //Produkty przypisane do niedzieli
-        public virtual List<Product> Products { get; set; }
+        public virtual List<Product> SundayProducts { get; set; }
 
         //Dania przypisane do niedzieli
-        public virtual List<Dish> Dishes { get; set; }
+        public virtual List<Dish> SundayDishes { get; set; }
     }
 }

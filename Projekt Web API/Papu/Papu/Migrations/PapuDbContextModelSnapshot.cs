@@ -408,31 +408,31 @@ namespace Papu.Migrations
             modelBuilder.Entity("Papu.Entities.Dish", b =>
                 {
                     b.HasOne("Papu.Entities.Friday", null)
-                        .WithMany("Dishes")
+                        .WithMany("FridayDishes")
                         .HasForeignKey("FridayId");
 
                     b.HasOne("Papu.Entities.Monday", null)
-                        .WithMany("Dishes")
+                        .WithMany("MondayDishes")
                         .HasForeignKey("MondayId");
 
                     b.HasOne("Papu.Entities.Saturday", null)
-                        .WithMany("Dishes")
+                        .WithMany("SaturdayDishes")
                         .HasForeignKey("SaturdayId");
 
                     b.HasOne("Papu.Entities.Sunday", null)
-                        .WithMany("Dishes")
+                        .WithMany("SundayDishes")
                         .HasForeignKey("SundayId");
 
                     b.HasOne("Papu.Entities.Thursday", null)
-                        .WithMany("Dishes")
+                        .WithMany("ThursdayDishes")
                         .HasForeignKey("ThursdayId");
 
                     b.HasOne("Papu.Entities.Tuesday", null)
-                        .WithMany("Dishes")
+                        .WithMany("TuesdayDishes")
                         .HasForeignKey("TuesdayId");
 
                     b.HasOne("Papu.Entities.Wednesday", null)
-                        .WithMany("Dishes")
+                        .WithMany("WednesdayDishes")
                         .HasForeignKey("WednesdayId");
                 });
 
@@ -506,27 +506,27 @@ namespace Papu.Migrations
                         .HasForeignKey("DishId");
 
                     b.HasOne("Papu.Entities.Friday", null)
-                        .WithMany("Products")
+                        .WithMany("FridayProducts")
                         .HasForeignKey("FridayId");
 
                     b.HasOne("Papu.Entities.Monday", null)
-                        .WithMany("Products")
+                        .WithMany("MondayProducts")
                         .HasForeignKey("MondayId");
 
                     b.HasOne("Papu.Entities.Saturday", null)
-                        .WithMany("Products")
+                        .WithMany("SaturdayProducts")
                         .HasForeignKey("SaturdayId");
 
                     b.HasOne("Papu.Entities.Sunday", null)
-                        .WithMany("Products")
+                        .WithMany("SundayProducts")
                         .HasForeignKey("SundayId");
 
                     b.HasOne("Papu.Entities.Thursday", null)
-                        .WithMany("Products")
+                        .WithMany("ThursdayProducts")
                         .HasForeignKey("ThursdayId");
 
                     b.HasOne("Papu.Entities.Tuesday", null)
-                        .WithMany("Products")
+                        .WithMany("TuesdayProducts")
                         .HasForeignKey("TuesdayId");
 
                     b.HasOne("Papu.Entities.Unit", "Unit")
@@ -534,7 +534,7 @@ namespace Papu.Migrations
                         .HasForeignKey("UnitId");
 
                     b.HasOne("Papu.Entities.Wednesday", null)
-                        .WithMany("Products")
+                        .WithMany("WednesdayProducts")
                         .HasForeignKey("WednesdayId");
 
                     b.Navigation("Category");
@@ -562,16 +562,16 @@ namespace Papu.Migrations
 
             modelBuilder.Entity("Papu.Entities.Friday", b =>
                 {
-                    b.Navigation("Dishes");
+                    b.Navigation("FridayDishes");
 
-                    b.Navigation("Products");
+                    b.Navigation("FridayProducts");
                 });
 
             modelBuilder.Entity("Papu.Entities.Monday", b =>
                 {
-                    b.Navigation("Dishes");
+                    b.Navigation("MondayDishes");
 
-                    b.Navigation("Products");
+                    b.Navigation("MondayProducts");
                 });
 
             modelBuilder.Entity("Papu.Entities.Product", b =>
@@ -581,37 +581,37 @@ namespace Papu.Migrations
 
             modelBuilder.Entity("Papu.Entities.Saturday", b =>
                 {
-                    b.Navigation("Dishes");
+                    b.Navigation("SaturdayDishes");
 
-                    b.Navigation("Products");
+                    b.Navigation("SaturdayProducts");
                 });
 
             modelBuilder.Entity("Papu.Entities.Sunday", b =>
                 {
-                    b.Navigation("Dishes");
+                    b.Navigation("SundayDishes");
 
-                    b.Navigation("Products");
+                    b.Navigation("SundayProducts");
                 });
 
             modelBuilder.Entity("Papu.Entities.Thursday", b =>
                 {
-                    b.Navigation("Dishes");
+                    b.Navigation("ThursdayDishes");
 
-                    b.Navigation("Products");
+                    b.Navigation("ThursdayProducts");
                 });
 
             modelBuilder.Entity("Papu.Entities.Tuesday", b =>
                 {
-                    b.Navigation("Dishes");
+                    b.Navigation("TuesdayDishes");
 
-                    b.Navigation("Products");
+                    b.Navigation("TuesdayProducts");
                 });
 
             modelBuilder.Entity("Papu.Entities.Wednesday", b =>
                 {
-                    b.Navigation("Dishes");
+                    b.Navigation("WednesdayDishes");
 
-                    b.Navigation("Products");
+                    b.Navigation("WednesdayProducts");
                 });
 #pragma warning restore 612, 618
         }

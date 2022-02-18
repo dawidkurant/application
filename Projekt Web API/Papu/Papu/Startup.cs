@@ -1,3 +1,4 @@
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,8 +32,14 @@ namespace Papu
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
+            //Rejestracja kontekstu bazy danych
             services.AddDbContext<PapuDbContext>();
+            //Rejestracja serwisu seedującego
             services.AddScoped<PapuSeeder>();
+            //AddAutoMapper - jako parametr przekazujemy źródło projektu, którym
+            //AutoMapper przeszuka wszystkie typy i znajdzie profile które są potrzebne do
+            //utworzenia konfiguracji         
+            services.AddAutoMapper(this.GetType().Assembly);
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -56,6 +63,8 @@ namespace Papu
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, PapuSeeder seeder)
         {
+            //Każde zapytanie do naszego API przejdzie przez proces seedowania przez co encje zostaną dodane już
+            //przy pierwszym zapytaniu do naszego API
             seeder.Seed();
             if (env.IsDevelopment())
             {
@@ -78,8 +87,13 @@ namespace Papu
 
             app.UseRouting();
 
+            //W ten sposób mówimy naszemu Api o tym, że każdy request wysłany przez klienta api
+            //będzie podlegał autentykacji 
             app.UseAuthentication();
             app.UseIdentityServer();
+
+            //Nasze api będzie w stanie autoryzować użytkowników, ale samo to nie wystarczy
+            //pod każdą akcją należy dodać atrybut autoryzacji 
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
