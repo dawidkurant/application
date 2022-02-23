@@ -7,11 +7,14 @@ namespace Papu.Entities
     {
         public int MondayId { get; set; }
 
+        public Menu Menu { get; set; }
+
+        public int? MenuRef { get; set; }
 
         //Produkty przypisane do poniedziałku
-        public virtual List<Product> MondayProducts { get; set; }
+        public virtual ICollection<ProductMonday> MondayProducts { get; set; }
 
         //Dania przypisane do poniedziałku
-        public virtual List<Dish> MondayDishes { get; set; }
+        public virtual ICollection<DishMonday> MondayDishes { get; set; }
     }
 }

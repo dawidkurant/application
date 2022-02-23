@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Papu.Entities;
 using Papu.Models;
+using System.Linq;
 
 namespace Papu
 {
@@ -13,8 +14,10 @@ namespace Papu
             //dla jakich właściwości chcemy skonfigurować dane mapowanie 
             //MapFrom() - z jakiego pola chcemy mapować do pola CategoryName
             CreateMap<Product, ProductDto>()
-                .ForMember(x => x.CategoryName, c => c.MapFrom(s => s.Category.CategoryName))
-                .ForMember(x => x.UnitName, c => c.MapFrom(s => s.Unit.UnitName));
+                .ForMember(dto => dto.Groups, c => c.MapFrom(dto => dto.ProductGroups.Select(cs => cs.Group)))
+                .ForMember(dto => dto.CategoryName, c => c.MapFrom(dto => dto.Category.CategoryName))
+                .ForMember(dto => dto.UnitName, c => c.MapFrom(dto => dto.Unit.UnitName));
+
 
             CreateMap<Dish, DishDto>();
 
@@ -34,6 +37,7 @@ namespace Papu
                 .ForMember(x => x.SundayProducts, c => c.MapFrom(s => s.Sunday.SundayProducts))
                 .ForMember(x => x.SundayDishes, c => c.MapFrom(s => s.Sunday.SundayDishes));
 
+            CreateMap<CreateProductDto, Product>();
         }
     }
 }

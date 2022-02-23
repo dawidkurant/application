@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Papu.Entities
@@ -8,5 +9,11 @@ namespace Papu.Entities
         //Id i Nazwa grupy do której należy produkt
         public int GroupId { get; set; }
         public string GroupName { get; set; }
+
+        //Grupa
+        [JsonIgnore]
+        public virtual ICollection<ProductGroup> ProductGroups { get; set; }
+
+
     }
 }

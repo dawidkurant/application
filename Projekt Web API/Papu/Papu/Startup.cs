@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using Papu.Data;
 using Papu.Entities;
 using Papu.Models;
+using Papu.Services;
 
 namespace Papu
 {
@@ -40,6 +41,10 @@ namespace Papu
             //AutoMapper przeszuka wszystkie typy i znajdzie profile które są potrzebne do
             //utworzenia konfiguracji         
             services.AddAutoMapper(this.GetType().Assembly);
+            services.AddScoped<IProductService, ProductService>();
+
+            services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 namespace Papu.Entities
@@ -26,17 +28,41 @@ namespace Papu.Entities
         public int PreparationTime { get; set; }
 
         //Rodzaj
-        public virtual List<KindOf> KindsOf { get; set; }
+        public virtual ICollection<DishKindOf> DishKindsOf { get; set; }
 
         //Rozmiar
         public int Size { get; set; }
 
         //Typ
-        public virtual List<Type> Types { get; set; }
+        public virtual ICollection<DishType> DishTypes { get; set; }
+
+        //Zdjęcie
+        public string DishImagePath { get; set; }
 
 
         //Produkty zawierające się w daniu
-        [JsonIgnore]
-        public virtual List<Product> Products { get; set; }
+        public virtual ICollection<ProductDish> DishProducts { get; set; }
+
+        //Dania przypisane do poniedziałku
+        public virtual ICollection<DishMonday> MondayDishes { get; set; }
+
+        //Dania przypisane do wtorku
+        public virtual ICollection<DishTuesday> TuesdayDishes { get; set; }
+
+        //Dania przypisane do środy
+        public virtual ICollection<DishWednesday> WednesdayDishes { get; set; }
+
+        //Dania przypisane do czwartku
+        public virtual ICollection<DishThursday> ThursdayDishes { get; set; }
+
+        //Dania przypisane do piątku
+        public virtual ICollection<DishFriday> FridayDishes { get; set; }
+
+        //Dania przypisane do soboty
+        public virtual ICollection<DishSaturday> SaturdayDishes { get; set; }
+
+        //Dania przypisane do niedzieli
+        public virtual ICollection<DishSunday> SundayDishes { get; set; }
+
     }
 }

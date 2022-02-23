@@ -1,5 +1,7 @@
-﻿using Papu.Entities;
+﻿using Microsoft.AspNetCore.Http;
+using Papu.Entities;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 namespace Papu.Models
@@ -34,6 +36,9 @@ namespace Papu.Models
 
         //Typ
         public virtual List<Type> Types { get; set; }
+
+        //Zdjęcie
+        public string DishImagePath { get; set; }
 
         //Produkty zawierające się w daniu
         [JsonIgnore]

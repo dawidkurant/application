@@ -26,10 +26,10 @@ namespace Papu.Controllers
         {
             var dishes = _dbContext
                 .Dishes
-                .Include(r => r.KindsOf)
-                .Include(r => r.Types)
-                .Include(r => r.Products)
-                .ToList();
+                .Include(r => r.DishKindsOf)
+                .Include(r => r.DishTypes)
+/*                .Include(r => r.Products)
+*/                .ToList();
 
             var dishesDtos = _mapper.Map<List<DishDto>>(dishes);
 
@@ -42,10 +42,10 @@ namespace Papu.Controllers
         {
             var dish = _dbContext
                 .Dishes
-                .Include(r => r.KindsOf)
-                .Include(r => r.Types)
-                .Include(r => r.Products)
-                .FirstOrDefault(r => r.DishId == id);
+                .Include(r => r.DishKindsOf)
+                .Include(r => r.DishTypes)
+/*                .Include(r => r.Products)
+*/                .FirstOrDefault(r => r.DishId == id);
 
             if(dish is null)
             {

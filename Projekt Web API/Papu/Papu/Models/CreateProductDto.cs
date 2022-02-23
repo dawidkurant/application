@@ -1,27 +1,23 @@
-﻿using Microsoft.AspNetCore.Http;
-using Papu.Entities;
+﻿using Papu.Entities;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.RegularExpressions;
 
 namespace Papu.Models
 {
-    public class ProductDto
+    public class CreateProductDto
     {
         //Podstawowe informacje dotyczące produktu dostępne dla klienta
 
-        //Id
-        public int ProductId { get; set; }
-
-        //Nazwa
+        //Nazwa produktu
         public string ProductName { get; set; }
 
-        //Kategoria
+        //Id grupy
+        public int[] GroupId { get; set; }
+
+        //Nazwa kategorii
         public string CategoryName { get; set; }
 
-        //Grupa
-        public virtual ICollection<Group> Groups { get; set; }
-
-        //Jednostka miary
+        //Nazwa jednostki
         public string UnitName { get; set; }
 
         //Waga jednostki miary

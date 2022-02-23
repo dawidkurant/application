@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Papu.Entities
 {
@@ -7,5 +8,9 @@ namespace Papu.Entities
         //Id i Nazwa jednostki miary produktu 
         public int UnitId { get; set; }
         public string UnitName { get; set; }
+
+        public virtual ICollection<Product> Products { get; set; }
+
+
     }
 }

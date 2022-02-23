@@ -5,7 +5,7 @@
         //Podstawowe informacje dotyczące jadłospisu
 
         //Id
-        public int MenuId { get; set; }
+        public int? MenuId { get; set; }
 
         //Nazwa
         public string MenuName { get; set; }
