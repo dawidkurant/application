@@ -6,16 +6,16 @@ namespace Papu.Models
 {
     public class CreateProductDto
     {
-        //Podstawowe informacje dotyczące produktu dostępne dla klienta
+        //Informacje, które może podać klient, aby stworzyć produkt
 
         //Nazwa produktu
         public string ProductName { get; set; }
 
-        //Id grupy
-        public int[] GroupId { get; set; }
-
         //Nazwa kategorii
         public string CategoryName { get; set; }
+
+        //Id grupy
+        public int[] GroupId { get; set; }
 
         //Nazwa jednostki
         public string UnitName { get; set; }

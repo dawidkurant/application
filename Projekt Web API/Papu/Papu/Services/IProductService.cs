@@ -8,8 +8,6 @@ namespace Papu.Services
     {
         IEnumerable<ProductDto> GetAllProducts();
         ProductDto GetByIdProduct(int id);
-/*        int CreateProductWithGroup(AddGroupToProductDto dto);
-        int CreateProductWithCategoryAndUnit(AddCategoryAndUnitToProductDto dto);*/
         int CreateProduct(CreateProductDto dto);
     }
 }

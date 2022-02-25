@@ -48,14 +48,6 @@ namespace Papu.Controllers
         {
             var newProductId = _productService.CreateProduct(dto);
 
-            //zapytanie zostało wysłane niepoprawnie (błąd walidacji)
-            //if (!ModelState.IsValid)
-            //{
-            //    return BadRequest(ModelState);
-            //}
-
-            /*            var id = _restaurantService.Create(dto);
-            */
             //Jako pierwszy parametr ścieżka, a jako drugi
             //możemy zwrócić ciało odpowiedzi, ale w tym wypadku zwracamy null
             return Created($"api/product/{newProductId}", null);

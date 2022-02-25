@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Papu.Entities
 {
@@ -30,9 +31,7 @@ namespace Papu.Entities
         //Zdjęcie
         public string ProductImagePath { get; set; }
 
-
         public virtual ICollection<ProductDish> DishProducts { get; set; }
-
 
         //Produkty przypisane do poniedziałku
         public virtual ICollection<ProductMonday> MondayProducts { get; set; }

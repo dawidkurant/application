@@ -1,82 +1,53 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Papu.Entities;
+﻿using Microsoft.AspNetCore.Mvc;
 using Papu.Models;
+using Papu.Services;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Papu.Controllers
 {
     [Route("api/menu")]
     public class MenuController : ControllerBase
     {
-        private readonly PapuDbContext _dbContext;
-        private readonly IMapper _mapper;
 
-        public MenuController(PapuDbContext dbContext, IMapper mapper)
+        private readonly IMenuService _menuService;
+
+        public MenuController(IMenuService menuService)
         {
-            _dbContext = dbContext;
-            _mapper = mapper;
+            _menuService = menuService;
         }
 
-        //Pobranie wszystkich menu z bazy i zwrócenie ich do klienta z kodem 200 czyli OK
-        [HttpGet]
-        public ActionResult<IEnumerable<MenuDto>> GetAll()
-        {
-            var menus = _dbContext
-                .Menus
-                .Include(r => r.Monday.MondayProducts)
-                .Include(r => r.Monday.MondayDishes)
-                .Include(r => r.Tuesday.TuesdayProducts)
-                .Include(r => r.Tuesday.TuesdayDishes)
-                .Include(r => r.Wednesday.WednesdayProducts)
-                .Include(r => r.Wednesday.WednesdayDishes)
-                .Include(r => r.Thursday.ThursdayProducts)
-                .Include(r => r.Thursday.ThursdayDishes)
-                .Include(r => r.Friday.FridayProducts)
-                .Include(r => r.Friday.FridayDishes)
-                .Include(r => r.Saturday.SaturdayProducts)
-                .Include(r => r.Saturday.SaturdayDishes)
-                .Include(r => r.Sunday.SundayProducts)
-                .Include(r => r.Sunday.SundayDishes)
-                .ToList();
-
-            var menusDtos = _mapper.Map<List<MenuDto>>(menus);
-
-            return Ok(menusDtos);
-        }
-
-        //Pobranie konkretnego menu
+        //Pobranie konkretnego jadłospisu 
         [HttpGet("{id}")]
-        public ActionResult<MenuDto> Get([FromRoute] int id)
+        public ActionResult<MenuDto> GetMenu([FromRoute] int id)
         {
-            var menu = _dbContext
-                .Menus
-                .Include(r => r.Monday.MondayProducts)
-                .Include(r => r.Monday.MondayDishes)
-                .Include(r => r.Tuesday.TuesdayProducts)
-                .Include(r => r.Tuesday.TuesdayDishes)
-                .Include(r => r.Wednesday.WednesdayProducts)
-                .Include(r => r.Wednesday.WednesdayDishes)
-                .Include(r => r.Thursday.ThursdayProducts)
-                .Include(r => r.Thursday.ThursdayDishes)
-                .Include(r => r.Friday.FridayProducts)
-                .Include(r => r.Friday.FridayDishes)
-                .Include(r => r.Saturday.SaturdayProducts)
-                .Include(r => r.Saturday.SaturdayDishes)
-                .Include(r => r.Sunday.SundayProducts)
-                .Include(r => r.Sunday.SundayDishes)
-                .FirstOrDefault(r => r.MenuId == id);
+            var menu = _menuService.GetByIdMenu(id);
 
             if (menu is null)
             {
                 return NotFound();
             }
 
-            var menuDto = _mapper.Map<MenuDto>(menu);
+            return Ok(menu);
+        }
 
-            return Ok(menuDto);
+        //Pobranie wszystkich jadłospisów z bazy i zwrócenie ich do klienta z kodem 200 czyli OK
+        [HttpGet]
+        public ActionResult<IEnumerable<MenuDto>> GetAllMenus()
+        {
+            var menusDtos = _menuService.GetAllMenus();
+
+            return Ok(menusDtos);
+        }
+
+        //Tworzenie nowego jadłospisu
+        [HttpPost]
+        public ActionResult CreateMenu([FromBody] CreateMenuDto dto)
+        {
+            var newMenuId = _menuService.CreateMenu(dto);
+
+            //Jako pierwszy parametr ścieżka, a jako drugi
+            //możemy zwrócić ciało odpowiedzi, ale w tym wypadku zwracamy null
+            return Created($"api/menu/{newMenuId}", null);
         }
     }
 }

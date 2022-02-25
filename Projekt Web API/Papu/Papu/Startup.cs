@@ -42,6 +42,8 @@ namespace Papu
             //utworzenia konfiguracji         
             services.AddAutoMapper(this.GetType().Assembly);
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IDishService, DishService>();
+            services.AddScoped<IMenuService, MenuService>();
 
             services.AddControllers().AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);

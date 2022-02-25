@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Papu.Entities
 {
@@ -8,6 +9,7 @@ namespace Papu.Entities
         public int TypeId { get; set; }
         public string TypeName { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<DishType> DishTypes { get; set; }
 
     }

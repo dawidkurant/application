@@ -52,56 +52,6 @@ namespace Papu.Services
             return productsDtos;
         }
 
-/*        public int CreateProductWithGroup(AddGroupToProductDto dto)
-        {
-            foreach (var addGroup in dto.GroupId)
-            {
-                Product product = _dbContext.Products
-                    .Include(c => c.ProductGroups).ThenInclude(cs => cs.Group)
-                    .FirstOrDefault(c => c.ProductId == dto.ProductId);
-
-                Group group = _dbContext.Groups
-                    .FirstOrDefault(s => s.GroupId == addGroup);
-
-                ProductGroup productGroup = new ProductGroup
-                {
-                    Product = product,
-                    Group = group
-                };
-
-                _dbContext.ProductGroups.Add(productGroup);
-            }
-
-            _dbContext.SaveChanges();
-           
-            return dto.ProductId;
-        }
-
-        public int CreateProductWithCategoryAndUnit(AddCategoryAndUnitToProductDto dto)
-        {
-            var product = _mapper.Map<Product>(dto);
-
-            Category category = _dbContext.Categories
-                .FirstOrDefault(c => c.CategoryName == dto.CategoryName);
-
-            Unit unit = _dbContext.Units
-               .FirstOrDefault(c => c.UnitName == dto.UnitName);
-
-            Product product1 = new Product
-            {
-                ProductId = product.ProductId,
-                ProductName = product.ProductName,
-                Unit = unit,
-                Category = category,
-            };
-
-
-            _dbContext.Products.Add(product1);
-            _dbContext.SaveChanges();
-
-            return product1.ProductId;
-        }*/
-
         public int CreateProduct(CreateProductDto dto)
         {
             var product = _mapper.Map<Product>(dto);

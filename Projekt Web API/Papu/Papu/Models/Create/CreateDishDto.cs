@@ -1,17 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
-using Papu.Entities;
+﻿using Papu.Entities;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
 
 namespace Papu.Models
 {
-    public class DishDto
+    public class CreateDishDto
     {
-        //Podstawowe informacje dotyczące potrawy dostępne dla klienta
-
-        //Id
-        public int DishId { get; set; }
+        //Informacje, które może podać klient, aby stworzyć potrawę
 
         //Nazwa
         public string DishName { get; set; }
@@ -29,19 +23,18 @@ namespace Papu.Models
         public int PreparationTime { get; set; }
 
         //Rodzaj
-        public virtual ICollection<KindOf> KindsOf { get; set; }
+        public int[] KindOfId { get; set; }
 
         //Rozmiar
         public int Size { get; set; }
 
         //Typ
-        public virtual ICollection<Type> Types { get; set; }
+        public int[] TypeId { get; set; }
 
         //Zdjęcie
         public string DishImagePath { get; set; }
 
-
         //Produkty zawierające się w daniu
-        public virtual ICollection<ProductDto> Products { get; set; }
+        public int[] ProductId { get; set; }
     }
 }
