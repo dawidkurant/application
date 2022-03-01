@@ -39,30 +39,23 @@ namespace Papu.Entities
         //Zdjęcie
         public string DishImagePath { get; set; }
 
-
         //Produkty zawierające się w daniu
         public virtual ICollection<ProductDish> DishProducts { get; set; }
 
-        //Dania przypisane do poniedziałku
-        public virtual ICollection<DishMonday> MondayDishes { get; set; }
+        //Dania zawierające się w śniadaniu
+        public virtual ICollection<BreakfastDish> BreakfastDishes { get; set; }
 
-        //Dania przypisane do wtorku
-        public virtual ICollection<DishTuesday> TuesdayDishes { get; set; }
+        //Dania zawierające się w drugim śniadaniu
+        public virtual ICollection<SecondBreakfastDish> SecondBreakfastDishes { get; set; }
 
-        //Dania przypisane do środy
-        public virtual ICollection<DishWednesday> WednesdayDishes { get; set; }
+        //Dania zawierające się w obiedzie
+        public virtual ICollection<LunchDish> LunchDishes { get; set; }
 
-        //Dania przypisane do czwartku
-        public virtual ICollection<DishThursday> ThursdayDishes { get; set; }
+        //Dania zawierające się w podwieczorku
+        public virtual ICollection<SnackDish> SnackDishes { get; set; }
 
-        //Dania przypisane do piątku
-        public virtual ICollection<DishFriday> FridayDishes { get; set; }
-
-        //Dania przypisane do soboty
-        public virtual ICollection<DishSaturday> SaturdayDishes { get; set; }
-
-        //Dania przypisane do niedzieli
-        public virtual ICollection<DishSunday> SundayDishes { get; set; }
+        //Dania zawierające się w kolacji
+        public virtual ICollection<DinnerDish> DinnerDishes { get; set; }
 
     }
 }

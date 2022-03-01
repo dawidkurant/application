@@ -43,7 +43,7 @@ namespace Papu
             services.AddAutoMapper(this.GetType().Assembly);
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IDishService, DishService>();
-            services.AddScoped<IMenuService, MenuService>();
+            services.AddScoped<ITimesOfDayService, TimesOfDayService>();
 
             services.AddControllers().AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);

@@ -13,7 +13,7 @@
         //Opis
         public string MenuDescription { get; set; }
 
-        //Poniedziałek
+        /*//Poniedziałek
         public virtual Monday Monday { get; set; }
 
         //Wtorek
@@ -32,6 +32,6 @@
         public virtual Saturday Saturday { get; set; }
 
         //Niedziela
-        public virtual Sunday Sunday { get; set; }
+        public virtual Sunday Sunday { get; set; }*/
     }
 }

@@ -75,7 +75,15 @@ namespace Papu
                     _dbContext.SaveChanges();
                 }
 
-                //Sprawdzamy czy tabela z poniedziałkami jest pusta
+                //Sprawdzamy czy tabela ze śniadaniami jest pusta
+                if (!_dbContext.Breakfasts.Any())
+                {
+                    var breakfasts = GetBreakfasts();
+                    _dbContext.Breakfasts.AddRange(breakfasts);
+                    _dbContext.SaveChanges();
+                }
+
+                /*//Sprawdzamy czy tabela z poniedziałkami jest pusta
                 if (!_dbContext.Mondays.Any())
                 {
                     var mondays = GetMondays();
@@ -137,7 +145,7 @@ namespace Papu
                     var menus = GetMenus();
                     _dbContext.Menus.AddRange(menus);
                     _dbContext.SaveChanges();
-                }
+                }*/
             }
         }
 
@@ -560,7 +568,52 @@ namespace Papu
             return dishes;
         }
 
-        //Metoda zwracająca kolekcję poniedziałków, które będą zawsze istnieć w tabeli product
+        //Metoda zwracająca kolekcję śniadań, które będą zawsze istnieć w tabeli breakfast
+        //baza automatycznie przydzieli id
+        private IEnumerable<Breakfast> GetBreakfasts()
+        {
+            var breakfasts = new List<Breakfast>()
+            {
+                new Breakfast()
+                {
+                    Dishes = new List<BreakfastDish>()
+                    {
+                        new BreakfastDish()
+                        {
+                            Dish = new Dish()
+                            {
+                                DishName = "Buraczki",
+                                DishProducts = new List<ProductDish>()
+                                {
+                                    new ProductDish()
+                                    {
+                                        Product = new Product()
+                                        {
+                                        ProductName = "Cytryna",
+                                        Weight = 400
+                                        }
+                                    }
+                                },
+                                DishDescription = "Przykładowy opis",
+                                Size = 3,
+                                MethodOfPeparation = "Cebule obieram, szatkuję w drobniutką " +
+                                "kostkę i podsmażam na oleju. Buraki studzę, ścieram na " +
+                                "tarce o grubych oczkach, właściwie grubość tarcia można " +
+                                "dostawać do swoich preferencji. Dodaję przyprawy, sok " +
+                                "wyciśnięty z cytryny, syrop daktylowy lub ryżowy, sól oraz " +
+                                "pieprz. Mieszam bardzo dokładnie i podgrzewam ponownie.",
+                                PreparationTime = 1,
+                                Portions = 3
+                            }
+                        }
+                    }
+                }
+            };
+
+            return breakfasts;
+        }
+
+        /*//Metoda zwracająca kolekcję poniedziałków, które będą zawsze istnieć w tabeli product
         //baza automatycznie przydzieli id
         private IEnumerable<Monday> GetMondays()
         {
@@ -950,6 +1003,6 @@ namespace Papu
             };
 
             return menus;
-        }
+        }*/
     }
 }

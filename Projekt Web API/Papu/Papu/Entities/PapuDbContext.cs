@@ -15,32 +15,26 @@ namespace Papu.Entities
         public DbSet<ProductGroup> ProductGroups { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Unit> Units { get; set; }
-        public DbSet<Friday> Fridays { get; set; }
         public DbSet<Monday> Mondays { get; set; }
-        public DbSet<Saturday> Saturdays { get; set; }
-        public DbSet<Sunday> Sundays { get; set; }
-        public DbSet<Thursday> Thursdays { get; set; }
-        public DbSet<Tuesday> Tuesdays { get; set; }
-        public DbSet<Wednesday> Wednesdays { get; set; }
         public DbSet<KindOf> KindsOf { get; set; }
         public DbSet<DishKindOf> DishKindsOf { get; set; }
         public DbSet<Type> Types { get; set; }
         public DbSet<DishType> DishTypes { get; set; }
-        public DbSet<DishMonday> DishMondays { get; set; }
-        public DbSet<DishTuesday> DishTuesdays { get; set; }
-        public DbSet<DishWednesday> DishWednesdays { get; set; }
-        public DbSet<DishThursday> DishThursdays { get; set; }
-        public DbSet<DishFriday> DishFridays { get; set; }
-        public DbSet<DishSaturday> DishSaturdays { get; set; }
-        public DbSet<DishSunday> DishSundays { get; set; }
-        public DbSet<ProductMonday> ProductMondays { get; set; }
-        public DbSet<ProductTuesday> ProductTuesdays { get; set; }
-        public DbSet<ProductWednesday> ProductWednesdays { get; set; }
-        public DbSet<ProductThursday> ProductThursdays { get; set; }
-        public DbSet<ProductFriday> ProductFridays { get; set; }
-        public DbSet<ProductSaturday> ProductSaturdays { get; set; }
-        public DbSet<ProductSunday> ProductSundays { get; set; }
-
+        public DbSet<Breakfast> Breakfasts { get; set; }
+        public DbSet<BreakfastProduct> ProductBreakfasts { get; set; }
+        public DbSet<BreakfastDish> DishBreakfasts { get; set; }
+        public DbSet<SecondBreakfast> SecondBreakfasts { get; set; }
+        public DbSet<SecondBreakfastProduct> ProductSecondBreakfasts { get; set; }
+        public DbSet<SecondBreakfastDish> DishSecondBreakfasts { get; set; }
+        public DbSet<Lunch> Lunches { get; set; }
+        public DbSet<LunchProduct> LunchProducts { get; set; }
+        public DbSet<LunchDish> LunchDishes { get; set; }
+        public DbSet<Snack> Snacks { get; set; }
+        public DbSet<SnackProduct> SnackProducts { get; set; }
+        public DbSet<SnackDish> SnackDishes { get; set; }
+        public DbSet<Dinner> Dinners { get; set; }
+        public DbSet<DinnerProduct> DinnerProducts { get; set; }
+        public DbSet<DinnerDish> DinnerDishes { get; set; }
 
         //Dodatkowe właściwości które powinny zawiera kolumny w bazie danych
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -139,11 +133,166 @@ namespace Papu.Entities
                 .HasForeignKey(bc => bc.DishId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<Menu>()
-                .HasOne(m => m.Monday)
-                .WithOne(b => b.Menu)
-                .HasForeignKey<Monday>(b => b.MenuRef)
-                .OnDelete(DeleteBehavior.SetNull);
+            modelBuilder.Entity<BreakfastProduct>()
+                .HasKey(bc => new { bc.BreakfastId, bc.ProductId });
+            modelBuilder.Entity<BreakfastProduct>()
+                .HasOne(bc => bc.Breakfast)
+                .WithMany(b => b.Products)
+                .HasForeignKey(bc => bc.BreakfastId)
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<BreakfastProduct>()
+                .HasOne(bc => bc.Product)
+                .WithMany(c => c.BreakfastProducts)
+                .HasForeignKey(bc => bc.ProductId)
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<BreakfastDish>()
+                .HasKey(bc => new { bc.BreakfastId, bc.DishId });
+            modelBuilder.Entity<BreakfastDish>()
+                .HasOne(bc => bc.Breakfast)
+                .WithMany(b => b.Dishes)
+                .HasForeignKey(bc => bc.BreakfastId)
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<BreakfastDish>()
+                .HasOne(bc => bc.Dish)
+                .WithMany(c => c.BreakfastDishes)
+                .HasForeignKey(bc => bc.DishId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<SecondBreakfastProduct>()
+                .HasKey(bc => new { bc.SecondBreakfastId, bc.ProductId });
+            modelBuilder.Entity<SecondBreakfastProduct>()
+                .HasOne(bc => bc.SecondBreakfast)
+                .WithMany(b => b.Products)
+                .HasForeignKey(bc => bc.SecondBreakfastId)
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<SecondBreakfastProduct>()
+                .HasOne(bc => bc.Product)
+                .WithMany(c => c.SecondBreakfastProducts)
+                .HasForeignKey(bc => bc.ProductId)
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<SecondBreakfastDish>()
+                .HasKey(bc => new { bc.SecondBreakfastId, bc.DishId });
+            modelBuilder.Entity<SecondBreakfastDish>()
+                .HasOne(bc => bc.SecondBreakfast)
+                .WithMany(b => b.Dishes)
+                .HasForeignKey(bc => bc.SecondBreakfastId)
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<SecondBreakfastDish>()
+                .HasOne(bc => bc.Dish)
+                .WithMany(c => c.SecondBreakfastDishes)
+                .HasForeignKey(bc => bc.DishId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<LunchProduct>()
+                .HasKey(bc => new { bc.LunchId, bc.ProductId });
+            modelBuilder.Entity<LunchProduct>()
+                .HasOne(bc => bc.Lunch)
+                .WithMany(b => b.Products)
+                .HasForeignKey(bc => bc.LunchId)
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<LunchProduct>()
+                .HasOne(bc => bc.Product)
+                .WithMany(c => c.LunchProducts)
+                .HasForeignKey(bc => bc.ProductId)
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<LunchDish>()
+                .HasKey(bc => new { bc.LunchId, bc.DishId });
+            modelBuilder.Entity<LunchDish>()
+                .HasOne(bc => bc.Lunch)
+                .WithMany(b => b.Dishes)
+                .HasForeignKey(bc => bc.LunchId)
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<LunchDish>()
+                .HasOne(bc => bc.Dish)
+                .WithMany(c => c.LunchDishes)
+                .HasForeignKey(bc => bc.DishId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<SnackProduct>()
+                .HasKey(bc => new { bc.SnackId, bc.ProductId });
+            modelBuilder.Entity<SnackProduct>()
+                .HasOne(bc => bc.Snack)
+                .WithMany(b => b.Products)
+                .HasForeignKey(bc => bc.SnackId)
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<SnackProduct>()
+                .HasOne(bc => bc.Product)
+                .WithMany(c => c.SnackProducts)
+                .HasForeignKey(bc => bc.ProductId)
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<SnackDish>()
+                .HasKey(bc => new { bc.SnackId, bc.DishId });
+            modelBuilder.Entity<SnackDish>()
+                .HasOne(bc => bc.Snack)
+                .WithMany(b => b.Dishes)
+                .HasForeignKey(bc => bc.SnackId)
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<SnackDish>()
+                .HasOne(bc => bc.Dish)
+                .WithMany(c => c.SnackDishes)
+                .HasForeignKey(bc => bc.DishId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<DinnerProduct>()
+                .HasKey(bc => new { bc.DinnerId, bc.ProductId });
+            modelBuilder.Entity<DinnerProduct>()
+                .HasOne(bc => bc.Dinner)
+                .WithMany(b => b.Products)
+                .HasForeignKey(bc => bc.DinnerId)
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<DinnerProduct>()
+                .HasOne(bc => bc.Product)
+                .WithMany(c => c.DinnerProducts)
+                .HasForeignKey(bc => bc.ProductId)
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<DinnerDish>()
+                .HasKey(bc => new { bc.DinnerId, bc.DishId });
+            modelBuilder.Entity<DinnerDish>()
+                .HasOne(bc => bc.Dinner)
+                .WithMany(b => b.Dishes)
+                .HasForeignKey(bc => bc.DinnerId)
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<DinnerDish>()
+                .HasOne(bc => bc.Dish)
+                .WithMany(c => c.DinnerDishes)
+                .HasForeignKey(bc => bc.DishId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            /*modelBuilder.Entity<Breakfast>()
+                .HasOne(p => p.Monday)
+                .WithOne(c => c.Breakfast)
+                .HasForeignKey<Monday>(c => c.MondayId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<SecondBreakfast>()
+                .HasOne(p => p.Monday)
+                .WithOne(c => c.SecondBreakfast)
+                .HasForeignKey<Monday>(c => c.MondayId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Lunch>()
+                .HasOne(p => p.Monday)
+                .WithOne(c => c.Lunch)
+                .HasForeignKey<Monday>(c => c.MondayId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Snack>()
+                .HasOne(p => p.Monday)
+                .WithOne(c => c.Snack)
+                .HasForeignKey<Monday>(c => c.MondayId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Dinner>()
+                .HasOne(p => p.Monday)
+                .WithOne(c => c.Dinner)
+                .HasForeignKey<Monday>(c => c.MondayId)
+                .OnDelete(DeleteBehavior.Restrict);*/
+
+            /*            modelBuilder.Entity<Menu>()
+                            .HasOne(m => m.Monday)
+                            .WithOne(b => b.Menu)
+                            .HasForeignKey<Monday>(b => b.MenuRef)
+                            .OnDelete(DeleteBehavior.SetNull);*//*
             modelBuilder.Entity<Menu>()
                 .HasOne(m => m.Tuesday)
                 .WithOne(b => b.Menu)
@@ -175,7 +324,7 @@ namespace Papu.Entities
                 .HasForeignKey<Sunday>(b => b.MenuRef)
                 .OnDelete(DeleteBehavior.SetNull);
 
-            modelBuilder.Entity<DishMonday>()
+*//*            modelBuilder.Entity<DishMonday>()
                 .HasKey(dm => new { dm.MondayId, dm.DishId });
             modelBuilder.Entity<DishMonday>()
                 .HasOne(bc => bc.Monday)
@@ -186,7 +335,7 @@ namespace Papu.Entities
                 .HasOne(bc => bc.Dish)
                 .WithMany(c => c.MondayDishes)
                 .HasForeignKey(bc => bc.DishId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Cascade);*//*
 
             modelBuilder.Entity<DishTuesday>()
                 .HasKey(dm => new { dm.TuesdayId, dm.DishId });
@@ -264,22 +413,22 @@ namespace Papu.Entities
                 .HasOne(bc => bc.Dish)
                 .WithMany(c => c.SundayDishes)
                 .HasForeignKey(bc => bc.DishId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Cascade);*/
 
-            modelBuilder.Entity<ProductMonday>()
-                .HasKey(dm => new { dm.MondayId, dm.ProductId });
-            modelBuilder.Entity<ProductMonday>()
-                .HasOne(bc => bc.Monday)
-                .WithMany(b => b.MondayProducts)
-                .HasForeignKey(bc => bc.MondayId)
-                .OnDelete(DeleteBehavior.Cascade);
-            modelBuilder.Entity<ProductMonday>()
-                .HasOne(bc => bc.Product)
-                .WithMany(c => c.MondayProducts)
-                .HasForeignKey(bc => bc.ProductId)
-                .OnDelete(DeleteBehavior.Cascade);
+            /*            modelBuilder.Entity<ProductMonday>()
+                            .HasKey(dm => new { dm.MondayId, dm.ProductId });
+                        modelBuilder.Entity<ProductMonday>()
+                            .HasOne(bc => bc.Monday)
+                            .WithMany(b => b.MondayProducts)
+                            .HasForeignKey(bc => bc.MondayId)
+                            .OnDelete(DeleteBehavior.Cascade);
+                        modelBuilder.Entity<ProductMonday>()
+                            .HasOne(bc => bc.Product)
+                            .WithMany(c => c.MondayProducts)
+                            .HasForeignKey(bc => bc.ProductId)
+                            .OnDelete(DeleteBehavior.Cascade);*/
 
-            modelBuilder.Entity<ProductTuesday>()
+            /*modelBuilder.Entity<ProductTuesday>()
                 .HasKey(dm => new { dm.TuesdayId, dm.ProductId });
             modelBuilder.Entity<ProductTuesday>()
                 .HasOne(bc => bc.Tuesday)
@@ -355,7 +504,7 @@ namespace Papu.Entities
                 .HasOne(bc => bc.Product)
                 .WithMany(c => c.SundayProducts)
                 .HasForeignKey(bc => bc.ProductId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Cascade);*/
 
             modelBuilder.Entity<Dish>()
                 .Property(r => r.DishName)
