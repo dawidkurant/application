@@ -258,35 +258,43 @@ namespace Papu.Entities
                 .HasForeignKey(bc => bc.DishId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            /*modelBuilder.Entity<Breakfast>()
-                .HasOne(p => p.Monday)
-                .WithOne(c => c.Breakfast)
-                .HasForeignKey<Monday>(c => c.MondayId)
-                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Monday>()
+                .HasOne(p => p.Breakfast)
+                .WithMany(c => c.Mondays)
+                .HasForeignKey(pc => pc.BreakfastId)
+                .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<SecondBreakfast>()
-                .HasOne(p => p.Monday)
-                .WithOne(c => c.SecondBreakfast)
-                .HasForeignKey<Monday>(c => c.MondayId)
-                .OnDelete(DeleteBehavior.Restrict);
+            /*modelBuilder.Entity<SecondBreakfast>()
+                .HasMany(c => c.Mondays)
+                .WithOne(p => p.SecondBreakfast);
+            modelBuilder.Entity<Monday>()
+                .HasOne(p => p.SecondBreakfast)
+                .WithMany(c => c.Mondays)
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Lunch>()
-                .HasOne(p => p.Monday)
-                .WithOne(c => c.Lunch)
-                .HasForeignKey<Monday>(c => c.MondayId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .HasMany(c => c.Mondays)
+                .WithOne(p => p.Lunch);
+            modelBuilder.Entity<Monday>()
+                .HasOne(p => p.Lunch)
+                .WithMany(c => c.Mondays)
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Snack>()
-                .HasOne(p => p.Monday)
-                .WithOne(c => c.Snack)
-                .HasForeignKey<Monday>(c => c.MondayId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .HasMany(c => c.Mondays)
+                .WithOne(p => p.Snack);
+            modelBuilder.Entity<Monday>()
+                .HasOne(p => p.Snack)
+                .WithMany(c => c.Mondays)
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Dinner>()
-                .HasOne(p => p.Monday)
-                .WithOne(c => c.Dinner)
-                .HasForeignKey<Monday>(c => c.MondayId)
-                .OnDelete(DeleteBehavior.Restrict);*/
+                .HasMany(c => c.Mondays)
+                .WithOne(p => p.Dinner);
+            modelBuilder.Entity<Monday>()
+                .HasOne(p => p.Dinner)
+                .WithMany(c => c.Mondays)
+                .OnDelete(DeleteBehavior.SetNull);*/
 
             /*            modelBuilder.Entity<Menu>()
                             .HasOne(m => m.Monday)

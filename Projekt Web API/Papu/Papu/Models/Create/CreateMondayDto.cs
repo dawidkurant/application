@@ -1,24 +1,39 @@
-﻿namespace Papu.Models.Create
+﻿using Papu.Entities;
+using System.Collections.Generic;
+
+namespace Papu.Models
 {
     public class CreateMondayDto
     {
-        //Id poniedziałku
-        public int MondayId { get; set; }
-
         //Śniadanie wchodzące w skład poniedziałku
-        public int BreakfastId { get; set; }
+        public int BreakfastMondayId { get; set; }
 
-        //Drugie śniadanie wchodzące w skład poniedziałku
-        public int SecondBreakfastId { get; set; }
+/*        //Drugie śniadanie wchodzące w skład poniedziałku
+        public int IdSecondBreakfast { get; set; }*/
 
-        //Obiad wchodzący w skład poniedziałku
-        public int LunchId { get; set; }
+        /*//Produkty wchodzące w skład drugiego śniadania
+        public virtual ICollection<SecondBreakfastProduct> SecondBreakfastProducts { get; set; }
 
-        //Podwieczorek wchodzący w skład poniedziałku
-        public int SnackId { get; set; }
+        //Potrawy wchodzące w skład drugiego śniadania
+        public virtual ICollection<SecondBreakfastDish> SecondBreakfastDishes { get; set; }
 
-        //Kolacja wchodząca w skład poniedziałku
-        public int DinnerId { get; set; }
+        //Produkty wchodzące w skład obiadu
+        public virtual ICollection<LunchProduct> LunchProducts { get; set; }
+
+        //Potrawy wchodzące w skład obiadu
+        public virtual ICollection<LunchDish> LunchDishes { get; set; }
+
+        //Produkty wchodzące w skład podwieczorka
+        public virtual ICollection<SnackProduct> SnackProducts { get; set; }
+
+        //Potrawy wchodzące w skład podwieczorka
+        public virtual ICollection<SnackDish> SnackDishes { get; set; }
+
+        //Produkty wchodzące w skład kolacji
+        public virtual ICollection<DinnerProduct> DinnerProducts { get; set; }
+
+        //Potrawy wchodzące w skład kolacji
+        public virtual ICollection<DinnerDish> DinnerDishes { get; set; }*/
 
     }
 }

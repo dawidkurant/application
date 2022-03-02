@@ -15,5 +15,8 @@ namespace Papu.Entities
         //Potrawy wchodzące w skład kolacji
         public virtual ICollection<DinnerDish> Dishes { get; set; }
 
+        public virtual ICollection<Monday> Mondays { get; set; }
+
+
     }
 }

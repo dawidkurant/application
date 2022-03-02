@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Papu.Entities;
+using System.Collections.Generic;
 
 namespace Papu.Models
 {
@@ -13,12 +14,45 @@ namespace Papu.Models
         //Podstawowe informacje dotyczące śniadania
 
         //Id śniadania
-        public int BreakfastId { get; set; }
+        public int BreakfastMondayId { get; set; }
 
-        //Produkty wchodzące w skład śniadania
-        public virtual ICollection<ProductDto> BreakfastProducts { get; set; }
+        //Drugie śniadanie wchodzące w skład poniedziałku
+        //Podstawowe informacje dotyczące drugiego śniadania
 
-        //Potrawy wchodzące w skład śniadania
-        public virtual ICollection<DishDto> BreakfastDishes { get; set; }
+        //Id drugiego śniadania
+        //public int SecondBreakfastId { get; set; }
+
+        /*//Produkty wchodzące w skład drugiego śniadania
+        public virtual ICollection<ProductDto> SecondBreakfastProducts { get; set; }
+
+        //Potrawy wchodzące w skład drugiego śniadania
+        public virtual ICollection<DishDto> SecondBreakfastDishes { get; set; }
+
+        //Id obiadu
+        public int LunchId { get; set; }
+
+        //Produkty wchodzące w skład obiadu
+        public virtual ICollection<ProductDto> LunchProducts { get; set; }
+
+        //Potrawy wchodzące w skład obiadu
+        public virtual ICollection<DishDto> LunchDishes { get; set; }
+
+        //Id podwieczorka
+        public int SnackId { get; set; }
+
+        //Produkty wchodzące w skład podwieczorka
+        public virtual ICollection<ProductDto> SnackProducts { get; set; }
+
+        //Potrawy wchodzące w skład podwieczorka
+        public virtual ICollection<DishDto> SnackDishes { get; set; }
+
+        //Id kolacji
+        public int DinnerId { get; set; }
+
+        //Produkty wchodzące w skład kolacji
+        public virtual ICollection<ProductDto> DinnerProducts { get; set; }
+
+        //Potrawy wchodzące w skład kolacji
+        public virtual ICollection<DishDto> DinnerDishes { get; set; }*/
     }
 }

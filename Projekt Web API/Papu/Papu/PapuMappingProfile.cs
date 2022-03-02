@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Papu.Entities;
 using Papu.Models;
-using Papu.Models.Create;
 using System.Linq;
 
 namespace Papu
@@ -23,22 +22,6 @@ namespace Papu
                 .ForMember(dto => dto.KindsOf, c => c.MapFrom(dto => dto.DishKindsOf.Select(cs => cs.KindOf)))
                 .ForMember(dto => dto.Types, c => c.MapFrom(dto => dto.DishTypes.Select(cs => cs.Type)))
                 .ForMember(dto => dto.Products, c => c.MapFrom(dto => dto.DishProducts.Select(cs => cs.Product)));
-
-            /*CreateMap<Menu, MenuDto>()
-                .ForMember(x => x.FridayProducts, c => c.MapFrom(s => s.Friday.FridayProducts.Select(cs => cs.Product)))
-                .ForMember(x => x.FridayDishes, c => c.MapFrom(s => s.Friday.FridayDishes.Select(cs => cs.Dish)))
-                *//*.ForMember(x => x.MondayProducts, c => c.MapFrom(s => s.Monday.MondayProducts.Select(cs => cs.Product)))
-                .ForMember(x => x.MondayDishes, c => c.MapFrom(s => s.Monday.MondayDishes.Select(cs => cs.Dish)))*//*
-                .ForMember(x => x.TuesdayProducts, c => c.MapFrom(s => s.Tuesday.TuesdayProducts.Select(cs => cs.Product)))
-                .ForMember(x => x.TuesdayDishes, c => c.MapFrom(s => s.Tuesday.TuesdayDishes.Select(cs => cs.Dish)))
-                .ForMember(x => x.WednesdayProducts, c => c.MapFrom(s => s.Wednesday.WednesdayProducts.Select(cs => cs.Product)))
-                .ForMember(x => x.WednesdayDishes, c => c.MapFrom(s => s.Wednesday.WednesdayDishes.Select(cs => cs.Dish)))
-                .ForMember(x => x.ThursdayProducts, c => c.MapFrom(s => s.Thursday.ThursdayProducts.Select(cs => cs.Product)))
-                .ForMember(x => x.ThursdayDishes, c => c.MapFrom(s => s.Thursday.ThursdayDishes.Select(cs => cs.Dish)))
-                .ForMember(x => x.SaturdayProducts, c => c.MapFrom(s => s.Saturday.SaturdayProducts.Select(cs => cs.Product)))
-                .ForMember(x => x.SaturdayDishes, c => c.MapFrom(s => s.Saturday.SaturdayDishes.Select(cs => cs.Dish)))
-                .ForMember(x => x.SundayProducts, c => c.MapFrom(s => s.Sunday.SundayProducts.Select(cs => cs.Product)))
-                .ForMember(x => x.SundayDishes, c => c.MapFrom(s => s.Sunday.SundayDishes.Select(cs => cs.Dish)));*/
 
             CreateMap<Breakfast, BreakfastDto>()
                 .ForMember(x => x.Products, c => c.MapFrom(x => x.Products.Select(cs => cs.Product)))
@@ -66,13 +49,13 @@ namespace Papu
 
             CreateMap<CreateDishDto, Dish>();
 
-            CreateMap<CreateMenuDto, Menu>();
-
             CreateMap<CreateBreakfastDto, Breakfast>();
             CreateMap<CreateSecondBreakfastDto, SecondBreakfast>();
             CreateMap<CreateLunchDto, Lunch>();
             CreateMap<CreateSnackDto, Snack>();
             CreateMap<CreateDinnerDto, Dinner>();
+
+            CreateMap<CreateMondayDto, Monday>();
         }
     }
 }

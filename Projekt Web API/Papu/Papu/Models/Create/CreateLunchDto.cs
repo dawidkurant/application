@@ -1,4 +1,4 @@
-﻿namespace Papu.Models.Create
+﻿namespace Papu.Models
 {
     public class CreateLunchDto
     {

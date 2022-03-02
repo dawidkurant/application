@@ -83,7 +83,7 @@ namespace Papu
                     _dbContext.SaveChanges();
                 }
 
-                /*//Sprawdzamy czy tabela z poniedziałkami jest pusta
+                //Sprawdzamy czy tabela z poniedziałkami jest pusta
                 if (!_dbContext.Mondays.Any())
                 {
                     var mondays = GetMondays();
@@ -91,7 +91,7 @@ namespace Papu
                     _dbContext.SaveChanges();
                 }
 
-                //Sprawdzamy czy tabela z soboty jest pusta
+                /*//Sprawdzamy czy tabela z soboty jest pusta
                 if (!_dbContext.Saturdays.Any())
                 {
                     var saturdays = GetSaturdays();
@@ -611,6 +611,55 @@ namespace Papu
             };
 
             return breakfasts;
+        }
+
+        //Metoda zwracająca kolekcję poniedziałków, które będą zawsze istnieć w tabeli monday
+        //baza automatycznie przydzieli id
+        private IEnumerable<Monday> GetMondays()
+        {
+            var mondays = new List<Monday>()
+            {
+                new Monday()
+                {
+                    Breakfast = new Breakfast()
+                    {
+                            Dishes = new List<BreakfastDish>()
+                            {
+                                new BreakfastDish()
+                                {
+                                    Dish = new Dish()
+                                    {
+                                        DishName = "Buraczki",
+                                        DishProducts = new List<ProductDish>()
+                                        {
+                                            new ProductDish()
+                                            {
+                                                Product = new Product()
+                                                {
+                                                    ProductName = "Cytryna",
+                                                    Weight = 400
+                                                }
+                                            }
+                                        },
+                                        DishDescription = "Przykładowy opis",
+                                        Size = 3,
+                                        MethodOfPeparation = "Cebule obieram, szatkuję w drobniutką " +
+                                        "kostkę i podsmażam na oleju. Buraki studzę, ścieram na " +
+                                        "tarce o grubych oczkach, właściwie grubość tarcia można " +
+                                        "dostawać do swoich preferencji. Dodaję przyprawy, sok " +
+                                        "wyciśnięty z cytryny, syrop daktylowy lub ryżowy, sól oraz " +
+                                        "pieprz. Mieszam bardzo dokładnie i podgrzewam ponownie.",
+                                        PreparationTime = 1,
+                                        Portions = 3
+                                    }
+                                }
+
+                            }
+                    }
+                }
+            };
+
+            return mondays;
         }
 
         /*//Metoda zwracająca kolekcję poniedziałków, które będą zawsze istnieć w tabeli product

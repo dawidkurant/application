@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Papu.Entities;
 using Papu.Models;
-using Papu.Models.Create;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -205,6 +204,8 @@ namespace Papu.Services
         {
 
             var breakfast = _mapper.Map<Breakfast>(dtoBreakfast);
+
+            breakfast.BreakfastName = dtoBreakfast.BreakfastName;
 
             Breakfast breakfast2 = _dbContext.Breakfasts
                 .Include(c => c.Products).ThenInclude(cs => cs.Product)

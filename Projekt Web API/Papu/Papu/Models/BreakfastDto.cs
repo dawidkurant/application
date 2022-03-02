@@ -11,10 +11,13 @@ namespace Papu.Models
         //Id śniadania
         public int BreakfastId { get; set; }
 
+        public string BreakfastName { get; set; }
+
         //Produkty wchodzące w skład śniadania
         public virtual ICollection<ProductDto> Products { get; set; }
 
         //Potrawy wchodzące w skład śniadania
         public virtual ICollection<DishDto> Dishes { get; set; }
+
     }
 }

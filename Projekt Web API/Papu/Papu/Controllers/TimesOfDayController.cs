@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Papu.Models;
-using Papu.Models.Create;
 using Papu.Services;
 using System.Collections.Generic;
 
@@ -54,7 +53,7 @@ namespace Papu.Controllers
         }
 
         //Tworzenie nowego śniadania
-        [HttpPost]
+        [HttpPost("createbreakfast")]
         public ActionResult CreateBreakfast([FromBody] CreateBreakfastDto dtoBreakfast)
         {
             var newBreakfastId = _timesOfDayService.CreateBreakfast(dtoBreakfast);

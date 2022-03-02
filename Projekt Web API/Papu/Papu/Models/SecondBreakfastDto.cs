@@ -9,6 +9,8 @@ namespace Papu.Models
         //Id drugiego śniadania
         public int SecondBreakfastId { get; set; }
 
+        public string SecondBreakfastName { get; set; }
+
         //Produkty wchodzące w skład drugiego śniadania
         public virtual ICollection<ProductDto> Products { get; set; }
 
