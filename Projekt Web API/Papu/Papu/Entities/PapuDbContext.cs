@@ -15,7 +15,6 @@ namespace Papu.Entities
         public DbSet<ProductGroup> ProductGroups { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Unit> Units { get; set; }
-        public DbSet<Monday> Mondays { get; set; }
         public DbSet<KindOf> KindsOf { get; set; }
         public DbSet<DishKindOf> DishKindsOf { get; set; }
         public DbSet<Type> Types { get; set; }
@@ -35,6 +34,14 @@ namespace Papu.Entities
         public DbSet<Dinner> Dinners { get; set; }
         public DbSet<DinnerProduct> DinnerProducts { get; set; }
         public DbSet<DinnerDish> DinnerDishes { get; set; }
+        public DbSet<Monday> Mondays { get; set; }
+        public DbSet<Tuesday> Tuesdays { get; set; }
+        public DbSet<Wednesday> Wednesdays { get; set; }
+        public DbSet<Thursday> Thursdays { get; set; }
+        public DbSet<Friday> Fridays { get; set; }
+        public DbSet<Saturday> Saturdays { get; set; }
+        public DbSet<Sunday> Sundays { get; set; }
+
 
         //Dodatkowe właściwości które powinny zawiera kolumny w bazie danych
         protected override void OnModelCreating(ModelBuilder modelBuilder)

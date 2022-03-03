@@ -44,7 +44,7 @@ namespace Papu
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IDishService, DishService>();
             services.AddScoped<ITimesOfDayService, TimesOfDayService>();
-            services.AddScoped<IMondayService, MondayService>();
+            services.AddScoped<IDaysOfTheWeekService, DaysOfTheWeekService>();
 
             services.AddControllers().AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);

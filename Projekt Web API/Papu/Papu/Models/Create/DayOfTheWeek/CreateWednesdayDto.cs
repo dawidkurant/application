@@ -1,6 +1,6 @@
 ﻿namespace Papu.Models
 {
-    public class CreateWednesday
+    public class CreateWednesdayDto
     {
         //Śniadanie wchodzące w skład środy
         public int BreakfastWednesdayId { get; set; }

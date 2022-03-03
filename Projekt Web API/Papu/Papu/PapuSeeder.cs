@@ -91,7 +91,7 @@ namespace Papu
                     _dbContext.SaveChanges();
                 }
 
-                /*//Sprawdzamy czy tabela z soboty jest pusta
+                //Sprawdzamy czy tabela z sobotami jest pusta
                 if (!_dbContext.Saturdays.Any())
                 {
                     var saturdays = GetSaturdays();
@@ -139,13 +139,13 @@ namespace Papu
                     _dbContext.SaveChanges();
                 }
 
-                //Sprawdzamy czy tabela z jadłospisami jest pusta
-                if (!_dbContext.Menus.Any())
-                {
-                    var menus = GetMenus();
-                    _dbContext.Menus.AddRange(menus);
-                    _dbContext.SaveChanges();
-                }*/
+                ////Sprawdzamy czy tabela z jadłospisami jest pusta
+                //if (!_dbContext.Menus.Any())
+                //{
+                //    var menus = GetMenus();
+                //    _dbContext.Menus.AddRange(menus);
+                //    _dbContext.SaveChanges();
+                //}
             }
         }
 
@@ -803,138 +803,7 @@ namespace Papu
             return mondays;
         }
 
-        /*//Metoda zwracająca kolekcję poniedziałków, które będą zawsze istnieć w tabeli product
-        //baza automatycznie przydzieli id
-        private IEnumerable<Monday> GetMondays()
-        {
-            var mondays = new List<Monday>()
-            {
-                new Monday()
-                {
-                    MondayDishes = new List<DishMonday>()
-                    {
-                        new DishMonday()
-                        {
-                            Dish = new Dish()
-                            {
-                                DishName = "Buraczki",
-                                DishProducts = new List<ProductDish>()
-                                {
-                                    new ProductDish()
-                                    {
-                                        Product = new Product()
-                                        {
-                                        ProductName = "Cytryna",
-                                        Weight = 400
-                                        }
-                                    }
-                                },
-                                DishDescription = "Przykładowy opis",
-                                Size = 3,
-                                MethodOfPeparation = "Cebule obieram, szatkuję w drobniutką " +
-                                "kostkę i podsmażam na oleju. Buraki studzę, ścieram na " +
-                                "tarce o grubych oczkach, właściwie grubość tarcia można " +
-                                "dostawać do swoich preferencji. Dodaję przyprawy, sok " +
-                                "wyciśnięty z cytryny, syrop daktylowy lub ryżowy, sól oraz " +
-                                "pieprz. Mieszam bardzo dokładnie i podgrzewam ponownie.",
-                                PreparationTime = 1,
-                                Portions = 3
-                            }
-                        }
-                    }
-                }
-            };
-
-            return mondays;
-        }
-
-        //Metoda zwracająca kolekcję sobót, które będą zawsze istnieć w tabeli product
-        //baza automatycznie przydzieli id
-        private IEnumerable<Saturday> GetSaturdays()
-        {
-            var saturdays = new List<Saturday>()
-            {
-                new Saturday()
-                {
-                    SaturdayDishes = new List<DishSaturday>()
-                    {
-                        new DishSaturday()
-                        {
-                            Dish = new Dish()
-                            {
-                                DishName = "Jajko na twardo",
-                                DishProducts = new List<ProductDish>()
-                                {
-                                    new ProductDish()
-                                    {
-                                        Product = new Product()
-                                        {
-                                            ProductName = "Jajko",
-                                            Weight = 120
-                                        }
-                                    }
-                                },
-                                DishDescription = "Przykładowy opis",
-                                Size = 1,
-                                MethodOfPeparation = "Nalej do garnka wodę i włóż " +
-                                "do niej jajka. Czekaj aż woda się zagotuje. " +
-                                "Od momentu zagotowania się wody, gotuj jajka dokładnie " +
-                                "8 minut. Po upływie tego czasu wylej wodę z garnka.",
-                                PreparationTime = 1,
-                                Portions = 4
-                            }
-                        }
-                    }
-                }
-            };
-
-            return saturdays;
-        }
-
-        //Metoda zwracająca kolekcję piątków, które będą zawsze istnieć w tabeli product
-        //baza automatycznie przydzieli id
-        private IEnumerable<Friday> GetFridays()
-        {
-            var fridays = new List<Friday>()
-            {
-                new Friday()
-                {
-                    FridayDishes = new List<DishFriday>()
-                    {
-                        new DishFriday()
-                        {
-                            Dish = new Dish()
-                            {
-                                DishName = "Grzanki",
-                                DishProducts = new List<ProductDish>()
-                                {
-                                    new ProductDish()
-                                    {
-                                        Product = new Product()
-                                        {
-                                            ProductName = "Chleb",
-                                            Weight = 500
-                                        }
-                                    }
-                                },
-                                DishDescription = "Przykładowy opis",
-                                Size = 2,
-                                MethodOfPeparation = "Chleb pokroić na kromki. Każdą " +
-                                "kromkę posmarować ok. 1 łyżeczką masła czosnkowo-ziołowego. " +
-                                "Ułożyć na blasze wyłożonej papierem do pieczenia i piec " +
-                                "przez 5 minut w piekarniku nagrzanym do 200 stopni C.",
-                                PreparationTime = 2,
-                                Portions = 1
-                            }
-                        }
-                    }
-                }
-            };
-
-            return fridays;
-        }
-
-        //Metoda zwracająca kolekcję wtorków, które będą zawsze istnieć w tabeli product
+        //Metoda zwracająca kolekcję wtorków, które będą zawsze istnieć w tabeli tuesday
         //baza automatycznie przydzieli id
         private IEnumerable<Tuesday> GetTuesdays()
         {
@@ -942,35 +811,171 @@ namespace Papu
             {
                 new Tuesday()
                 {
-                    TuesdayDishes = new List<DishTuesday>()
+                    Breakfast = new Breakfast()
                     {
-                        new DishTuesday()
-                        {
-                            Dish = new Dish()
+                            Dishes = new List<BreakfastDish>()
                             {
-                                DishName = "Tosty",
-                                DishProducts = new List<ProductDish>()
+                                new BreakfastDish()
                                 {
-                                    new ProductDish()
+                                    Dish = new Dish()
                                     {
-                                        Product = new Product()
+                                        DishName = "Jajko na twardo",
+                                        DishProducts = new List<ProductDish>()
                                         {
-                                            ProductName = "Chleb tostowy",
-                                            Weight = 350
-                                        }
+                                            new ProductDish()
+                                            {
+                                                Product = new Product()
+                                                {
+                                                    ProductName = "Jajko",
+                                                    Weight = 120
+                                                }
+                                            }
+                                        },
+                                        DishDescription = "Przykładowy opis",
+                                        Size = 1,
+                                        MethodOfPeparation = "Nalej do garnka wodę i włóż " +
+                                        "do niej jajka. Czekaj aż woda się zagotuje. " +
+                                        "Od momentu zagotowania się wody, gotuj jajka dokładnie " +
+                                        "8 minut. Po upływie tego czasu wylej wodę z garnka.",
+                                        PreparationTime = 1,
+                                        Portions = 4
                                     }
-                                },
-                                DishDescription = "Przykładowy opis",
-                                Size = 3,
-                                MethodOfPeparation = "Chleb posmaruj masłem, na 2 " +
-                                "kromkach połóż ser, szynkę, ogórka, pomidora, przykryj " +
-                                "pozostałymi kromkami. Kanapki włóż do opiekacza na kilka " +
-                                "minut, aż chleb się zarumieni. Gotowe tosty przekrój na " +
-                                "trójkąty, podawaj z kiełkami rzeżuchy i domowym ketchupem.",
-                                PreparationTime = 3,
-                                Portions = 1
+                                }
+
                             }
-                        }
+                    },
+                    SecondBreakfast = new SecondBreakfast()
+                    {
+                            Dishes = new List<SecondBreakfastDish>()
+                            {
+                                new SecondBreakfastDish()
+                                {
+                                    Dish = new Dish()
+                                    {
+                                        DishName = "Jajko na twardo",
+                                        DishProducts = new List<ProductDish>()
+                                        {
+                                            new ProductDish()
+                                            {
+                                                Product = new Product()
+                                                {
+                                                    ProductName = "Jajko",
+                                                    Weight = 120
+                                                }
+                                            }
+                                        },
+                                        DishDescription = "Przykładowy opis",
+                                        Size = 1,
+                                        MethodOfPeparation = "Nalej do garnka wodę i włóż " +
+                                        "do niej jajka. Czekaj aż woda się zagotuje. " +
+                                        "Od momentu zagotowania się wody, gotuj jajka dokładnie " +
+                                        "8 minut. Po upływie tego czasu wylej wodę z garnka.",
+                                        PreparationTime = 1,
+                                        Portions = 4
+                                    }
+                                }
+
+                            }
+                    },
+                    Lunch = new Lunch()
+                    {
+                            Dishes = new List<LunchDish>()
+                            {
+                                new LunchDish()
+                                {
+                                    Dish = new Dish()
+                                    {
+                                        DishName = "Jajko na twardo",
+                                        DishProducts = new List<ProductDish>()
+                                        {
+                                            new ProductDish()
+                                            {
+                                                Product = new Product()
+                                                {
+                                                    ProductName = "Jajko",
+                                                    Weight = 120
+                                                }
+                                            }
+                                        },
+                                        DishDescription = "Przykładowy opis",
+                                        Size = 1,
+                                        MethodOfPeparation = "Nalej do garnka wodę i włóż " +
+                                        "do niej jajka. Czekaj aż woda się zagotuje. " +
+                                        "Od momentu zagotowania się wody, gotuj jajka dokładnie " +
+                                        "8 minut. Po upływie tego czasu wylej wodę z garnka.",
+                                        PreparationTime = 1,
+                                        Portions = 4
+                                    }
+                                }
+
+                            }
+                    },
+                    Snack = new Snack()
+                    {
+                            Dishes = new List<SnackDish>()
+                            {
+                                new SnackDish()
+                                {
+                                    Dish = new Dish()
+                                    {
+                                        DishName = "Jajko na twardo",
+                                        DishProducts = new List<ProductDish>()
+                                        {
+                                            new ProductDish()
+                                            {
+                                                Product = new Product()
+                                                {
+                                                    ProductName = "Jajko",
+                                                    Weight = 120
+                                                }
+                                            }
+                                        },
+                                        DishDescription = "Przykładowy opis",
+                                        Size = 1,
+                                        MethodOfPeparation = "Nalej do garnka wodę i włóż " +
+                                        "do niej jajka. Czekaj aż woda się zagotuje. " +
+                                        "Od momentu zagotowania się wody, gotuj jajka dokładnie " +
+                                        "8 minut. Po upływie tego czasu wylej wodę z garnka.",
+                                        PreparationTime = 1,
+                                        Portions = 4
+                                    }
+                                }
+
+                            }
+                    },
+                    Dinner = new Dinner()
+                    {
+
+                            Dishes = new List<DinnerDish>()
+                            {
+                                new DinnerDish()
+                                {
+                                    Dish = new Dish()
+                                    {
+                                        DishName = "Jajko na twardo",
+                                        DishProducts = new List<ProductDish>()
+                                        {
+                                            new ProductDish()
+                                            {
+                                                Product = new Product()
+                                                {
+                                                    ProductName = "Jajko",
+                                                    Weight = 120
+                                                }
+                                            }
+                                        },
+                                        DishDescription = "Przykładowy opis",
+                                        Size = 1,
+                                        MethodOfPeparation = "Nalej do garnka wodę i włóż " +
+                                        "do niej jajka. Czekaj aż woda się zagotuje. " +
+                                        "Od momentu zagotowania się wody, gotuj jajka dokładnie " +
+                                        "8 minut. Po upływie tego czasu wylej wodę z garnka.",
+                                        PreparationTime = 1,
+                                        Portions = 4
+                                    }
+                                }
+
+                            }
                     }
                 }
             };
@@ -978,7 +983,7 @@ namespace Papu
             return tuesdays;
         }
 
-        //Metoda zwracająca kolekcję śród, które będą zawsze istnieć w tabeli product
+        //Metoda zwracająca kolekcję śród, które będą zawsze istnieć w tabeli wednesday
         //baza automatycznie przydzieli id
         private IEnumerable<Wednesday> GetWednesdays()
         {
@@ -986,33 +991,171 @@ namespace Papu
             {
                 new Wednesday()
                 {
-                    WednesdayDishes = new List<DishWednesday>()
+                    Breakfast = new Breakfast()
                     {
-                        new DishWednesday()
-                        {
-                            Dish = new Dish()
+                            Dishes = new List<BreakfastDish>()
                             {
-                                DishName = "Żurek",
-                                DishProducts = new List<ProductDish>()
+                                new BreakfastDish()
                                 {
-                                    new ProductDish()
+                                    Dish = new Dish()
                                     {
-                                        Product = new Product()
+                                        DishName = "Grzanki",
+                                        DishProducts = new List<ProductDish>()
                                         {
-                                            ProductName = "Kiełbasa",
-                                            Weight = 240
-                                        }
+                                            new ProductDish()
+                                            {
+                                                Product = new Product()
+                                                {
+                                                    ProductName = "Chleb",
+                                                    Weight = 500
+                                                }
+                                            }
+                                        },
+                                        DishDescription = "Przykładowy opis",
+                                        Size = 2,
+                                        MethodOfPeparation = "Chleb pokroić na kromki. Każdą " +
+                                        "kromkę posmarować ok. 1 łyżeczką masła czosnkowo-ziołowego. " +
+                                        "Ułożyć na blasze wyłożonej papierem do pieczenia i piec " +
+                                        "przez 5 minut w piekarniku nagrzanym do 200 stopni C.",
+                                        PreparationTime = 2,
+                                        Portions = 1
                                     }
-                                },
-                                DishDescription = "Przykładowy opis",
-                                Size = 1,
-                                MethodOfPeparation = "Bulion lub wywar zagotować z " +
-                                "dodatkiem pokrojonych na 2 - 3 części wędzonych żeberek " +
-                                "lub kości lub pokrojonego na 4 części boczku.",
-                                PreparationTime = 4,
-                                Portions = 1
+                                }
+
                             }
-                        }
+                    },
+                    SecondBreakfast = new SecondBreakfast()
+                    {
+                            Dishes = new List<SecondBreakfastDish>()
+                            {
+                                new SecondBreakfastDish()
+                                {
+                                    Dish = new Dish()
+                                    {
+                                        DishName = "Grzanki",
+                                        DishProducts = new List<ProductDish>()
+                                        {
+                                            new ProductDish()
+                                            {
+                                                Product = new Product()
+                                                {
+                                                    ProductName = "Chleb",
+                                                    Weight = 500
+                                                }
+                                            }
+                                        },
+                                        DishDescription = "Przykładowy opis",
+                                        Size = 2,
+                                        MethodOfPeparation = "Chleb pokroić na kromki. Każdą " +
+                                        "kromkę posmarować ok. 1 łyżeczką masła czosnkowo-ziołowego. " +
+                                        "Ułożyć na blasze wyłożonej papierem do pieczenia i piec " +
+                                        "przez 5 minut w piekarniku nagrzanym do 200 stopni C.",
+                                        PreparationTime = 2,
+                                        Portions = 1
+                                    }
+                                }
+
+                            }
+                    },
+                    Lunch = new Lunch()
+                    {
+                            Dishes = new List<LunchDish>()
+                            {
+                                new LunchDish()
+                                {
+                                    Dish = new Dish()
+                                    {
+                                        DishName = "Grzanki",
+                                        DishProducts = new List<ProductDish>()
+                                        {
+                                            new ProductDish()
+                                            {
+                                                Product = new Product()
+                                                {
+                                                    ProductName = "Chleb",
+                                                    Weight = 500
+                                                }
+                                            }
+                                        },
+                                        DishDescription = "Przykładowy opis",
+                                        Size = 2,
+                                        MethodOfPeparation = "Chleb pokroić na kromki. Każdą " +
+                                        "kromkę posmarować ok. 1 łyżeczką masła czosnkowo-ziołowego. " +
+                                        "Ułożyć na blasze wyłożonej papierem do pieczenia i piec " +
+                                        "przez 5 minut w piekarniku nagrzanym do 200 stopni C.",
+                                        PreparationTime = 2,
+                                        Portions = 1
+                                    }
+                                }
+
+                            }
+                    },
+                    Snack = new Snack()
+                    {
+                            Dishes = new List<SnackDish>()
+                            {
+                                new SnackDish()
+                                {
+                                    Dish = new Dish()
+                                    {
+                                        DishName = "Grzanki",
+                                        DishProducts = new List<ProductDish>()
+                                        {
+                                            new ProductDish()
+                                            {
+                                                Product = new Product()
+                                                {
+                                                    ProductName = "Chleb",
+                                                    Weight = 500
+                                                }
+                                            }
+                                        },
+                                        DishDescription = "Przykładowy opis",
+                                        Size = 2,
+                                        MethodOfPeparation = "Chleb pokroić na kromki. Każdą " +
+                                        "kromkę posmarować ok. 1 łyżeczką masła czosnkowo-ziołowego. " +
+                                        "Ułożyć na blasze wyłożonej papierem do pieczenia i piec " +
+                                        "przez 5 minut w piekarniku nagrzanym do 200 stopni C.",
+                                        PreparationTime = 2,
+                                        Portions = 1
+                                    }
+                                }
+
+                            }
+                    },
+                    Dinner = new Dinner()
+                    {
+
+                            Dishes = new List<DinnerDish>()
+                            {
+                                new DinnerDish()
+                                {
+                                    Dish = new Dish()
+                                    {
+                                        DishName = "Grzanki",
+                                        DishProducts = new List<ProductDish>()
+                                        {
+                                            new ProductDish()
+                                            {
+                                                Product = new Product()
+                                                {
+                                                    ProductName = "Chleb",
+                                                    Weight = 500
+                                                }
+                                            }
+                                        },
+                                        DishDescription = "Przykładowy opis",
+                                        Size = 2,
+                                        MethodOfPeparation = "Chleb pokroić na kromki. Każdą " +
+                                        "kromkę posmarować ok. 1 łyżeczką masła czosnkowo-ziołowego. " +
+                                        "Ułożyć na blasze wyłożonej papierem do pieczenia i piec " +
+                                        "przez 5 minut w piekarniku nagrzanym do 200 stopni C.",
+                                        PreparationTime = 2,
+                                        Portions = 1
+                                    }
+                                }
+
+                            }
                     }
                 }
             };
@@ -1020,7 +1163,7 @@ namespace Papu
             return wednesdays;
         }
 
-        //Metoda zwracająca kolekcję czwartków, które będą zawsze istnieć w tabeli product
+        //Metoda zwracająca kolekcję czwartków, które będą zawsze istnieć w tabeli thursday
         //baza automatycznie przydzieli id
         private IEnumerable<Thursday> GetThursdays()
         {
@@ -1028,34 +1171,176 @@ namespace Papu
             {
                 new Thursday()
                 {
-                    ThursdayDishes = new List<DishThursday>()
+                    Breakfast = new Breakfast()
                     {
-                        new DishThursday()
-                        {
-                            Dish = new Dish()
+                            Dishes = new List<BreakfastDish>()
                             {
-                                DishName = "Zupa z dyni",
-                                DishProducts = new List<ProductDish>()
+                                new BreakfastDish()
                                 {
-                                    new ProductDish()
+                                    Dish = new Dish()
                                     {
-                                        Product = new Product()
+                                        DishName = "Tosty",
+                                        DishProducts = new List<ProductDish>()
                                         {
-                                            ProductName = "Dynia",
-                                            Weight = 1000
-                                        }
+                                            new ProductDish()
+                                            {
+                                                Product = new Product()
+                                                {
+                                                    ProductName = "Chleb tostowy",
+                                                    Weight = 350
+                                                }
+                                            }
+                                        },
+                                        DishDescription = "Przykładowy opis",
+                                        Size = 3,
+                                        MethodOfPeparation = "Chleb posmaruj masłem, na 2 " +
+                                        "kromkach połóż ser, szynkę, ogórka, pomidora, przykryj " +
+                                        "pozostałymi kromkami. Kanapki włóż do opiekacza na kilka " +
+                                        "minut, aż chleb się zarumieni. Gotowe tosty przekrój na " +
+                                        "trójkąty, podawaj z kiełkami rzeżuchy i domowym ketchupem.",
+                                        PreparationTime = 3,
+                                        Portions = 1
                                     }
-                                },
-                                DishDescription = "Przykładowy opis",
-                                Size = 2,
-                                MethodOfPeparation = "Dynię umyć, przekroić na pół, " +
-                                "oczyścić z pestek i włókien. Następnie pokroić w kostkę " +
-                                "razem ze skórką. Ziemniaki i marchewki umyć, obrać i " +
-                                "pokroić w kostkę. Cebulę obrać i pokroić w kostkę.",
-                                PreparationTime = 5,
-                                Portions = 1
+                                }
+
                             }
-                        }
+                    },
+                    SecondBreakfast = new SecondBreakfast()
+                    {
+                            Dishes = new List<SecondBreakfastDish>()
+                            {
+                                new SecondBreakfastDish()
+                                {
+                                    Dish = new Dish()
+                                    {
+                                        DishName = "Tosty",
+                                        DishProducts = new List<ProductDish>()
+                                        {
+                                            new ProductDish()
+                                            {
+                                                Product = new Product()
+                                                {
+                                                    ProductName = "Chleb tostowy",
+                                                    Weight = 350
+                                                }
+                                            }
+                                        },
+                                        DishDescription = "Przykładowy opis",
+                                        Size = 3,
+                                        MethodOfPeparation = "Chleb posmaruj masłem, na 2 " +
+                                        "kromkach połóż ser, szynkę, ogórka, pomidora, przykryj " +
+                                        "pozostałymi kromkami. Kanapki włóż do opiekacza na kilka " +
+                                        "minut, aż chleb się zarumieni. Gotowe tosty przekrój na " +
+                                        "trójkąty, podawaj z kiełkami rzeżuchy i domowym ketchupem.",
+                                        PreparationTime = 3,
+                                        Portions = 1
+                                    }
+                                }
+
+                            }
+                    },
+                    Lunch = new Lunch()
+                    {
+                            Dishes = new List<LunchDish>()
+                            {
+                                new LunchDish()
+                                {
+                                    Dish = new Dish()
+                                    {
+                                        DishName = "Tosty",
+                                        DishProducts = new List<ProductDish>()
+                                        {
+                                            new ProductDish()
+                                            {
+                                                Product = new Product()
+                                                {
+                                                    ProductName = "Chleb tostowy",
+                                                    Weight = 350
+                                                }
+                                            }
+                                        },
+                                        DishDescription = "Przykładowy opis",
+                                        Size = 3,
+                                        MethodOfPeparation = "Chleb posmaruj masłem, na 2 " +
+                                        "kromkach połóż ser, szynkę, ogórka, pomidora, przykryj " +
+                                        "pozostałymi kromkami. Kanapki włóż do opiekacza na kilka " +
+                                        "minut, aż chleb się zarumieni. Gotowe tosty przekrój na " +
+                                        "trójkąty, podawaj z kiełkami rzeżuchy i domowym ketchupem.",
+                                        PreparationTime = 3,
+                                        Portions = 1
+                                    }
+                                }
+
+                            }
+                    },
+                    Snack = new Snack()
+                    {
+                            Dishes = new List<SnackDish>()
+                            {
+                                new SnackDish()
+                                {
+                                    Dish = new Dish()
+                                    {
+                                        DishName = "Tosty",
+                                        DishProducts = new List<ProductDish>()
+                                        {
+                                            new ProductDish()
+                                            {
+                                                Product = new Product()
+                                                {
+                                                    ProductName = "Chleb tostowy",
+                                                    Weight = 350
+                                                }
+                                            }
+                                        },
+                                        DishDescription = "Przykładowy opis",
+                                        Size = 3,
+                                        MethodOfPeparation = "Chleb posmaruj masłem, na 2 " +
+                                        "kromkach połóż ser, szynkę, ogórka, pomidora, przykryj " +
+                                        "pozostałymi kromkami. Kanapki włóż do opiekacza na kilka " +
+                                        "minut, aż chleb się zarumieni. Gotowe tosty przekrój na " +
+                                        "trójkąty, podawaj z kiełkami rzeżuchy i domowym ketchupem.",
+                                        PreparationTime = 3,
+                                        Portions = 1
+                                    }
+                                }
+
+                            }
+                    },
+                    Dinner = new Dinner()
+                    {
+
+                            Dishes = new List<DinnerDish>()
+                            {
+                                new DinnerDish()
+                                {
+                                    Dish = new Dish()
+                                    {
+                                        DishName = "Tosty",
+                                        DishProducts = new List<ProductDish>()
+                                        {
+                                            new ProductDish()
+                                            {
+                                                Product = new Product()
+                                                {
+                                                    ProductName = "Chleb tostowy",
+                                                    Weight = 350
+                                                }
+                                            }
+                                        },
+                                        DishDescription = "Przykładowy opis",
+                                        Size = 3,
+                                        MethodOfPeparation = "Chleb posmaruj masłem, na 2 " +
+                                        "kromkach połóż ser, szynkę, ogórka, pomidora, przykryj " +
+                                        "pozostałymi kromkami. Kanapki włóż do opiekacza na kilka " +
+                                        "minut, aż chleb się zarumieni. Gotowe tosty przekrój na " +
+                                        "trójkąty, podawaj z kiełkami rzeżuchy i domowym ketchupem.",
+                                        PreparationTime = 3,
+                                        Portions = 1
+                                    }
+                                }
+
+                            }
                     }
                 }
             };
@@ -1063,7 +1348,362 @@ namespace Papu
             return thursdays;
         }
 
-        //Metoda zwracająca kolekcję niedziel, które będą zawsze istnieć w tabeli product
+        //Metoda zwracająca kolekcję piątków, które będą zawsze istnieć w tabeli friday
+        //baza automatycznie przydzieli id
+        private IEnumerable<Friday> GetFridays()
+        {
+            var fridays = new List<Friday>()
+            {
+                new Friday()
+                {
+                    Breakfast = new Breakfast()
+                    {
+                            Dishes = new List<BreakfastDish>()
+                            {
+                                new BreakfastDish()
+                                {
+                                    Dish = new Dish()
+                                    {
+                                        DishName = "Żurek",
+                                        DishProducts = new List<ProductDish>()
+                                        {
+                                            new ProductDish()
+                                            {
+                                                Product = new Product()
+                                                {
+                                                    ProductName = "Kiełbasa",
+                                                    Weight = 240
+                                                }
+                                            }
+                                        },
+                                        DishDescription = "Przykładowy opis",
+                                        Size = 1,
+                                        MethodOfPeparation = "Bulion lub wywar zagotować z " +
+                                        "dodatkiem pokrojonych na 2 - 3 części wędzonych żeberek " +
+                                        "lub kości lub pokrojonego na 4 części boczku.",
+                                        PreparationTime = 4,
+                                        Portions = 1
+                                    }
+                                }
+
+                            }
+                    },
+                    SecondBreakfast = new SecondBreakfast()
+                    {
+                            Dishes = new List<SecondBreakfastDish>()
+                            {
+                                new SecondBreakfastDish()
+                                {
+                                    Dish = new Dish()
+                                    {
+                                        DishName = "Żurek",
+                                        DishProducts = new List<ProductDish>()
+                                        {
+                                            new ProductDish()
+                                            {
+                                                Product = new Product()
+                                                {
+                                                    ProductName = "Kiełbasa",
+                                                    Weight = 240
+                                                }
+                                            }
+                                        },
+                                        DishDescription = "Przykładowy opis",
+                                        Size = 1,
+                                        MethodOfPeparation = "Bulion lub wywar zagotować z " +
+                                        "dodatkiem pokrojonych na 2 - 3 części wędzonych żeberek " +
+                                        "lub kości lub pokrojonego na 4 części boczku.",
+                                        PreparationTime = 4,
+                                        Portions = 1
+                                    }
+                                }
+
+                            }
+                    },
+                    Lunch = new Lunch()
+                    {
+                            Dishes = new List<LunchDish>()
+                            {
+                                new LunchDish()
+                                {
+                                    Dish = new Dish()
+                                    {
+                                        DishName = "Żurek",
+                                        DishProducts = new List<ProductDish>()
+                                        {
+                                            new ProductDish()
+                                            {
+                                                Product = new Product()
+                                                {
+                                                    ProductName = "Kiełbasa",
+                                                    Weight = 240
+                                                }
+                                            }
+                                        },
+                                        DishDescription = "Przykładowy opis",
+                                        Size = 1,
+                                        MethodOfPeparation = "Bulion lub wywar zagotować z " +
+                                        "dodatkiem pokrojonych na 2 - 3 części wędzonych żeberek " +
+                                        "lub kości lub pokrojonego na 4 części boczku.",
+                                        PreparationTime = 4,
+                                        Portions = 1
+                                    }
+                                }
+
+                            }
+                    },
+                    Snack = new Snack()
+                    {
+                            Dishes = new List<SnackDish>()
+                            {
+                                new SnackDish()
+                                {
+                                    Dish = new Dish()
+                                    {
+                                        DishName = "Żurek",
+                                        DishProducts = new List<ProductDish>()
+                                        {
+                                            new ProductDish()
+                                            {
+                                                Product = new Product()
+                                                {
+                                                    ProductName = "Kiełbasa",
+                                                    Weight = 240
+                                                }
+                                            }
+                                        },
+                                        DishDescription = "Przykładowy opis",
+                                        Size = 1,
+                                        MethodOfPeparation = "Bulion lub wywar zagotować z " +
+                                        "dodatkiem pokrojonych na 2 - 3 części wędzonych żeberek " +
+                                        "lub kości lub pokrojonego na 4 części boczku.",
+                                        PreparationTime = 4,
+                                        Portions = 1
+                                    }
+                                }
+
+                            }
+                    },
+                    Dinner = new Dinner()
+                    {
+
+                            Dishes = new List<DinnerDish>()
+                            {
+                                new DinnerDish()
+                                {
+                                    Dish = new Dish()
+                                    {
+                                        DishName = "Żurek",
+                                        DishProducts = new List<ProductDish>()
+                                        {
+                                            new ProductDish()
+                                            {
+                                                Product = new Product()
+                                                {
+                                                    ProductName = "Kiełbasa",
+                                                    Weight = 240
+                                                }
+                                            }
+                                        },
+                                        DishDescription = "Przykładowy opis",
+                                        Size = 1,
+                                        MethodOfPeparation = "Bulion lub wywar zagotować z " +
+                                        "dodatkiem pokrojonych na 2 - 3 części wędzonych żeberek " +
+                                        "lub kości lub pokrojonego na 4 części boczku.",
+                                        PreparationTime = 4,
+                                        Portions = 1
+                                    }
+                                }
+
+                            }
+                    }
+                }
+            };
+
+            return fridays;
+        }
+
+        //Metoda zwracająca kolekcję sobót, które będą zawsze istnieć w tabeli saturday
+        //baza automatycznie przydzieli id
+        private IEnumerable<Saturday> GetSaturdays()
+        {
+            var saturdays = new List<Saturday>()
+            {
+                new Saturday()
+                {
+                    Breakfast = new Breakfast()
+                    {
+                            Dishes = new List<BreakfastDish>()
+                            {
+                                new BreakfastDish()
+                                {
+                                    Dish = new Dish()
+                                    {
+                                        DishName = "Zupa z dyni",
+                                        DishProducts = new List<ProductDish>()
+                                        {
+                                            new ProductDish()
+                                            {
+                                                Product = new Product()
+                                                {
+                                                    ProductName = "Dynia",
+                                                    Weight = 1000
+                                                }
+                                            }
+                                        },
+                                        DishDescription = "Przykładowy opis",
+                                        Size = 2,
+                                        MethodOfPeparation = "Dynię umyć, przekroić na pół, " +
+                                        "oczyścić z pestek i włókien. Następnie pokroić w kostkę " +
+                                        "razem ze skórką. Ziemniaki i marchewki umyć, obrać i " +
+                                        "pokroić w kostkę. Cebulę obrać i pokroić w kostkę.",
+                                        PreparationTime = 5,
+                                        Portions = 1
+                                    }
+                                }
+
+                            }
+                    },
+                    SecondBreakfast = new SecondBreakfast()
+                    {
+                            Dishes = new List<SecondBreakfastDish>()
+                            {
+                                new SecondBreakfastDish()
+                                {
+                                    Dish = new Dish()
+                                    {
+                                        DishName = "Zupa z dyni",
+                                        DishProducts = new List<ProductDish>()
+                                        {
+                                            new ProductDish()
+                                            {
+                                                Product = new Product()
+                                                {
+                                                    ProductName = "Dynia",
+                                                    Weight = 1000
+                                                }
+                                            }
+                                        },
+                                        DishDescription = "Przykładowy opis",
+                                        Size = 2,
+                                        MethodOfPeparation = "Dynię umyć, przekroić na pół, " +
+                                        "oczyścić z pestek i włókien. Następnie pokroić w kostkę " +
+                                        "razem ze skórką. Ziemniaki i marchewki umyć, obrać i " +
+                                        "pokroić w kostkę. Cebulę obrać i pokroić w kostkę.",
+                                        PreparationTime = 5,
+                                        Portions = 1
+                                    }
+                                }
+
+                            }
+                    },
+                    Lunch = new Lunch()
+                    {
+                            Dishes = new List<LunchDish>()
+                            {
+                                new LunchDish()
+                                {
+                                    Dish = new Dish()
+                                    {
+                                        DishName = "Zupa z dyni",
+                                        DishProducts = new List<ProductDish>()
+                                        {
+                                            new ProductDish()
+                                            {
+                                                Product = new Product()
+                                                {
+                                                    ProductName = "Dynia",
+                                                    Weight = 1000
+                                                }
+                                            }
+                                        },
+                                        DishDescription = "Przykładowy opis",
+                                        Size = 2,
+                                        MethodOfPeparation = "Dynię umyć, przekroić na pół, " +
+                                        "oczyścić z pestek i włókien. Następnie pokroić w kostkę " +
+                                        "razem ze skórką. Ziemniaki i marchewki umyć, obrać i " +
+                                        "pokroić w kostkę. Cebulę obrać i pokroić w kostkę.",
+                                        PreparationTime = 5,
+                                        Portions = 1
+                                    }
+                                }
+
+                            }
+                    },
+                    Snack = new Snack()
+                    {
+                            Dishes = new List<SnackDish>()
+                            {
+                                new SnackDish()
+                                {
+                                    Dish = new Dish()
+                                    {
+                                        DishName = "Zupa z dyni",
+                                        DishProducts = new List<ProductDish>()
+                                        {
+                                            new ProductDish()
+                                            {
+                                                Product = new Product()
+                                                {
+                                                    ProductName = "Dynia",
+                                                    Weight = 1000
+                                                }
+                                            }
+                                        },
+                                        DishDescription = "Przykładowy opis",
+                                        Size = 2,
+                                        MethodOfPeparation = "Dynię umyć, przekroić na pół, " +
+                                        "oczyścić z pestek i włókien. Następnie pokroić w kostkę " +
+                                        "razem ze skórką. Ziemniaki i marchewki umyć, obrać i " +
+                                        "pokroić w kostkę. Cebulę obrać i pokroić w kostkę.",
+                                        PreparationTime = 5,
+                                        Portions = 1
+                                    }
+                                }
+
+                            }
+                    },
+                    Dinner = new Dinner()
+                    {
+
+                            Dishes = new List<DinnerDish>()
+                            {
+                                new DinnerDish()
+                                {
+                                    Dish = new Dish()
+                                    {
+                                        DishName = "Zupa z dyni",
+                                        DishProducts = new List<ProductDish>()
+                                        {
+                                            new ProductDish()
+                                            {
+                                                Product = new Product()
+                                                {
+                                                    ProductName = "Dynia",
+                                                    Weight = 1000
+                                                }
+                                            }
+                                        },
+                                        DishDescription = "Przykładowy opis",
+                                        Size = 2,
+                                        MethodOfPeparation = "Dynię umyć, przekroić na pół, " +
+                                        "oczyścić z pestek i włókien. Następnie pokroić w kostkę " +
+                                        "razem ze skórką. Ziemniaki i marchewki umyć, obrać i " +
+                                        "pokroić w kostkę. Cebulę obrać i pokroić w kostkę.",
+                                        PreparationTime = 5,
+                                        Portions = 1
+                                    }
+                                }
+
+                            }
+                    }
+                }
+            };
+
+            return saturdays;
+        }
+
+        //Metoda zwracająca kolekcję niedziel, które będą zawsze istnieć w tabeli sunday
         //baza automatycznie przydzieli id
         private IEnumerable<Sunday> GetSundays()
         {
@@ -1071,37 +1711,186 @@ namespace Papu
             {
                 new Sunday()
                 {
-                    SundayDishes = new List<DishSunday>()
+                    Breakfast = new Breakfast()
                     {
-                        new DishSunday()
-                        {
-                            Dish = new Dish()
+                            Dishes = new List<BreakfastDish>()
                             {
-                                DishName = "Kurczak",
-                                DishProducts = new List<ProductDish>()
+                                new BreakfastDish()
                                 {
-                                    new ProductDish()
+                                    Dish = new Dish()
                                     {
-                                        Product = new Product()
+                                        DishName = "Kurczak",
+                                        DishProducts = new List<ProductDish>()
                                         {
-                                            ProductName = "Kura",
-                                            Weight = 2000
-                                        }
+                                            new ProductDish()
+                                            {
+                                                Product = new Product()
+                                                {
+                                                    ProductName = "Kura",
+                                                    Weight = 2000
+                                                }
+                                            }
+                                        },
+                                        DishDescription = "Przykładowy opis",
+                                        Size = 3,
+                                        MethodOfPeparation = "Wyciśnij sok z pomarańczy. " +
+                                            "Na patelni na rozgrzanej oliwie podsmaż pokrojoną " +
+                                            "w półplasterki cebulę. Gdy się zeszkli, dodaj łyżkę " +
+                                            "cukru, smaż aż cukier zacznie się karmelizować. " +
+                                            "Następnie dodaj sok z pomarańczy. Gotuj aż sok " +
+                                            "zupełnie odparuje. Cebulę przełóż do miski i odstaw " +
+                                            "na chwilę, aby wystygła.",
+                                        PreparationTime = 3,
+                                        Portions = 2
                                     }
-                                },
-                                DishDescription = "Przykładowy opis",
-                                Size = 3,
-                                MethodOfPeparation = "Wyciśnij sok z pomarańczy. " +
-                                    "Na patelni na rozgrzanej oliwie podsmaż pokrojoną " +
-                                    "w półplasterki cebulę. Gdy się zeszkli, dodaj łyżkę " +
-                                    "cukru, smaż aż cukier zacznie się karmelizować. " +
-                                    "Następnie dodaj sok z pomarańczy. Gotuj aż sok " +
-                                    "zupełnie odparuje. Cebulę przełóż do miski i odstaw " +
-                                    "na chwilę, aby wystygła.",
-                                PreparationTime = 3,
-                                Portions = 2
+                                }
+
                             }
-                        }
+                    },
+                    SecondBreakfast = new SecondBreakfast()
+                    {
+                            Dishes = new List<SecondBreakfastDish>()
+                            {
+                                new SecondBreakfastDish()
+                                {
+                                    Dish = new Dish()
+                                    {
+                                        DishName = "Kurczak",
+                                        DishProducts = new List<ProductDish>()
+                                        {
+                                            new ProductDish()
+                                            {
+                                                Product = new Product()
+                                                {
+                                                    ProductName = "Kura",
+                                                    Weight = 2000
+                                                }
+                                            }
+                                        },
+                                        DishDescription = "Przykładowy opis",
+                                        Size = 3,
+                                        MethodOfPeparation = "Wyciśnij sok z pomarańczy. " +
+                                            "Na patelni na rozgrzanej oliwie podsmaż pokrojoną " +
+                                            "w półplasterki cebulę. Gdy się zeszkli, dodaj łyżkę " +
+                                            "cukru, smaż aż cukier zacznie się karmelizować. " +
+                                            "Następnie dodaj sok z pomarańczy. Gotuj aż sok " +
+                                            "zupełnie odparuje. Cebulę przełóż do miski i odstaw " +
+                                            "na chwilę, aby wystygła.",
+                                        PreparationTime = 3,
+                                        Portions = 2
+                                    }
+                                }
+
+                            }
+                    },
+                    Lunch = new Lunch()
+                    {
+                            Dishes = new List<LunchDish>()
+                            {
+                                new LunchDish()
+                                {
+                                    Dish = new Dish()
+                                    {
+                                        DishName = "Kurczak",
+                                        DishProducts = new List<ProductDish>()
+                                        {
+                                            new ProductDish()
+                                            {
+                                                Product = new Product()
+                                                {
+                                                    ProductName = "Kura",
+                                                    Weight = 2000
+                                                }
+                                            }
+                                        },
+                                        DishDescription = "Przykładowy opis",
+                                        Size = 3,
+                                        MethodOfPeparation = "Wyciśnij sok z pomarańczy. " +
+                                            "Na patelni na rozgrzanej oliwie podsmaż pokrojoną " +
+                                            "w półplasterki cebulę. Gdy się zeszkli, dodaj łyżkę " +
+                                            "cukru, smaż aż cukier zacznie się karmelizować. " +
+                                            "Następnie dodaj sok z pomarańczy. Gotuj aż sok " +
+                                            "zupełnie odparuje. Cebulę przełóż do miski i odstaw " +
+                                            "na chwilę, aby wystygła.",
+                                        PreparationTime = 3,
+                                        Portions = 2
+                                    }
+                                }
+
+                            }
+                    },
+                    Snack = new Snack()
+                    {
+                            Dishes = new List<SnackDish>()
+                            {
+                                new SnackDish()
+                                {
+                                    Dish = new Dish()
+                                    {
+                                        DishName = "Kurczak",
+                                        DishProducts = new List<ProductDish>()
+                                        {
+                                            new ProductDish()
+                                            {
+                                                Product = new Product()
+                                                {
+                                                    ProductName = "Kura",
+                                                    Weight = 2000
+                                                }
+                                            }
+                                        },
+                                        DishDescription = "Przykładowy opis",
+                                        Size = 3,
+                                        MethodOfPeparation = "Wyciśnij sok z pomarańczy. " +
+                                            "Na patelni na rozgrzanej oliwie podsmaż pokrojoną " +
+                                            "w półplasterki cebulę. Gdy się zeszkli, dodaj łyżkę " +
+                                            "cukru, smaż aż cukier zacznie się karmelizować. " +
+                                            "Następnie dodaj sok z pomarańczy. Gotuj aż sok " +
+                                            "zupełnie odparuje. Cebulę przełóż do miski i odstaw " +
+                                            "na chwilę, aby wystygła.",
+                                        PreparationTime = 3,
+                                        Portions = 2
+                                    }
+                                }
+
+                            }
+                    },
+                    Dinner = new Dinner()
+                    {
+
+                            Dishes = new List<DinnerDish>()
+                            {
+                                new DinnerDish()
+                                {
+                                    Dish = new Dish()
+                                    {
+                                        DishName = "Kurczak",
+                                        DishProducts = new List<ProductDish>()
+                                        {
+                                            new ProductDish()
+                                            {
+                                                Product = new Product()
+                                                {
+                                                    ProductName = "Kura",
+                                                    Weight = 2000
+                                                }
+                                            }
+                                        },
+                                        DishDescription = "Przykładowy opis",
+                                        Size = 3,
+                                        MethodOfPeparation = "Wyciśnij sok z pomarańczy. " +
+                                            "Na patelni na rozgrzanej oliwie podsmaż pokrojoną " +
+                                            "w półplasterki cebulę. Gdy się zeszkli, dodaj łyżkę " +
+                                            "cukru, smaż aż cukier zacznie się karmelizować. " +
+                                            "Następnie dodaj sok z pomarańczy. Gotuj aż sok " +
+                                            "zupełnie odparuje. Cebulę przełóż do miski i odstaw " +
+                                            "na chwilę, aby wystygła.",
+                                        PreparationTime = 3,
+                                        Portions = 2
+                                    }
+                                }
+
+                            }
                     }
                 }
             };
@@ -1109,7 +1898,7 @@ namespace Papu
             return sundays;
         }
 
-        //Metoda zwracająca kolekcję jadłospisów, które będą zawsze istnieć w tabeli product
+        /*//Metoda zwracająca kolekcję jadłospisów, które będą zawsze istnieć w tabeli product
         //baza automatycznie przydzieli id
         private IEnumerable<Menu> GetMenus()
         {

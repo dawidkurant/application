@@ -60,7 +60,107 @@ namespace Papu
                 .ForMember(x => x.DinnerProducts, c => c.MapFrom(x => x.Dinner.Products.Select(cs => cs.Product)))
                 .ForMember(x => x.DinnerDishes, c => c.MapFrom(x => x.Dinner.Dishes.Select(cs => cs.Dish)));
 
-            //.ForMember(dto => dto.BreakfastMondayId, c => c.MapFrom(dto => dto.BreakfastId))
+            CreateMap<Tuesday, TuesdayDto>()
+                .ForMember(dto => dto.BreakfastTuesdayId, c => c.MapFrom(dto => dto.Breakfast.BreakfastId))
+                .ForMember(x => x.BreakfastProducts, c => c.MapFrom(x => x.Breakfast.Products.Select(cs => cs.Product)))
+                .ForMember(x => x.BreakfastDishes, c => c.MapFrom(x => x.Breakfast.Dishes.Select(cs => cs.Dish)))
+                .ForMember(dto => dto.SecondBreakfastTuesdayId, c => c.MapFrom(dto => dto.SecondBreakfast.SecondBreakfastId))
+                .ForMember(x => x.SecondBreakfastProducts, c => c.MapFrom(x => x.SecondBreakfast.Products.Select(cs => cs.Product)))
+                .ForMember(x => x.SecondBreakfastDishes, c => c.MapFrom(x => x.SecondBreakfast.Dishes.Select(cs => cs.Dish)))
+                .ForMember(dto => dto.LunchTuesdayId, c => c.MapFrom(dto => dto.Lunch.LunchId))
+                .ForMember(x => x.LunchProducts, c => c.MapFrom(x => x.Lunch.Products.Select(cs => cs.Product)))
+                .ForMember(x => x.LunchDishes, c => c.MapFrom(x => x.Lunch.Dishes.Select(cs => cs.Dish)))
+                .ForMember(dto => dto.SnackTuesdayId, c => c.MapFrom(dto => dto.Snack.SnackId))
+                .ForMember(x => x.SnackProducts, c => c.MapFrom(x => x.Snack.Products.Select(cs => cs.Product)))
+                .ForMember(x => x.SnackDishes, c => c.MapFrom(x => x.Snack.Dishes.Select(cs => cs.Dish)))
+                .ForMember(dto => dto.DinnerTuesdayId, c => c.MapFrom(dto => dto.Dinner.DinnerId))
+                .ForMember(x => x.DinnerProducts, c => c.MapFrom(x => x.Dinner.Products.Select(cs => cs.Product)))
+                .ForMember(x => x.DinnerDishes, c => c.MapFrom(x => x.Dinner.Dishes.Select(cs => cs.Dish)));
+
+            CreateMap<Wednesday, WednesdayDto>()
+                .ForMember(dto => dto.BreakfastWednesdayId, c => c.MapFrom(dto => dto.Breakfast.BreakfastId))
+                .ForMember(x => x.BreakfastProducts, c => c.MapFrom(x => x.Breakfast.Products.Select(cs => cs.Product)))
+                .ForMember(x => x.BreakfastDishes, c => c.MapFrom(x => x.Breakfast.Dishes.Select(cs => cs.Dish)))
+                .ForMember(dto => dto.SecondBreakfastWednesdayId, c => c.MapFrom(dto => dto.SecondBreakfast.SecondBreakfastId))
+                .ForMember(x => x.SecondBreakfastProducts, c => c.MapFrom(x => x.SecondBreakfast.Products.Select(cs => cs.Product)))
+                .ForMember(x => x.SecondBreakfastDishes, c => c.MapFrom(x => x.SecondBreakfast.Dishes.Select(cs => cs.Dish)))
+                .ForMember(dto => dto.LunchWednesdayId, c => c.MapFrom(dto => dto.Lunch.LunchId))
+                .ForMember(x => x.LunchProducts, c => c.MapFrom(x => x.Lunch.Products.Select(cs => cs.Product)))
+                .ForMember(x => x.LunchDishes, c => c.MapFrom(x => x.Lunch.Dishes.Select(cs => cs.Dish)))
+                .ForMember(dto => dto.SnackWednesdayId, c => c.MapFrom(dto => dto.Snack.SnackId))
+                .ForMember(x => x.SnackProducts, c => c.MapFrom(x => x.Snack.Products.Select(cs => cs.Product)))
+                .ForMember(x => x.SnackDishes, c => c.MapFrom(x => x.Snack.Dishes.Select(cs => cs.Dish)))
+                .ForMember(dto => dto.DinnerWednesdayId, c => c.MapFrom(dto => dto.Dinner.DinnerId))
+                .ForMember(x => x.DinnerProducts, c => c.MapFrom(x => x.Dinner.Products.Select(cs => cs.Product)))
+                .ForMember(x => x.DinnerDishes, c => c.MapFrom(x => x.Dinner.Dishes.Select(cs => cs.Dish)));
+
+            CreateMap<Thursday, ThursdayDto>()
+                .ForMember(dto => dto.BreakfastThursdayId, c => c.MapFrom(dto => dto.Breakfast.BreakfastId))
+                .ForMember(x => x.BreakfastProducts, c => c.MapFrom(x => x.Breakfast.Products.Select(cs => cs.Product)))
+                .ForMember(x => x.BreakfastDishes, c => c.MapFrom(x => x.Breakfast.Dishes.Select(cs => cs.Dish)))
+                .ForMember(dto => dto.SecondBreakfastThursdayId, c => c.MapFrom(dto => dto.SecondBreakfast.SecondBreakfastId))
+                .ForMember(x => x.SecondBreakfastProducts, c => c.MapFrom(x => x.SecondBreakfast.Products.Select(cs => cs.Product)))
+                .ForMember(x => x.SecondBreakfastDishes, c => c.MapFrom(x => x.SecondBreakfast.Dishes.Select(cs => cs.Dish)))
+                .ForMember(dto => dto.LunchThursdayId, c => c.MapFrom(dto => dto.Lunch.LunchId))
+                .ForMember(x => x.LunchProducts, c => c.MapFrom(x => x.Lunch.Products.Select(cs => cs.Product)))
+                .ForMember(x => x.LunchDishes, c => c.MapFrom(x => x.Lunch.Dishes.Select(cs => cs.Dish)))
+                .ForMember(dto => dto.SnackThursdayId, c => c.MapFrom(dto => dto.Snack.SnackId))
+                .ForMember(x => x.SnackProducts, c => c.MapFrom(x => x.Snack.Products.Select(cs => cs.Product)))
+                .ForMember(x => x.SnackDishes, c => c.MapFrom(x => x.Snack.Dishes.Select(cs => cs.Dish)))
+                .ForMember(dto => dto.DinnerThursdayId, c => c.MapFrom(dto => dto.Dinner.DinnerId))
+                .ForMember(x => x.DinnerProducts, c => c.MapFrom(x => x.Dinner.Products.Select(cs => cs.Product)))
+                .ForMember(x => x.DinnerDishes, c => c.MapFrom(x => x.Dinner.Dishes.Select(cs => cs.Dish)));
+
+            CreateMap<Friday, FridayDto>()
+                .ForMember(dto => dto.BreakfastFridayId, c => c.MapFrom(dto => dto.Breakfast.BreakfastId))
+                .ForMember(x => x.BreakfastProducts, c => c.MapFrom(x => x.Breakfast.Products.Select(cs => cs.Product)))
+                .ForMember(x => x.BreakfastDishes, c => c.MapFrom(x => x.Breakfast.Dishes.Select(cs => cs.Dish)))
+                .ForMember(dto => dto.SecondBreakfastFridayId, c => c.MapFrom(dto => dto.SecondBreakfast.SecondBreakfastId))
+                .ForMember(x => x.SecondBreakfastProducts, c => c.MapFrom(x => x.SecondBreakfast.Products.Select(cs => cs.Product)))
+                .ForMember(x => x.SecondBreakfastDishes, c => c.MapFrom(x => x.SecondBreakfast.Dishes.Select(cs => cs.Dish)))
+                .ForMember(dto => dto.LunchFridayId, c => c.MapFrom(dto => dto.Lunch.LunchId))
+                .ForMember(x => x.LunchProducts, c => c.MapFrom(x => x.Lunch.Products.Select(cs => cs.Product)))
+                .ForMember(x => x.LunchDishes, c => c.MapFrom(x => x.Lunch.Dishes.Select(cs => cs.Dish)))
+                .ForMember(dto => dto.SnackFridayId, c => c.MapFrom(dto => dto.Snack.SnackId))
+                .ForMember(x => x.SnackProducts, c => c.MapFrom(x => x.Snack.Products.Select(cs => cs.Product)))
+                .ForMember(x => x.SnackDishes, c => c.MapFrom(x => x.Snack.Dishes.Select(cs => cs.Dish)))
+                .ForMember(dto => dto.DinnerFridayId, c => c.MapFrom(dto => dto.Dinner.DinnerId))
+                .ForMember(x => x.DinnerProducts, c => c.MapFrom(x => x.Dinner.Products.Select(cs => cs.Product)))
+                .ForMember(x => x.DinnerDishes, c => c.MapFrom(x => x.Dinner.Dishes.Select(cs => cs.Dish)));
+
+            CreateMap<Saturday, SaturdayDto>()
+                .ForMember(dto => dto.BreakfastSaturdayId, c => c.MapFrom(dto => dto.Breakfast.BreakfastId))
+                .ForMember(x => x.BreakfastProducts, c => c.MapFrom(x => x.Breakfast.Products.Select(cs => cs.Product)))
+                .ForMember(x => x.BreakfastDishes, c => c.MapFrom(x => x.Breakfast.Dishes.Select(cs => cs.Dish)))
+                .ForMember(dto => dto.SecondBreakfastSaturdayId, c => c.MapFrom(dto => dto.SecondBreakfast.SecondBreakfastId))
+                .ForMember(x => x.SecondBreakfastProducts, c => c.MapFrom(x => x.SecondBreakfast.Products.Select(cs => cs.Product)))
+                .ForMember(x => x.SecondBreakfastDishes, c => c.MapFrom(x => x.SecondBreakfast.Dishes.Select(cs => cs.Dish)))
+                .ForMember(dto => dto.LunchSaturdayId, c => c.MapFrom(dto => dto.Lunch.LunchId))
+                .ForMember(x => x.LunchProducts, c => c.MapFrom(x => x.Lunch.Products.Select(cs => cs.Product)))
+                .ForMember(x => x.LunchDishes, c => c.MapFrom(x => x.Lunch.Dishes.Select(cs => cs.Dish)))
+                .ForMember(dto => dto.SnackSaturdayId, c => c.MapFrom(dto => dto.Snack.SnackId))
+                .ForMember(x => x.SnackProducts, c => c.MapFrom(x => x.Snack.Products.Select(cs => cs.Product)))
+                .ForMember(x => x.SnackDishes, c => c.MapFrom(x => x.Snack.Dishes.Select(cs => cs.Dish)))
+                .ForMember(dto => dto.DinnerSaturdayId, c => c.MapFrom(dto => dto.Dinner.DinnerId))
+                .ForMember(x => x.DinnerProducts, c => c.MapFrom(x => x.Dinner.Products.Select(cs => cs.Product)))
+                .ForMember(x => x.DinnerDishes, c => c.MapFrom(x => x.Dinner.Dishes.Select(cs => cs.Dish)));
+
+            CreateMap<Sunday, SundayDto>()
+                .ForMember(dto => dto.BreakfastSundayId, c => c.MapFrom(dto => dto.Breakfast.BreakfastId))
+                .ForMember(x => x.BreakfastProducts, c => c.MapFrom(x => x.Breakfast.Products.Select(cs => cs.Product)))
+                .ForMember(x => x.BreakfastDishes, c => c.MapFrom(x => x.Breakfast.Dishes.Select(cs => cs.Dish)))
+                .ForMember(dto => dto.SecondBreakfastSundayId, c => c.MapFrom(dto => dto.SecondBreakfast.SecondBreakfastId))
+                .ForMember(x => x.SecondBreakfastProducts, c => c.MapFrom(x => x.SecondBreakfast.Products.Select(cs => cs.Product)))
+                .ForMember(x => x.SecondBreakfastDishes, c => c.MapFrom(x => x.SecondBreakfast.Dishes.Select(cs => cs.Dish)))
+                .ForMember(dto => dto.LunchSundayId, c => c.MapFrom(dto => dto.Lunch.LunchId))
+                .ForMember(x => x.LunchProducts, c => c.MapFrom(x => x.Lunch.Products.Select(cs => cs.Product)))
+                .ForMember(x => x.LunchDishes, c => c.MapFrom(x => x.Lunch.Dishes.Select(cs => cs.Dish)))
+                .ForMember(dto => dto.SnackSundayId, c => c.MapFrom(dto => dto.Snack.SnackId))
+                .ForMember(x => x.SnackProducts, c => c.MapFrom(x => x.Snack.Products.Select(cs => cs.Product)))
+                .ForMember(x => x.SnackDishes, c => c.MapFrom(x => x.Snack.Dishes.Select(cs => cs.Dish)))
+                .ForMember(dto => dto.DinnerSundayId, c => c.MapFrom(dto => dto.Dinner.DinnerId))
+                .ForMember(x => x.DinnerProducts, c => c.MapFrom(x => x.Dinner.Products.Select(cs => cs.Product)))
+                .ForMember(x => x.DinnerDishes, c => c.MapFrom(x => x.Dinner.Dishes.Select(cs => cs.Dish)));
 
 
             CreateMap<CreateProductDto, Product>();
@@ -74,6 +174,12 @@ namespace Papu
             CreateMap<CreateDinnerDto, Dinner>();
 
             CreateMap<CreateMondayDto, Monday>();
+            CreateMap<CreateTuesdayDto, Tuesday>();
+            CreateMap<CreateWednesdayDto, Wednesday>();
+            CreateMap<CreateThursdayDto, Thursday>();
+            CreateMap<CreateFridayDto, Friday>();
+            CreateMap<CreateSaturdayDto, Saturday>();
+            CreateMap<CreateSundayDto, Sunday>();
         }
     }
 }
