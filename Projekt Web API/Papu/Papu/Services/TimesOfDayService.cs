@@ -205,8 +205,6 @@ namespace Papu.Services
 
             var breakfast = _mapper.Map<Breakfast>(dtoBreakfast);
 
-            breakfast.BreakfastName = dtoBreakfast.BreakfastName;
-
             Breakfast breakfast2 = _dbContext.Breakfasts
                 .Include(c => c.Products).ThenInclude(cs => cs.Product)
                 .Include(c => c.Dishes).ThenInclude(cs => cs.Dish)

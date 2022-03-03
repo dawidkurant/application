@@ -43,6 +43,48 @@ namespace Papu.Controllers
             return Ok(secondBreakfast);
         }
 
+        //Pobranie konkretnego obiadu 
+        [HttpGet("lunch/{id}")]
+        public ActionResult<LunchDto> GetOneLunch([FromRoute] int id)
+        {
+            var lunch = _timesOfDayService.GetByIdLunch(id);
+
+            if (lunch is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(lunch);
+        }
+
+        //Pobranie konkretnego podwieczorka 
+        [HttpGet("snack/{id}")]
+        public ActionResult<SnackDto> GetOneSnack([FromRoute] int id)
+        {
+            var snack = _timesOfDayService.GetByIdSnack(id);
+
+            if (snack is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(snack);
+        }
+
+        //Pobranie konkretnej kolacji 
+        [HttpGet("dinner/{id}")]
+        public ActionResult<DinnerDto> GetOneDinner([FromRoute] int id)
+        {
+            var dinner = _timesOfDayService.GetByIdDinner(id);
+
+            if (dinner is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(dinner);
+        }
+
         //Pobranie wszystkich śniadań z bazy i zwrócenie ich do klienta z kodem 200 czyli OK
         [HttpGet("breakfast")]
         public ActionResult<IEnumerable<BreakfastDto>> GetAllBreakfasts()
@@ -50,6 +92,42 @@ namespace Papu.Controllers
             var breakfastsDtos = _timesOfDayService.GetAllBreakfast();
 
             return Ok(breakfastsDtos);
+        }
+
+        //Pobranie wszystkich drugich śniadań z bazy i zwrócenie ich do klienta z kodem 200 czyli OK
+        [HttpGet("secondbreakfast")]
+        public ActionResult<IEnumerable<SecondBreakfastDto>> GetAllSecondBreakfasts()
+        {
+            var secondBreakfastsDtos = _timesOfDayService.GetAllSecondBreakfast();
+
+            return Ok(secondBreakfastsDtos);
+        }
+
+        //Pobranie wszystkich obiadów z bazy i zwrócenie ich do klienta z kodem 200 czyli OK
+        [HttpGet("lunch")]
+        public ActionResult<IEnumerable<LunchDto>> GetAllLunches()
+        {
+            var lunchesDtos = _timesOfDayService.GetAllLunch();
+
+            return Ok(lunchesDtos);
+        }
+
+        //Pobranie wszystkich podwieczorków z bazy i zwrócenie ich do klienta z kodem 200 czyli OK
+        [HttpGet("snack")]
+        public ActionResult<IEnumerable<SnackDto>> GetAllSnacks()
+        {
+            var snacksDtos = _timesOfDayService.GetAllSnack();
+
+            return Ok(snacksDtos);
+        }
+
+        //Pobranie wszystkich kolacji z bazy i zwrócenie ich do klienta z kodem 200 czyli OK
+        [HttpGet("dinner")]
+        public ActionResult<IEnumerable<SnackDto>> GetAllDinners()
+        {
+            var dinnersDtos = _timesOfDayService.GetAllDinner();
+
+            return Ok(dinnersDtos);
         }
 
         //Tworzenie nowego śniadania
@@ -61,6 +139,50 @@ namespace Papu.Controllers
             //Jako pierwszy parametr ścieżka, a jako drugi
             //możemy zwrócić ciało odpowiedzi, ale w tym wypadku zwracamy null
             return Created($"api/breakfast/{newBreakfastId}", null);
+        }
+
+        //Tworzenie nowego drugiego śniadania
+        [HttpPost("createsecondbreakfast")]
+        public ActionResult CreateSecondBreakfast([FromBody] CreateSecondBreakfastDto dtoSecondBreakfast)
+        {
+            var newSecondBreakfastId = _timesOfDayService.CreateSecondBreakfast(dtoSecondBreakfast);
+
+            //Jako pierwszy parametr ścieżka, a jako drugi
+            //możemy zwrócić ciało odpowiedzi, ale w tym wypadku zwracamy null
+            return Created($"api/secondbreakfast/{newSecondBreakfastId}", null);
+        }
+
+        //Tworzenie nowego obiadu
+        [HttpPost("createlunch")]
+        public ActionResult CreateLunch([FromBody] CreateLunchDto dtoLunch)
+        {
+            var newLunchId = _timesOfDayService.CreateLunch(dtoLunch);
+
+            //Jako pierwszy parametr ścieżka, a jako drugi
+            //możemy zwrócić ciało odpowiedzi, ale w tym wypadku zwracamy null
+            return Created($"api/lunch/{newLunchId}", null);
+        }
+
+        //Tworzenie nowego podwieczorka
+        [HttpPost("createsnack")]
+        public ActionResult CreateSnack([FromBody] CreateSnackDto dtoSnack)
+        {
+            var newSnackId = _timesOfDayService.CreateSnack(dtoSnack);
+
+            //Jako pierwszy parametr ścieżka, a jako drugi
+            //możemy zwrócić ciało odpowiedzi, ale w tym wypadku zwracamy null
+            return Created($"api/snack/{newSnackId}", null);
+        }
+
+        //Tworzenie nowej kolacji
+        [HttpPost("createdinner")]
+        public ActionResult CreateDinner([FromBody] CreateDinnerDto dtoDinner)
+        {
+            var newDinnerId = _timesOfDayService.CreateDinner(dtoDinner);
+
+            //Jako pierwszy parametr ścieżka, a jako drugi
+            //możemy zwrócić ciało odpowiedzi, ale w tym wypadku zwracamy null
+            return Created($"api/dinner/{newDinnerId}", null);
         }
     }
 }

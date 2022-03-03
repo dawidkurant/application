@@ -9,15 +9,14 @@ namespace Papu.Entities
         //Id obiadu
         public int LunchId { get; set; }
 
-        public string LunchName { get; set; }
-
         //Produkty wchodzące w skład obiadu
         public virtual ICollection<LunchProduct> Products { get; set; }
 
         //Potrawy wchodzące w skład obiadu
         public virtual ICollection<LunchDish> Dishes { get; set; }
 
-        public virtual ICollection<Monday> Mondays { get; set; }
+        public virtual Monday Monday { get; set; }
+
 
     }
 }

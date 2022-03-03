@@ -2,8 +2,6 @@
 {
     public class CreateBreakfastDto
     {
-        public string BreakfastName { get; set; }
-
         //Produkty wchodzące w skład śniadania
         public int[] ProductId { get; set; }
 

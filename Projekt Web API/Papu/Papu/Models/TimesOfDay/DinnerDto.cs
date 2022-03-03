@@ -9,8 +9,6 @@ namespace Papu.Models
         //Id kolacji
         public int DinnerId { get; set; }
 
-        public string DinnerName { get; set; }
-
         //Produkty wchodzące w skład śniadania
         public virtual ICollection<ProductDto> Products { get; set; }
 

@@ -10,7 +10,7 @@ using Papu.Entities;
 namespace Papu.Migrations
 {
     [DbContext(typeof(PapuDbContext))]
-    [Migration("20220302152242_MyMigration")]
+    [Migration("20220303135046_MyMigration")]
     partial class MyMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,9 +27,6 @@ namespace Papu.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("BreakfastName")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("BreakfastId");
 
@@ -299,29 +296,34 @@ namespace Papu.Migrations
                     b.Property<int>("BreakfastId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("DinnerId")
+                    b.Property<int>("DinnerId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("LunchId")
+                    b.Property<int>("LunchId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SecondBreakfastId")
+                    b.Property<int>("SecondBreakfastId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SnackId")
+                    b.Property<int>("SnackId")
                         .HasColumnType("int");
 
                     b.HasKey("MondayId");
 
-                    b.HasIndex("BreakfastId");
+                    b.HasIndex("BreakfastId")
+                        .IsUnique();
 
-                    b.HasIndex("DinnerId");
+                    b.HasIndex("DinnerId")
+                        .IsUnique();
 
-                    b.HasIndex("LunchId");
+                    b.HasIndex("LunchId")
+                        .IsUnique();
 
-                    b.HasIndex("SecondBreakfastId");
+                    b.HasIndex("SecondBreakfastId")
+                        .IsUnique();
 
-                    b.HasIndex("SnackId");
+                    b.HasIndex("SnackId")
+                        .IsUnique();
 
                     b.ToTable("Mondays");
                 });
@@ -659,28 +661,44 @@ namespace Papu.Migrations
             modelBuilder.Entity("Papu.Entities.Monday", b =>
                 {
                     b.HasOne("Papu.Entities.Breakfast", "Breakfast")
-                        .WithMany("Mondays")
-                        .HasForeignKey("BreakfastId")
+                        .WithOne("Monday")
+                        .HasForeignKey("Papu.Entities.Monday", "BreakfastId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Papu.Entities.Dinner", null)
-                        .WithMany("Mondays")
-                        .HasForeignKey("DinnerId");
+                    b.HasOne("Papu.Entities.Dinner", "Dinner")
+                        .WithOne("Monday")
+                        .HasForeignKey("Papu.Entities.Monday", "DinnerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("Papu.Entities.Lunch", null)
-                        .WithMany("Mondays")
-                        .HasForeignKey("LunchId");
+                    b.HasOne("Papu.Entities.Lunch", "Lunch")
+                        .WithOne("Monday")
+                        .HasForeignKey("Papu.Entities.Monday", "LunchId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("Papu.Entities.SecondBreakfast", null)
-                        .WithMany("Mondays")
-                        .HasForeignKey("SecondBreakfastId");
+                    b.HasOne("Papu.Entities.SecondBreakfast", "SecondBreakfast")
+                        .WithOne("Monday")
+                        .HasForeignKey("Papu.Entities.Monday", "SecondBreakfastId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("Papu.Entities.Snack", null)
-                        .WithMany("Mondays")
-                        .HasForeignKey("SnackId");
+                    b.HasOne("Papu.Entities.Snack", "Snack")
+                        .WithOne("Monday")
+                        .HasForeignKey("Papu.Entities.Monday", "SnackId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Breakfast");
+
+                    b.Navigation("Dinner");
+
+                    b.Navigation("Lunch");
+
+                    b.Navigation("SecondBreakfast");
+
+                    b.Navigation("Snack");
                 });
 
             modelBuilder.Entity("Papu.Entities.Product", b =>
@@ -818,7 +836,7 @@ namespace Papu.Migrations
                 {
                     b.Navigation("Dishes");
 
-                    b.Navigation("Mondays");
+                    b.Navigation("Monday");
 
                     b.Navigation("Products");
                 });
@@ -832,7 +850,7 @@ namespace Papu.Migrations
                 {
                     b.Navigation("Dishes");
 
-                    b.Navigation("Mondays");
+                    b.Navigation("Monday");
 
                     b.Navigation("Products");
                 });
@@ -870,7 +888,7 @@ namespace Papu.Migrations
                 {
                     b.Navigation("Dishes");
 
-                    b.Navigation("Mondays");
+                    b.Navigation("Monday");
 
                     b.Navigation("Products");
                 });
@@ -896,7 +914,7 @@ namespace Papu.Migrations
                 {
                     b.Navigation("Dishes");
 
-                    b.Navigation("Mondays");
+                    b.Navigation("Monday");
 
                     b.Navigation("Products");
                 });
@@ -905,7 +923,7 @@ namespace Papu.Migrations
                 {
                     b.Navigation("Dishes");
 
-                    b.Navigation("Mondays");
+                    b.Navigation("Monday");
 
                     b.Navigation("Products");
                 });

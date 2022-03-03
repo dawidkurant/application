@@ -655,6 +655,147 @@ namespace Papu
                                 }
 
                             }
+                    },
+                    SecondBreakfast = new SecondBreakfast()
+                    {
+                            Dishes = new List<SecondBreakfastDish>()
+                            {
+                                new SecondBreakfastDish()
+                                {
+                                    Dish = new Dish()
+                                    {
+                                        DishName = "Buraczki",
+                                        DishProducts = new List<ProductDish>()
+                                        {
+                                            new ProductDish()
+                                            {
+                                                Product = new Product()
+                                                {
+                                                    ProductName = "Cytryna",
+                                                    Weight = 400
+                                                }
+                                            }
+                                        },
+                                        DishDescription = "Przykładowy opis",
+                                        Size = 3,
+                                        MethodOfPeparation = "Cebule obieram, szatkuję w drobniutką " +
+                                        "kostkę i podsmażam na oleju. Buraki studzę, ścieram na " +
+                                        "tarce o grubych oczkach, właściwie grubość tarcia można " +
+                                        "dostawać do swoich preferencji. Dodaję przyprawy, sok " +
+                                        "wyciśnięty z cytryny, syrop daktylowy lub ryżowy, sól oraz " +
+                                        "pieprz. Mieszam bardzo dokładnie i podgrzewam ponownie.",
+                                        PreparationTime = 1,
+                                        Portions = 3
+                                    }
+                                }
+
+                            }
+                    },
+                    Lunch = new Lunch()
+                    {
+                            Dishes = new List<LunchDish>()
+                            {
+                                new LunchDish()
+                                {
+                                    Dish = new Dish()
+                                    {
+                                        DishName = "Buraczki",
+                                        DishProducts = new List<ProductDish>()
+                                        {
+                                            new ProductDish()
+                                            {
+                                                Product = new Product()
+                                                {
+                                                    ProductName = "Cytryna",
+                                                    Weight = 400
+                                                }
+                                            }
+                                        },
+                                        DishDescription = "Przykładowy opis",
+                                        Size = 3,
+                                        MethodOfPeparation = "Cebule obieram, szatkuję w drobniutką " +
+                                        "kostkę i podsmażam na oleju. Buraki studzę, ścieram na " +
+                                        "tarce o grubych oczkach, właściwie grubość tarcia można " +
+                                        "dostawać do swoich preferencji. Dodaję przyprawy, sok " +
+                                        "wyciśnięty z cytryny, syrop daktylowy lub ryżowy, sól oraz " +
+                                        "pieprz. Mieszam bardzo dokładnie i podgrzewam ponownie.",
+                                        PreparationTime = 1,
+                                        Portions = 3
+                                    }
+                                }
+
+                            }
+                    },
+                    Snack = new Snack()
+                    {
+                            Dishes = new List<SnackDish>()
+                            {
+                                new SnackDish()
+                                {
+                                    Dish = new Dish()
+                                    {
+                                        DishName = "Buraczki",
+                                        DishProducts = new List<ProductDish>()
+                                        {
+                                            new ProductDish()
+                                            {
+                                                Product = new Product()
+                                                {
+                                                    ProductName = "Cytryna",
+                                                    Weight = 400
+                                                }
+                                            }
+                                        },
+                                        DishDescription = "Przykładowy opis",
+                                        Size = 3,
+                                        MethodOfPeparation = "Cebule obieram, szatkuję w drobniutką " +
+                                        "kostkę i podsmażam na oleju. Buraki studzę, ścieram na " +
+                                        "tarce o grubych oczkach, właściwie grubość tarcia można " +
+                                        "dostawać do swoich preferencji. Dodaję przyprawy, sok " +
+                                        "wyciśnięty z cytryny, syrop daktylowy lub ryżowy, sól oraz " +
+                                        "pieprz. Mieszam bardzo dokładnie i podgrzewam ponownie.",
+                                        PreparationTime = 1,
+                                        Portions = 3
+                                    }
+                                }
+
+                            }
+                    },
+                    Dinner = new Dinner()
+                    {
+                        
+                            Dishes = new List<DinnerDish>()
+                            {
+                                new DinnerDish()
+                                {
+                                    Dish = new Dish()
+                                    {
+                                        DishName = "Buraczki",
+                                        DishProducts = new List<ProductDish>()
+                                        {
+                                            new ProductDish()
+                                            {
+                                                Product = new Product()
+                                                {
+                                                    ProductName = "Cytryna",
+                                                    Weight = 400
+                                                }
+                                            }
+                                        },
+                                        DishDescription = "Przykładowy opis",
+                                        Size = 3,
+                                        MethodOfPeparation = "Cebule obieram, szatkuję w drobniutką " +
+                                        "kostkę i podsmażam na oleju. Buraki studzę, ścieram na " +
+                                        "tarce o grubych oczkach, właściwie grubość tarcia można " +
+                                        "dostawać do swoich preferencji. Dodaję przyprawy, sok " +
+                                        "wyciśnięty z cytryny, syrop daktylowy lub ryżowy, sól oraz " +
+                                        "pieprz. Mieszam bardzo dokładnie i podgrzewam ponownie.",
+                                        PreparationTime = 1,
+                                        Portions = 3
+                                    }
+                                }
+
+                            }
                     }
                 }
             };

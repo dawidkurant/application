@@ -11,8 +11,7 @@ namespace Papu.Migrations
                 columns: table => new
                 {
                     BreakfastId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    BreakfastName = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                        .Annotation("SqlServer:Identity", "1, 1")
                 },
                 constraints: table =>
                 {
@@ -292,10 +291,10 @@ namespace Papu.Migrations
                     MondayId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     BreakfastId = table.Column<int>(type: "int", nullable: false),
-                    DinnerId = table.Column<int>(type: "int", nullable: true),
-                    LunchId = table.Column<int>(type: "int", nullable: true),
-                    SecondBreakfastId = table.Column<int>(type: "int", nullable: true),
-                    SnackId = table.Column<int>(type: "int", nullable: true)
+                    SecondBreakfastId = table.Column<int>(type: "int", nullable: false),
+                    LunchId = table.Column<int>(type: "int", nullable: false),
+                    SnackId = table.Column<int>(type: "int", nullable: false),
+                    DinnerId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -311,25 +310,25 @@ namespace Papu.Migrations
                         column: x => x.DinnerId,
                         principalTable: "Dinners",
                         principalColumn: "DinnerId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Mondays_Lunches_LunchId",
                         column: x => x.LunchId,
                         principalTable: "Lunches",
                         principalColumn: "LunchId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Mondays_SecondBreakfasts_SecondBreakfastId",
                         column: x => x.SecondBreakfastId,
                         principalTable: "SecondBreakfasts",
                         principalColumn: "SecondBreakfastId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Mondays_Snacks_SnackId",
                         column: x => x.SnackId,
                         principalTable: "Snacks",
                         principalColumn: "SnackId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -625,27 +624,32 @@ namespace Papu.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Mondays_BreakfastId",
                 table: "Mondays",
-                column: "BreakfastId");
+                column: "BreakfastId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Mondays_DinnerId",
                 table: "Mondays",
-                column: "DinnerId");
+                column: "DinnerId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Mondays_LunchId",
                 table: "Mondays",
-                column: "LunchId");
+                column: "LunchId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Mondays_SecondBreakfastId",
                 table: "Mondays",
-                column: "SecondBreakfastId");
+                column: "SecondBreakfastId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Mondays_SnackId",
                 table: "Mondays",
-                column: "SnackId");
+                column: "SnackId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductBreakfasts_ProductId",
