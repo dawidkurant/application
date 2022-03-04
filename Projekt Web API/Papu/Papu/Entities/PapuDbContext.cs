@@ -421,31 +421,41 @@ namespace Papu.Entities
                 .HasForeignKey<Saturday>(pc => pc.DinnerId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<Breakfast>()
-                .HasOne(p => p.Sunday)
-                .WithOne(c => c.Breakfast)
-                .HasForeignKey<Sunday>(pc => pc.BreakfastId)
-                .OnDelete(DeleteBehavior.Cascade);
-            modelBuilder.Entity<SecondBreakfast>()
-                .HasOne(p => p.Sunday)
-                .WithOne(c => c.SecondBreakfast)
-                .HasForeignKey<Sunday>(pc => pc.SecondBreakfastId)
-                .OnDelete(DeleteBehavior.Cascade);
-            modelBuilder.Entity<Lunch>()
-                .HasOne(p => p.Sunday)
-                .WithOne(c => c.Lunch)
-                .HasForeignKey<Sunday>(pc => pc.LunchId)
-                .OnDelete(DeleteBehavior.Cascade);
-            modelBuilder.Entity<Snack>()
-                .HasOne(p => p.Sunday)
-                .WithOne(c => c.Snack)
-                .HasForeignKey<Sunday>(pc => pc.SnackId)
-                .OnDelete(DeleteBehavior.Cascade);
-            modelBuilder.Entity<Dinner>()
-                .HasOne(p => p.Sunday)
-                .WithOne(c => c.Dinner)
-                .HasForeignKey<Sunday>(pc => pc.DinnerId)
-                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Monday>()
+                .HasOne(p => p.Menu)
+                .WithOne(c => c.Monday)
+                .HasForeignKey<Menu>(pc => pc.MondayId)
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Tuesday>()
+                .HasOne(p => p.Menu)
+                .WithOne(c => c.Tuesday)
+                .HasForeignKey<Menu>(pc => pc.TuesdayId)
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Wednesday>()
+                .HasOne(p => p.Menu)
+                .WithOne(c => c.Wednesday)
+                .HasForeignKey<Menu>(pc => pc.WednesdayId)
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Thursday>()
+                .HasOne(p => p.Menu)
+                .WithOne(c => c.Thursday)
+                .HasForeignKey<Menu>(pc => pc.ThursdayId)
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Friday>()
+                .HasOne(p => p.Menu)
+                .WithOne(c => c.Friday)
+                .HasForeignKey<Menu>(pc => pc.FridayId)
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Saturday>()
+                .HasOne(p => p.Menu)
+                .WithOne(c => c.Saturday)
+                .HasForeignKey<Menu>(pc => pc.SaturdayId)
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Sunday>()
+                .HasOne(p => p.Menu)
+                .WithOne(c => c.Sunday)
+                .HasForeignKey<Menu>(pc => pc.SundayId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Dish>()
                 .Property(r => r.DishName)

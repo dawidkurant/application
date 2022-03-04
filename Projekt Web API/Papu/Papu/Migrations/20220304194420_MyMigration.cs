@@ -101,20 +101,6 @@ namespace Papu.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Menus",
-                columns: table => new
-                {
-                    MenuId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    MenuName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    MenuDescription = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Menus", x => x.MenuId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "SecondBreakfasts",
                 columns: table => new
                 {
@@ -691,6 +677,69 @@ namespace Papu.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Menus",
+                columns: table => new
+                {
+                    MenuId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MenuName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    MenuDescription = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    MondayId = table.Column<int>(type: "int", nullable: false),
+                    TuesdayId = table.Column<int>(type: "int", nullable: false),
+                    WednesdayId = table.Column<int>(type: "int", nullable: false),
+                    ThursdayId = table.Column<int>(type: "int", nullable: false),
+                    FridayId = table.Column<int>(type: "int", nullable: false),
+                    SaturdayId = table.Column<int>(type: "int", nullable: false),
+                    SundayId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Menus", x => x.MenuId);
+                    table.ForeignKey(
+                        name: "FK_Menus_Fridays_FridayId",
+                        column: x => x.FridayId,
+                        principalTable: "Fridays",
+                        principalColumn: "FridayId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Menus_Mondays_MondayId",
+                        column: x => x.MondayId,
+                        principalTable: "Mondays",
+                        principalColumn: "MondayId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Menus_Saturdays_SaturdayId",
+                        column: x => x.SaturdayId,
+                        principalTable: "Saturdays",
+                        principalColumn: "SaturdayId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Menus_Sundays_SundayId",
+                        column: x => x.SundayId,
+                        principalTable: "Sundays",
+                        principalColumn: "SundayId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Menus_Thursdays_ThursdayId",
+                        column: x => x.ThursdayId,
+                        principalTable: "Thursdays",
+                        principalColumn: "ThursdayId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Menus_Tuesdays_TuesdayId",
+                        column: x => x.TuesdayId,
+                        principalTable: "Tuesdays",
+                        principalColumn: "TuesdayId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Menus_Wednesdays_WednesdayId",
+                        column: x => x.WednesdayId,
+                        principalTable: "Wednesdays",
+                        principalColumn: "WednesdayId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "DinnerProducts",
                 columns: table => new
                 {
@@ -934,6 +983,48 @@ namespace Papu.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Menus_FridayId",
+                table: "Menus",
+                column: "FridayId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Menus_MondayId",
+                table: "Menus",
+                column: "MondayId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Menus_SaturdayId",
+                table: "Menus",
+                column: "SaturdayId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Menus_SundayId",
+                table: "Menus",
+                column: "SundayId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Menus_ThursdayId",
+                table: "Menus",
+                column: "ThursdayId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Menus_TuesdayId",
+                table: "Menus",
+                column: "TuesdayId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Menus_WednesdayId",
+                table: "Menus",
+                column: "WednesdayId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Mondays_BreakfastId",
                 table: "Mondays",
                 column: "BreakfastId",
@@ -1173,9 +1264,6 @@ namespace Papu.Migrations
                 name: "DishTypes");
 
             migrationBuilder.DropTable(
-                name: "Fridays");
-
-            migrationBuilder.DropTable(
                 name: "LunchDishes");
 
             migrationBuilder.DropTable(
@@ -1183,9 +1271,6 @@ namespace Papu.Migrations
 
             migrationBuilder.DropTable(
                 name: "Menus");
-
-            migrationBuilder.DropTable(
-                name: "Mondays");
 
             migrationBuilder.DropTable(
                 name: "ProductBreakfasts");
@@ -1197,13 +1282,25 @@ namespace Papu.Migrations
                 name: "ProductSecondBreakfasts");
 
             migrationBuilder.DropTable(
-                name: "Saturdays");
-
-            migrationBuilder.DropTable(
                 name: "SnackDishes");
 
             migrationBuilder.DropTable(
                 name: "SnackProducts");
+
+            migrationBuilder.DropTable(
+                name: "KindsOf");
+
+            migrationBuilder.DropTable(
+                name: "Types");
+
+            migrationBuilder.DropTable(
+                name: "Fridays");
+
+            migrationBuilder.DropTable(
+                name: "Mondays");
+
+            migrationBuilder.DropTable(
+                name: "Saturdays");
 
             migrationBuilder.DropTable(
                 name: "Sundays");
@@ -1216,12 +1313,6 @@ namespace Papu.Migrations
 
             migrationBuilder.DropTable(
                 name: "Wednesdays");
-
-            migrationBuilder.DropTable(
-                name: "KindsOf");
-
-            migrationBuilder.DropTable(
-                name: "Types");
 
             migrationBuilder.DropTable(
                 name: "Groups");

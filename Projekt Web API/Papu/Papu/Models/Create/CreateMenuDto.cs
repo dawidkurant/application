@@ -12,32 +12,25 @@ namespace Papu.Models
         //Opis
         public string MenuDescription { get; set; }
 
-        //Poniedziałek
-        public int[] MondayProductsId { get; set; }
-        public int[] MondayDishesId { get; set; }
+        //Poniedziałek wchodzący w skład jadłospisu
+        public int MondayId { get; set; }
 
-        //Wtorek
-        public int[] TuesdayProductsId { get; set; }
-        public int[] TuesdayDishesId { get; set; }
+        //Wtorek wchodzący w skład jadłospisu
+        public int TuesdayId { get; set; }
 
-        //Środa
-        public int[] WednesdayProductsId { get; set; }
-        public int[] WednesdayDishesId { get; set; }
+        //Środa wchodząca w skład jadłospisu
+        public int WednesdayId { get; set; }
 
-        //Czwartek
-        public int[] ThursdayProductsId { get; set; }
-        public int[] ThursdayDishesId { get; set; }
+        //Czwartek wchodzący w skład jadłospisu
+        public int ThursdayId { get; set; }
 
-        //Piątek
-        public int[] FridayProductsId { get; set; }
-        public int[] FridayDishesId { get; set; }
+        //Piątek wchodzący w skład jadłospisu
+        public int FridayId { get; set; }
 
-        //Sobota
-        public int[] SaturdayProductsId { get; set; }
-        public int[] SaturdayDishesId { get; set; }
+        //Sobota wchodząca w skład jadłospisu
+        public int SaturdayId { get; set; }
 
-        //Niedziela
-        public int[] SundayProductsId { get; set; }
-        public int[] SundayDishesId { get; set; }
+        //Niedziela wchodząca w skład jadłospisu
+        public int SundayId { get; set; }
     }
 }
