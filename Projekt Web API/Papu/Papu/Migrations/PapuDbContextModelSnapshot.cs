@@ -127,16 +127,16 @@ namespace Papu.Migrations
 
                     b.Property<string>("DishDescription")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                        .HasMaxLength(1300)
+                        .HasColumnType("nvarchar(1300)");
 
                     b.Property<string>("DishImagePath")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DishName")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("MethodOfPeparation")
                         .IsRequired()

@@ -49,8 +49,8 @@ namespace Papu.Migrations
                 {
                     DishId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DishName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    DishDescription = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    DishName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    DishDescription = table.Column<string>(type: "nvarchar(1300)", maxLength: 1300, nullable: false),
                     MethodOfPeparation = table.Column<string>(type: "nvarchar(1300)", maxLength: 1300, nullable: false),
                     Portions = table.Column<int>(type: "int", maxLength: 3, nullable: false),
                     PreparationTime = table.Column<int>(type: "int", maxLength: 3, nullable: false),

@@ -1,4 +1,5 @@
 ﻿using Papu.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace Papu.Models
 {
@@ -7,9 +8,15 @@ namespace Papu.Models
         //Informacje które klient może podać aby stworzyć nowy jadłospis
 
         //Nazwa
+        //Nazwa jadłospisu jest wymagana
+        [Required]
+        //Maksymalna długość nazwy jadłospisu wynosi 50
+        [MaxLength(50)]
         public string MenuName { get; set; }
 
         //Opis
+        //Maksymalny opis jadłospisu wynosi 500
+        [MaxLength(500)]
         public string MenuDescription { get; set; }
 
         //Poniedziałek wchodzący w skład jadłospisu

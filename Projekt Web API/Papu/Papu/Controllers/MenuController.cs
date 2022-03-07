@@ -15,15 +15,6 @@ namespace Papu.Controllers
             _menuService = menuService;
         }
 
-        //Pobranie wszystkich jadłospisów z bazy i zwrócenie ich do klienta z kodem 200 czyli OK
-        [HttpGet("menu")]
-        public ActionResult<IEnumerable<MenuDto>> GetAllMenus()
-        {
-            var menusDtos = _menuService.GetAllMenus();
-
-            return Ok(menusDtos);
-        }
-
         //Pobranie konkretnego jadłospisu
         [HttpGet("menu/{id}")]
         public ActionResult<MenuDto> GetMenu([FromRoute] int id)
@@ -38,10 +29,23 @@ namespace Papu.Controllers
             return Ok(menu);
         }
 
+        //Pobranie wszystkich jadłospisów z bazy i zwrócenie ich do klienta z kodem 200 czyli OK
+        [HttpGet("menu")]
+        public ActionResult<IEnumerable<MenuDto>> GetAllMenus()
+        {
+            var menusDtos = _menuService.GetAllMenus();
+
+            return Ok(menusDtos);
+        }
+
         //Tworzenie nowego jadłospisu
         [HttpPost("createmenu")]
         public ActionResult CreateMenu([FromBody] CreateMenuDto dto)
         {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var newMenuId = _menuService.CreateMenu(dto);
 
             //Jako pierwszy parametr ścieżka, a jako drugi

@@ -19,15 +19,6 @@ namespace Papu.Controllers
             _productService = productService;
         }
 
-        //Pobranie wszystkich produktów z bazy i zwrócenie ich do klienta z kodem 200 czyli OK
-        [HttpGet]
-        public ActionResult<IEnumerable<ProductDto>> GetAllProducts()
-        {
-            var productsDtos = _productService.GetAllProducts();
-
-            return Ok(productsDtos);
-        }
-
         //Pobranie konkretnego produktu
         [HttpGet("{id}")]
         public ActionResult<ProductDto> GetProduct([FromRoute] int id)
@@ -42,10 +33,23 @@ namespace Papu.Controllers
             return Ok(product);
         }
 
+        //Pobranie wszystkich produktów z bazy i zwrócenie ich do klienta z kodem 200 czyli OK
+        [HttpGet]
+        public ActionResult<IEnumerable<ProductDto>> GetAllProducts()
+        {
+            var productsDtos = _productService.GetAllProducts();
+
+            return Ok(productsDtos);
+        }
+
         //Tworzenie nowego produktu
         [HttpPost]
         public ActionResult CreateProduct([FromBody] CreateProductDto dto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var newProductId = _productService.CreateProduct(dto);
 
             //Jako pierwszy parametr ścieżka, a jako drugi

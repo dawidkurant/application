@@ -460,12 +460,12 @@ namespace Papu.Entities
             modelBuilder.Entity<Dish>()
                 .Property(r => r.DishName)
                 .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(200);
 
             modelBuilder.Entity<Dish>()
                 .Property(r => r.DishDescription)
                 .IsRequired()
-                .HasMaxLength(500);
+                .HasMaxLength(1300);
 
             modelBuilder.Entity<Dish>()
                 .Property(r => r.MethodOfPeparation)

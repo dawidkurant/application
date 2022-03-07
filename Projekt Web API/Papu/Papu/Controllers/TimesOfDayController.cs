@@ -134,6 +134,10 @@ namespace Papu.Controllers
         [HttpPost("createbreakfast")]
         public ActionResult CreateBreakfast([FromBody] CreateBreakfastDto dtoBreakfast)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var newBreakfastId = _timesOfDayService.CreateBreakfast(dtoBreakfast);
 
             //Jako pierwszy parametr ścieżka, a jako drugi
@@ -145,6 +149,10 @@ namespace Papu.Controllers
         [HttpPost("createsecondbreakfast")]
         public ActionResult CreateSecondBreakfast([FromBody] CreateSecondBreakfastDto dtoSecondBreakfast)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var newSecondBreakfastId = _timesOfDayService.CreateSecondBreakfast(dtoSecondBreakfast);
 
             //Jako pierwszy parametr ścieżka, a jako drugi
@@ -156,6 +164,10 @@ namespace Papu.Controllers
         [HttpPost("createlunch")]
         public ActionResult CreateLunch([FromBody] CreateLunchDto dtoLunch)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var newLunchId = _timesOfDayService.CreateLunch(dtoLunch);
 
             //Jako pierwszy parametr ścieżka, a jako drugi
@@ -167,6 +179,10 @@ namespace Papu.Controllers
         [HttpPost("createsnack")]
         public ActionResult CreateSnack([FromBody] CreateSnackDto dtoSnack)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var newSnackId = _timesOfDayService.CreateSnack(dtoSnack);
 
             //Jako pierwszy parametr ścieżka, a jako drugi
@@ -178,6 +194,10 @@ namespace Papu.Controllers
         [HttpPost("createdinner")]
         public ActionResult CreateDinner([FromBody] CreateDinnerDto dtoDinner)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var newDinnerId = _timesOfDayService.CreateDinner(dtoDinner);
 
             //Jako pierwszy parametr ścieżka, a jako drugi
