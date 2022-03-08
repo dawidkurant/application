@@ -42,11 +42,31 @@ namespace Papu.Controllers
         [HttpPost("createmonday")]
         public ActionResult CreateMonday([FromBody] CreateMondayDto dto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var newMondayId = _daysOfTheWeekService.CreateMonday(dto);
 
             //Jako pierwszy parametr ścieżka, a jako drugi
             //możemy zwrócić ciało odpowiedzi, ale w tym wypadku zwracamy null
             return Created($"api/monday/{newMondayId}", null);
+        }
+
+        //Usuwanie poniedziałku
+        [HttpDelete("monday/{id}")]
+        public ActionResult DeleteMonday([FromRoute] int id)
+        {
+            var isDeleted = _daysOfTheWeekService.DeleteMonday(id);
+
+            //operacja zakończona sukcesem
+            if (isDeleted)
+            {
+                return NoContent();
+            }
+
+            //nie odnaleziono
+            return NotFound();
         }
 
         //Pobranie konkretnego wtorku 
@@ -76,11 +96,31 @@ namespace Papu.Controllers
         [HttpPost("createtuesday")]
         public ActionResult CreateTuesday([FromBody] CreateTuesdayDto dto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var newTuesdayId = _daysOfTheWeekService.CreateTuesday(dto);
 
             //Jako pierwszy parametr ścieżka, a jako drugi
             //możemy zwrócić ciało odpowiedzi, ale w tym wypadku zwracamy null
             return Created($"api/tuesday/{newTuesdayId}", null);
+        }
+
+        //Usuwanie wtorku
+        [HttpDelete("tuesday/{id}")]
+        public ActionResult DeleteTuesday([FromRoute] int id)
+        {
+            var isDeleted = _daysOfTheWeekService.DeleteTuesday(id);
+
+            //operacja zakończona sukcesem
+            if (isDeleted)
+            {
+                return NoContent();
+            }
+
+            //nie odnaleziono
+            return NotFound();
         }
 
         //Pobranie konkretnej środy 
@@ -110,11 +150,31 @@ namespace Papu.Controllers
         [HttpPost("createwednesday")]
         public ActionResult CreateWednesday([FromBody] CreateWednesdayDto dto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var newWednesdayId = _daysOfTheWeekService.CreateWednesday(dto);
 
             //Jako pierwszy parametr ścieżka, a jako drugi
             //możemy zwrócić ciało odpowiedzi, ale w tym wypadku zwracamy null
             return Created($"api/wednesday/{newWednesdayId}", null);
+        }
+
+        //Usuwanie środy
+        [HttpDelete("wednesday/{id}")]
+        public ActionResult DeleteWednesday([FromRoute] int id)
+        {
+            var isDeleted = _daysOfTheWeekService.DeleteWednesday(id);
+
+            //operacja zakończona sukcesem
+            if (isDeleted)
+            {
+                return NoContent();
+            }
+
+            //nie odnaleziono
+            return NotFound();
         }
 
         //Pobranie konkretnego czwartku 
@@ -144,11 +204,31 @@ namespace Papu.Controllers
         [HttpPost("createthursday")]
         public ActionResult CreateThursday([FromBody] CreateThursdayDto dto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var newThursdayId = _daysOfTheWeekService.CreateThursday(dto);
 
             //Jako pierwszy parametr ścieżka, a jako drugi
             //możemy zwrócić ciało odpowiedzi, ale w tym wypadku zwracamy null
             return Created($"api/thursday/{newThursdayId}", null);
+        }
+
+        //Usuwanie czwartku
+        [HttpDelete("thursday/{id}")]
+        public ActionResult DeleteThursday([FromRoute] int id)
+        {
+            var isDeleted = _daysOfTheWeekService.DeleteThursday(id);
+
+            //operacja zakończona sukcesem
+            if (isDeleted)
+            {
+                return NoContent();
+            }
+
+            //nie odnaleziono
+            return NotFound();
         }
 
         //Pobranie konkretnego piątku 
@@ -178,11 +258,31 @@ namespace Papu.Controllers
         [HttpPost("createfriday")]
         public ActionResult CreateFriday([FromBody] CreateFridayDto dto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var newFridayId = _daysOfTheWeekService.CreateFriday(dto);
 
             //Jako pierwszy parametr ścieżka, a jako drugi
             //możemy zwrócić ciało odpowiedzi, ale w tym wypadku zwracamy null
             return Created($"api/friday/{newFridayId}", null);
+        }
+
+        //Usuwanie piątku
+        [HttpDelete("friday/{id}")]
+        public ActionResult DeleteFriday([FromRoute] int id)
+        {
+            var isDeleted = _daysOfTheWeekService.DeleteFriday(id);
+
+            //operacja zakończona sukcesem
+            if (isDeleted)
+            {
+                return NoContent();
+            }
+
+            //nie odnaleziono
+            return NotFound();
         }
 
         //Pobranie konkretnej soboty 
@@ -212,11 +312,31 @@ namespace Papu.Controllers
         [HttpPost("createsaturday")]
         public ActionResult CreateSaturday([FromBody] CreateSaturdayDto dto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var newSaturdayId = _daysOfTheWeekService.CreateSaturday(dto);
 
             //Jako pierwszy parametr ścieżka, a jako drugi
             //możemy zwrócić ciało odpowiedzi, ale w tym wypadku zwracamy null
             return Created($"api/saturday/{newSaturdayId}", null);
+        }
+
+        //Usuwanie soboty
+        [HttpDelete("saturday/{id}")]
+        public ActionResult DeleteSaturday([FromRoute] int id)
+        {
+            var isDeleted = _daysOfTheWeekService.DeleteSaturday(id);
+
+            //operacja zakończona sukcesem
+            if (isDeleted)
+            {
+                return NoContent();
+            }
+
+            //nie odnaleziono
+            return NotFound();
         }
 
         //Pobranie konkretnej niedzieli 
@@ -246,11 +366,31 @@ namespace Papu.Controllers
         [HttpPost("createsunday")]
         public ActionResult CreateSunday([FromBody] CreateSundayDto dto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var newSundayId = _daysOfTheWeekService.CreateSunday(dto);
 
             //Jako pierwszy parametr ścieżka, a jako drugi
             //możemy zwrócić ciało odpowiedzi, ale w tym wypadku zwracamy null
             return Created($"api/sunday/{newSundayId}", null);
+        }
+
+        //Usuwanie niedzieli
+        [HttpDelete("sunday/{id}")]
+        public ActionResult DeleteSunday([FromRoute] int id)
+        {
+            var isDeleted = _daysOfTheWeekService.DeleteSunday(id);
+
+            //operacja zakończona sukcesem
+            if (isDeleted)
+            {
+                return NoContent();
+            }
+
+            //nie odnaleziono
+            return NotFound();
         }
 
     }

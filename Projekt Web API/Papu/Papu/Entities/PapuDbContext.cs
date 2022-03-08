@@ -269,193 +269,193 @@ namespace Papu.Entities
                 .HasOne(p => p.Monday)
                 .WithOne(c => c.Breakfast)
                 .HasForeignKey<Monday>(pc => pc.BreakfastId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.SetNull);
             modelBuilder.Entity<SecondBreakfast>()
                 .HasOne(p => p.Monday)
                 .WithOne(c => c.SecondBreakfast)
                 .HasForeignKey<Monday>(pc => pc.SecondBreakfastId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.SetNull);
             modelBuilder.Entity<Lunch>()
                 .HasOne(p => p.Monday)
                 .WithOne(c => c.Lunch)
                 .HasForeignKey<Monday>(pc => pc.LunchId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.SetNull);
             modelBuilder.Entity<Snack>()
                 .HasOne(p => p.Monday)
                 .WithOne(c => c.Snack)
                 .HasForeignKey<Monday>(pc => pc.SnackId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.SetNull);
             modelBuilder.Entity<Dinner>()
                 .HasOne(p => p.Monday)
                 .WithOne(c => c.Dinner)
                 .HasForeignKey<Monday>(pc => pc.DinnerId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Breakfast>()
                 .HasOne(p => p.Tuesday)
                 .WithOne(c => c.Breakfast)
                 .HasForeignKey<Tuesday>(pc => pc.BreakfastId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.SetNull);
             modelBuilder.Entity<SecondBreakfast>()
                 .HasOne(p => p.Tuesday)
                 .WithOne(c => c.SecondBreakfast)
                 .HasForeignKey<Tuesday>(pc => pc.SecondBreakfastId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.SetNull);
             modelBuilder.Entity<Lunch>()
                 .HasOne(p => p.Tuesday)
                 .WithOne(c => c.Lunch)
                 .HasForeignKey<Tuesday>(pc => pc.LunchId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.SetNull);
             modelBuilder.Entity<Snack>()
                 .HasOne(p => p.Tuesday)
                 .WithOne(c => c.Snack)
                 .HasForeignKey<Tuesday>(pc => pc.SnackId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.SetNull);
             modelBuilder.Entity<Dinner>()
                 .HasOne(p => p.Tuesday)
                 .WithOne(c => c.Dinner)
                 .HasForeignKey<Tuesday>(pc => pc.DinnerId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Breakfast>()
                 .HasOne(p => p.Wednesday)
                 .WithOne(c => c.Breakfast)
                 .HasForeignKey<Wednesday>(pc => pc.BreakfastId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.SetNull);
             modelBuilder.Entity<SecondBreakfast>()
                 .HasOne(p => p.Wednesday)
                 .WithOne(c => c.SecondBreakfast)
                 .HasForeignKey<Wednesday>(pc => pc.SecondBreakfastId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.SetNull);
             modelBuilder.Entity<Lunch>()
                 .HasOne(p => p.Wednesday)
                 .WithOne(c => c.Lunch)
                 .HasForeignKey<Wednesday>(pc => pc.LunchId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.SetNull);
             modelBuilder.Entity<Snack>()
                 .HasOne(p => p.Wednesday)
                 .WithOne(c => c.Snack)
                 .HasForeignKey<Wednesday>(pc => pc.SnackId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.SetNull);
             modelBuilder.Entity<Dinner>()
                 .HasOne(p => p.Wednesday)
                 .WithOne(c => c.Dinner)
                 .HasForeignKey<Wednesday>(pc => pc.DinnerId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Breakfast>()
                 .HasOne(p => p.Thursday)
                 .WithOne(c => c.Breakfast)
                 .HasForeignKey<Thursday>(pc => pc.BreakfastId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.SetNull);
             modelBuilder.Entity<SecondBreakfast>()
                 .HasOne(p => p.Thursday)
                 .WithOne(c => c.SecondBreakfast)
                 .HasForeignKey<Thursday>(pc => pc.SecondBreakfastId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.SetNull);
             modelBuilder.Entity<Lunch>()
                 .HasOne(p => p.Thursday)
                 .WithOne(c => c.Lunch)
                 .HasForeignKey<Thursday>(pc => pc.LunchId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.SetNull);
             modelBuilder.Entity<Snack>()
                 .HasOne(p => p.Thursday)
                 .WithOne(c => c.Snack)
                 .HasForeignKey<Thursday>(pc => pc.SnackId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.SetNull);
             modelBuilder.Entity<Dinner>()
                 .HasOne(p => p.Thursday)
                 .WithOne(c => c.Dinner)
                 .HasForeignKey<Thursday>(pc => pc.DinnerId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Breakfast>()
                 .HasOne(p => p.Friday)
                 .WithOne(c => c.Breakfast)
                 .HasForeignKey<Friday>(pc => pc.BreakfastId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.SetNull);
             modelBuilder.Entity<SecondBreakfast>()
                 .HasOne(p => p.Friday)
                 .WithOne(c => c.SecondBreakfast)
                 .HasForeignKey<Friday>(pc => pc.SecondBreakfastId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.SetNull);
             modelBuilder.Entity<Lunch>()
                 .HasOne(p => p.Friday)
                 .WithOne(c => c.Lunch)
                 .HasForeignKey<Friday>(pc => pc.LunchId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.SetNull);
             modelBuilder.Entity<Snack>()
                 .HasOne(p => p.Friday)
                 .WithOne(c => c.Snack)
                 .HasForeignKey<Friday>(pc => pc.SnackId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.SetNull);
             modelBuilder.Entity<Dinner>()
                 .HasOne(p => p.Friday)
                 .WithOne(c => c.Dinner)
                 .HasForeignKey<Friday>(pc => pc.DinnerId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Breakfast>()
                 .HasOne(p => p.Saturday)
                 .WithOne(c => c.Breakfast)
                 .HasForeignKey<Saturday>(pc => pc.BreakfastId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.SetNull);
             modelBuilder.Entity<SecondBreakfast>()
                 .HasOne(p => p.Saturday)
                 .WithOne(c => c.SecondBreakfast)
                 .HasForeignKey<Saturday>(pc => pc.SecondBreakfastId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.SetNull);
             modelBuilder.Entity<Lunch>()
                 .HasOne(p => p.Saturday)
                 .WithOne(c => c.Lunch)
                 .HasForeignKey<Saturday>(pc => pc.LunchId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.SetNull);
             modelBuilder.Entity<Snack>()
                 .HasOne(p => p.Saturday)
                 .WithOne(c => c.Snack)
                 .HasForeignKey<Saturday>(pc => pc.SnackId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.SetNull);
             modelBuilder.Entity<Dinner>()
                 .HasOne(p => p.Saturday)
                 .WithOne(c => c.Dinner)
                 .HasForeignKey<Saturday>(pc => pc.DinnerId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Monday>()
                 .HasOne(p => p.Menu)
                 .WithOne(c => c.Monday)
                 .HasForeignKey<Menu>(pc => pc.MondayId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.SetNull);
             modelBuilder.Entity<Tuesday>()
                 .HasOne(p => p.Menu)
                 .WithOne(c => c.Tuesday)
                 .HasForeignKey<Menu>(pc => pc.TuesdayId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.SetNull);
             modelBuilder.Entity<Wednesday>()
                 .HasOne(p => p.Menu)
                 .WithOne(c => c.Wednesday)
                 .HasForeignKey<Menu>(pc => pc.WednesdayId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.SetNull);
             modelBuilder.Entity<Thursday>()
                 .HasOne(p => p.Menu)
                 .WithOne(c => c.Thursday)
                 .HasForeignKey<Menu>(pc => pc.ThursdayId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.SetNull);
             modelBuilder.Entity<Friday>()
                 .HasOne(p => p.Menu)
                 .WithOne(c => c.Friday)
                 .HasForeignKey<Menu>(pc => pc.FridayId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.SetNull);
             modelBuilder.Entity<Saturday>()
                 .HasOne(p => p.Menu)
                 .WithOne(c => c.Saturday)
                 .HasForeignKey<Menu>(pc => pc.SaturdayId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.SetNull);
             modelBuilder.Entity<Sunday>()
                 .HasOne(p => p.Menu)
                 .WithOne(c => c.Sunday)
                 .HasForeignKey<Menu>(pc => pc.SundayId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Dish>()
                 .Property(r => r.DishName)

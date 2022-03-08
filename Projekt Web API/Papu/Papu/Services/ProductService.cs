@@ -88,5 +88,25 @@ namespace Papu.Services
 
             return product.ProductId;
         }
+
+        public bool DeleteProduct(int id)
+        {
+            var product = 
+                _dbContext.Products
+                .Include(c => c.Category)
+                .Include(c => c.Unit)
+                .Include(c => c.ProductGroups).ThenInclude(cs => cs.Group)
+                .FirstOrDefault(c => c.ProductId == id);
+
+            if (product is null)
+            {
+                return false;
+            }
+
+            _dbContext.Products.Remove(product);
+            _dbContext.SaveChanges();
+
+            return true;
+        }
     }
 }

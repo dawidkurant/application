@@ -52,5 +52,21 @@ namespace Papu.Controllers
             //możemy zwrócić ciało odpowiedzi, ale w tym wypadku zwracamy null
             return Created($"api/menu/{newMenuId}", null);
         }
+
+        //Usuwanie jadłospisu
+        [HttpDelete("{id}")]
+        public ActionResult DeleteMenu([FromRoute] int id)
+        {
+            var isDeleted = _menuService.DeleteMenu(id);
+
+            //operacja zakończona sukcesem
+            if (isDeleted)
+            {
+                return NoContent();
+            }
+
+            //nie odnaleziono
+            return NotFound();
+        }
     }
 }

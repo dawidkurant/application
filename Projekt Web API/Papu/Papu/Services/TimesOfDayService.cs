@@ -442,5 +442,110 @@ namespace Papu.Services
 
             return dinner.DinnerId;
         }
+
+        //Usuwanie śniadania
+        public bool DeleteBreakfast(int id)
+        {
+            var breakfast =
+                _dbContext
+                .Breakfasts
+                .Include(c => c.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Dishes).ThenInclude(cs => cs.Dish)
+                .FirstOrDefault(c => c.BreakfastId == id);
+
+            if (breakfast is null)
+            {
+                return false;
+            }
+
+            _dbContext.Breakfasts.Remove(breakfast);
+            _dbContext.SaveChanges();
+
+            return true;
+        }
+
+        //Usuwanie drugiego śniadania
+        public bool DeleteSecondBreakfast(int id)
+        {
+            var secondBreakfast =
+                _dbContext
+                .SecondBreakfasts
+                .Include(c => c.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Dishes).ThenInclude(cs => cs.Dish)
+                .FirstOrDefault(c => c.SecondBreakfastId == id);
+
+            if (secondBreakfast is null)
+            {
+                return false;
+            }
+
+            _dbContext.SecondBreakfasts.Remove(secondBreakfast);
+            _dbContext.SaveChanges();
+
+            return true;
+        }
+
+        //Usuwanie obiadu
+        public bool DeleteLunch(int id)
+        {
+            var lunch =
+                _dbContext
+                .Lunches
+                .Include(c => c.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Dishes).ThenInclude(cs => cs.Dish)
+                .FirstOrDefault(c => c.LunchId == id);
+
+            if (lunch is null)
+            {
+                return false;
+            }
+
+            _dbContext.Lunches.Remove(lunch);
+            _dbContext.SaveChanges();
+
+            return true;
+        }
+
+        //Usuwanie podwieczorka
+        public bool DeleteSnack(int id)
+        {
+            var snack =
+                _dbContext
+                .Snacks
+                .Include(c => c.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Dishes).ThenInclude(cs => cs.Dish)
+                .FirstOrDefault(c => c.SnackId == id);
+
+            if (snack is null)
+            {
+                return false;
+            }
+
+            _dbContext.Snacks.Remove(snack);
+            _dbContext.SaveChanges();
+
+            return true;
+        }
+
+        //Usuwanie kolacji
+        public bool DeleteDinner(int id)
+        {
+            var dinner =
+                _dbContext
+                .Dinners
+                .Include(c => c.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Dishes).ThenInclude(cs => cs.Dish)
+                .FirstOrDefault(c => c.DinnerId == id);
+
+            if (dinner is null)
+            {
+                return false;
+            }
+
+            _dbContext.Dinners.Remove(dinner);
+            _dbContext.SaveChanges();
+
+            return true;
+        }
     }
 }

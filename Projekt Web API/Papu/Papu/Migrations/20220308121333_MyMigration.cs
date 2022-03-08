@@ -276,11 +276,11 @@ namespace Papu.Migrations
                 {
                     FridayId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BreakfastId = table.Column<int>(type: "int", nullable: false),
-                    SecondBreakfastId = table.Column<int>(type: "int", nullable: false),
-                    LunchId = table.Column<int>(type: "int", nullable: false),
-                    SnackId = table.Column<int>(type: "int", nullable: false),
-                    DinnerId = table.Column<int>(type: "int", nullable: false)
+                    BreakfastId = table.Column<int>(type: "int", nullable: true),
+                    SecondBreakfastId = table.Column<int>(type: "int", nullable: true),
+                    LunchId = table.Column<int>(type: "int", nullable: true),
+                    SnackId = table.Column<int>(type: "int", nullable: true),
+                    DinnerId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -290,31 +290,31 @@ namespace Papu.Migrations
                         column: x => x.BreakfastId,
                         principalTable: "Breakfasts",
                         principalColumn: "BreakfastId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Fridays_Dinners_DinnerId",
                         column: x => x.DinnerId,
                         principalTable: "Dinners",
                         principalColumn: "DinnerId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Fridays_Lunches_LunchId",
                         column: x => x.LunchId,
                         principalTable: "Lunches",
                         principalColumn: "LunchId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Fridays_SecondBreakfasts_SecondBreakfastId",
                         column: x => x.SecondBreakfastId,
                         principalTable: "SecondBreakfasts",
                         principalColumn: "SecondBreakfastId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Fridays_Snacks_SnackId",
                         column: x => x.SnackId,
                         principalTable: "Snacks",
                         principalColumn: "SnackId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -323,11 +323,11 @@ namespace Papu.Migrations
                 {
                     MondayId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BreakfastId = table.Column<int>(type: "int", nullable: false),
-                    SecondBreakfastId = table.Column<int>(type: "int", nullable: false),
-                    LunchId = table.Column<int>(type: "int", nullable: false),
-                    SnackId = table.Column<int>(type: "int", nullable: false),
-                    DinnerId = table.Column<int>(type: "int", nullable: false)
+                    BreakfastId = table.Column<int>(type: "int", nullable: true),
+                    SecondBreakfastId = table.Column<int>(type: "int", nullable: true),
+                    LunchId = table.Column<int>(type: "int", nullable: true),
+                    SnackId = table.Column<int>(type: "int", nullable: true),
+                    DinnerId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -337,31 +337,31 @@ namespace Papu.Migrations
                         column: x => x.BreakfastId,
                         principalTable: "Breakfasts",
                         principalColumn: "BreakfastId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Mondays_Dinners_DinnerId",
                         column: x => x.DinnerId,
                         principalTable: "Dinners",
                         principalColumn: "DinnerId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Mondays_Lunches_LunchId",
                         column: x => x.LunchId,
                         principalTable: "Lunches",
                         principalColumn: "LunchId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Mondays_SecondBreakfasts_SecondBreakfastId",
                         column: x => x.SecondBreakfastId,
                         principalTable: "SecondBreakfasts",
                         principalColumn: "SecondBreakfastId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Mondays_Snacks_SnackId",
                         column: x => x.SnackId,
                         principalTable: "Snacks",
                         principalColumn: "SnackId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -370,11 +370,11 @@ namespace Papu.Migrations
                 {
                     SaturdayId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BreakfastId = table.Column<int>(type: "int", nullable: false),
-                    SecondBreakfastId = table.Column<int>(type: "int", nullable: false),
-                    LunchId = table.Column<int>(type: "int", nullable: false),
-                    SnackId = table.Column<int>(type: "int", nullable: false),
-                    DinnerId = table.Column<int>(type: "int", nullable: false)
+                    BreakfastId = table.Column<int>(type: "int", nullable: true),
+                    SecondBreakfastId = table.Column<int>(type: "int", nullable: true),
+                    LunchId = table.Column<int>(type: "int", nullable: true),
+                    SnackId = table.Column<int>(type: "int", nullable: true),
+                    DinnerId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -384,31 +384,31 @@ namespace Papu.Migrations
                         column: x => x.BreakfastId,
                         principalTable: "Breakfasts",
                         principalColumn: "BreakfastId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Saturdays_Dinners_DinnerId",
                         column: x => x.DinnerId,
                         principalTable: "Dinners",
                         principalColumn: "DinnerId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Saturdays_Lunches_LunchId",
                         column: x => x.LunchId,
                         principalTable: "Lunches",
                         principalColumn: "LunchId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Saturdays_SecondBreakfasts_SecondBreakfastId",
                         column: x => x.SecondBreakfastId,
                         principalTable: "SecondBreakfasts",
                         principalColumn: "SecondBreakfastId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Saturdays_Snacks_SnackId",
                         column: x => x.SnackId,
                         principalTable: "Snacks",
                         principalColumn: "SnackId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -441,11 +441,11 @@ namespace Papu.Migrations
                 {
                     SundayId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BreakfastId = table.Column<int>(type: "int", nullable: false),
-                    SecondBreakfastId = table.Column<int>(type: "int", nullable: false),
-                    LunchId = table.Column<int>(type: "int", nullable: false),
-                    SnackId = table.Column<int>(type: "int", nullable: false),
-                    DinnerId = table.Column<int>(type: "int", nullable: false)
+                    BreakfastId = table.Column<int>(type: "int", nullable: true),
+                    SecondBreakfastId = table.Column<int>(type: "int", nullable: true),
+                    LunchId = table.Column<int>(type: "int", nullable: true),
+                    SnackId = table.Column<int>(type: "int", nullable: true),
+                    DinnerId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -455,31 +455,31 @@ namespace Papu.Migrations
                         column: x => x.BreakfastId,
                         principalTable: "Breakfasts",
                         principalColumn: "BreakfastId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Sundays_Dinners_DinnerId",
                         column: x => x.DinnerId,
                         principalTable: "Dinners",
                         principalColumn: "DinnerId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Sundays_Lunches_LunchId",
                         column: x => x.LunchId,
                         principalTable: "Lunches",
                         principalColumn: "LunchId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Sundays_SecondBreakfasts_SecondBreakfastId",
                         column: x => x.SecondBreakfastId,
                         principalTable: "SecondBreakfasts",
                         principalColumn: "SecondBreakfastId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Sundays_Snacks_SnackId",
                         column: x => x.SnackId,
                         principalTable: "Snacks",
                         principalColumn: "SnackId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -488,11 +488,11 @@ namespace Papu.Migrations
                 {
                     ThursdayId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BreakfastId = table.Column<int>(type: "int", nullable: false),
-                    SecondBreakfastId = table.Column<int>(type: "int", nullable: false),
-                    LunchId = table.Column<int>(type: "int", nullable: false),
-                    SnackId = table.Column<int>(type: "int", nullable: false),
-                    DinnerId = table.Column<int>(type: "int", nullable: false)
+                    BreakfastId = table.Column<int>(type: "int", nullable: true),
+                    SecondBreakfastId = table.Column<int>(type: "int", nullable: true),
+                    LunchId = table.Column<int>(type: "int", nullable: true),
+                    SnackId = table.Column<int>(type: "int", nullable: true),
+                    DinnerId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -502,31 +502,31 @@ namespace Papu.Migrations
                         column: x => x.BreakfastId,
                         principalTable: "Breakfasts",
                         principalColumn: "BreakfastId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Thursdays_Dinners_DinnerId",
                         column: x => x.DinnerId,
                         principalTable: "Dinners",
                         principalColumn: "DinnerId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Thursdays_Lunches_LunchId",
                         column: x => x.LunchId,
                         principalTable: "Lunches",
                         principalColumn: "LunchId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Thursdays_SecondBreakfasts_SecondBreakfastId",
                         column: x => x.SecondBreakfastId,
                         principalTable: "SecondBreakfasts",
                         principalColumn: "SecondBreakfastId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Thursdays_Snacks_SnackId",
                         column: x => x.SnackId,
                         principalTable: "Snacks",
                         principalColumn: "SnackId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -535,11 +535,11 @@ namespace Papu.Migrations
                 {
                     TuesdayId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BreakfastId = table.Column<int>(type: "int", nullable: false),
-                    SecondBreakfastId = table.Column<int>(type: "int", nullable: false),
-                    LunchId = table.Column<int>(type: "int", nullable: false),
-                    SnackId = table.Column<int>(type: "int", nullable: false),
-                    DinnerId = table.Column<int>(type: "int", nullable: false)
+                    BreakfastId = table.Column<int>(type: "int", nullable: true),
+                    SecondBreakfastId = table.Column<int>(type: "int", nullable: true),
+                    LunchId = table.Column<int>(type: "int", nullable: true),
+                    SnackId = table.Column<int>(type: "int", nullable: true),
+                    DinnerId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -549,31 +549,31 @@ namespace Papu.Migrations
                         column: x => x.BreakfastId,
                         principalTable: "Breakfasts",
                         principalColumn: "BreakfastId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Tuesdays_Dinners_DinnerId",
                         column: x => x.DinnerId,
                         principalTable: "Dinners",
                         principalColumn: "DinnerId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Tuesdays_Lunches_LunchId",
                         column: x => x.LunchId,
                         principalTable: "Lunches",
                         principalColumn: "LunchId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Tuesdays_SecondBreakfasts_SecondBreakfastId",
                         column: x => x.SecondBreakfastId,
                         principalTable: "SecondBreakfasts",
                         principalColumn: "SecondBreakfastId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Tuesdays_Snacks_SnackId",
                         column: x => x.SnackId,
                         principalTable: "Snacks",
                         principalColumn: "SnackId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -582,11 +582,11 @@ namespace Papu.Migrations
                 {
                     WednesdayId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BreakfastId = table.Column<int>(type: "int", nullable: false),
-                    SecondBreakfastId = table.Column<int>(type: "int", nullable: false),
-                    LunchId = table.Column<int>(type: "int", nullable: false),
-                    SnackId = table.Column<int>(type: "int", nullable: false),
-                    DinnerId = table.Column<int>(type: "int", nullable: false)
+                    BreakfastId = table.Column<int>(type: "int", nullable: true),
+                    SecondBreakfastId = table.Column<int>(type: "int", nullable: true),
+                    LunchId = table.Column<int>(type: "int", nullable: true),
+                    SnackId = table.Column<int>(type: "int", nullable: true),
+                    DinnerId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -596,31 +596,31 @@ namespace Papu.Migrations
                         column: x => x.BreakfastId,
                         principalTable: "Breakfasts",
                         principalColumn: "BreakfastId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Wednesdays_Dinners_DinnerId",
                         column: x => x.DinnerId,
                         principalTable: "Dinners",
                         principalColumn: "DinnerId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Wednesdays_Lunches_LunchId",
                         column: x => x.LunchId,
                         principalTable: "Lunches",
                         principalColumn: "LunchId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Wednesdays_SecondBreakfasts_SecondBreakfastId",
                         column: x => x.SecondBreakfastId,
                         principalTable: "SecondBreakfasts",
                         principalColumn: "SecondBreakfastId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Wednesdays_Snacks_SnackId",
                         column: x => x.SnackId,
                         principalTable: "Snacks",
                         principalColumn: "SnackId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -684,13 +684,13 @@ namespace Papu.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     MenuName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     MenuDescription = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    MondayId = table.Column<int>(type: "int", nullable: false),
-                    TuesdayId = table.Column<int>(type: "int", nullable: false),
-                    WednesdayId = table.Column<int>(type: "int", nullable: false),
-                    ThursdayId = table.Column<int>(type: "int", nullable: false),
-                    FridayId = table.Column<int>(type: "int", nullable: false),
-                    SaturdayId = table.Column<int>(type: "int", nullable: false),
-                    SundayId = table.Column<int>(type: "int", nullable: false)
+                    MondayId = table.Column<int>(type: "int", nullable: true),
+                    TuesdayId = table.Column<int>(type: "int", nullable: true),
+                    WednesdayId = table.Column<int>(type: "int", nullable: true),
+                    ThursdayId = table.Column<int>(type: "int", nullable: true),
+                    FridayId = table.Column<int>(type: "int", nullable: true),
+                    SaturdayId = table.Column<int>(type: "int", nullable: true),
+                    SundayId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -700,43 +700,43 @@ namespace Papu.Migrations
                         column: x => x.FridayId,
                         principalTable: "Fridays",
                         principalColumn: "FridayId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Menus_Mondays_MondayId",
                         column: x => x.MondayId,
                         principalTable: "Mondays",
                         principalColumn: "MondayId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Menus_Saturdays_SaturdayId",
                         column: x => x.SaturdayId,
                         principalTable: "Saturdays",
                         principalColumn: "SaturdayId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Menus_Sundays_SundayId",
                         column: x => x.SundayId,
                         principalTable: "Sundays",
                         principalColumn: "SundayId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Menus_Thursdays_ThursdayId",
                         column: x => x.ThursdayId,
                         principalTable: "Thursdays",
                         principalColumn: "ThursdayId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Menus_Tuesdays_TuesdayId",
                         column: x => x.TuesdayId,
                         principalTable: "Tuesdays",
                         principalColumn: "TuesdayId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Menus_Wednesdays_WednesdayId",
                         column: x => x.WednesdayId,
                         principalTable: "Wednesdays",
                         principalColumn: "WednesdayId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -946,31 +946,36 @@ namespace Papu.Migrations
                 name: "IX_Fridays_BreakfastId",
                 table: "Fridays",
                 column: "BreakfastId",
-                unique: true);
+                unique: true,
+                filter: "[BreakfastId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Fridays_DinnerId",
                 table: "Fridays",
                 column: "DinnerId",
-                unique: true);
+                unique: true,
+                filter: "[DinnerId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Fridays_LunchId",
                 table: "Fridays",
                 column: "LunchId",
-                unique: true);
+                unique: true,
+                filter: "[LunchId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Fridays_SecondBreakfastId",
                 table: "Fridays",
                 column: "SecondBreakfastId",
-                unique: true);
+                unique: true,
+                filter: "[SecondBreakfastId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Fridays_SnackId",
                 table: "Fridays",
                 column: "SnackId",
-                unique: true);
+                unique: true,
+                filter: "[SnackId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_LunchDishes_DishId",
@@ -986,73 +991,85 @@ namespace Papu.Migrations
                 name: "IX_Menus_FridayId",
                 table: "Menus",
                 column: "FridayId",
-                unique: true);
+                unique: true,
+                filter: "[FridayId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Menus_MondayId",
                 table: "Menus",
                 column: "MondayId",
-                unique: true);
+                unique: true,
+                filter: "[MondayId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Menus_SaturdayId",
                 table: "Menus",
                 column: "SaturdayId",
-                unique: true);
+                unique: true,
+                filter: "[SaturdayId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Menus_SundayId",
                 table: "Menus",
                 column: "SundayId",
-                unique: true);
+                unique: true,
+                filter: "[SundayId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Menus_ThursdayId",
                 table: "Menus",
                 column: "ThursdayId",
-                unique: true);
+                unique: true,
+                filter: "[ThursdayId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Menus_TuesdayId",
                 table: "Menus",
                 column: "TuesdayId",
-                unique: true);
+                unique: true,
+                filter: "[TuesdayId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Menus_WednesdayId",
                 table: "Menus",
                 column: "WednesdayId",
-                unique: true);
+                unique: true,
+                filter: "[WednesdayId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Mondays_BreakfastId",
                 table: "Mondays",
                 column: "BreakfastId",
-                unique: true);
+                unique: true,
+                filter: "[BreakfastId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Mondays_DinnerId",
                 table: "Mondays",
                 column: "DinnerId",
-                unique: true);
+                unique: true,
+                filter: "[DinnerId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Mondays_LunchId",
                 table: "Mondays",
                 column: "LunchId",
-                unique: true);
+                unique: true,
+                filter: "[LunchId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Mondays_SecondBreakfastId",
                 table: "Mondays",
                 column: "SecondBreakfastId",
-                unique: true);
+                unique: true,
+                filter: "[SecondBreakfastId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Mondays_SnackId",
                 table: "Mondays",
                 column: "SnackId",
-                unique: true);
+                unique: true,
+                filter: "[SnackId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductBreakfasts_ProductId",
@@ -1083,31 +1100,36 @@ namespace Papu.Migrations
                 name: "IX_Saturdays_BreakfastId",
                 table: "Saturdays",
                 column: "BreakfastId",
-                unique: true);
+                unique: true,
+                filter: "[BreakfastId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Saturdays_DinnerId",
                 table: "Saturdays",
                 column: "DinnerId",
-                unique: true);
+                unique: true,
+                filter: "[DinnerId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Saturdays_LunchId",
                 table: "Saturdays",
                 column: "LunchId",
-                unique: true);
+                unique: true,
+                filter: "[LunchId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Saturdays_SecondBreakfastId",
                 table: "Saturdays",
                 column: "SecondBreakfastId",
-                unique: true);
+                unique: true,
+                filter: "[SecondBreakfastId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Saturdays_SnackId",
                 table: "Saturdays",
                 column: "SnackId",
-                unique: true);
+                unique: true,
+                filter: "[SnackId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SnackDishes_DishId",
@@ -1123,121 +1145,141 @@ namespace Papu.Migrations
                 name: "IX_Sundays_BreakfastId",
                 table: "Sundays",
                 column: "BreakfastId",
-                unique: true);
+                unique: true,
+                filter: "[BreakfastId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Sundays_DinnerId",
                 table: "Sundays",
                 column: "DinnerId",
-                unique: true);
+                unique: true,
+                filter: "[DinnerId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Sundays_LunchId",
                 table: "Sundays",
                 column: "LunchId",
-                unique: true);
+                unique: true,
+                filter: "[LunchId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Sundays_SecondBreakfastId",
                 table: "Sundays",
                 column: "SecondBreakfastId",
-                unique: true);
+                unique: true,
+                filter: "[SecondBreakfastId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Sundays_SnackId",
                 table: "Sundays",
                 column: "SnackId",
-                unique: true);
+                unique: true,
+                filter: "[SnackId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Thursdays_BreakfastId",
                 table: "Thursdays",
                 column: "BreakfastId",
-                unique: true);
+                unique: true,
+                filter: "[BreakfastId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Thursdays_DinnerId",
                 table: "Thursdays",
                 column: "DinnerId",
-                unique: true);
+                unique: true,
+                filter: "[DinnerId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Thursdays_LunchId",
                 table: "Thursdays",
                 column: "LunchId",
-                unique: true);
+                unique: true,
+                filter: "[LunchId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Thursdays_SecondBreakfastId",
                 table: "Thursdays",
                 column: "SecondBreakfastId",
-                unique: true);
+                unique: true,
+                filter: "[SecondBreakfastId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Thursdays_SnackId",
                 table: "Thursdays",
                 column: "SnackId",
-                unique: true);
+                unique: true,
+                filter: "[SnackId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tuesdays_BreakfastId",
                 table: "Tuesdays",
                 column: "BreakfastId",
-                unique: true);
+                unique: true,
+                filter: "[BreakfastId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tuesdays_DinnerId",
                 table: "Tuesdays",
                 column: "DinnerId",
-                unique: true);
+                unique: true,
+                filter: "[DinnerId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tuesdays_LunchId",
                 table: "Tuesdays",
                 column: "LunchId",
-                unique: true);
+                unique: true,
+                filter: "[LunchId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tuesdays_SecondBreakfastId",
                 table: "Tuesdays",
                 column: "SecondBreakfastId",
-                unique: true);
+                unique: true,
+                filter: "[SecondBreakfastId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tuesdays_SnackId",
                 table: "Tuesdays",
                 column: "SnackId",
-                unique: true);
+                unique: true,
+                filter: "[SnackId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Wednesdays_BreakfastId",
                 table: "Wednesdays",
                 column: "BreakfastId",
-                unique: true);
+                unique: true,
+                filter: "[BreakfastId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Wednesdays_DinnerId",
                 table: "Wednesdays",
                 column: "DinnerId",
-                unique: true);
+                unique: true,
+                filter: "[DinnerId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Wednesdays_LunchId",
                 table: "Wednesdays",
                 column: "LunchId",
-                unique: true);
+                unique: true,
+                filter: "[LunchId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Wednesdays_SecondBreakfastId",
                 table: "Wednesdays",
                 column: "SecondBreakfastId",
-                unique: true);
+                unique: true,
+                filter: "[SecondBreakfastId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Wednesdays_SnackId",
                 table: "Wednesdays",
                 column: "SnackId",
-                unique: true);
+                unique: true,
+                filter: "[SnackId] IS NOT NULL");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

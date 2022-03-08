@@ -46,11 +46,31 @@ namespace Papu.Controllers
         [HttpPost]
         public ActionResult CreateDish([FromBody] CreateDishDto dto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var newDishId = _dishService.CreateDish(dto);
 
             //Jako pierwszy parametr ścieżka, a jako drugi
             //możemy zwrócić ciało odpowiedzi, ale w tym wypadku zwracamy null
             return Created($"api/dish/{newDishId}", null);
+        }
+
+        //Usuwanie potrawy
+        [HttpDelete("{id}")]
+        public ActionResult DeleteDish([FromRoute] int id)
+        {
+            var isDeleted = _dishService.DeleteDish(id);
+
+            //operacja zakończona sukcesem
+            if (isDeleted)
+            {
+                return NoContent();
+            }
+
+            //nie odnaleziono
+            return NotFound();
         }
     }
 }

@@ -56,5 +56,21 @@ namespace Papu.Controllers
             //możemy zwrócić ciało odpowiedzi, ale w tym wypadku zwracamy null
             return Created($"api/product/{newProductId}", null);
         }
+
+        //Usuwanie produktu
+        [HttpDelete("{id}")]
+        public ActionResult DeleteProduct([FromRoute] int id)
+        {
+            var isDeleted = _productService.DeleteProduct(id);
+
+            //operacja zakończona sukcesem
+            if (isDeleted)
+            {
+                return NoContent();
+            }
+
+            //nie odnaleziono
+            return NotFound();
+        }
     }
 }

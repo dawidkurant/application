@@ -111,5 +111,25 @@ namespace Papu.Services
 
             return dish.DishId;
         }
+
+        public bool DeleteDish(int id)
+        {
+            var dish = _dbContext
+                .Dishes
+                .Include(c => c.DishKindsOf).ThenInclude(cs => cs.KindOf)
+                .Include(c => c.DishTypes).ThenInclude(cs => cs.Type)
+                .Include(c => c.DishProducts).ThenInclude(cs => cs.Product)
+                .FirstOrDefault(c => c.DishId == id);
+
+            if (dish is null)
+            {
+                return false;
+            }
+
+            _dbContext.Dishes.Remove(dish);
+            _dbContext.SaveChanges();
+
+            return true;
+        }
     }
 }

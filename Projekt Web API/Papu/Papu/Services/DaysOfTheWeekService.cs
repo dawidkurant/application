@@ -89,6 +89,34 @@ namespace Papu.Services
             return monday.MondayId;
         }
 
+        //Usuwanie poniedziałku
+        public bool DeleteMonday(int id)
+        {
+            var monday = _dbContext
+                .Mondays
+                .Include(c => c.Breakfast).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Breakfast).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.SecondBreakfast).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.SecondBreakfast).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.Lunch).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Lunch).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.Snack).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Snack).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.Dinner).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Dinner).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .FirstOrDefault(c => c.MondayId == id);
+
+            if (monday is null)
+            {
+                return false;
+            }
+
+            _dbContext.Mondays.Remove(monday);
+            _dbContext.SaveChanges();
+
+            return true;
+        }
+
         //Wyświetlanie jednego wtorku
 
         public TuesdayDto GetByIdTuesday(int id)
@@ -157,6 +185,34 @@ namespace Papu.Services
             _dbContext.SaveChanges();
 
             return tuesday.TuesdayId;
+        }
+
+        //Usuwanie wtorku
+        public bool DeleteTuesday(int id)
+        {
+            var tuesday = _dbContext
+                .Tuesdays
+                .Include(c => c.Breakfast).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Breakfast).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.SecondBreakfast).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.SecondBreakfast).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.Lunch).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Lunch).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.Snack).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Snack).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.Dinner).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Dinner).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .FirstOrDefault(c => c.TuesdayId == id);
+
+            if (tuesday is null)
+            {
+                return false;
+            }
+
+            _dbContext.Tuesdays.Remove(tuesday);
+            _dbContext.SaveChanges();
+
+            return true;
         }
 
         //Wyświetlanie jednej środy
@@ -229,6 +285,34 @@ namespace Papu.Services
             return wednesday.WednesdayId;
         }
 
+        //Usuwanie środy
+        public bool DeleteWednesday(int id)
+        {
+            var wednesday = _dbContext
+                .Wednesdays
+                .Include(c => c.Breakfast).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Breakfast).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.SecondBreakfast).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.SecondBreakfast).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.Lunch).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Lunch).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.Snack).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Snack).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.Dinner).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Dinner).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .FirstOrDefault(c => c.WednesdayId == id);
+
+            if (wednesday is null)
+            {
+                return false;
+            }
+
+            _dbContext.Wednesdays.Remove(wednesday);
+            _dbContext.SaveChanges();
+
+            return true;
+        }
+
         //Wyświetlanie jednego czwartku
 
         public ThursdayDto GetByIdThursday(int id)
@@ -297,6 +381,34 @@ namespace Papu.Services
             _dbContext.SaveChanges();
 
             return thursday.ThursdayId;
+        }
+
+        //Usuwanie czwartku
+        public bool DeleteThursday(int id)
+        {
+            var thursday = _dbContext
+                .Thursdays
+                .Include(c => c.Breakfast).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Breakfast).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.SecondBreakfast).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.SecondBreakfast).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.Lunch).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Lunch).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.Snack).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Snack).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.Dinner).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Dinner).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .FirstOrDefault(c => c.ThursdayId == id);
+
+            if (thursday is null)
+            {
+                return false;
+            }
+
+            _dbContext.Thursdays.Remove(thursday);
+            _dbContext.SaveChanges();
+
+            return true;
         }
 
         //Wyświetlanie jednego piątku
@@ -369,6 +481,34 @@ namespace Papu.Services
             return friday.FridayId;
         }
 
+        //Usuwanie piątku
+        public bool DeleteFriday(int id)
+        {
+            var friday = _dbContext
+                .Fridays
+                .Include(c => c.Breakfast).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Breakfast).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.SecondBreakfast).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.SecondBreakfast).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.Lunch).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Lunch).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.Snack).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Snack).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.Dinner).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Dinner).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .FirstOrDefault(c => c.FridayId == id);
+
+            if (friday is null)
+            {
+                return false;
+            }
+
+            _dbContext.Fridays.Remove(friday);
+            _dbContext.SaveChanges();
+
+            return true;
+        }
+
         //Wyświetlanie jednej soboty
 
         public SaturdayDto GetByIdSaturday(int id)
@@ -439,6 +579,34 @@ namespace Papu.Services
             return saturday.SaturdayId;
         }
 
+        //Usuwanie soboty
+        public bool DeleteSaturday(int id)
+        {
+            var saturday = _dbContext
+                .Saturdays
+                .Include(c => c.Breakfast).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Breakfast).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.SecondBreakfast).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.SecondBreakfast).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.Lunch).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Lunch).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.Snack).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Snack).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.Dinner).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Dinner).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .FirstOrDefault(c => c.SaturdayId == id);
+
+            if (saturday is null)
+            {
+                return false;
+            }
+
+            _dbContext.Saturdays.Remove(saturday);
+            _dbContext.SaveChanges();
+
+            return true;
+        }
+
         //Wyświetlanie jednej niedzieli
 
         public SundayDto GetByIdSunday(int id)
@@ -507,6 +675,34 @@ namespace Papu.Services
             _dbContext.SaveChanges();
 
             return sunday.SundayId;
+        }
+
+        //Usuwanie niedzieli
+        public bool DeleteSunday(int id)
+        {
+            var sunday = _dbContext
+                .Sundays
+                .Include(c => c.Breakfast).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Breakfast).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.SecondBreakfast).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.SecondBreakfast).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.Lunch).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Lunch).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.Snack).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Snack).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.Dinner).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Dinner).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .FirstOrDefault(c => c.SundayId == id);
+
+            if (sunday is null)
+            {
+                return false;
+            }
+
+            _dbContext.Sundays.Remove(sunday);
+            _dbContext.SaveChanges();
+
+            return true;
         }
     }
 }

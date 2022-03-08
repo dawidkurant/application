@@ -204,5 +204,85 @@ namespace Papu.Controllers
             //możemy zwrócić ciało odpowiedzi, ale w tym wypadku zwracamy null
             return Created($"api/dinner/{newDinnerId}", null);
         }
+
+        //Usuwanie konkretnego śniadania
+        [HttpDelete("breakfast/{id}")]
+        public ActionResult DeleteBreakfast([FromRoute] int id)
+        {
+            var isDeleted = _timesOfDayService.DeleteBreakfast(id);
+
+            //operacja zakończona sukcesem
+            if (isDeleted)
+            {
+                return NoContent();
+            }
+
+            //nie odnaleziono
+            return NotFound();
+        }
+
+        //Usuwanie konkretnego drugiego śniadania
+        [HttpDelete("secondbreakfast/{id}")]
+        public ActionResult DeleteSecondBreakfast([FromRoute] int id)
+        {
+            var isDeleted = _timesOfDayService.DeleteSecondBreakfast(id);
+
+            //operacja zakończona sukcesem
+            if (isDeleted)
+            {
+                return NoContent();
+            }
+
+            //nie odnaleziono
+            return NotFound();
+        }
+
+        //Usuwanie konkretnego obiadu
+        [HttpDelete("lunch/{id}")]
+        public ActionResult DeleteLunch([FromRoute] int id)
+        {
+            var isDeleted = _timesOfDayService.DeleteLunch(id);
+
+            //operacja zakończona sukcesem
+            if (isDeleted)
+            {
+                return NoContent();
+            }
+
+            //nie odnaleziono
+            return NotFound();
+        }
+
+        //Usuwanie konkretnego podwieczorka
+        [HttpDelete("snack/{id}")]
+        public ActionResult DeleteSnack([FromRoute] int id)
+        {
+            var isDeleted = _timesOfDayService.DeleteSnack(id);
+
+            //operacja zakończona sukcesem
+            if (isDeleted)
+            {
+                return NoContent();
+            }
+
+            //nie odnaleziono
+            return NotFound();
+        }
+
+        //Usuwanie konkretnej kolacji
+        [HttpDelete("dinner/{id}")]
+        public ActionResult DeleteDinner([FromRoute] int id)
+        {
+            var isDeleted = _timesOfDayService.DeleteDinner(id);
+
+            //operacja zakończona sukcesem
+            if (isDeleted)
+            {
+                return NoContent();
+            }
+
+            //nie odnaleziono
+            return NotFound();
+        }
     }
 }

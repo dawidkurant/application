@@ -197,37 +197,42 @@ namespace Papu.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BreakfastId")
+                    b.Property<int?>("BreakfastId")
                         .HasColumnType("int");
 
-                    b.Property<int>("DinnerId")
+                    b.Property<int?>("DinnerId")
                         .HasColumnType("int");
 
-                    b.Property<int>("LunchId")
+                    b.Property<int?>("LunchId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SecondBreakfastId")
+                    b.Property<int?>("SecondBreakfastId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SnackId")
+                    b.Property<int?>("SnackId")
                         .HasColumnType("int");
 
                     b.HasKey("FridayId");
 
                     b.HasIndex("BreakfastId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[BreakfastId] IS NOT NULL");
 
                     b.HasIndex("DinnerId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[DinnerId] IS NOT NULL");
 
                     b.HasIndex("LunchId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[LunchId] IS NOT NULL");
 
                     b.HasIndex("SecondBreakfastId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[SecondBreakfastId] IS NOT NULL");
 
                     b.HasIndex("SnackId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[SnackId] IS NOT NULL");
 
                     b.ToTable("Fridays");
                 });
@@ -311,7 +316,7 @@ namespace Papu.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("FridayId")
+                    b.Property<int?>("FridayId")
                         .HasColumnType("int");
 
                     b.Property<string>("MenuDescription")
@@ -324,46 +329,53 @@ namespace Papu.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("MondayId")
+                    b.Property<int?>("MondayId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SaturdayId")
+                    b.Property<int?>("SaturdayId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SundayId")
+                    b.Property<int?>("SundayId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ThursdayId")
+                    b.Property<int?>("ThursdayId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TuesdayId")
+                    b.Property<int?>("TuesdayId")
                         .HasColumnType("int");
 
-                    b.Property<int>("WednesdayId")
+                    b.Property<int?>("WednesdayId")
                         .HasColumnType("int");
 
                     b.HasKey("MenuId");
 
                     b.HasIndex("FridayId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[FridayId] IS NOT NULL");
 
                     b.HasIndex("MondayId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[MondayId] IS NOT NULL");
 
                     b.HasIndex("SaturdayId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[SaturdayId] IS NOT NULL");
 
                     b.HasIndex("SundayId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[SundayId] IS NOT NULL");
 
                     b.HasIndex("ThursdayId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[ThursdayId] IS NOT NULL");
 
                     b.HasIndex("TuesdayId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[TuesdayId] IS NOT NULL");
 
                     b.HasIndex("WednesdayId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[WednesdayId] IS NOT NULL");
 
                     b.ToTable("Menus");
                 });
@@ -375,37 +387,42 @@ namespace Papu.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BreakfastId")
+                    b.Property<int?>("BreakfastId")
                         .HasColumnType("int");
 
-                    b.Property<int>("DinnerId")
+                    b.Property<int?>("DinnerId")
                         .HasColumnType("int");
 
-                    b.Property<int>("LunchId")
+                    b.Property<int?>("LunchId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SecondBreakfastId")
+                    b.Property<int?>("SecondBreakfastId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SnackId")
+                    b.Property<int?>("SnackId")
                         .HasColumnType("int");
 
                     b.HasKey("MondayId");
 
                     b.HasIndex("BreakfastId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[BreakfastId] IS NOT NULL");
 
                     b.HasIndex("DinnerId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[DinnerId] IS NOT NULL");
 
                     b.HasIndex("LunchId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[LunchId] IS NOT NULL");
 
                     b.HasIndex("SecondBreakfastId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[SecondBreakfastId] IS NOT NULL");
 
                     b.HasIndex("SnackId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[SnackId] IS NOT NULL");
 
                     b.ToTable("Mondays");
                 });
@@ -481,37 +498,42 @@ namespace Papu.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BreakfastId")
+                    b.Property<int?>("BreakfastId")
                         .HasColumnType("int");
 
-                    b.Property<int>("DinnerId")
+                    b.Property<int?>("DinnerId")
                         .HasColumnType("int");
 
-                    b.Property<int>("LunchId")
+                    b.Property<int?>("LunchId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SecondBreakfastId")
+                    b.Property<int?>("SecondBreakfastId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SnackId")
+                    b.Property<int?>("SnackId")
                         .HasColumnType("int");
 
                     b.HasKey("SaturdayId");
 
                     b.HasIndex("BreakfastId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[BreakfastId] IS NOT NULL");
 
                     b.HasIndex("DinnerId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[DinnerId] IS NOT NULL");
 
                     b.HasIndex("LunchId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[LunchId] IS NOT NULL");
 
                     b.HasIndex("SecondBreakfastId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[SecondBreakfastId] IS NOT NULL");
 
                     b.HasIndex("SnackId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[SnackId] IS NOT NULL");
 
                     b.ToTable("Saturdays");
                 });
@@ -607,37 +629,42 @@ namespace Papu.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BreakfastId")
+                    b.Property<int?>("BreakfastId")
                         .HasColumnType("int");
 
-                    b.Property<int>("DinnerId")
+                    b.Property<int?>("DinnerId")
                         .HasColumnType("int");
 
-                    b.Property<int>("LunchId")
+                    b.Property<int?>("LunchId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SecondBreakfastId")
+                    b.Property<int?>("SecondBreakfastId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SnackId")
+                    b.Property<int?>("SnackId")
                         .HasColumnType("int");
 
                     b.HasKey("SundayId");
 
                     b.HasIndex("BreakfastId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[BreakfastId] IS NOT NULL");
 
                     b.HasIndex("DinnerId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[DinnerId] IS NOT NULL");
 
                     b.HasIndex("LunchId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[LunchId] IS NOT NULL");
 
                     b.HasIndex("SecondBreakfastId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[SecondBreakfastId] IS NOT NULL");
 
                     b.HasIndex("SnackId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[SnackId] IS NOT NULL");
 
                     b.ToTable("Sundays");
                 });
@@ -649,37 +676,42 @@ namespace Papu.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BreakfastId")
+                    b.Property<int?>("BreakfastId")
                         .HasColumnType("int");
 
-                    b.Property<int>("DinnerId")
+                    b.Property<int?>("DinnerId")
                         .HasColumnType("int");
 
-                    b.Property<int>("LunchId")
+                    b.Property<int?>("LunchId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SecondBreakfastId")
+                    b.Property<int?>("SecondBreakfastId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SnackId")
+                    b.Property<int?>("SnackId")
                         .HasColumnType("int");
 
                     b.HasKey("ThursdayId");
 
                     b.HasIndex("BreakfastId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[BreakfastId] IS NOT NULL");
 
                     b.HasIndex("DinnerId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[DinnerId] IS NOT NULL");
 
                     b.HasIndex("LunchId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[LunchId] IS NOT NULL");
 
                     b.HasIndex("SecondBreakfastId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[SecondBreakfastId] IS NOT NULL");
 
                     b.HasIndex("SnackId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[SnackId] IS NOT NULL");
 
                     b.ToTable("Thursdays");
                 });
@@ -691,37 +723,42 @@ namespace Papu.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BreakfastId")
+                    b.Property<int?>("BreakfastId")
                         .HasColumnType("int");
 
-                    b.Property<int>("DinnerId")
+                    b.Property<int?>("DinnerId")
                         .HasColumnType("int");
 
-                    b.Property<int>("LunchId")
+                    b.Property<int?>("LunchId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SecondBreakfastId")
+                    b.Property<int?>("SecondBreakfastId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SnackId")
+                    b.Property<int?>("SnackId")
                         .HasColumnType("int");
 
                     b.HasKey("TuesdayId");
 
                     b.HasIndex("BreakfastId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[BreakfastId] IS NOT NULL");
 
                     b.HasIndex("DinnerId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[DinnerId] IS NOT NULL");
 
                     b.HasIndex("LunchId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[LunchId] IS NOT NULL");
 
                     b.HasIndex("SecondBreakfastId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[SecondBreakfastId] IS NOT NULL");
 
                     b.HasIndex("SnackId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[SnackId] IS NOT NULL");
 
                     b.ToTable("Tuesdays");
                 });
@@ -763,37 +800,42 @@ namespace Papu.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BreakfastId")
+                    b.Property<int?>("BreakfastId")
                         .HasColumnType("int");
 
-                    b.Property<int>("DinnerId")
+                    b.Property<int?>("DinnerId")
                         .HasColumnType("int");
 
-                    b.Property<int>("LunchId")
+                    b.Property<int?>("LunchId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SecondBreakfastId")
+                    b.Property<int?>("SecondBreakfastId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SnackId")
+                    b.Property<int?>("SnackId")
                         .HasColumnType("int");
 
                     b.HasKey("WednesdayId");
 
                     b.HasIndex("BreakfastId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[BreakfastId] IS NOT NULL");
 
                     b.HasIndex("DinnerId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[DinnerId] IS NOT NULL");
 
                     b.HasIndex("LunchId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[LunchId] IS NOT NULL");
 
                     b.HasIndex("SecondBreakfastId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[SecondBreakfastId] IS NOT NULL");
 
                     b.HasIndex("SnackId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[SnackId] IS NOT NULL");
 
                     b.ToTable("Wednesdays");
                 });
@@ -917,32 +959,27 @@ namespace Papu.Migrations
                     b.HasOne("Papu.Entities.Breakfast", "Breakfast")
                         .WithOne("Friday")
                         .HasForeignKey("Papu.Entities.Friday", "BreakfastId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Papu.Entities.Dinner", "Dinner")
                         .WithOne("Friday")
                         .HasForeignKey("Papu.Entities.Friday", "DinnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Papu.Entities.Lunch", "Lunch")
                         .WithOne("Friday")
                         .HasForeignKey("Papu.Entities.Friday", "LunchId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Papu.Entities.SecondBreakfast", "SecondBreakfast")
                         .WithOne("Friday")
                         .HasForeignKey("Papu.Entities.Friday", "SecondBreakfastId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Papu.Entities.Snack", "Snack")
                         .WithOne("Friday")
                         .HasForeignKey("Papu.Entities.Friday", "SnackId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Breakfast");
 
@@ -998,44 +1035,37 @@ namespace Papu.Migrations
                     b.HasOne("Papu.Entities.Friday", "Friday")
                         .WithOne("Menu")
                         .HasForeignKey("Papu.Entities.Menu", "FridayId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Papu.Entities.Monday", "Monday")
                         .WithOne("Menu")
                         .HasForeignKey("Papu.Entities.Menu", "MondayId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Papu.Entities.Saturday", "Saturday")
                         .WithOne("Menu")
                         .HasForeignKey("Papu.Entities.Menu", "SaturdayId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Papu.Entities.Sunday", "Sunday")
                         .WithOne("Menu")
                         .HasForeignKey("Papu.Entities.Menu", "SundayId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Papu.Entities.Thursday", "Thursday")
                         .WithOne("Menu")
                         .HasForeignKey("Papu.Entities.Menu", "ThursdayId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Papu.Entities.Tuesday", "Tuesday")
                         .WithOne("Menu")
                         .HasForeignKey("Papu.Entities.Menu", "TuesdayId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Papu.Entities.Wednesday", "Wednesday")
                         .WithOne("Menu")
                         .HasForeignKey("Papu.Entities.Menu", "WednesdayId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Friday");
 
@@ -1057,32 +1087,27 @@ namespace Papu.Migrations
                     b.HasOne("Papu.Entities.Breakfast", "Breakfast")
                         .WithOne("Monday")
                         .HasForeignKey("Papu.Entities.Monday", "BreakfastId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Papu.Entities.Dinner", "Dinner")
                         .WithOne("Monday")
                         .HasForeignKey("Papu.Entities.Monday", "DinnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Papu.Entities.Lunch", "Lunch")
                         .WithOne("Monday")
                         .HasForeignKey("Papu.Entities.Monday", "LunchId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Papu.Entities.SecondBreakfast", "SecondBreakfast")
                         .WithOne("Monday")
                         .HasForeignKey("Papu.Entities.Monday", "SecondBreakfastId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Papu.Entities.Snack", "Snack")
                         .WithOne("Monday")
                         .HasForeignKey("Papu.Entities.Monday", "SnackId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Breakfast");
 
@@ -1155,32 +1180,27 @@ namespace Papu.Migrations
                     b.HasOne("Papu.Entities.Breakfast", "Breakfast")
                         .WithOne("Saturday")
                         .HasForeignKey("Papu.Entities.Saturday", "BreakfastId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Papu.Entities.Dinner", "Dinner")
                         .WithOne("Saturday")
                         .HasForeignKey("Papu.Entities.Saturday", "DinnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Papu.Entities.Lunch", "Lunch")
                         .WithOne("Saturday")
                         .HasForeignKey("Papu.Entities.Saturday", "LunchId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Papu.Entities.SecondBreakfast", "SecondBreakfast")
                         .WithOne("Saturday")
                         .HasForeignKey("Papu.Entities.Saturday", "SecondBreakfastId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Papu.Entities.Snack", "Snack")
                         .WithOne("Saturday")
                         .HasForeignKey("Papu.Entities.Saturday", "SnackId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Breakfast");
 
@@ -1273,33 +1293,23 @@ namespace Papu.Migrations
                 {
                     b.HasOne("Papu.Entities.Breakfast", "Breakfast")
                         .WithOne("Sunday")
-                        .HasForeignKey("Papu.Entities.Sunday", "BreakfastId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Papu.Entities.Sunday", "BreakfastId");
 
                     b.HasOne("Papu.Entities.Dinner", "Dinner")
                         .WithOne("Sunday")
-                        .HasForeignKey("Papu.Entities.Sunday", "DinnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Papu.Entities.Sunday", "DinnerId");
 
                     b.HasOne("Papu.Entities.Lunch", "Lunch")
                         .WithOne("Sunday")
-                        .HasForeignKey("Papu.Entities.Sunday", "LunchId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Papu.Entities.Sunday", "LunchId");
 
                     b.HasOne("Papu.Entities.SecondBreakfast", "SecondBreakfast")
                         .WithOne("Sunday")
-                        .HasForeignKey("Papu.Entities.Sunday", "SecondBreakfastId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Papu.Entities.Sunday", "SecondBreakfastId");
 
                     b.HasOne("Papu.Entities.Snack", "Snack")
                         .WithOne("Sunday")
-                        .HasForeignKey("Papu.Entities.Sunday", "SnackId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Papu.Entities.Sunday", "SnackId");
 
                     b.Navigation("Breakfast");
 
@@ -1317,32 +1327,27 @@ namespace Papu.Migrations
                     b.HasOne("Papu.Entities.Breakfast", "Breakfast")
                         .WithOne("Thursday")
                         .HasForeignKey("Papu.Entities.Thursday", "BreakfastId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Papu.Entities.Dinner", "Dinner")
                         .WithOne("Thursday")
                         .HasForeignKey("Papu.Entities.Thursday", "DinnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Papu.Entities.Lunch", "Lunch")
                         .WithOne("Thursday")
                         .HasForeignKey("Papu.Entities.Thursday", "LunchId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Papu.Entities.SecondBreakfast", "SecondBreakfast")
                         .WithOne("Thursday")
                         .HasForeignKey("Papu.Entities.Thursday", "SecondBreakfastId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Papu.Entities.Snack", "Snack")
                         .WithOne("Thursday")
                         .HasForeignKey("Papu.Entities.Thursday", "SnackId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Breakfast");
 
@@ -1360,32 +1365,27 @@ namespace Papu.Migrations
                     b.HasOne("Papu.Entities.Breakfast", "Breakfast")
                         .WithOne("Tuesday")
                         .HasForeignKey("Papu.Entities.Tuesday", "BreakfastId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Papu.Entities.Dinner", "Dinner")
                         .WithOne("Tuesday")
                         .HasForeignKey("Papu.Entities.Tuesday", "DinnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Papu.Entities.Lunch", "Lunch")
                         .WithOne("Tuesday")
                         .HasForeignKey("Papu.Entities.Tuesday", "LunchId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Papu.Entities.SecondBreakfast", "SecondBreakfast")
                         .WithOne("Tuesday")
                         .HasForeignKey("Papu.Entities.Tuesday", "SecondBreakfastId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Papu.Entities.Snack", "Snack")
                         .WithOne("Tuesday")
                         .HasForeignKey("Papu.Entities.Tuesday", "SnackId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Breakfast");
 
@@ -1403,32 +1403,27 @@ namespace Papu.Migrations
                     b.HasOne("Papu.Entities.Breakfast", "Breakfast")
                         .WithOne("Wednesday")
                         .HasForeignKey("Papu.Entities.Wednesday", "BreakfastId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Papu.Entities.Dinner", "Dinner")
                         .WithOne("Wednesday")
                         .HasForeignKey("Papu.Entities.Wednesday", "DinnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Papu.Entities.Lunch", "Lunch")
                         .WithOne("Wednesday")
                         .HasForeignKey("Papu.Entities.Wednesday", "LunchId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Papu.Entities.SecondBreakfast", "SecondBreakfast")
                         .WithOne("Wednesday")
                         .HasForeignKey("Papu.Entities.Wednesday", "SecondBreakfastId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Papu.Entities.Snack", "Snack")
                         .WithOne("Wednesday")
                         .HasForeignKey("Papu.Entities.Wednesday", "SnackId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Breakfast");
 
