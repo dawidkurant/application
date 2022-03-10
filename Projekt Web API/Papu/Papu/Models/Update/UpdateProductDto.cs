@@ -21,6 +21,9 @@ namespace Papu.Models
         [MaxLength(50)]
         public string CategoryName { get; set; }
 
+        //Id grupy
+        public int[] GroupId { get; set; }
+
         //Nazwa jednostki
         //Maksymalna długość łańcucha nazwy jednostki wynosi 50
         [MaxLength(50)]

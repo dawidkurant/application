@@ -117,6 +117,28 @@ namespace Papu.Services
             product.Weight = dto.Weight;
             product.ProductImagePath = dto.ProductImagePath;
 
+            foreach (var old in product.ProductGroups)
+            {
+                _dbContext.ProductGroups.Remove(old);
+            }
+
+            product.ProductGroups.Clear();
+
+            foreach (var addGroup in dto.GroupId)
+            {
+
+                Group group = _dbContext.Groups
+                    .FirstOrDefault(s => s.GroupId == addGroup);
+
+                ProductGroup productGroup = new ProductGroup
+                {
+                    Product = product,
+                    Group = group
+                };
+
+                _dbContext.ProductGroups.Add(productGroup);
+            }
+
             _dbContext.SaveChanges();
 
             return true;
@@ -146,30 +168,3 @@ namespace Papu.Services
         }
     }
 }
-
-//[HttpPost("group")]
-//public async Task<IActionResult> CreateGroup([FromBody] ProjectGroupModel pro)
-//{
-//    var dbProject = await _context.Project
-//        .Include(p => p.ProjectEmployees)
-//        .FirstAsync(p => p.ProjectId == pro.ProjectId);
-
-//    foreach (var old in dbProject.ProjectEmployees)
-//    {
-//        _context.ProjectEmployee.Remove(old);
-//    }
-
-//    dbProject.ProjectEmployees.Clear();
-
-//    foreach (var emp in pro.ProjectEmployees)
-//    {
-//        dbProject.ProjectEmployees.Add(new ProjectEmployee()
-//        {
-//            UserId = emp.UserId
-//        });
-//    }
-
-//    await _context.SaveChangesAsync();
-
-//    return Ok();
-//}
