@@ -276,7 +276,7 @@ namespace Papu
                 .ForMember(x => x.SundayDinnerDishes, c => c.MapFrom(x => x.Sunday.Dinner.Dishes.Select(cs => cs.Dish)));
 
 
-            CreateMap<CreateProductDto, Product>();
+            CreateMap<UpdateProductDto, Product>();
 
             CreateMap<CreateDishDto, Dish>();
 

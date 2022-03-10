@@ -27,27 +27,25 @@ namespace Papu.Models
 
         //Produkty potrawy składającej się z ilu porcji
         //Maksymalna długość łańcucha porcji potrawy wynosi 3
-        [MaxLength(3)]
+        [Range(0, 999, ErrorMessage = "Rating must between 0 to 999")]
         public int Portions { get; set; }
 
         //Czas przygotowania w minutach
         //Maksymalna długość łańcucha czasu potrawy wynosi 3
-        [MaxLength(3)]
+        [Range(0, 999, ErrorMessage = "Rating must between 0 to 999")]
         public int PreparationTime { get; set; }
 
         //Rodzaj
         //Maksymalna długość łańcucha rodzaju potrawy wynosi 1
-        [MaxLength(1)]
         public int[] KindOfId { get; set; }
 
         //Rozmiar
         //Maksymalna długość łańcucha rozmiaru potrawy wynosi 3
-        [MaxLength(3)]
+        [Range(0, 999, ErrorMessage = "Rating must between 0 to 999")]
         public int Size { get; set; }
 
         //Typ
         //Maksymalna długość łańcucha typu potrawy wynosi 1
-        [MaxLength(1)]
         public int[] TypeId { get; set; }
 
         //Zdjęcie
@@ -55,7 +53,6 @@ namespace Papu.Models
 
         //Produkty zawierające się w daniu
         //Maksymalna długość łańcucha id produktu wynosi 3
-        [MaxLength(3)]
         public int[] ProductId { get; set; }
     }
 }

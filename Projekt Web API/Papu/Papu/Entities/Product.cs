@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
@@ -13,7 +14,7 @@ namespace Papu.Entities
         //Id
         public int ProductId { get; set; }
 
-        //Nazwa
+        //Nazwa produktu
         public string ProductName { get; set; }
 
         //Kategoria

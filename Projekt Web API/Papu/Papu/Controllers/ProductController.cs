@@ -57,6 +57,24 @@ namespace Papu.Controllers
             return Created($"api/product/{newProductId}", null);
         }
 
+        [HttpPut("{id}")]
+        public ActionResult UpdateProduct([FromBody] UpdateProductDto dto, [FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var isUpdated = _productService.UpdateProduct(id, dto);
+
+            if(!isUpdated)
+            {
+                return NotFound();
+            }
+
+            return Ok();
+        }
+
         //Usuwanie produktu
         [HttpDelete("{id}")]
         public ActionResult DeleteProduct([FromRoute] int id)

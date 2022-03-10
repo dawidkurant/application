@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace Papu.Models
 {
-    public class CreateProductDto
+    public class UpdateProductDto
     {
         //Informacje, które może podać klient, aby stworzyć produkt
 
@@ -20,9 +20,6 @@ namespace Papu.Models
         //Maksymalna długość łańcucha nazwy kategorii wynosi 50
         [MaxLength(50)]
         public string CategoryName { get; set; }
-
-        //Id grupy
-        public int[] GroupId { get; set; }
 
         //Nazwa jednostki
         //Maksymalna długość łańcucha nazwy jednostki wynosi 50

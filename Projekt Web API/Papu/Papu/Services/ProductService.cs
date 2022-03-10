@@ -18,6 +18,7 @@ namespace Papu.Services
             _mapper = mapper;
         }
 
+        //Pobranie jednego produktu po id 
         public ProductDto GetByIdProduct(int id)
         {
             Product product =
@@ -38,6 +39,7 @@ namespace Papu.Services
             return result;
         }
 
+        //Pobieranie wszystkich produktów z bazy danych
         public IEnumerable<ProductDto> GetAllProducts()
         {
             var products = _dbContext
@@ -52,6 +54,7 @@ namespace Papu.Services
             return productsDtos;
         }
 
+        //Utworzenie jednego produktu na podstawie obiektu dto 
         public int CreateProduct(CreateProductDto dto)
         {
             var product = _mapper.Map<Product>(dto);
@@ -64,10 +67,6 @@ namespace Papu.Services
 
             product.Category = category;
             product.Unit = unit;
-
-            Product product2 = _dbContext.Products
-                    .Include(c => c.ProductGroups).ThenInclude(cs => cs.Group)
-                    .FirstOrDefault(c => c.ProductId == product.ProductId);
 
             foreach (var addGroup in dto.GroupId)
             {
@@ -89,6 +88,43 @@ namespace Papu.Services
             return product.ProductId;
         }
 
+        //Edycja jednego produktu na podstawie id i obiektu dto
+        //tylko ten kto utworzył dany zasób, będzie mógł go modyfikować lub usuwać
+        public bool UpdateProduct(int id, UpdateProductDto dto)
+        {
+            var product =
+                _dbContext.Products
+                .Include(c => c.Category)
+                .Include(c => c.Unit)
+                .Include(c => c.ProductGroups).ThenInclude(cs => cs.Group)
+                .FirstOrDefault(c => c.ProductId == id);
+
+            //Jeśli jesteśmy pewni, że dany produkt nie istnieje, zwracamy wyjątek
+            if (product is null)
+            {
+                return false;
+            }
+
+            Category category = _dbContext.Categories
+                .FirstOrDefault(c => c.CategoryName == dto.CategoryName);
+
+            Unit unit = _dbContext.Units
+               .FirstOrDefault(c => c.UnitName == dto.UnitName);
+
+            product.ProductName = dto.ProductName;
+            product.Category = category;
+            product.Unit = unit;
+            product.Weight = dto.Weight;
+            product.ProductImagePath = dto.ProductImagePath;
+
+            _dbContext.SaveChanges();
+
+            return true;
+        }
+
+
+        //Usunięcie jednego produktu na podstawie id
+        //tylko ten kto utworzył dany zasób, będzie mógł go modyfikować lub usuwać
         public bool DeleteProduct(int id)
         {
             var product = 
@@ -110,3 +146,30 @@ namespace Papu.Services
         }
     }
 }
+
+//[HttpPost("group")]
+//public async Task<IActionResult> CreateGroup([FromBody] ProjectGroupModel pro)
+//{
+//    var dbProject = await _context.Project
+//        .Include(p => p.ProjectEmployees)
+//        .FirstAsync(p => p.ProjectId == pro.ProjectId);
+
+//    foreach (var old in dbProject.ProjectEmployees)
+//    {
+//        _context.ProjectEmployee.Remove(old);
+//    }
+
+//    dbProject.ProjectEmployees.Clear();
+
+//    foreach (var emp in pro.ProjectEmployees)
+//    {
+//        dbProject.ProjectEmployees.Add(new ProjectEmployee()
+//        {
+//            UserId = emp.UserId
+//        });
+//    }
+
+//    await _context.SaveChangesAsync();
+
+//    return Ok();
+//}

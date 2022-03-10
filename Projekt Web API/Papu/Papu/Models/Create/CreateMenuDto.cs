@@ -20,31 +20,24 @@ namespace Papu.Models
         public string MenuDescription { get; set; }
 
         //Poniedziałek wchodzący w skład jadłospisu
-        [MaxLength(3)]
         public int MondayId { get; set; }
 
         //Wtorek wchodzący w skład jadłospisu
-        [MaxLength(3)]
         public int TuesdayId { get; set; }
 
         //Środa wchodząca w skład jadłospisu
-        [MaxLength(3)]
         public int WednesdayId { get; set; }
 
         //Czwartek wchodzący w skład jadłospisu
-        [MaxLength(3)]
         public int ThursdayId { get; set; }
 
         //Piątek wchodzący w skład jadłospisu
-        [MaxLength(3)]
         public int FridayId { get; set; }
 
         //Sobota wchodząca w skład jadłospisu
-        [MaxLength(3)]
         public int SaturdayId { get; set; }
 
         //Niedziela wchodząca w skład jadłospisu
-        [MaxLength(3)]
         public int SundayId { get; set; }
     }
 }
