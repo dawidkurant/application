@@ -57,6 +57,7 @@ namespace Papu.Controllers
             return Created($"api/product/{newProductId}", null);
         }
 
+        //Edycja produktu
         [HttpPut("{id}")]
         public ActionResult UpdateProduct([FromBody] UpdateProductDto dto, [FromRoute] int id)
         {

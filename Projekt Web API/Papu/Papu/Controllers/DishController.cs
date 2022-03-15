@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Papu.Entities;
 using Papu.Models;
+using Papu.Models.Update;
 using Papu.Services;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,6 +56,25 @@ namespace Papu.Controllers
             //Jako pierwszy parametr ścieżka, a jako drugi
             //możemy zwrócić ciało odpowiedzi, ale w tym wypadku zwracamy null
             return Created($"api/dish/{newDishId}", null);
+        }
+
+        //Edycja potrawy
+        [HttpPut("{id}")]
+        public ActionResult UpdateDish([FromBody] UpdateDishDto dto, [FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var isUpdated = _dishService.UpdateDish(id, dto);
+
+            if (!isUpdated)
+            {
+                return NotFound();
+            }
+
+            return Ok();
         }
 
         //Usuwanie potrawy

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Papu.Entities;
 using Papu.Models;
+using Papu.Models.Update;
 using System.Linq;
 
 namespace Papu
@@ -277,6 +278,8 @@ namespace Papu
 
 
             CreateMap<UpdateProductDto, Product>();
+            CreateMap<UpdateDishDto, Dish>();
+            CreateMap<UpdateMenuDto, Menu>();
 
             CreateMap<CreateDishDto, Dish>();
 

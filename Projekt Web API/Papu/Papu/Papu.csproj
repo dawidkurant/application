@@ -35,6 +35,8 @@
 
   <ItemGroup>
     <Folder Include="Images\" />
+    <Folder Include="Models\Update\DayOfTheWeek\" />
+    <Folder Include="Models\Update\TimesOfDay\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
