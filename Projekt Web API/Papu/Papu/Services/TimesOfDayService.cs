@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Papu.Entities;
 using Papu.Models;
 using Papu.Models.Update.TimesOfDay;
@@ -12,11 +13,13 @@ namespace Papu.Services
     {
         private readonly PapuDbContext _dbContext;
         private readonly IMapper _mapper;
+        private readonly ILogger<TimesOfDayService> _logger;
 
-        public TimesOfDayService(PapuDbContext dbContext, IMapper mapper)
+        public TimesOfDayService(PapuDbContext dbContext, IMapper mapper, ILogger<TimesOfDayService> logger)
         {
             _dbContext = dbContext;
             _mapper = mapper;
+            _logger = logger;
         }
 
         //Wyświetlanie jednego śniadania
@@ -732,6 +735,8 @@ namespace Papu.Services
         //Usuwanie śniadania
         public bool DeleteBreakfast(int id)
         {
+            _logger.LogError($"Breakfast with id: {id} DELETE action invoked");
+
             var breakfast =
                 _dbContext
                 .Breakfasts
@@ -753,6 +758,8 @@ namespace Papu.Services
         //Usuwanie drugiego śniadania
         public bool DeleteSecondBreakfast(int id)
         {
+            _logger.LogError($"Second breakfast with id: {id} DELETE action invoked");
+
             var secondBreakfast =
                 _dbContext
                 .SecondBreakfasts
@@ -774,6 +781,8 @@ namespace Papu.Services
         //Usuwanie obiadu
         public bool DeleteLunch(int id)
         {
+            _logger.LogError($"Lunch with id: {id} DELETE action invoked");
+
             var lunch =
                 _dbContext
                 .Lunches
@@ -795,6 +804,8 @@ namespace Papu.Services
         //Usuwanie podwieczorka
         public bool DeleteSnack(int id)
         {
+            _logger.LogError($"Snack with id: {id} DELETE action invoked");
+
             var snack =
                 _dbContext
                 .Snacks
@@ -816,6 +827,8 @@ namespace Papu.Services
         //Usuwanie kolacji
         public bool DeleteDinner(int id)
         {
+            _logger.LogError($"Dinner with id: {id} DELETE action invoked");
+
             var dinner =
                 _dbContext
                 .Dinners

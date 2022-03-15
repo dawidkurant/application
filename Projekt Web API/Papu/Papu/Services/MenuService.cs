@@ -13,6 +13,7 @@ namespace Papu.Services
 
         private readonly PapuDbContext _dbContext;
         private readonly IMapper _mapper;
+        private readonly ILogger<MenuService> _logger;
 
         public MenuService(PapuDbContext dbContext, IMapper mapper)
         {
@@ -327,6 +328,8 @@ namespace Papu.Services
 
         public bool DeleteMenu(int id)
         {
+            _logger.LogError($"Menu with id: {id} DELETE action invoked");
+
             var menu =
                 _dbContext
                 .Menus

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Papu.Entities;
 using Papu.Models;
 using Papu.Models.Update.DayOfTheWeek;
@@ -13,11 +14,13 @@ namespace Papu.Services
 
         private readonly PapuDbContext _dbContext;
         private readonly IMapper _mapper;
+        private readonly ILogger<DaysOfTheWeekService> _logger;
 
-        public DaysOfTheWeekService(PapuDbContext dbContext, IMapper mapper)
+        public DaysOfTheWeekService(PapuDbContext dbContext, IMapper mapper, ILogger<DaysOfTheWeekService> logger)
         {
             _dbContext = dbContext;
             _mapper = mapper;
+            _logger = logger;
         }
 
         //Wyświetlanie jednego poniedziałku
@@ -128,6 +131,8 @@ namespace Papu.Services
         //Usuwanie poniedziałku
         public bool DeleteMonday(int id)
         {
+            _logger.LogError($"Monday with id: {id} DELETE action invoked");
+
             var monday = _dbContext
                 .Mondays
                 .Include(c => c.Breakfast).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
@@ -258,6 +263,8 @@ namespace Papu.Services
         //Usuwanie wtorku
         public bool DeleteTuesday(int id)
         {
+            _logger.LogError($"Tuesday with id: {id} DELETE action invoked");
+
             var tuesday = _dbContext
                 .Tuesdays
                 .Include(c => c.Breakfast).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
@@ -388,6 +395,8 @@ namespace Papu.Services
         //Usuwanie środy
         public bool DeleteWednesday(int id)
         {
+            _logger.LogError($"Wednesday with id: {id} DELETE action invoked");
+
             var wednesday = _dbContext
                 .Wednesdays
                 .Include(c => c.Breakfast).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
@@ -518,6 +527,8 @@ namespace Papu.Services
         //Usuwanie czwartku
         public bool DeleteThursday(int id)
         {
+            _logger.LogError($"Thursday with id: {id} DELETE action invoked");
+
             var thursday = _dbContext
                 .Thursdays
                 .Include(c => c.Breakfast).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
@@ -648,6 +659,8 @@ namespace Papu.Services
         //Usuwanie piątku
         public bool DeleteFriday(int id)
         {
+            _logger.LogError($"Friday with id: {id} DELETE action invoked");
+
             var friday = _dbContext
                 .Fridays
                 .Include(c => c.Breakfast).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
@@ -778,6 +791,8 @@ namespace Papu.Services
         //Usuwanie soboty
         public bool DeleteSaturday(int id)
         {
+            _logger.LogError($"Saturday with id: {id} DELETE action invoked");
+
             var saturday = _dbContext
                 .Saturdays
                 .Include(c => c.Breakfast).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
@@ -908,6 +923,8 @@ namespace Papu.Services
         //Usuwanie niedzieli
         public bool DeleteSunday(int id)
         {
+            _logger.LogError($"Sunday with id: {id} DELETE action invoked");
+
             var sunday = _dbContext
                 .Sundays
                 .Include(c => c.Breakfast).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)

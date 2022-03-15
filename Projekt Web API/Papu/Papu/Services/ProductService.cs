@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Papu.Entities;
 using Papu.Models;
 using System.Collections.Generic;
@@ -11,11 +12,13 @@ namespace Papu.Services
     {
         private readonly PapuDbContext _dbContext;
         private readonly IMapper _mapper;
+        private readonly ILogger<ProductService> _logger;
 
-        public ProductService(PapuDbContext dbContext, IMapper mapper)
+        public ProductService(PapuDbContext dbContext, IMapper mapper, ILogger<ProductService> logger)
         {
             _dbContext = dbContext;
             _mapper = mapper;
+            _logger = logger;
         }
 
         //Pobranie jednego produktu po id 
@@ -149,6 +152,8 @@ namespace Papu.Services
         //tylko ten kto utworzył dany zasób, będzie mógł go modyfikować lub usuwać
         public bool DeleteProduct(int id)
         {
+            _logger.LogError($"Product with id: {id} DELETE action invoked");
+
             var product = 
                 _dbContext.Products
                 .Include(c => c.Category)
