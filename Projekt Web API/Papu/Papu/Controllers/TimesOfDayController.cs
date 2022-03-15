@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Papu.Models;
+using Papu.Models.Update.TimesOfDay;
 using Papu.Services;
 using System.Collections.Generic;
 
@@ -203,6 +204,101 @@ namespace Papu.Controllers
             //Jako pierwszy parametr ścieżka, a jako drugi
             //możemy zwrócić ciało odpowiedzi, ale w tym wypadku zwracamy null
             return Created($"api/dinner/{newDinnerId}", null);
+        }
+
+        //Edycja śniadania
+        [HttpPut("breakfast/{id}")]
+        public ActionResult UpdateBreakfast([FromBody] UpdateBreakfastDto dto, [FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var isUpdated = _timesOfDayService.UpdateBreakfast(id, dto);
+
+            if (!isUpdated)
+            {
+                return NotFound();
+            }
+
+            return Ok();
+        }
+
+        //Edycja drugiego śniadania
+        [HttpPut("secondbreakfast/{id}")]
+        public ActionResult UpdateSecondBreakfast([FromBody] UpdateSecondBreakfastDto dto, [FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var isUpdated = _timesOfDayService.UpdateSecondBreakfast(id, dto);
+
+            if (!isUpdated)
+            {
+                return NotFound();
+            }
+
+            return Ok();
+        }
+
+        //Edycja obiadu
+        [HttpPut("lunch/{id}")]
+        public ActionResult UpdateLunch([FromBody] UpdateLunchDto dto, [FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var isUpdated = _timesOfDayService.UpdateLunch(id, dto);
+
+            if (!isUpdated)
+            {
+                return NotFound();
+            }
+
+            return Ok();
+        }
+
+        //Edycja podwieczorka
+        [HttpPut("snack/{id}")]
+        public ActionResult UpdateSnack([FromBody] UpdateSnackDto dto, [FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var isUpdated = _timesOfDayService.UpdateSnack(id, dto);
+
+            if (!isUpdated)
+            {
+                return NotFound();
+            }
+
+            return Ok();
+        }
+
+        //Edycja kolacji
+        [HttpPut("dinner/{id}")]
+        public ActionResult UpdateDinner([FromBody] UpdateDinnerDto dto, [FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var isUpdated = _timesOfDayService.UpdateDinner(id, dto);
+
+            if (!isUpdated)
+            {
+                return NotFound();
+            }
+
+            return Ok();
         }
 
         //Usuwanie konkretnego śniadania

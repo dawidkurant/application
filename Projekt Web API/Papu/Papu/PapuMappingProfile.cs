@@ -2,6 +2,8 @@
 using Papu.Entities;
 using Papu.Models;
 using Papu.Models.Update;
+using Papu.Models.Update.DayOfTheWeek;
+using Papu.Models.Update.TimesOfDay;
 using System.Linq;
 
 namespace Papu
@@ -280,6 +282,20 @@ namespace Papu
             CreateMap<UpdateProductDto, Product>();
             CreateMap<UpdateDishDto, Dish>();
             CreateMap<UpdateMenuDto, Menu>();
+
+            CreateMap<UpdateMondayDto, Monday>();
+            CreateMap<UpdateTuesdayDto, Tuesday>();
+            CreateMap<UpdateWednesdayDto, Wednesday>();
+            CreateMap<UpdateThursdayDto, Thursday>();
+            CreateMap<UpdateFridayDto, Friday>();
+            CreateMap<UpdateSaturdayDto, Saturday>();
+            CreateMap<UpdateSundayDto, Sunday>();
+
+            CreateMap<UpdateBreakfastDto, Breakfast>();
+            CreateMap<UpdateSecondBreakfastDto, SecondBreakfast>();
+            CreateMap<UpdateLunchDto, Lunch>();
+            CreateMap<UpdateSnackDto, Snack>();
+            CreateMap<UpdateDinnerDto, Dinner>();
 
             CreateMap<CreateDishDto, Dish>();
 

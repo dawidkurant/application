@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Papu.Entities;
 using Papu.Models;
+using Papu.Models.Update.DayOfTheWeek;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -89,6 +90,41 @@ namespace Papu.Services
             return monday.MondayId;
         }
 
+        //Edycja poniedziałku
+        public bool UpdateMonday(int id, UpdateMondayDto dto)
+        {
+            var monday = _dbContext
+                .Mondays
+                .Include(c => c.Breakfast).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Breakfast).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.SecondBreakfast).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.SecondBreakfast).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.Lunch).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Lunch).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.Snack).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Snack).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.Dinner).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Dinner).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .FirstOrDefault(c => c.MondayId == id);
+
+
+            //Jeśli jesteśmy pewni, że dany poniedziałek nie istnieje, zwracamy wyjątek
+            if (monday is null)
+            {
+                return false;
+            }
+
+            monday.BreakfastId = dto.BreakfastMondayId;
+            monday.SecondBreakfastId = dto.SecondBreakfastMondayId;
+            monday.LunchId = dto.LunchMondayId;
+            monday.SnackId = dto.SnackMondayId;
+            monday.DinnerId = dto.DinnerMondayId;
+
+            _dbContext.SaveChanges();
+
+            return true;
+        }
+
         //Usuwanie poniedziałku
         public bool DeleteMonday(int id)
         {
@@ -118,7 +154,6 @@ namespace Papu.Services
         }
 
         //Wyświetlanie jednego wtorku
-
         public TuesdayDto GetByIdTuesday(int id)
         {
             Tuesday tuesday = _dbContext
@@ -147,7 +182,6 @@ namespace Papu.Services
         }
 
         //Wyświetlanie wszystkich wtorków
-
         public IEnumerable<TuesdayDto> GetAllTuesdays()
         {
             var tuesdays = _dbContext
@@ -170,7 +204,6 @@ namespace Papu.Services
         }
 
         //Tworzenie nowego wtorku
-
         public int CreateTuesday(CreateTuesdayDto dtoTuesday)
         {
             var tuesday = _mapper.Map<Tuesday>(dtoTuesday);
@@ -185,6 +218,41 @@ namespace Papu.Services
             _dbContext.SaveChanges();
 
             return tuesday.TuesdayId;
+        }
+
+        //Edycja wtorku
+        public bool UpdateTuesday(int id, UpdateTuesdayDto dto)
+        {
+            var tuesday = _dbContext
+                .Tuesdays
+                .Include(c => c.Breakfast).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Breakfast).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.SecondBreakfast).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.SecondBreakfast).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.Lunch).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Lunch).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.Snack).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Snack).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.Dinner).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Dinner).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .FirstOrDefault(c => c.TuesdayId == id);
+
+
+            //Jeśli jesteśmy pewni, że dany wtorek nie istnieje, zwracamy wyjątek
+            if (tuesday is null)
+            {
+                return false;
+            }
+
+            tuesday.BreakfastId = dto.BreakfastTuesdayId;
+            tuesday.SecondBreakfastId = dto.SecondBreakfastTuesdayId;
+            tuesday.LunchId = dto.LunchTuesdayId;
+            tuesday.SnackId = dto.SnackTuesdayId;
+            tuesday.DinnerId = dto.DinnerTuesdayId;
+
+            _dbContext.SaveChanges();
+
+            return true;
         }
 
         //Usuwanie wtorku
@@ -216,7 +284,6 @@ namespace Papu.Services
         }
 
         //Wyświetlanie jednej środy
-
         public WednesdayDto GetByIdWednesday(int id)
         {
             Wednesday wednesday = _dbContext
@@ -245,7 +312,6 @@ namespace Papu.Services
         }
 
         //Wyświetlanie wszystkich śród
-
         public IEnumerable<WednesdayDto> GetAllWednesdays()
         {
             var wednesdays = _dbContext
@@ -268,7 +334,6 @@ namespace Papu.Services
         }
 
         //Tworzenie nowej środy
-
         public int CreateWednesday(CreateWednesdayDto dtoWednesday)
         {
             var wednesday = _mapper.Map<Wednesday>(dtoWednesday);
@@ -283,6 +348,41 @@ namespace Papu.Services
             _dbContext.SaveChanges();
 
             return wednesday.WednesdayId;
+        }
+
+        //Edycja środy
+        public bool UpdateWednesday(int id, UpdateWednesdayDto dto)
+        {
+            var wednesday = _dbContext
+                .Wednesdays
+                .Include(c => c.Breakfast).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Breakfast).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.SecondBreakfast).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.SecondBreakfast).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.Lunch).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Lunch).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.Snack).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Snack).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.Dinner).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Dinner).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .FirstOrDefault(c => c.WednesdayId == id);
+
+
+            //Jeśli jesteśmy pewni, że dana środa nie istnieje, zwracamy wyjątek
+            if (wednesday is null)
+            {
+                return false;
+            }
+
+            wednesday.BreakfastId = dto.BreakfastWednesdayId;
+            wednesday.SecondBreakfastId = dto.SecondBreakfastWednesdayId;
+            wednesday.LunchId = dto.LunchWednesdayId;
+            wednesday.SnackId = dto.SnackWednesdayId;
+            wednesday.DinnerId = dto.DinnerWednesdayId;
+
+            _dbContext.SaveChanges();
+
+            return true;
         }
 
         //Usuwanie środy
@@ -314,7 +414,6 @@ namespace Papu.Services
         }
 
         //Wyświetlanie jednego czwartku
-
         public ThursdayDto GetByIdThursday(int id)
         {
             Thursday thursday = _dbContext
@@ -343,7 +442,6 @@ namespace Papu.Services
         }
 
         //Wyświetlanie wszystkich czwartków
-
         public IEnumerable<ThursdayDto> GetAllThursdays()
         {
             var thursdays = _dbContext
@@ -366,7 +464,6 @@ namespace Papu.Services
         }
 
         //Tworzenie nowego czwartku
-
         public int CreateThursday(CreateThursdayDto dtoThursday)
         {
             var thursday = _mapper.Map<Thursday>(dtoThursday);
@@ -381,6 +478,41 @@ namespace Papu.Services
             _dbContext.SaveChanges();
 
             return thursday.ThursdayId;
+        }
+
+        //Edycja czwartku
+        public bool UpdateThursday(int id, UpdateThursdayDto dto)
+        {
+            var thursday = _dbContext
+                .Thursdays
+                .Include(c => c.Breakfast).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Breakfast).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.SecondBreakfast).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.SecondBreakfast).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.Lunch).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Lunch).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.Snack).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Snack).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.Dinner).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Dinner).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .FirstOrDefault(c => c.ThursdayId == id);
+
+
+            //Jeśli jesteśmy pewni, że dany czwartek nie istnieje, zwracamy wyjątek
+            if (thursday is null)
+            {
+                return false;
+            }
+
+            thursday.BreakfastId = dto.BreakfastThursdayId;
+            thursday.SecondBreakfastId = dto.SecondBreakfastThursdayId;
+            thursday.LunchId = dto.LunchThursdayId;
+            thursday.SnackId = dto.SnackThursdayId;
+            thursday.DinnerId = dto.DinnerThursdayId;
+
+            _dbContext.SaveChanges();
+
+            return true;
         }
 
         //Usuwanie czwartku
@@ -412,7 +544,6 @@ namespace Papu.Services
         }
 
         //Wyświetlanie jednego piątku
-
         public FridayDto GetByIdFriday(int id)
         {
             Friday friday = _dbContext
@@ -441,7 +572,6 @@ namespace Papu.Services
         }
 
         //Wyświetlanie wszystkich piątków
-
         public IEnumerable<FridayDto> GetAllFridays()
         {
             var fridays = _dbContext
@@ -464,7 +594,6 @@ namespace Papu.Services
         }
 
         //Tworzenie nowego piątku
-
         public int CreateFriday(CreateFridayDto dtoFriday)
         {
             var friday = _mapper.Map<Friday>(dtoFriday);
@@ -479,6 +608,41 @@ namespace Papu.Services
             _dbContext.SaveChanges();
 
             return friday.FridayId;
+        }
+
+        //Edycja piątku
+        public bool UpdateFriday(int id, UpdateFridayDto dto)
+        {
+            var friday = _dbContext
+                .Fridays
+                .Include(c => c.Breakfast).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Breakfast).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.SecondBreakfast).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.SecondBreakfast).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.Lunch).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Lunch).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.Snack).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Snack).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.Dinner).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Dinner).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .FirstOrDefault(c => c.FridayId == id);
+
+
+            //Jeśli jesteśmy pewni, że dany piątek nie istnieje, zwracamy wyjątek
+            if (friday is null)
+            {
+                return false;
+            }
+
+            friday.BreakfastId = dto.BreakfastFridayId;
+            friday.SecondBreakfastId = dto.SecondBreakfastFridayId;
+            friday.LunchId = dto.LunchFridayId;
+            friday.SnackId = dto.SnackFridayId;
+            friday.DinnerId = dto.DinnerFridayId;
+
+            _dbContext.SaveChanges();
+
+            return true;
         }
 
         //Usuwanie piątku
@@ -510,7 +674,6 @@ namespace Papu.Services
         }
 
         //Wyświetlanie jednej soboty
-
         public SaturdayDto GetByIdSaturday(int id)
         {
             Saturday saturday = _dbContext
@@ -539,7 +702,6 @@ namespace Papu.Services
         }
 
         //Wyświetlanie wszystkich sobót
-
         public IEnumerable<SaturdayDto> GetAllSaturdays()
         {
             var saturdays = _dbContext
@@ -562,7 +724,6 @@ namespace Papu.Services
         }
 
         //Tworzenie nowej soboty
-
         public int CreateSaturday(CreateSaturdayDto dtoSaturday)
         {
             var saturday = _mapper.Map<Saturday>(dtoSaturday);
@@ -577,6 +738,41 @@ namespace Papu.Services
             _dbContext.SaveChanges();
 
             return saturday.SaturdayId;
+        }
+
+        //Edycja soboty
+        public bool UpdateSaturday(int id, UpdateSaturdayDto dto)
+        {
+            var saturday = _dbContext
+                .Saturdays
+                .Include(c => c.Breakfast).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Breakfast).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.SecondBreakfast).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.SecondBreakfast).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.Lunch).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Lunch).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.Snack).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Snack).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.Dinner).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Dinner).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .FirstOrDefault(c => c.SaturdayId == id);
+
+
+            //Jeśli jesteśmy pewni, że dana sobota nie istnieje, zwracamy wyjątek
+            if (saturday is null)
+            {
+                return false;
+            }
+
+            saturday.BreakfastId = dto.BreakfastSaturdayId;
+            saturday.SecondBreakfastId = dto.SecondBreakfastSaturdayId;
+            saturday.LunchId = dto.LunchSaturdayId;
+            saturday.SnackId = dto.SnackSaturdayId;
+            saturday.DinnerId = dto.DinnerSaturdayId;
+
+            _dbContext.SaveChanges();
+
+            return true;
         }
 
         //Usuwanie soboty
@@ -608,7 +804,6 @@ namespace Papu.Services
         }
 
         //Wyświetlanie jednej niedzieli
-
         public SundayDto GetByIdSunday(int id)
         {
             Sunday sunday = _dbContext
@@ -637,7 +832,6 @@ namespace Papu.Services
         }
 
         //Wyświetlanie wszystkich niedziel
-
         public IEnumerable<SundayDto> GetAllSundays()
         {
             var sundays = _dbContext
@@ -660,7 +854,6 @@ namespace Papu.Services
         }
 
         //Tworzenie nowej niedzieli
-
         public int CreateSunday(CreateSundayDto dtoSunday)
         {
             var sunday = _mapper.Map<Sunday>(dtoSunday);
@@ -675,6 +868,41 @@ namespace Papu.Services
             _dbContext.SaveChanges();
 
             return sunday.SundayId;
+        }
+
+        //Edycja niedzieli
+        public bool UpdateSunday(int id, UpdateSundayDto dto)
+        {
+            var sunday = _dbContext
+                .Sundays
+                .Include(c => c.Breakfast).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Breakfast).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.SecondBreakfast).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.SecondBreakfast).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.Lunch).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Lunch).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.Snack).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Snack).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .Include(c => c.Dinner).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Dinner).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
+                .FirstOrDefault(c => c.SundayId == id);
+
+
+            //Jeśli jesteśmy pewni, że dana niedziela nie istnieje, zwracamy wyjątek
+            if (sunday is null)
+            {
+                return false;
+            }
+
+            sunday.BreakfastId = dto.BreakfastSundayId;
+            sunday.SecondBreakfastId = dto.SecondBreakfastSundayId;
+            sunday.LunchId = dto.LunchSundayId;
+            sunday.SnackId = dto.SnackSundayId;
+            sunday.DinnerId = dto.DinnerSundayId;
+
+            _dbContext.SaveChanges();
+
+            return true;
         }
 
         //Usuwanie niedzieli

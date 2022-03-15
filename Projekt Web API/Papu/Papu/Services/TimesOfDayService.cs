@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Papu.Entities;
 using Papu.Models;
+using Papu.Models.Update.TimesOfDay;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -19,7 +20,6 @@ namespace Papu.Services
         }
 
         //Wyświetlanie jednego śniadania
-
         public BreakfastDto GetByIdBreakfast(int id)
         {
             Breakfast breakfast = _dbContext
@@ -40,7 +40,6 @@ namespace Papu.Services
         }
 
         //Wyświetlanie jednego drugiego śniadania
-
         public SecondBreakfastDto GetByIdSecondBreakfast(int id)
         {
             SecondBreakfast secondBreakfast = _dbContext
@@ -61,7 +60,6 @@ namespace Papu.Services
         }
 
         //Wyświetlanie jednego obiadu
-
         public LunchDto GetByIdLunch(int id)
         {
             Lunch lunch = _dbContext
@@ -82,7 +80,6 @@ namespace Papu.Services
         }
 
         //Wyświetlanie jednego podwieczorku
-
         public SnackDto GetByIdSnack(int id)
         {
             Snack snack = _dbContext
@@ -103,7 +100,6 @@ namespace Papu.Services
         }
 
         //Wyświetlanie jednej kolacji
-
         public DinnerDto GetByIdDinner(int id)
         {
             Dinner dinner = _dbContext
@@ -124,7 +120,6 @@ namespace Papu.Services
         }
 
         //Wyświetlanie wszystkich śniadań
-
         public IEnumerable<BreakfastDto> GetAllBreakfast()
         {
             var breakfasts = _dbContext
@@ -139,7 +134,6 @@ namespace Papu.Services
         }
 
         //Wyświetlanie wszystkich drugich śniadań
-
         public IEnumerable<SecondBreakfastDto> GetAllSecondBreakfast()
         {
             var secondBreakfasts = _dbContext
@@ -154,7 +148,6 @@ namespace Papu.Services
         }
 
         //Wyświetlanie wszystkich obiadów
-
         public IEnumerable<LunchDto> GetAllLunch()
         {
             var lunches = _dbContext
@@ -169,7 +162,6 @@ namespace Papu.Services
         }
 
         //Wyświetlanie wszystkich podwieczorków
-
         public IEnumerable<SnackDto> GetAllSnack()
         {
             var snacks = _dbContext
@@ -184,7 +176,6 @@ namespace Papu.Services
         }
 
         //Wyświetlanie wszystkich kolacji
-
         public IEnumerable<DinnerDto> GetAllDinner()
         {
             var dinners = _dbContext
@@ -199,16 +190,10 @@ namespace Papu.Services
         }
 
         //Tworzenie nowego śniadania 
-
         public int CreateBreakfast(CreateBreakfastDto dtoBreakfast)
         {
 
             var breakfast = _mapper.Map<Breakfast>(dtoBreakfast);
-
-            Breakfast breakfast2 = _dbContext.Breakfasts
-                .Include(c => c.Products).ThenInclude(cs => cs.Product)
-                .Include(c => c.Dishes).ThenInclude(cs => cs.Dish)
-                .FirstOrDefault(c => c.BreakfastId == breakfast.BreakfastId);
 
             foreach (var addProduct in dtoBreakfast.ProductId)
             {
@@ -248,16 +233,10 @@ namespace Papu.Services
         }
 
         //Tworzenie nowego drugiego śniadania 
-
         public int CreateSecondBreakfast(CreateSecondBreakfastDto dtoSecondBreakfast)
         {
 
             var secondBreakfast = _mapper.Map<SecondBreakfast>(dtoSecondBreakfast);
-
-            SecondBreakfast secondBreakfast2 = _dbContext.SecondBreakfasts
-                .Include(c => c.Products).ThenInclude(cs => cs.Product)
-                .Include(c => c.Dishes).ThenInclude(cs => cs.Dish)
-                .FirstOrDefault(c => c.SecondBreakfastId == secondBreakfast.SecondBreakfastId);
 
             foreach (var addProduct in dtoSecondBreakfast.ProductId)
             {
@@ -297,16 +276,10 @@ namespace Papu.Services
         }
 
         //Tworzenie nowego obiadu 
-
         public int CreateLunch(CreateLunchDto dtoLunch)
         {
 
             var lunch = _mapper.Map<Lunch>(dtoLunch);
-
-            Lunch lunch2 = _dbContext.Lunches
-                .Include(c => c.Products).ThenInclude(cs => cs.Product)
-                .Include(c => c.Dishes).ThenInclude(cs => cs.Dish)
-                .FirstOrDefault(c => c.LunchId == lunch.LunchId);
 
             foreach (var addProduct in dtoLunch.ProductId)
             {
@@ -346,16 +319,10 @@ namespace Papu.Services
         }
 
         //Tworzenie nowego podwieczorku
-
         public int CreateSnack(CreateSnackDto dtoSnack)
         {
 
             var snack = _mapper.Map<Snack>(dtoSnack);
-
-            Snack snack2 = _dbContext.Snacks
-                .Include(c => c.Products).ThenInclude(cs => cs.Product)
-                .Include(c => c.Dishes).ThenInclude(cs => cs.Dish)
-                .FirstOrDefault(c => c.SnackId == snack.SnackId);
 
             foreach (var addProduct in dtoSnack.ProductId)
             {
@@ -395,16 +362,10 @@ namespace Papu.Services
         }
 
         //Tworzenie nowej kolacji
-
         public int CreateDinner(CreateDinnerDto dtoDinner)
         {
 
             var dinner = _mapper.Map<Dinner>(dtoDinner);
-
-            Dinner dinner2 = _dbContext.Dinners
-                .Include(c => c.Products).ThenInclude(cs => cs.Product)
-                .Include(c => c.Dishes).ThenInclude(cs => cs.Dish)
-                .FirstOrDefault(c => c.DinnerId == dinner.DinnerId);
 
             foreach (var addProduct in dtoDinner.ProductId)
             {
@@ -441,6 +402,331 @@ namespace Papu.Services
             _dbContext.SaveChanges();
 
             return dinner.DinnerId;
+        }
+
+        //Edycja śniadania
+        public bool UpdateBreakfast(int id, UpdateBreakfastDto dtoBreakfast)
+        {
+            var breakfast = _dbContext
+                .Breakfasts
+                .Include(c => c.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Dishes).ThenInclude(cs => cs.Dish)
+                .FirstOrDefault(c => c.BreakfastId == id);
+
+            //Jeśli jesteśmy pewni, że dane śniadanie nie istnieje, zwracamy wyjątek
+            if (breakfast is null)
+            {
+                return false;
+            }
+
+            foreach (var old in breakfast.Products)
+            {
+                _dbContext.ProductBreakfasts.Remove(old);
+            }
+
+            breakfast.Products.Clear();
+
+            foreach (var addProduct in dtoBreakfast.ProductId)
+            {
+
+                Product product = _dbContext.Products
+                    .FirstOrDefault(s => s.ProductId == addProduct);
+
+                BreakfastProduct productBreakfast = new BreakfastProduct
+                {
+                    Breakfast = breakfast,
+                    Product = product
+                };
+
+                _dbContext.ProductBreakfasts.Add(productBreakfast);
+
+            }
+
+            foreach (var old in breakfast.Dishes)
+            {
+                _dbContext.DishBreakfasts.Remove(old);
+            }
+
+            breakfast.Products.Clear();
+
+            foreach (var addDish in dtoBreakfast.DishId)
+            {
+
+                Dish dish = _dbContext.Dishes
+                    .FirstOrDefault(s => s.DishId == addDish);
+
+                BreakfastDish dishBreakfast = new BreakfastDish
+                {
+                    Dish = dish,
+                    Breakfast = breakfast
+                };
+
+                _dbContext.DishBreakfasts.Add(dishBreakfast);
+            }
+
+            _dbContext.SaveChanges();
+
+            return true;
+        }
+
+        //Edycja drugiego śniadania
+        public bool UpdateSecondBreakfast(int id, UpdateSecondBreakfastDto dtoSecondBreakfast)
+        {
+            var secondBreakfast = _dbContext
+                .SecondBreakfasts
+                .Include(c => c.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Dishes).ThenInclude(cs => cs.Dish)
+                .FirstOrDefault(c => c.SecondBreakfastId == id);
+
+            //Jeśli jesteśmy pewni, że dane drugie śniadanie nie istnieje, zwracamy wyjątek
+            if (secondBreakfast is null)
+            {
+                return false;
+            }
+
+            foreach (var old in secondBreakfast.Products)
+            {
+                _dbContext.ProductSecondBreakfasts.Remove(old);
+            }
+
+            secondBreakfast.Products.Clear();
+
+            foreach (var addProduct in dtoSecondBreakfast.ProductId)
+            {
+
+                Product product = _dbContext.Products
+                    .FirstOrDefault(s => s.ProductId == addProduct);
+
+                SecondBreakfastProduct productSecondBreakfast = new SecondBreakfastProduct
+                {
+                    SecondBreakfast = secondBreakfast,
+                    Product = product
+                };
+
+                _dbContext.ProductSecondBreakfasts.Add(productSecondBreakfast);
+
+            }
+
+            foreach (var old in secondBreakfast.Dishes)
+            {
+                _dbContext.DishSecondBreakfasts.Remove(old);
+            }
+
+            secondBreakfast.Products.Clear();
+
+            foreach (var addDish in dtoSecondBreakfast.DishId)
+            {
+
+                Dish dish = _dbContext.Dishes
+                    .FirstOrDefault(s => s.DishId == addDish);
+
+                SecondBreakfastDish dishSecondBreakfast = new SecondBreakfastDish
+                {
+                    Dish = dish,
+                    SecondBreakfast = secondBreakfast
+                };
+
+                _dbContext.DishSecondBreakfasts.Add(dishSecondBreakfast);
+            }
+
+            _dbContext.SaveChanges();
+
+            return true;
+        }
+
+        //Edycja obiadu
+        public bool UpdateLunch(int id, UpdateLunchDto dtoLunch)
+        {
+            var lunch = _dbContext
+                .Lunches
+                .Include(c => c.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Dishes).ThenInclude(cs => cs.Dish)
+                .FirstOrDefault(c => c.LunchId == id);
+
+            //Jeśli jesteśmy pewni, że dany obiad nie istnieje, zwracamy wyjątek
+            if (lunch is null)
+            {
+                return false;
+            }
+
+            foreach (var old in lunch.Products)
+            {
+                _dbContext.LunchProducts.Remove(old);
+            }
+
+            lunch.Products.Clear();
+
+            foreach (var addProduct in dtoLunch.ProductId)
+            {
+
+                Product product = _dbContext.Products
+                    .FirstOrDefault(s => s.ProductId == addProduct);
+
+                LunchProduct lunchProduct = new LunchProduct
+                {
+                    Lunch = lunch,
+                    Product = product
+                };
+
+                _dbContext.LunchProducts.Add(lunchProduct);
+
+            }
+
+            foreach (var old in lunch.Dishes)
+            {
+                _dbContext.LunchDishes.Remove(old);
+            }
+
+            lunch.Products.Clear();
+
+            foreach (var addDish in dtoLunch.DishId)
+            {
+
+                Dish dish = _dbContext.Dishes
+                    .FirstOrDefault(s => s.DishId == addDish);
+
+                LunchDish lunchDish = new LunchDish
+                {
+                    Dish = dish,
+                    Lunch = lunch
+                };
+
+                _dbContext.LunchDishes.Add(lunchDish);
+            }
+
+            _dbContext.SaveChanges();
+
+            return true;
+        }
+
+        //Edycja podwieczorka
+        public bool UpdateSnack(int id, UpdateSnackDto dtoSnack)
+        {
+            var snack = _dbContext
+                .Snacks
+                .Include(c => c.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Dishes).ThenInclude(cs => cs.Dish)
+                .FirstOrDefault(c => c.SnackId == id);
+
+            //Jeśli jesteśmy pewni, że dany podwieczorek nie istnieje, zwracamy wyjątek
+            if (snack is null)
+            {
+                return false;
+            }
+
+            foreach (var old in snack.Products)
+            {
+                _dbContext.SnackProducts.Remove(old);
+            }
+
+            snack.Products.Clear();
+
+            foreach (var addProduct in dtoSnack.ProductId)
+            {
+
+                Product product = _dbContext.Products
+                    .FirstOrDefault(s => s.ProductId == addProduct);
+
+                SnackProduct snackProduct = new SnackProduct
+                {
+                    Snack = snack,
+                    Product = product
+                };
+
+                _dbContext.SnackProducts.Add(snackProduct);
+
+            }
+
+            foreach (var old in snack.Dishes)
+            {
+                _dbContext.SnackDishes.Remove(old);
+            }
+
+            snack.Products.Clear();
+
+            foreach (var addDish in dtoSnack.DishId)
+            {
+
+                Dish dish = _dbContext.Dishes
+                    .FirstOrDefault(s => s.DishId == addDish);
+
+                SnackDish snackDish = new SnackDish
+                {
+                    Snack = snack,
+                    Dish = dish
+                };
+
+                _dbContext.SnackDishes.Add(snackDish);
+            }
+
+            _dbContext.SaveChanges();
+
+            return true;
+        }
+
+        //Edycja kolacji
+        public bool UpdateDinner(int id, UpdateDinnerDto dtoDinner)
+        {
+            var dinner = _dbContext
+                .Dinners
+                .Include(c => c.Products).ThenInclude(cs => cs.Product)
+                .Include(c => c.Dishes).ThenInclude(cs => cs.Dish)
+                .FirstOrDefault(c => c.DinnerId == id);
+
+            //Jeśli jesteśmy pewni, że dana kolacja nie istnieje, zwracamy wyjątek
+            if (dinner is null)
+            {
+                return false;
+            }
+
+            foreach (var old in dinner.Products)
+            {
+                _dbContext.DinnerProducts.Remove(old);
+            }
+
+            dinner.Products.Clear();
+
+            foreach (var addProduct in dtoDinner.ProductId)
+            {
+
+                Product product = _dbContext.Products
+                    .FirstOrDefault(s => s.ProductId == addProduct);
+
+                DinnerProduct dinnerProduct = new DinnerProduct
+                {
+                    Dinner = dinner,
+                    Product = product
+                };
+
+                _dbContext.DinnerProducts.Add(dinnerProduct);
+
+            }
+
+            foreach (var old in dinner.Dishes)
+            {
+                _dbContext.DinnerDishes.Remove(old);
+            }
+
+            dinner.Products.Clear();
+
+            foreach (var addDish in dtoDinner.DishId)
+            {
+
+                Dish dish = _dbContext.Dishes
+                    .FirstOrDefault(s => s.DishId == addDish);
+
+                DinnerDish dinnerDish = new DinnerDish
+                {
+                    Dinner = dinner,
+                    Dish = dish
+                };
+
+                _dbContext.DinnerDishes.Add(dinnerDish);
+            }
+
+            _dbContext.SaveChanges();
+
+            return true;
         }
 
         //Usuwanie śniadania
