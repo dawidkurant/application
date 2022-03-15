@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Papu.Data;
 using Papu.Entities;
+using Papu.Middleware;
 using Papu.Models;
 using Papu.Services;
 
@@ -46,6 +47,8 @@ namespace Papu
             services.AddScoped<ITimesOfDayService, TimesOfDayService>();
             services.AddScoped<IDaysOfTheWeekService, DaysOfTheWeekService>();
             services.AddScoped<IMenuService, MenuService>();
+            //Papu middleware aby kontener dependenciInjection mógł go poprawnie zaizolować
+            services.AddScoped<ErrorHandlingMiddleware>();
 
             services.AddControllers().AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
@@ -86,6 +89,9 @@ namespace Papu
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            //Aby skorzystać z middleware to musi być
+            app.UseMiddleware<ErrorHandlingMiddleware>();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

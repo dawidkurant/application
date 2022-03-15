@@ -9,7 +9,7 @@ namespace Papu.Services
         IEnumerable<DishDto> GetAllDishes();
         DishDto GetByIdDish(int id);
         int CreateDish(CreateDishDto dto);
-        bool UpdateDish(int id, UpdateDishDto dto);
+        void UpdateDish(int id, UpdateDishDto dto);
         bool DeleteDish(int id);
     }
 }

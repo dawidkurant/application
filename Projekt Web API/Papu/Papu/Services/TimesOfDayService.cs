@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Papu.Entities;
+using Papu.Exceptions;
 using Papu.Models;
 using Papu.Models.Update.TimesOfDay;
 using System.Collections.Generic;
@@ -408,7 +409,7 @@ namespace Papu.Services
         }
 
         //Edycja śniadania
-        public bool UpdateBreakfast(int id, UpdateBreakfastDto dtoBreakfast)
+        public void UpdateBreakfast(int id, UpdateBreakfastDto dtoBreakfast)
         {
             var breakfast = _dbContext
                 .Breakfasts
@@ -419,7 +420,7 @@ namespace Papu.Services
             //Jeśli jesteśmy pewni, że dane śniadanie nie istnieje, zwracamy wyjątek
             if (breakfast is null)
             {
-                return false;
+                throw new NotFoundException("Breakfast not found");
             }
 
             foreach (var old in breakfast.Products)
@@ -468,12 +469,10 @@ namespace Papu.Services
             }
 
             _dbContext.SaveChanges();
-
-            return true;
         }
 
         //Edycja drugiego śniadania
-        public bool UpdateSecondBreakfast(int id, UpdateSecondBreakfastDto dtoSecondBreakfast)
+        public void UpdateSecondBreakfast(int id, UpdateSecondBreakfastDto dtoSecondBreakfast)
         {
             var secondBreakfast = _dbContext
                 .SecondBreakfasts
@@ -484,7 +483,7 @@ namespace Papu.Services
             //Jeśli jesteśmy pewni, że dane drugie śniadanie nie istnieje, zwracamy wyjątek
             if (secondBreakfast is null)
             {
-                return false;
+                throw new NotFoundException("Second breakfast not found");
             }
 
             foreach (var old in secondBreakfast.Products)
@@ -533,12 +532,10 @@ namespace Papu.Services
             }
 
             _dbContext.SaveChanges();
-
-            return true;
         }
 
         //Edycja obiadu
-        public bool UpdateLunch(int id, UpdateLunchDto dtoLunch)
+        public void UpdateLunch(int id, UpdateLunchDto dtoLunch)
         {
             var lunch = _dbContext
                 .Lunches
@@ -549,7 +546,7 @@ namespace Papu.Services
             //Jeśli jesteśmy pewni, że dany obiad nie istnieje, zwracamy wyjątek
             if (lunch is null)
             {
-                return false;
+                throw new NotFoundException("Lunch not found");
             }
 
             foreach (var old in lunch.Products)
@@ -598,12 +595,10 @@ namespace Papu.Services
             }
 
             _dbContext.SaveChanges();
-
-            return true;
         }
 
         //Edycja podwieczorka
-        public bool UpdateSnack(int id, UpdateSnackDto dtoSnack)
+        public void UpdateSnack(int id, UpdateSnackDto dtoSnack)
         {
             var snack = _dbContext
                 .Snacks
@@ -614,7 +609,7 @@ namespace Papu.Services
             //Jeśli jesteśmy pewni, że dany podwieczorek nie istnieje, zwracamy wyjątek
             if (snack is null)
             {
-                return false;
+                throw new NotFoundException("Snack not found");
             }
 
             foreach (var old in snack.Products)
@@ -663,12 +658,10 @@ namespace Papu.Services
             }
 
             _dbContext.SaveChanges();
-
-            return true;
         }
 
         //Edycja kolacji
-        public bool UpdateDinner(int id, UpdateDinnerDto dtoDinner)
+        public void UpdateDinner(int id, UpdateDinnerDto dtoDinner)
         {
             var dinner = _dbContext
                 .Dinners
@@ -679,7 +672,7 @@ namespace Papu.Services
             //Jeśli jesteśmy pewni, że dana kolacja nie istnieje, zwracamy wyjątek
             if (dinner is null)
             {
-                return false;
+                throw new NotFoundException("Dinner not found");
             }
 
             foreach (var old in dinner.Products)
@@ -728,8 +721,6 @@ namespace Papu.Services
             }
 
             _dbContext.SaveChanges();
-
-            return true;
         }
 
         //Usuwanie śniadania

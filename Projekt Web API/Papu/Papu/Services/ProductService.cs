@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Papu.Entities;
+using Papu.Exceptions;
 using Papu.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -93,7 +94,7 @@ namespace Papu.Services
 
         //Edycja jednego produktu na podstawie id i obiektu dto
         //tylko ten kto utworzył dany zasób, będzie mógł go modyfikować lub usuwać
-        public bool UpdateProduct(int id, UpdateProductDto dto)
+        public void UpdateProduct(int id, UpdateProductDto dto)
         {
             var product =
                 _dbContext.Products
@@ -105,7 +106,7 @@ namespace Papu.Services
             //Jeśli jesteśmy pewni, że dany produkt nie istnieje, zwracamy wyjątek
             if (product is null)
             {
-                return false;
+                throw new NotFoundException("Product not found");
             }
 
             Category category = _dbContext.Categories
@@ -143,8 +144,6 @@ namespace Papu.Services
             }
 
             _dbContext.SaveChanges();
-
-            return true;
         }
 
 

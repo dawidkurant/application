@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Papu.Entities;
 using Papu.Models;
 using Papu.Models.Update;
@@ -15,10 +16,11 @@ namespace Papu.Services
         private readonly IMapper _mapper;
         private readonly ILogger<MenuService> _logger;
 
-        public MenuService(PapuDbContext dbContext, IMapper mapper)
+        public MenuService(PapuDbContext dbContext, IMapper mapper, ILogger<MenuService> logger)
         {
             _dbContext = dbContext;
             _mapper = mapper;
+            _logger = logger;
         }
 
         public MenuDto GetByIdMenu(int id)
@@ -221,7 +223,7 @@ namespace Papu.Services
             return menu.MenuId;
         }
 
-        public bool UpdateMenu(int id, UpdateMenuDto dto)
+        public void UpdateMenu(int id, UpdateMenuDto dto)
         {
             var menu = _dbContext
                 .Menus
@@ -308,7 +310,7 @@ namespace Papu.Services
             //Jeśli jesteśmy pewni, że dany jadłospis nie istnieje, zwracamy wyjątek
             if (menu is null)
             {
-                return false;
+                throw new NotFoundException("Menu not found");
             }
 
             menu.MenuName = dto.MenuName;
@@ -322,8 +324,6 @@ namespace Papu.Services
             menu.SundayId = dto.SundayId;
 
             _dbContext.SaveChanges();
-
-            return true;
         }
 
         public bool DeleteMenu(int id)

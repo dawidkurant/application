@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Papu.Entities;
+using Papu.Exceptions;
 using Papu.Models;
 using Papu.Models.Update.DayOfTheWeek;
 using System.Collections.Generic;
@@ -94,7 +95,7 @@ namespace Papu.Services
         }
 
         //Edycja poniedziałku
-        public bool UpdateMonday(int id, UpdateMondayDto dto)
+        public void UpdateMonday(int id, UpdateMondayDto dto)
         {
             var monday = _dbContext
                 .Mondays
@@ -114,7 +115,7 @@ namespace Papu.Services
             //Jeśli jesteśmy pewni, że dany poniedziałek nie istnieje, zwracamy wyjątek
             if (monday is null)
             {
-                return false;
+                throw new NotFoundException("Monday not found");
             }
 
             monday.BreakfastId = dto.BreakfastMondayId;
@@ -124,8 +125,6 @@ namespace Papu.Services
             monday.DinnerId = dto.DinnerMondayId;
 
             _dbContext.SaveChanges();
-
-            return true;
         }
 
         //Usuwanie poniedziałku
@@ -226,7 +225,7 @@ namespace Papu.Services
         }
 
         //Edycja wtorku
-        public bool UpdateTuesday(int id, UpdateTuesdayDto dto)
+        public void UpdateTuesday(int id, UpdateTuesdayDto dto)
         {
             var tuesday = _dbContext
                 .Tuesdays
@@ -246,7 +245,7 @@ namespace Papu.Services
             //Jeśli jesteśmy pewni, że dany wtorek nie istnieje, zwracamy wyjątek
             if (tuesday is null)
             {
-                return false;
+                throw new NotFoundException("Tuesday not found");
             }
 
             tuesday.BreakfastId = dto.BreakfastTuesdayId;
@@ -256,8 +255,6 @@ namespace Papu.Services
             tuesday.DinnerId = dto.DinnerTuesdayId;
 
             _dbContext.SaveChanges();
-
-            return true;
         }
 
         //Usuwanie wtorku
@@ -358,7 +355,7 @@ namespace Papu.Services
         }
 
         //Edycja środy
-        public bool UpdateWednesday(int id, UpdateWednesdayDto dto)
+        public void UpdateWednesday(int id, UpdateWednesdayDto dto)
         {
             var wednesday = _dbContext
                 .Wednesdays
@@ -378,7 +375,7 @@ namespace Papu.Services
             //Jeśli jesteśmy pewni, że dana środa nie istnieje, zwracamy wyjątek
             if (wednesday is null)
             {
-                return false;
+                throw new NotFoundException("Wednesday not found");
             }
 
             wednesday.BreakfastId = dto.BreakfastWednesdayId;
@@ -388,8 +385,6 @@ namespace Papu.Services
             wednesday.DinnerId = dto.DinnerWednesdayId;
 
             _dbContext.SaveChanges();
-
-            return true;
         }
 
         //Usuwanie środy
@@ -490,7 +485,7 @@ namespace Papu.Services
         }
 
         //Edycja czwartku
-        public bool UpdateThursday(int id, UpdateThursdayDto dto)
+        public void UpdateThursday(int id, UpdateThursdayDto dto)
         {
             var thursday = _dbContext
                 .Thursdays
@@ -510,7 +505,7 @@ namespace Papu.Services
             //Jeśli jesteśmy pewni, że dany czwartek nie istnieje, zwracamy wyjątek
             if (thursday is null)
             {
-                return false;
+                throw new NotFoundException("Thursday not found");
             }
 
             thursday.BreakfastId = dto.BreakfastThursdayId;
@@ -520,8 +515,6 @@ namespace Papu.Services
             thursday.DinnerId = dto.DinnerThursdayId;
 
             _dbContext.SaveChanges();
-
-            return true;
         }
 
         //Usuwanie czwartku
@@ -622,7 +615,7 @@ namespace Papu.Services
         }
 
         //Edycja piątku
-        public bool UpdateFriday(int id, UpdateFridayDto dto)
+        public void UpdateFriday(int id, UpdateFridayDto dto)
         {
             var friday = _dbContext
                 .Fridays
@@ -642,7 +635,7 @@ namespace Papu.Services
             //Jeśli jesteśmy pewni, że dany piątek nie istnieje, zwracamy wyjątek
             if (friday is null)
             {
-                return false;
+                throw new NotFoundException("Friday not found");
             }
 
             friday.BreakfastId = dto.BreakfastFridayId;
@@ -652,8 +645,6 @@ namespace Papu.Services
             friday.DinnerId = dto.DinnerFridayId;
 
             _dbContext.SaveChanges();
-
-            return true;
         }
 
         //Usuwanie piątku
@@ -754,7 +745,7 @@ namespace Papu.Services
         }
 
         //Edycja soboty
-        public bool UpdateSaturday(int id, UpdateSaturdayDto dto)
+        public void UpdateSaturday(int id, UpdateSaturdayDto dto)
         {
             var saturday = _dbContext
                 .Saturdays
@@ -774,7 +765,7 @@ namespace Papu.Services
             //Jeśli jesteśmy pewni, że dana sobota nie istnieje, zwracamy wyjątek
             if (saturday is null)
             {
-                return false;
+                throw new NotFoundException("Saturday not found");
             }
 
             saturday.BreakfastId = dto.BreakfastSaturdayId;
@@ -784,8 +775,6 @@ namespace Papu.Services
             saturday.DinnerId = dto.DinnerSaturdayId;
 
             _dbContext.SaveChanges();
-
-            return true;
         }
 
         //Usuwanie soboty
@@ -886,7 +875,7 @@ namespace Papu.Services
         }
 
         //Edycja niedzieli
-        public bool UpdateSunday(int id, UpdateSundayDto dto)
+        public void UpdateSunday(int id, UpdateSundayDto dto)
         {
             var sunday = _dbContext
                 .Sundays
@@ -906,7 +895,7 @@ namespace Papu.Services
             //Jeśli jesteśmy pewni, że dana niedziela nie istnieje, zwracamy wyjątek
             if (sunday is null)
             {
-                return false;
+                throw new NotFoundException("Sunday not found");
             }
 
             sunday.BreakfastId = dto.BreakfastSundayId;
@@ -916,8 +905,6 @@ namespace Papu.Services
             sunday.DinnerId = dto.DinnerSundayId;
 
             _dbContext.SaveChanges();
-
-            return true;
         }
 
         //Usuwanie niedzieli

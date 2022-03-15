@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Papu.Entities;
+using Papu.Exceptions;
 using Papu.Models;
 using Papu.Models.Update;
 using System.Collections.Generic;
@@ -12,11 +14,13 @@ namespace Papu.Services
     {
         private readonly PapuDbContext _dbContext;
         private readonly IMapper _mapper;
+        private readonly ILogger<DishService> _logger;
 
-        public DishService(PapuDbContext dbContext, IMapper mapper)
+        public DishService(PapuDbContext dbContext, IMapper mapper, ILogger<DishService> logger)
         {
             _dbContext = dbContext;
             _mapper = mapper;
+            _logger = logger;
         }
 
         //Pobranie jednej potrawy po id 
@@ -112,7 +116,7 @@ namespace Papu.Services
 
         //Edycja jednej potrawy na podstawie id i obiektu dto
         //tylko ten kto utworzył dany zasób, będzie mógł go modyfikować lub usuwać
-        public bool UpdateDish(int id, UpdateDishDto dto)
+        public void UpdateDish(int id, UpdateDishDto dto)
         {
             var dish = _dbContext
                 .Dishes
@@ -124,7 +128,7 @@ namespace Papu.Services
             //Jeśli jesteśmy pewni, że dana potrawa nie istnieje, zwracamy wyjątek
             if (dish is null)
             {
-                return false;
+                throw new NotFoundException("Dish not found");
             }
 
             dish.DishName = dto.DishName;
@@ -202,14 +206,14 @@ namespace Papu.Services
             }
 
             _dbContext.SaveChanges();
-
-            return true;
         }
 
         //Usunięcie jednej potrawy na podstawie id
         //tylko ten kto utworzył dany zasób, będzie mógł go modyfikować lub usuwać
         public bool DeleteDish(int id)
         {
+            _logger.LogError($"Dish with id: {id} DELETE action invoked");
+
             var dish = _dbContext
                 .Dishes
                 .Include(c => c.DishKindsOf).ThenInclude(cs => cs.KindOf)

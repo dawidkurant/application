@@ -9,7 +9,7 @@ namespace Papu.Services
         MenuDto GetByIdMenu(int id);
         IEnumerable<MenuDto> GetAllMenus();
         int CreateMenu(CreateMenuDto dtoMenu);
-        bool UpdateMenu(int id, UpdateMenuDto dto);
+        void UpdateMenu(int id, UpdateMenuDto dto);
         bool DeleteMenu(int id);
     }
 }
