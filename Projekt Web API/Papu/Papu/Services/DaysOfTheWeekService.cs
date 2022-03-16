@@ -45,7 +45,7 @@ namespace Papu.Services
 
             if (monday is null)
             {
-                return null;
+                throw new NotFoundException("Monday not found");
             }
 
             var result = _mapper.Map<MondayDto>(monday);
@@ -128,7 +128,7 @@ namespace Papu.Services
         }
 
         //Usuwanie poniedziałku
-        public bool DeleteMonday(int id)
+        public void DeleteMonday(int id)
         {
             _logger.LogError($"Monday with id: {id} DELETE action invoked");
 
@@ -148,13 +148,11 @@ namespace Papu.Services
 
             if (monday is null)
             {
-                return false;
+                throw new NotFoundException("Monday not found");
             }
 
             _dbContext.Mondays.Remove(monday);
             _dbContext.SaveChanges();
-
-            return true;
         }
 
         //Wyświetlanie jednego wtorku
@@ -177,7 +175,7 @@ namespace Papu.Services
 
             if (tuesday is null)
             {
-                return null;
+                throw new NotFoundException("Tuesday not found");
             }
 
             var result = _mapper.Map<TuesdayDto>(tuesday);
@@ -258,7 +256,7 @@ namespace Papu.Services
         }
 
         //Usuwanie wtorku
-        public bool DeleteTuesday(int id)
+        public void DeleteTuesday(int id)
         {
             _logger.LogError($"Tuesday with id: {id} DELETE action invoked");
 
@@ -278,13 +276,11 @@ namespace Papu.Services
 
             if (tuesday is null)
             {
-                return false;
+                throw new NotFoundException("Tuesday not found");
             }
 
             _dbContext.Tuesdays.Remove(tuesday);
             _dbContext.SaveChanges();
-
-            return true;
         }
 
         //Wyświetlanie jednej środy
@@ -307,7 +303,7 @@ namespace Papu.Services
 
             if (wednesday is null)
             {
-                return null;
+                throw new NotFoundException("Wednesday not found");
             }
 
             var result = _mapper.Map<WednesdayDto>(wednesday);
@@ -388,7 +384,7 @@ namespace Papu.Services
         }
 
         //Usuwanie środy
-        public bool DeleteWednesday(int id)
+        public void DeleteWednesday(int id)
         {
             _logger.LogError($"Wednesday with id: {id} DELETE action invoked");
 
@@ -408,13 +404,11 @@ namespace Papu.Services
 
             if (wednesday is null)
             {
-                return false;
+                throw new NotFoundException("Wednesday not found");
             }
 
             _dbContext.Wednesdays.Remove(wednesday);
             _dbContext.SaveChanges();
-
-            return true;
         }
 
         //Wyświetlanie jednego czwartku
@@ -437,7 +431,7 @@ namespace Papu.Services
 
             if (thursday is null)
             {
-                return null;
+                throw new NotFoundException("Thursday not found");
             }
 
             var result = _mapper.Map<ThursdayDto>(thursday);
@@ -518,7 +512,7 @@ namespace Papu.Services
         }
 
         //Usuwanie czwartku
-        public bool DeleteThursday(int id)
+        public void DeleteThursday(int id)
         {
             _logger.LogError($"Thursday with id: {id} DELETE action invoked");
 
@@ -538,13 +532,11 @@ namespace Papu.Services
 
             if (thursday is null)
             {
-                return false;
+                throw new NotFoundException("Thursday not found");
             }
 
             _dbContext.Thursdays.Remove(thursday);
             _dbContext.SaveChanges();
-
-            return true;
         }
 
         //Wyświetlanie jednego piątku
@@ -567,7 +559,7 @@ namespace Papu.Services
 
             if (friday is null)
             {
-                return null;
+                throw new NotFoundException("Friday not found");
             }
 
             var result = _mapper.Map<FridayDto>(friday);
@@ -648,7 +640,7 @@ namespace Papu.Services
         }
 
         //Usuwanie piątku
-        public bool DeleteFriday(int id)
+        public void DeleteFriday(int id)
         {
             _logger.LogError($"Friday with id: {id} DELETE action invoked");
 
@@ -668,13 +660,11 @@ namespace Papu.Services
 
             if (friday is null)
             {
-                return false;
+                throw new NotFoundException("Friday not found");
             }
 
             _dbContext.Fridays.Remove(friday);
             _dbContext.SaveChanges();
-
-            return true;
         }
 
         //Wyświetlanie jednej soboty
@@ -697,7 +687,7 @@ namespace Papu.Services
 
             if (saturday is null)
             {
-                return null;
+                throw new NotFoundException("Saturday not found");
             }
 
             var result = _mapper.Map<SaturdayDto>(saturday);
@@ -778,7 +768,7 @@ namespace Papu.Services
         }
 
         //Usuwanie soboty
-        public bool DeleteSaturday(int id)
+        public void DeleteSaturday(int id)
         {
             _logger.LogError($"Saturday with id: {id} DELETE action invoked");
 
@@ -798,13 +788,11 @@ namespace Papu.Services
 
             if (saturday is null)
             {
-                return false;
+                throw new NotFoundException("Saturday not found");
             }
 
             _dbContext.Saturdays.Remove(saturday);
             _dbContext.SaveChanges();
-
-            return true;
         }
 
         //Wyświetlanie jednej niedzieli
@@ -827,7 +815,7 @@ namespace Papu.Services
 
             if (sunday is null)
             {
-                return null;
+                throw new NotFoundException("Sunday not found");
             }
 
             var result = _mapper.Map<SundayDto>(sunday);
@@ -908,7 +896,7 @@ namespace Papu.Services
         }
 
         //Usuwanie niedzieli
-        public bool DeleteSunday(int id)
+        public void DeleteSunday(int id)
         {
             _logger.LogError($"Sunday with id: {id} DELETE action invoked");
 
@@ -928,13 +916,11 @@ namespace Papu.Services
 
             if (sunday is null)
             {
-                return false;
+                throw new NotFoundException("Sunday not found");
             }
 
             _dbContext.Sundays.Remove(sunday);
             _dbContext.SaveChanges();
-
-            return true;
         }
     }
 }

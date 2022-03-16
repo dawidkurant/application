@@ -10,6 +10,6 @@ namespace Papu.Services
         DishDto GetByIdDish(int id);
         int CreateDish(CreateDishDto dto);
         void UpdateDish(int id, UpdateDishDto dto);
-        bool DeleteDish(int id);
+        void DeleteDish(int id);
     }
 }

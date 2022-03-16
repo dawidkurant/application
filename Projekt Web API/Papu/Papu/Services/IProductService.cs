@@ -10,6 +10,6 @@ namespace Papu.Services
         ProductDto GetByIdProduct(int id);
         int CreateProduct(CreateProductDto dto);
         void UpdateProduct(int id, UpdateProductDto dto);
-        bool DeleteProduct(int id);
+        void DeleteProduct(int id);
     }
 }

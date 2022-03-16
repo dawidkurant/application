@@ -26,11 +26,6 @@ namespace Papu.Controllers
         {
             var dish = _dishService.GetByIdDish(id);
 
-            if (dish is null)
-            {
-                return NotFound();
-            }
-
             return Ok(dish);
         }
 
@@ -67,12 +62,7 @@ namespace Papu.Controllers
                 return BadRequest(ModelState);
             }
 
-            var isUpdated = _dishService.UpdateDish(id, dto);
-
-            if (!isUpdated)
-            {
-                return NotFound();
-            }
+            _dishService.UpdateDish(id, dto);
 
             return Ok();
         }
@@ -81,16 +71,10 @@ namespace Papu.Controllers
         [HttpDelete("{id}")]
         public ActionResult DeleteDish([FromRoute] int id)
         {
-            var isDeleted = _dishService.DeleteDish(id);
+            _dishService.DeleteDish(id);
 
             //operacja zakończona sukcesem
-            if (isDeleted)
-            {
-                return NoContent();
-            }
-
-            //nie odnaleziono
-            return NotFound();
+            return NoContent();
         }
     }
 }

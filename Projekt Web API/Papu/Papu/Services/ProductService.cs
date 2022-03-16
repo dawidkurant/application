@@ -35,7 +35,7 @@ namespace Papu.Services
 
             if (product is null)
             {
-                return null;
+                throw new NotFoundException("Product not found");
             }
 
             var result = _mapper.Map<ProductDto>(product);
@@ -149,7 +149,7 @@ namespace Papu.Services
 
         //Usunięcie jednego produktu na podstawie id
         //tylko ten kto utworzył dany zasób, będzie mógł go modyfikować lub usuwać
-        public bool DeleteProduct(int id)
+        public void DeleteProduct(int id)
         {
             _logger.LogError($"Product with id: {id} DELETE action invoked");
 
@@ -162,13 +162,11 @@ namespace Papu.Services
 
             if (product is null)
             {
-                return false;
+                throw new NotFoundException("Product not found");
             }
 
             _dbContext.Products.Remove(product);
             _dbContext.SaveChanges();
-
-            return true;
         }
     }
 }

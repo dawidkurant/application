@@ -22,11 +22,6 @@ namespace Papu.Controllers
         {
             var breakfast = _timesOfDayService.GetByIdBreakfast(id);
 
-            if (breakfast is null)
-            {
-                return NotFound();
-            }
-
             return Ok(breakfast);
         }
 
@@ -35,11 +30,6 @@ namespace Papu.Controllers
         public ActionResult<SecondBreakfastDto> GetOneSecondBreakfast([FromRoute] int id)
         {
             var secondBreakfast = _timesOfDayService.GetByIdSecondBreakfast(id);
-
-            if (secondBreakfast is null)
-            {
-                return NotFound();
-            }
 
             return Ok(secondBreakfast);
         }
@@ -50,11 +40,6 @@ namespace Papu.Controllers
         {
             var lunch = _timesOfDayService.GetByIdLunch(id);
 
-            if (lunch is null)
-            {
-                return NotFound();
-            }
-
             return Ok(lunch);
         }
 
@@ -64,11 +49,6 @@ namespace Papu.Controllers
         {
             var snack = _timesOfDayService.GetByIdSnack(id);
 
-            if (snack is null)
-            {
-                return NotFound();
-            }
-
             return Ok(snack);
         }
 
@@ -77,11 +57,6 @@ namespace Papu.Controllers
         public ActionResult<DinnerDto> GetOneDinner([FromRoute] int id)
         {
             var dinner = _timesOfDayService.GetByIdDinner(id);
-
-            if (dinner is null)
-            {
-                return NotFound();
-            }
 
             return Ok(dinner);
         }
@@ -215,12 +190,7 @@ namespace Papu.Controllers
                 return BadRequest(ModelState);
             }
 
-            var isUpdated = _timesOfDayService.UpdateBreakfast(id, dto);
-
-            if (!isUpdated)
-            {
-                return NotFound();
-            }
+            _timesOfDayService.UpdateBreakfast(id, dto);
 
             return Ok();
         }
@@ -234,12 +204,7 @@ namespace Papu.Controllers
                 return BadRequest(ModelState);
             }
 
-            var isUpdated = _timesOfDayService.UpdateSecondBreakfast(id, dto);
-
-            if (!isUpdated)
-            {
-                return NotFound();
-            }
+            _timesOfDayService.UpdateSecondBreakfast(id, dto);
 
             return Ok();
         }
@@ -253,12 +218,7 @@ namespace Papu.Controllers
                 return BadRequest(ModelState);
             }
 
-            var isUpdated = _timesOfDayService.UpdateLunch(id, dto);
-
-            if (!isUpdated)
-            {
-                return NotFound();
-            }
+            _timesOfDayService.UpdateLunch(id, dto);
 
             return Ok();
         }
@@ -272,12 +232,7 @@ namespace Papu.Controllers
                 return BadRequest(ModelState);
             }
 
-            var isUpdated = _timesOfDayService.UpdateSnack(id, dto);
-
-            if (!isUpdated)
-            {
-                return NotFound();
-            }
+            _timesOfDayService.UpdateSnack(id, dto);
 
             return Ok();
         }
@@ -291,12 +246,7 @@ namespace Papu.Controllers
                 return BadRequest(ModelState);
             }
 
-            var isUpdated = _timesOfDayService.UpdateDinner(id, dto);
-
-            if (!isUpdated)
-            {
-                return NotFound();
-            }
+            _timesOfDayService.UpdateDinner(id, dto);
 
             return Ok();
         }
@@ -305,80 +255,50 @@ namespace Papu.Controllers
         [HttpDelete("breakfast/{id}")]
         public ActionResult DeleteBreakfast([FromRoute] int id)
         {
-            var isDeleted = _timesOfDayService.DeleteBreakfast(id);
+            _timesOfDayService.DeleteBreakfast(id);
 
             //operacja zakończona sukcesem
-            if (isDeleted)
-            {
-                return NoContent();
-            }
-
-            //nie odnaleziono
-            return NotFound();
+            return NoContent();
         }
 
         //Usuwanie konkretnego drugiego śniadania
         [HttpDelete("secondbreakfast/{id}")]
         public ActionResult DeleteSecondBreakfast([FromRoute] int id)
         {
-            var isDeleted = _timesOfDayService.DeleteSecondBreakfast(id);
+            _timesOfDayService.DeleteSecondBreakfast(id);
 
             //operacja zakończona sukcesem
-            if (isDeleted)
-            {
-                return NoContent();
-            }
-
-            //nie odnaleziono
-            return NotFound();
+            return NoContent();
         }
 
         //Usuwanie konkretnego obiadu
         [HttpDelete("lunch/{id}")]
         public ActionResult DeleteLunch([FromRoute] int id)
         {
-            var isDeleted = _timesOfDayService.DeleteLunch(id);
+            _timesOfDayService.DeleteLunch(id);
 
             //operacja zakończona sukcesem
-            if (isDeleted)
-            {
-                return NoContent();
-            }
-
-            //nie odnaleziono
-            return NotFound();
+            return NoContent();
         }
 
         //Usuwanie konkretnego podwieczorka
         [HttpDelete("snack/{id}")]
         public ActionResult DeleteSnack([FromRoute] int id)
         {
-            var isDeleted = _timesOfDayService.DeleteSnack(id);
+            _timesOfDayService.DeleteSnack(id);
 
             //operacja zakończona sukcesem
-            if (isDeleted)
-            {
-                return NoContent();
-            }
-
-            //nie odnaleziono
-            return NotFound();
+            return NoContent();
         }
 
         //Usuwanie konkretnej kolacji
         [HttpDelete("dinner/{id}")]
         public ActionResult DeleteDinner([FromRoute] int id)
         {
-            var isDeleted = _timesOfDayService.DeleteDinner(id);
+            _timesOfDayService.DeleteDinner(id);
 
             //operacja zakończona sukcesem
-            if (isDeleted)
-            {
-                return NoContent();
-            }
-
-            //nie odnaleziono
-            return NotFound();
+            return NoContent();
         }
     }
 }

@@ -10,6 +10,7 @@ using System.Linq;
 namespace Papu.Controllers
 {
     [Route("api/product")]
+    [ApiController]
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
@@ -24,11 +25,6 @@ namespace Papu.Controllers
         public ActionResult<ProductDto> GetProduct([FromRoute] int id)
         {
             var product = _productService.GetByIdProduct(id);
-
-            if (product is null)
-            {
-                return NotFound();
-            }
 
             return Ok(product);
         }
@@ -46,10 +42,6 @@ namespace Papu.Controllers
         [HttpPost]
         public ActionResult CreateProduct([FromBody] CreateProductDto dto)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             var newProductId = _productService.CreateProduct(dto);
 
             //Jako pierwszy parametr ścieżka, a jako drugi
@@ -61,17 +53,7 @@ namespace Papu.Controllers
         [HttpPut("{id}")]
         public ActionResult UpdateProduct([FromBody] UpdateProductDto dto, [FromRoute] int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var isUpdated = _productService.UpdateProduct(id, dto);
-
-            if(!isUpdated)
-            {
-                return NotFound();
-            }
+            _productService.UpdateProduct(id, dto);
 
             return Ok();
         }
@@ -80,16 +62,10 @@ namespace Papu.Controllers
         [HttpDelete("{id}")]
         public ActionResult DeleteProduct([FromRoute] int id)
         {
-            var isDeleted = _productService.DeleteProduct(id);
+            _productService.DeleteProduct(id);
 
             //operacja zakończona sukcesem
-            if (isDeleted)
-            {
-                return NoContent();
-            }
-
-            //nie odnaleziono
-            return NotFound();
+            return NoContent();
         }
     }
 }

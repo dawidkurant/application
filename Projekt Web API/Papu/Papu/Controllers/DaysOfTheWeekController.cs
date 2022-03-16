@@ -22,11 +22,6 @@ namespace Papu.Controllers
         {
             var monday = _daysOfTheWeekService.GetByIdMonday(id);
 
-            if (monday is null)
-            {
-                return NotFound();
-            }
-
             return Ok(monday);
         }
 
@@ -63,12 +58,7 @@ namespace Papu.Controllers
                 return BadRequest(ModelState);
             }
 
-            var isUpdated = _daysOfTheWeekService.UpdateMonday(id, dto);
-
-            if (!isUpdated)
-            {
-                return NotFound();
-            }
+            _daysOfTheWeekService.UpdateMonday(id, dto);
 
             return Ok();
         }
@@ -77,16 +67,10 @@ namespace Papu.Controllers
         [HttpDelete("monday/{id}")]
         public ActionResult DeleteMonday([FromRoute] int id)
         {
-            var isDeleted = _daysOfTheWeekService.DeleteMonday(id);
+            _daysOfTheWeekService.DeleteMonday(id);
 
             //operacja zakończona sukcesem
-            if (isDeleted)
-            {
-                return NoContent();
-            }
-
-            //nie odnaleziono
-            return NotFound();
+            return NoContent();
         }
 
         //Pobranie konkretnego wtorku 
@@ -94,11 +78,6 @@ namespace Papu.Controllers
         public ActionResult<TuesdayDto> GetTuesday([FromRoute] int id)
         {
             var tuesday = _daysOfTheWeekService.GetByIdTuesday(id);
-
-            if (tuesday is null)
-            {
-                return NotFound();
-            }
 
             return Ok(tuesday);
         }
@@ -136,12 +115,7 @@ namespace Papu.Controllers
                 return BadRequest(ModelState);
             }
 
-            var isUpdated = _daysOfTheWeekService.UpdateTuesday(id, dto);
-
-            if (!isUpdated)
-            {
-                return NotFound();
-            }
+            _daysOfTheWeekService.UpdateTuesday(id, dto);
 
             return Ok();
         }
@@ -150,16 +124,10 @@ namespace Papu.Controllers
         [HttpDelete("tuesday/{id}")]
         public ActionResult DeleteTuesday([FromRoute] int id)
         {
-            var isDeleted = _daysOfTheWeekService.DeleteTuesday(id);
+            _daysOfTheWeekService.DeleteTuesday(id);
 
             //operacja zakończona sukcesem
-            if (isDeleted)
-            {
-                return NoContent();
-            }
-
-            //nie odnaleziono
-            return NotFound();
+            return NoContent();
         }
 
         //Pobranie konkretnej środy 
@@ -167,11 +135,6 @@ namespace Papu.Controllers
         public ActionResult<WednesdayDto> GetWednesday([FromRoute] int id)
         {
             var wednesday = _daysOfTheWeekService.GetByIdWednesday(id);
-
-            if (wednesday is null)
-            {
-                return NotFound();
-            }
 
             return Ok(wednesday);
         }
@@ -208,13 +171,8 @@ namespace Papu.Controllers
             {
                 return BadRequest(ModelState);
             }
-
-            var isUpdated = _daysOfTheWeekService.UpdateWednesday(id, dto);
-
-            if (!isUpdated)
-            {
-                return NotFound();
-            }
+            
+            _daysOfTheWeekService.UpdateWednesday(id, dto);
 
             return Ok();
         }
@@ -223,16 +181,10 @@ namespace Papu.Controllers
         [HttpDelete("wednesday/{id}")]
         public ActionResult DeleteWednesday([FromRoute] int id)
         {
-            var isDeleted = _daysOfTheWeekService.DeleteWednesday(id);
+            _daysOfTheWeekService.DeleteWednesday(id);
 
             //operacja zakończona sukcesem
-            if (isDeleted)
-            {
-                return NoContent();
-            }
-
-            //nie odnaleziono
-            return NotFound();
+            return NoContent();
         }
 
         //Pobranie konkretnego czwartku 
@@ -240,11 +192,6 @@ namespace Papu.Controllers
         public ActionResult<ThursdayDto> GetThursday([FromRoute] int id)
         {
             var thursday = _daysOfTheWeekService.GetByIdThursday(id);
-
-            if (thursday is null)
-            {
-                return NotFound();
-            }
 
             return Ok(thursday);
         }
@@ -282,12 +229,7 @@ namespace Papu.Controllers
                 return BadRequest(ModelState);
             }
 
-            var isUpdated = _daysOfTheWeekService.UpdateThursday(id, dto);
-
-            if (!isUpdated)
-            {
-                return NotFound();
-            }
+            _daysOfTheWeekService.UpdateThursday(id, dto);
 
             return Ok();
         }
@@ -296,16 +238,10 @@ namespace Papu.Controllers
         [HttpDelete("thursday/{id}")]
         public ActionResult DeleteThursday([FromRoute] int id)
         {
-            var isDeleted = _daysOfTheWeekService.DeleteThursday(id);
+            _daysOfTheWeekService.DeleteThursday(id);
 
             //operacja zakończona sukcesem
-            if (isDeleted)
-            {
-                return NoContent();
-            }
-
-            //nie odnaleziono
-            return NotFound();
+            return NoContent();
         }
 
         //Pobranie konkretnego piątku 
@@ -313,11 +249,6 @@ namespace Papu.Controllers
         public ActionResult<FridayDto> GetFriday([FromRoute] int id)
         {
             var friday = _daysOfTheWeekService.GetByIdFriday(id);
-
-            if (friday is null)
-            {
-                return NotFound();
-            }
 
             return Ok(friday);
         }
@@ -355,12 +286,7 @@ namespace Papu.Controllers
                 return BadRequest(ModelState);
             }
 
-            var isUpdated = _daysOfTheWeekService.UpdateFriday(id, dto);
-
-            if (!isUpdated)
-            {
-                return NotFound();
-            }
+            _daysOfTheWeekService.UpdateFriday(id, dto);
 
             return Ok();
         }
@@ -369,16 +295,10 @@ namespace Papu.Controllers
         [HttpDelete("friday/{id}")]
         public ActionResult DeleteFriday([FromRoute] int id)
         {
-            var isDeleted = _daysOfTheWeekService.DeleteFriday(id);
+            _daysOfTheWeekService.DeleteFriday(id);
 
             //operacja zakończona sukcesem
-            if (isDeleted)
-            {
-                return NoContent();
-            }
-
-            //nie odnaleziono
-            return NotFound();
+            return NoContent();
         }
 
         //Pobranie konkretnej soboty 
@@ -386,11 +306,6 @@ namespace Papu.Controllers
         public ActionResult<SaturdayDto> GetSaturday([FromRoute] int id)
         {
             var saturday = _daysOfTheWeekService.GetByIdSaturday(id);
-
-            if (saturday is null)
-            {
-                return NotFound();
-            }
 
             return Ok(saturday);
         }
@@ -428,12 +343,7 @@ namespace Papu.Controllers
                 return BadRequest(ModelState);
             }
 
-            var isUpdated = _daysOfTheWeekService.UpdateSaturday(id, dto);
-
-            if (!isUpdated)
-            {
-                return NotFound();
-            }
+            _daysOfTheWeekService.UpdateSaturday(id, dto);
 
             return Ok();
         }
@@ -442,16 +352,10 @@ namespace Papu.Controllers
         [HttpDelete("saturday/{id}")]
         public ActionResult DeleteSaturday([FromRoute] int id)
         {
-            var isDeleted = _daysOfTheWeekService.DeleteSaturday(id);
+            _daysOfTheWeekService.DeleteSaturday(id);
 
             //operacja zakończona sukcesem
-            if (isDeleted)
-            {
-                return NoContent();
-            }
-
-            //nie odnaleziono
-            return NotFound();
+            return NoContent();
         }
 
         //Pobranie konkretnej niedzieli 
@@ -459,11 +363,6 @@ namespace Papu.Controllers
         public ActionResult<SundayDto> GetSunday([FromRoute] int id)
         {
             var sunday = _daysOfTheWeekService.GetByIdSunday(id);
-
-            if (sunday is null)
-            {
-                return NotFound();
-            }
 
             return Ok(sunday);
         }
@@ -501,12 +400,7 @@ namespace Papu.Controllers
                 return BadRequest(ModelState);
             }
 
-            var isUpdated = _daysOfTheWeekService.UpdateSunday(id, dto);
-
-            if (!isUpdated)
-            {
-                return NotFound();
-            }
+            _daysOfTheWeekService.UpdateSunday(id, dto);
 
             return Ok();
         }
@@ -515,16 +409,10 @@ namespace Papu.Controllers
         [HttpDelete("sunday/{id}")]
         public ActionResult DeleteSunday([FromRoute] int id)
         {
-            var isDeleted = _daysOfTheWeekService.DeleteSunday(id);
+            _daysOfTheWeekService.DeleteSunday(id);
 
             //operacja zakończona sukcesem
-            if (isDeleted)
-            {
-                return NoContent();
-            }
-
-            //nie odnaleziono
-            return NotFound();
+            return NoContent();
         }
 
     }

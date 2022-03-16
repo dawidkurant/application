@@ -36,7 +36,7 @@ namespace Papu.Services
 
             if (dish is null)
             {
-                return null;
+                throw new NotFoundException("Dish not found");
             }
 
             var result = _mapper.Map<DishDto>(dish);
@@ -210,7 +210,7 @@ namespace Papu.Services
 
         //Usunięcie jednej potrawy na podstawie id
         //tylko ten kto utworzył dany zasób, będzie mógł go modyfikować lub usuwać
-        public bool DeleteDish(int id)
+        public void DeleteDish(int id)
         {
             _logger.LogError($"Dish with id: {id} DELETE action invoked");
 
@@ -223,13 +223,11 @@ namespace Papu.Services
 
             if (dish is null)
             {
-                return false;
+                throw new NotFoundException("Dish not found");
             }
 
             _dbContext.Dishes.Remove(dish);
             _dbContext.SaveChanges();
-
-            return true;
         }
     }
 }

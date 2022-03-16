@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using Papu.Exceptions;
 using System;
 using System.Threading.Tasks;
 
@@ -23,6 +24,13 @@ namespace Papu.Middleware
             {
                 await next.Invoke(context);
             }
+            catch (NotFoundException notFoundException)
+            {
+                //Jeśli do naszego api przyjdzie jakiekolwiek zapytanie, dla którego istnieje
+                //walidacja modelu, to if (!ModelState.IsValid) zostanie wywołany automatycznie
+                context.Response.StatusCode = 404;
+                await context.Response.WriteAsync(notFoundException.Message);
+            }
             catch (Exception e)
             {
                 _logger.LogError(e, e.Message);
@@ -31,7 +39,7 @@ namespace Papu.Middleware
                 //dla klienta wypisać jakis generyczny tekst po to aby nie miał on informacji
                 //bezpośrednio z kodu czyli kod statusu
                 context.Response.StatusCode = 500;
-                await context.Response.WriteAsync("Something went wrong"); ;
+                await context.Response.WriteAsync("Something went wrong");
             }
         }
     }

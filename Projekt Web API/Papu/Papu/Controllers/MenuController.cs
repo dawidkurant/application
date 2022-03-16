@@ -22,11 +22,6 @@ namespace Papu.Controllers
         {
             var menu = _menuService.GetByIdMenu(id);
 
-            if (menu is null)
-            {
-                return NotFound();
-            }
-
             return Ok(menu);
         }
 
@@ -63,12 +58,7 @@ namespace Papu.Controllers
                 return BadRequest(ModelState);
             }
 
-            var isUpdated = _menuService.UpdateMenu(id, dto);
-
-            if (!isUpdated)
-            {
-                return NotFound();
-            }
+            _menuService.UpdateMenu(id, dto);
 
             return Ok();
         }
@@ -77,16 +67,10 @@ namespace Papu.Controllers
         [HttpDelete("{id}")]
         public ActionResult DeleteMenu([FromRoute] int id)
         {
-            var isDeleted = _menuService.DeleteMenu(id);
+            _menuService.DeleteMenu(id);
 
             //operacja zakończona sukcesem
-            if (isDeleted)
-            {
-                return NoContent();
-            }
-
-            //nie odnaleziono
-            return NotFound();
+            return NoContent();
         }
     }
 }

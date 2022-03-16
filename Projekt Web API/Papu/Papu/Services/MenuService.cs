@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Papu.Entities;
+using Papu.Exceptions;
 using Papu.Models;
 using Papu.Models.Update;
 using System.Collections.Generic;
@@ -109,7 +110,7 @@ namespace Papu.Services
 
             if (menu is null)
             {
-                return null;
+                throw new NotFoundException("Menu not found");
             }
 
             var result = _mapper.Map<MenuDto>(menu);
@@ -326,7 +327,7 @@ namespace Papu.Services
             _dbContext.SaveChanges();
         }
 
-        public bool DeleteMenu(int id)
+        public void DeleteMenu(int id)
         {
             _logger.LogError($"Menu with id: {id} DELETE action invoked");
 
@@ -407,13 +408,11 @@ namespace Papu.Services
 
             if (menu is null)
             {
-                return false;
+                throw new NotFoundException("Menu not found");
             }
 
             _dbContext.Menus.Remove(menu);
             _dbContext.SaveChanges();
-
-            return true;
         }
     }
 }

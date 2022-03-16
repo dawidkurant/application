@@ -35,7 +35,7 @@ namespace Papu.Services
 
             if (breakfast is null)
             {
-                return null;
+                throw new NotFoundException("Breakfast not found");
             }
 
             var result = _mapper.Map<BreakfastDto>(breakfast);
@@ -55,7 +55,7 @@ namespace Papu.Services
 
             if (secondBreakfast is null)
             {
-                return null;
+                throw new NotFoundException("Second breakfast not found");
             }
 
             var result = _mapper.Map<SecondBreakfastDto>(secondBreakfast);
@@ -75,7 +75,7 @@ namespace Papu.Services
 
             if (lunch is null)
             {
-                return null;
+                throw new NotFoundException("Lunch not found");
             }
 
             var result = _mapper.Map<LunchDto>(lunch);
@@ -95,7 +95,7 @@ namespace Papu.Services
 
             if (snack is null)
             {
-                return null;
+                throw new NotFoundException("Snack not found");
             }
 
             var result = _mapper.Map<SnackDto>(snack);
@@ -115,7 +115,7 @@ namespace Papu.Services
 
             if (dinner is null)
             {
-                return null;
+                throw new NotFoundException("Dinner not found");
             }
 
             var result = _mapper.Map<DinnerDto>(dinner);
@@ -724,7 +724,7 @@ namespace Papu.Services
         }
 
         //Usuwanie śniadania
-        public bool DeleteBreakfast(int id)
+        public void DeleteBreakfast(int id)
         {
             _logger.LogError($"Breakfast with id: {id} DELETE action invoked");
 
@@ -737,17 +737,15 @@ namespace Papu.Services
 
             if (breakfast is null)
             {
-                return false;
+                throw new NotFoundException("Breakfast not found");
             }
 
             _dbContext.Breakfasts.Remove(breakfast);
             _dbContext.SaveChanges();
-
-            return true;
         }
 
         //Usuwanie drugiego śniadania
-        public bool DeleteSecondBreakfast(int id)
+        public void DeleteSecondBreakfast(int id)
         {
             _logger.LogError($"Second breakfast with id: {id} DELETE action invoked");
 
@@ -760,17 +758,15 @@ namespace Papu.Services
 
             if (secondBreakfast is null)
             {
-                return false;
+                throw new NotFoundException("Second breakfast not found");
             }
 
             _dbContext.SecondBreakfasts.Remove(secondBreakfast);
             _dbContext.SaveChanges();
-
-            return true;
         }
 
         //Usuwanie obiadu
-        public bool DeleteLunch(int id)
+        public void DeleteLunch(int id)
         {
             _logger.LogError($"Lunch with id: {id} DELETE action invoked");
 
@@ -783,17 +779,15 @@ namespace Papu.Services
 
             if (lunch is null)
             {
-                return false;
+                throw new NotFoundException("Lunch not found");
             }
 
             _dbContext.Lunches.Remove(lunch);
             _dbContext.SaveChanges();
-
-            return true;
         }
 
         //Usuwanie podwieczorka
-        public bool DeleteSnack(int id)
+        public void DeleteSnack(int id)
         {
             _logger.LogError($"Snack with id: {id} DELETE action invoked");
 
@@ -806,17 +800,15 @@ namespace Papu.Services
 
             if (snack is null)
             {
-                return false;
+                throw new NotFoundException("Snack not found");
             }
 
             _dbContext.Snacks.Remove(snack);
             _dbContext.SaveChanges();
-
-            return true;
         }
 
         //Usuwanie kolacji
-        public bool DeleteDinner(int id)
+        public void DeleteDinner(int id)
         {
             _logger.LogError($"Dinner with id: {id} DELETE action invoked");
 
@@ -829,13 +821,11 @@ namespace Papu.Services
 
             if (dinner is null)
             {
-                return false;
+                throw new NotFoundException("Dinner not found");
             }
 
             _dbContext.Dinners.Remove(dinner);
             _dbContext.SaveChanges();
-
-            return true;
         }
     }
 }
