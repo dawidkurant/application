@@ -38,10 +38,6 @@ namespace Papu.Controllers
         [HttpPost("createmonday")]
         public ActionResult CreateMonday([FromBody] CreateMondayDto dto)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             var newMondayId = _daysOfTheWeekService.CreateMonday(dto);
 
             //Jako pierwszy parametr ścieżka, a jako drugi
@@ -53,11 +49,6 @@ namespace Papu.Controllers
         [HttpPut("monday/{id}")]
         public ActionResult UpdateMonday([FromBody] UpdateMondayDto dto, [FromRoute] int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             _daysOfTheWeekService.UpdateMonday(id, dto);
 
             return Ok();
@@ -95,10 +86,6 @@ namespace Papu.Controllers
         [HttpPost("createtuesday")]
         public ActionResult CreateTuesday([FromBody] CreateTuesdayDto dto)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             var newTuesdayId = _daysOfTheWeekService.CreateTuesday(dto);
 
             //Jako pierwszy parametr ścieżka, a jako drugi
@@ -110,11 +97,6 @@ namespace Papu.Controllers
         [HttpPut("tuesday/{id}")]
         public ActionResult UpdateTuesday([FromBody] UpdateTuesdayDto dto, [FromRoute] int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             _daysOfTheWeekService.UpdateTuesday(id, dto);
 
             return Ok();
@@ -152,10 +134,6 @@ namespace Papu.Controllers
         [HttpPost("createwednesday")]
         public ActionResult CreateWednesday([FromBody] CreateWednesdayDto dto)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             var newWednesdayId = _daysOfTheWeekService.CreateWednesday(dto);
 
             //Jako pierwszy parametr ścieżka, a jako drugi
@@ -167,11 +145,6 @@ namespace Papu.Controllers
         [HttpPut("wednesday/{id}")]
         public ActionResult UpdateWednesday([FromBody] UpdateWednesdayDto dto, [FromRoute] int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            
             _daysOfTheWeekService.UpdateWednesday(id, dto);
 
             return Ok();
@@ -209,10 +182,6 @@ namespace Papu.Controllers
         [HttpPost("createthursday")]
         public ActionResult CreateThursday([FromBody] CreateThursdayDto dto)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             var newThursdayId = _daysOfTheWeekService.CreateThursday(dto);
 
             //Jako pierwszy parametr ścieżka, a jako drugi
@@ -224,11 +193,6 @@ namespace Papu.Controllers
         [HttpPut("thursday/{id}")]
         public ActionResult UpdateThursday([FromBody] UpdateThursdayDto dto, [FromRoute] int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             _daysOfTheWeekService.UpdateThursday(id, dto);
 
             return Ok();
@@ -266,10 +230,6 @@ namespace Papu.Controllers
         [HttpPost("createfriday")]
         public ActionResult CreateFriday([FromBody] CreateFridayDto dto)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             var newFridayId = _daysOfTheWeekService.CreateFriday(dto);
 
             //Jako pierwszy parametr ścieżka, a jako drugi
@@ -281,11 +241,6 @@ namespace Papu.Controllers
         [HttpPut("friday/{id}")]
         public ActionResult UpdateFriday([FromBody] UpdateFridayDto dto, [FromRoute] int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             _daysOfTheWeekService.UpdateFriday(id, dto);
 
             return Ok();
@@ -323,10 +278,6 @@ namespace Papu.Controllers
         [HttpPost("createsaturday")]
         public ActionResult CreateSaturday([FromBody] CreateSaturdayDto dto)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             var newSaturdayId = _daysOfTheWeekService.CreateSaturday(dto);
 
             //Jako pierwszy parametr ścieżka, a jako drugi
@@ -338,11 +289,6 @@ namespace Papu.Controllers
         [HttpPut("saturday/{id}")]
         public ActionResult UpdateSaturday([FromBody] UpdateSaturdayDto dto, [FromRoute] int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             _daysOfTheWeekService.UpdateSaturday(id, dto);
 
             return Ok();
@@ -379,11 +325,7 @@ namespace Papu.Controllers
         //Tworzenie nowej niedzieli
         [HttpPost("createsunday")]
         public ActionResult CreateSunday([FromBody] CreateSundayDto dto)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        { 
             var newSundayId = _daysOfTheWeekService.CreateSunday(dto);
 
             //Jako pierwszy parametr ścieżka, a jako drugi
@@ -392,14 +334,9 @@ namespace Papu.Controllers
         }
 
         //Edycja niedzieli
-        [HttpPut("saturday/{id}")]
+        [HttpPut("sunday/{id}")]
         public ActionResult UpdateSunday([FromBody] UpdateSundayDto dto, [FromRoute] int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             _daysOfTheWeekService.UpdateSunday(id, dto);
 
             return Ok();

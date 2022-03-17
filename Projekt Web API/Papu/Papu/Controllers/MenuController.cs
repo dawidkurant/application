@@ -38,10 +38,6 @@ namespace Papu.Controllers
         [HttpPost]
         public ActionResult CreateMenu([FromBody] CreateMenuDto dto)
         {
-            if(!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             var newMenuId = _menuService.CreateMenu(dto);
 
             //Jako pierwszy parametr ścieżka, a jako drugi
@@ -53,11 +49,6 @@ namespace Papu.Controllers
         [HttpPut("{id}")]
         public ActionResult UpdateMenu([FromBody] UpdateMenuDto dto, [FromRoute] int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             _menuService.UpdateMenu(id, dto);
 
             return Ok();

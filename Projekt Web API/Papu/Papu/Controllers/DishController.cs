@@ -42,10 +42,6 @@ namespace Papu.Controllers
         [HttpPost]
         public ActionResult CreateDish([FromBody] CreateDishDto dto)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             var newDishId = _dishService.CreateDish(dto);
 
             //Jako pierwszy parametr ścieżka, a jako drugi
@@ -57,11 +53,6 @@ namespace Papu.Controllers
         [HttpPut("{id}")]
         public ActionResult UpdateDish([FromBody] UpdateDishDto dto, [FromRoute] int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             _dishService.UpdateDish(id, dto);
 
             return Ok();

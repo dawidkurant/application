@@ -49,6 +49,9 @@ namespace Papu
             services.AddScoped<IMenuService, MenuService>();
             //Papu middleware aby kontener dependenciInjection mógł go poprawnie zaizolować
             services.AddScoped<ErrorHandlingMiddleware>();
+            //Rejestrujemy niezbędne serwisy do wygenerowania specyfikacji openapi na podstawie
+            //naszego api
+            services.AddSwaggerGen();
 
             services.AddControllers().AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
@@ -94,6 +97,17 @@ namespace Papu
             app.UseMiddleware<ErrorHandlingMiddleware>();
 
             app.UseHttpsRedirection();
+            //Api wygeneruje plik swagger.json zgodny ze specyfikacją openapi i udostępnia
+            //na podstawie tego pliku, userinterface czyli stronę która będzie widoczna dla
+            //użytkowników bazującą na pliku swagger.json
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                //domy�lna �cie�ka do pliku wygenerowanego przez swaggera, a drugi parametr to nazwa
+                //dokumentacji naszego api
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Papu API");
+            });
+
             app.UseStaticFiles();
             if (!env.IsDevelopment())
             {
