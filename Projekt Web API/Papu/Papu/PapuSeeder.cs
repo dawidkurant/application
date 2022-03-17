@@ -18,6 +18,13 @@ namespace Papu
             //Sprawdzamy połączenie do bazy danych zostało nawiązane
             if (_dbContext.Database.CanConnect())
             {
+                //Sprawdzamy czy tabela z rolami jest pusta
+                if (!_dbContext.Roles.Any())
+                {
+                    var roles = GetRoles();
+                    _dbContext.Roles.AddRange(roles);
+                    _dbContext.SaveChanges();
+                }
 
                 //Sprawdzamy czy tabela z produktami jest pusta
                 if (!_dbContext.Products.Any())
@@ -147,6 +154,29 @@ namespace Papu
                     _dbContext.SaveChanges();
                 }
             }
+        }
+
+        //Metoda zwracająca kolekcję ról, które będą zawsze istnieć w tabeli role
+        //baza automatycznie przydzieli id
+        private IEnumerable<Role> GetRoles()
+        {
+            var roles = new List<Role>()
+            {
+                new Role()
+                {
+                    Name = "User"
+                },
+                new Role()
+                {
+                    Name = "Manager"
+                },
+                new Role()
+                {
+                    Name = "Admin"
+                },
+            };
+
+            return roles;
         }
 
         //Metoda zwracająca kolekcję grup produktów, które będą zawsze istnieć w tabeli group

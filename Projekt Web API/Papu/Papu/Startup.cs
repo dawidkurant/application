@@ -49,6 +49,7 @@ namespace Papu
             services.AddScoped<IMenuService, MenuService>();
             //Papu middleware aby kontener dependenciInjection mógł go poprawnie zaizolować
             services.AddScoped<ErrorHandlingMiddleware>();
+            services.AddScoped<RequestTimeMiddleware>();
             //Rejestrujemy niezbędne serwisy do wygenerowania specyfikacji openapi na podstawie
             //naszego api
             services.AddSwaggerGen();
@@ -95,6 +96,7 @@ namespace Papu
 
             //Aby skorzystać z middleware to musi być
             app.UseMiddleware<ErrorHandlingMiddleware>();
+            app.UseMiddleware<RequestTimeMiddleware>();
 
             app.UseHttpsRedirection();
             //Api wygeneruje plik swagger.json zgodny ze specyfikacją openapi i udostępnia

@@ -41,11 +41,22 @@ namespace Papu.Entities
         public DbSet<Friday> Fridays { get; set; }
         public DbSet<Saturday> Saturdays { get; set; }
         public DbSet<Sunday> Sundays { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
 
 
         //Dodatkowe właściwości które powinny zawiera kolumny w bazie danych
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<User>()
+                .Property(u => u.Email)
+                .IsRequired();
+
+            modelBuilder.Entity<Role>()
+                .Property(u => u.Name)
+                .IsRequired();
+
             modelBuilder.Entity<Menu>()
                 .Property(r => r.MenuName)
 
