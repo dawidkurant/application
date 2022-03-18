@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -14,6 +16,7 @@ using Papu.Data;
 using Papu.Entities;
 using Papu.Middleware;
 using Papu.Models;
+using Papu.Models.Validators;
 using Papu.Services;
 
 namespace Papu
@@ -30,6 +33,8 @@ namespace Papu
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //W ten sposób dodajemy walidację do projektu
+            services.AddControllers().AddFluentValidation();
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -47,9 +52,12 @@ namespace Papu
             services.AddScoped<ITimesOfDayService, TimesOfDayService>();
             services.AddScoped<IDaysOfTheWeekService, DaysOfTheWeekService>();
             services.AddScoped<IMenuService, MenuService>();
+            services.AddScoped<IAccountService, AccountService>();
             //Papu middleware aby kontener dependenciInjection mógł go poprawnie zaizolować
             services.AddScoped<ErrorHandlingMiddleware>();
             services.AddScoped<RequestTimeMiddleware>();
+            services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+            services.AddScoped<IValidator<RegisterUserDto>, RegisterUserDtoValidator>();
             //Rejestrujemy niezbędne serwisy do wygenerowania specyfikacji openapi na podstawie
             //naszego api
             services.AddSwaggerGen();
