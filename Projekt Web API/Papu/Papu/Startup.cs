@@ -12,12 +12,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Papu.Data;
 using Papu.Entities;
 using Papu.Middleware;
 using Papu.Models;
 using Papu.Models.Validators;
 using Papu.Services;
+using System.Text;
 
 namespace Papu
 {
@@ -33,6 +35,41 @@ namespace Papu
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var authenticationSettings = new AuthenticationSettings();
+            //Pobieranie informacji zapisanych w pliku appsettings.json
+            //bind czyli połączenie wartości z pliku ze zmienną authenticationSettings
+            Configuration.GetSection("Authentication").Bind(authenticationSettings);
+
+            //Abyśmy mogli wstrzyknąć konfigurację do api
+            services.AddSingleton(authenticationSettings);
+
+            //Konfiguracja autentykacji, przekazujemy opcje autentykacji
+            //dla tych opcji domyślny schemat autentykacji będzie równy Bearer
+            services.AddAuthentication(option =>
+            {
+                option.DefaultAuthenticateScheme = "Bearer";
+                option.DefaultScheme = "Bearer";
+                option.DefaultChallengeScheme = "Bearer";
+                //Aby dodać konfigurację JWT, przekazujemy konfigurację
+            }).AddJwtBearer(cfg =>
+            {
+                //Nie wymuszamy od klienta protokołu https
+                cfg.RequireHttpsMetadata = false;
+                //Dany token powinien zostać zapisany po stronie serwera do celów autentykacji 
+                cfg.SaveToken = true;
+                //Parametry walidacji po to aby sprawdzić czy dany token wysłany przez klienta
+                //jest zgodny z tym co wie serwer
+                cfg.TokenValidationParameters = new TokenValidationParameters
+                {
+                    //Wydawca danego tokenu 
+                    ValidIssuer = authenticationSettings.JwtIssuer,
+                    //Jakie podmioty mogą używać tego tokenu
+                    ValidAudience = authenticationSettings.JwtIssuer,
+                    //Klucz prywatny wygenerowany na podstawie wartości z pliku appsettings.json
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authenticationSettings.JwtKey)),
+                };
+            });
+
             //W ten sposób dodajemy walidację do projektu
             services.AddControllers().AddFluentValidation();
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -106,6 +143,9 @@ namespace Papu
             app.UseMiddleware<ErrorHandlingMiddleware>();
             app.UseMiddleware<RequestTimeMiddleware>();
 
+            //W ten sposób mówimy naszemu Api o tym, że każdy request wysłany przez klienta api
+            //będzie podlegał autentykacji 
+            app.UseAuthentication();
             app.UseHttpsRedirection();
             //Api wygeneruje plik swagger.json zgodny ze specyfikacją openapi i udostępnia
             //na podstawie tego pliku, userinterface czyli stronę która będzie widoczna dla
@@ -126,9 +166,7 @@ namespace Papu
 
             app.UseRouting();
 
-            //W ten sposób mówimy naszemu Api o tym, że każdy request wysłany przez klienta api
-            //będzie podlegał autentykacji 
-            app.UseAuthentication();
+
             app.UseIdentityServer();
 
             //Nasze api będzie w stanie autoryzować użytkowników, ale samo to nie wystarczy

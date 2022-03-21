@@ -24,6 +24,11 @@ namespace Papu.Middleware
             {
                 await next.Invoke(context);
             }
+            catch (BadRequestException badRequestExeption)
+            {
+                context.Response.StatusCode = 400;
+                await context.Response.WriteAsync(badRequestExeption.Message);
+            }
             catch (NotFoundException notFoundException)
             {
                 //Jeśli do naszego api przyjdzie jakiekolwiek zapytanie, dla którego istnieje
