@@ -2,6 +2,7 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -13,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using Papu.Authorization;
 using Papu.Data;
 using Papu.Entities;
 using Papu.Middleware;
@@ -70,6 +72,7 @@ namespace Papu
                 };
             });
 
+            services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementProductHandler>();
             //W ten sposób dodajemy walidację do projektu
             services.AddControllers().AddFluentValidation();
             services.AddDbContext<ApplicationDbContext>(options =>

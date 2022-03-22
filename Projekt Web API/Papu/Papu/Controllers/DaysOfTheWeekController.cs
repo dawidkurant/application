@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Papu.Models;
 using Papu.Models.Update.DayOfTheWeek;
 using Papu.Services;
@@ -7,6 +8,8 @@ using System.Collections.Generic;
 namespace Papu.Controllers
 {
     [Route("api")]
+    //Atrybut potrzebny aby dane akcje były zablokowane przed niezalogowanymi użytkownikami
+    [Authorize]
     public class DaysOfTheWeekController : ControllerBase
     {
 
@@ -18,6 +21,8 @@ namespace Papu.Controllers
 
         //Pobranie konkretnego poniedziałku 
         [HttpGet("monday/{id}")]
+        //Ta akcja nie wymaga autoryzacji
+        [AllowAnonymous]
         public ActionResult<MondayDto> GetMonday([FromRoute] int id)
         {
             var monday = _daysOfTheWeekService.GetByIdMonday(id);
@@ -66,6 +71,8 @@ namespace Papu.Controllers
 
         //Pobranie konkretnego wtorku 
         [HttpGet("tuesday/{id}")]
+        //Ta akcja nie wymaga autoryzacji
+        [AllowAnonymous]
         public ActionResult<TuesdayDto> GetTuesday([FromRoute] int id)
         {
             var tuesday = _daysOfTheWeekService.GetByIdTuesday(id);
@@ -114,6 +121,8 @@ namespace Papu.Controllers
 
         //Pobranie konkretnej środy 
         [HttpGet("wednesday/{id}")]
+        //Ta akcja nie wymaga autoryzacji
+        [AllowAnonymous]
         public ActionResult<WednesdayDto> GetWednesday([FromRoute] int id)
         {
             var wednesday = _daysOfTheWeekService.GetByIdWednesday(id);
@@ -162,6 +171,8 @@ namespace Papu.Controllers
 
         //Pobranie konkretnego czwartku 
         [HttpGet("thursday/{id}")]
+        //Ta akcja nie wymaga autoryzacji
+        [AllowAnonymous]
         public ActionResult<ThursdayDto> GetThursday([FromRoute] int id)
         {
             var thursday = _daysOfTheWeekService.GetByIdThursday(id);
@@ -210,6 +221,8 @@ namespace Papu.Controllers
 
         //Pobranie konkretnego piątku 
         [HttpGet("friday/{id}")]
+        //Ta akcja nie wymaga autoryzacji
+        [AllowAnonymous]
         public ActionResult<FridayDto> GetFriday([FromRoute] int id)
         {
             var friday = _daysOfTheWeekService.GetByIdFriday(id);
@@ -258,6 +271,8 @@ namespace Papu.Controllers
 
         //Pobranie konkretnej soboty 
         [HttpGet("saturday/{id}")]
+        //Ta akcja nie wymaga autoryzacji
+        [AllowAnonymous]
         public ActionResult<SaturdayDto> GetSaturday([FromRoute] int id)
         {
             var saturday = _daysOfTheWeekService.GetByIdSaturday(id);
@@ -306,6 +321,8 @@ namespace Papu.Controllers
 
         //Pobranie konkretnej niedzieli 
         [HttpGet("sunday/{id}")]
+        //Ta akcja nie wymaga autoryzacji
+        [AllowAnonymous]
         public ActionResult<SundayDto> GetSunday([FromRoute] int id)
         {
             var sunday = _daysOfTheWeekService.GetByIdSunday(id);

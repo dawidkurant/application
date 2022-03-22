@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Papu.Entities;
@@ -11,6 +12,8 @@ using System.Linq;
 namespace Papu.Controllers
 {
     [Route("api/dish")]
+    //Atrybut potrzebny aby dane akcje były zablokowane przed niezalogowanymi użytkownikami
+    [Authorize]
     public class DishController : ControllerBase
     {
         private readonly IDishService _dishService;
@@ -22,6 +25,8 @@ namespace Papu.Controllers
 
         //Pobranie konkretnej potrawy
         [HttpGet("{id}")]
+        //Ta akcja nie wymaga autoryzacji
+        [AllowAnonymous]
         public ActionResult<DishDto> GetDish([FromRoute] int id)
         {
             var dish = _dishService.GetByIdDish(id);

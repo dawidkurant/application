@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Papu.Entities;
@@ -6,11 +7,14 @@ using Papu.Models;
 using Papu.Services;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 
 namespace Papu.Controllers
 {
     [Route("api/product")]
     [ApiController]
+    //Atrybut potrzebny aby dane akcje były zablokowane przed niezalogowanymi użytkownikami
+    [Authorize]
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
@@ -22,6 +26,8 @@ namespace Papu.Controllers
 
         //Pobranie konkretnego produktu
         [HttpGet("{id}")]
+        //Ta akcja nie wymaga autoryzacji
+        [AllowAnonymous]
         public ActionResult<ProductDto> GetProduct([FromRoute] int id)
         {
             var product = _productService.GetByIdProduct(id);
@@ -42,7 +48,8 @@ namespace Papu.Controllers
         [HttpPost]
         public ActionResult CreateProduct([FromBody] CreateProductDto dto)
         {
-            var newProductId = _productService.CreateProduct(dto);
+            var userId = int.Parse(User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier).Value);
+            var newProductId = _productService.CreateProduct(dto, userId);
 
             //Jako pierwszy parametr ścieżka, a jako drugi
             //możemy zwrócić ciało odpowiedzi, ale w tym wypadku zwracamy null
@@ -53,7 +60,7 @@ namespace Papu.Controllers
         [HttpPut("{id}")]
         public ActionResult UpdateProduct([FromBody] UpdateProductDto dto, [FromRoute] int id)
         {
-            _productService.UpdateProduct(id, dto);
+            _productService.UpdateProduct(id, dto, User);
 
             return Ok();
         }
@@ -62,7 +69,7 @@ namespace Papu.Controllers
         [HttpDelete("{id}")]
         public ActionResult DeleteProduct([FromRoute] int id)
         {
-            _productService.DeleteProduct(id);
+            _productService.DeleteProduct(id, User);
 
             //operacja zakończona sukcesem
             return NoContent();

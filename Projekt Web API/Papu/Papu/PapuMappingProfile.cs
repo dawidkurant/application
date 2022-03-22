@@ -297,6 +297,7 @@ namespace Papu
             CreateMap<UpdateSnackDto, Snack>();
             CreateMap<UpdateDinnerDto, Dinner>();
 
+            CreateMap<CreateProductDto, Product>();
             CreateMap<CreateDishDto, Dish>();
 
             CreateMap<CreateBreakfastDto, Breakfast>();

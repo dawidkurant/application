@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Papu.Models;
 using Papu.Models.Update;
 using Papu.Services;
@@ -7,6 +8,8 @@ using System.Collections.Generic;
 namespace Papu.Controllers
 {
     [Route("api/menu")]
+    //Atrybut potrzebny aby dane akcje były zablokowane przed niezalogowanymi użytkownikami
+    [Authorize]
     public class MenuController : ControllerBase
     {
         private readonly IMenuService _menuService;
@@ -18,6 +21,8 @@ namespace Papu.Controllers
 
         //Pobranie konkretnego jadłospisu
         [HttpGet("{id}")]
+        //Ta akcja nie wymaga autoryzacji
+        [AllowAnonymous]
         public ActionResult<MenuDto> GetMenu([FromRoute] int id)
         {
             var menu = _menuService.GetByIdMenu(id);

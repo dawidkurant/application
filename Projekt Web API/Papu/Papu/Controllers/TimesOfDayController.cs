@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Papu.Models;
 using Papu.Models.Update.TimesOfDay;
 using Papu.Services;
@@ -8,6 +9,8 @@ namespace Papu.Controllers
 {
     [Route("api")]
     [ApiController]
+    //Atrybut potrzebny aby dane akcje były zablokowane przed niezalogowanymi użytkownikami
+    [Authorize]
     public class TimesOfDayController : ControllerBase
     {
         private readonly ITimesOfDayService _timesOfDayService;
@@ -19,6 +22,8 @@ namespace Papu.Controllers
 
         //Pobranie konkretnego śniadania 
         [HttpGet("breakfast/{id}")]
+        //Ta akcja nie wymaga autoryzacji
+        [AllowAnonymous]
         public ActionResult<BreakfastDto> GetOneBreakfast([FromRoute] int id)
         {
             var breakfast = _timesOfDayService.GetByIdBreakfast(id);
@@ -28,6 +33,8 @@ namespace Papu.Controllers
 
         //Pobranie konkretnego drugiego śniadania 
         [HttpGet("secondbreakfast/{id}")]
+        //Ta akcja nie wymaga autoryzacji
+        [AllowAnonymous]
         public ActionResult<SecondBreakfastDto> GetOneSecondBreakfast([FromRoute] int id)
         {
             var secondBreakfast = _timesOfDayService.GetByIdSecondBreakfast(id);
@@ -37,6 +44,8 @@ namespace Papu.Controllers
 
         //Pobranie konkretnego obiadu 
         [HttpGet("lunch/{id}")]
+        //Ta akcja nie wymaga autoryzacji
+        [AllowAnonymous]
         public ActionResult<LunchDto> GetOneLunch([FromRoute] int id)
         {
             var lunch = _timesOfDayService.GetByIdLunch(id);
@@ -46,6 +55,8 @@ namespace Papu.Controllers
 
         //Pobranie konkretnego podwieczorka 
         [HttpGet("snack/{id}")]
+        //Ta akcja nie wymaga autoryzacji
+        [AllowAnonymous]
         public ActionResult<SnackDto> GetOneSnack([FromRoute] int id)
         {
             var snack = _timesOfDayService.GetByIdSnack(id);
@@ -55,6 +66,8 @@ namespace Papu.Controllers
 
         //Pobranie konkretnej kolacji 
         [HttpGet("dinner/{id}")]
+        //Ta akcja nie wymaga autoryzacji
+        [AllowAnonymous]
         public ActionResult<DinnerDto> GetOneDinner([FromRoute] int id)
         {
             var dinner = _timesOfDayService.GetByIdDinner(id);

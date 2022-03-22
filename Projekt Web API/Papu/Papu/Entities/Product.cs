@@ -32,6 +32,12 @@ namespace Papu.Entities
         //Zdjęcie
         public string ProductImagePath { get; set; }
 
+        //Twórca danego produktu
+        public int? CreatedById { get; set; }
+        
+        //Zmienna reperezentująca twórcę danego produktu
+        public virtual User CreatedBy { get; set; }
+
         //Produkty wchodzące w skład posiłku
         public virtual ICollection<ProductDish> DishProducts { get; set; }
 
