@@ -1,12 +1,15 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Papu.Authorization;
 using Papu.Entities;
 using Papu.Exceptions;
 using Papu.Models;
 using Papu.Models.Update;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 
 namespace Papu.Services
 {
@@ -16,12 +19,17 @@ namespace Papu.Services
         private readonly PapuDbContext _dbContext;
         private readonly IMapper _mapper;
         private readonly ILogger<MenuService> _logger;
+        private readonly IAuthorizationService _authorizationService;
+        private readonly IUserContextService _userContextService;
 
-        public MenuService(PapuDbContext dbContext, IMapper mapper, ILogger<MenuService> logger)
+        public MenuService(PapuDbContext dbContext, IMapper mapper, ILogger<MenuService> logger, 
+            IAuthorizationService authorizationService, IUserContextService userContextService)
         {
             _dbContext = dbContext;
             _mapper = mapper;
             _logger = logger;
+            _authorizationService = authorizationService;
+            _userContextService = userContextService;
         }
 
         public MenuDto GetByIdMenu(int id)
@@ -179,6 +187,8 @@ namespace Papu.Services
         public int CreateMenu(CreateMenuDto dtoMenu)
         {
             var menu = _mapper.Map<Menu>(dtoMenu);
+            //Dostaniemy informację jaki użytkownik stworzył konkretny jadłospis w bazie danych
+            menu.CreatedById = _userContextService.GetUserId;
 
             menu.MondayId = dtoMenu.MondayId;
             menu.TuesdayId = dtoMenu.TuesdayId;
@@ -284,6 +294,16 @@ namespace Papu.Services
                 throw new NotFoundException("Menu not found");
             }
 
+            //Sprawdzamy czy to użytkownik który stworzył dany jadłospis chce go zmodyfikować
+            var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User,
+                menu, new ResourceOperationRequirement(ResourceOperation.Update)).Result;
+
+            //Sprawdzamy czy autoryzacja użytkownika nie powiodła się
+            if (!authorizationResult.Succeeded)
+            {
+                throw new ForbidException("This menu is not your");
+            }
+
             menu.MenuName = dto.MenuName;
             menu.MenuDescription = dto.MenuDescription;
             menu.MondayId = dto.MondayId;
@@ -379,6 +399,16 @@ namespace Papu.Services
             if (menu is null)
             {
                 throw new NotFoundException("Menu not found");
+            }
+
+            //Sprawdzamy czy to użytkownik który stworzył dany jadłospis chce go usunąć
+            var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User,
+                menu, new ResourceOperationRequirement(ResourceOperation.Delete)).Result;
+
+            //Sprawdzamy czy autoryzacja użytkownika nie powiodła się
+            if (!authorizationResult.Succeeded)
+            {
+                throw new ForbidException("This menu is not your");
             }
 
             _dbContext.Menus.Remove(menu);

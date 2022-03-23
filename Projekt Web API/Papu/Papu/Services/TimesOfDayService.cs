@@ -1,12 +1,15 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Papu.Authorization;
 using Papu.Entities;
 using Papu.Exceptions;
 using Papu.Models;
 using Papu.Models.Update.TimesOfDay;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 
 namespace Papu.Services
 {
@@ -15,12 +18,17 @@ namespace Papu.Services
         private readonly PapuDbContext _dbContext;
         private readonly IMapper _mapper;
         private readonly ILogger<TimesOfDayService> _logger;
+        private readonly IAuthorizationService _authorizationService;
+        private readonly IUserContextService _userContextService;
 
-        public TimesOfDayService(PapuDbContext dbContext, IMapper mapper, ILogger<TimesOfDayService> logger)
+        public TimesOfDayService(PapuDbContext dbContext, IMapper mapper, ILogger<TimesOfDayService> logger,
+            IAuthorizationService authorizationService, IUserContextService userContextService)
         {
             _dbContext = dbContext;
             _mapper = mapper;
             _logger = logger;
+            _authorizationService = authorizationService;
+            _userContextService = userContextService;
         }
 
         //Wyświetlanie jednego śniadania
@@ -198,6 +206,8 @@ namespace Papu.Services
         {
 
             var breakfast = _mapper.Map<Breakfast>(dtoBreakfast);
+            //Dostaniemy informację jaki użytkownik stworzył konkretne śniadanie w bazie danych
+            breakfast.CreatedById = _userContextService.GetUserId;
 
             foreach (var addProduct in dtoBreakfast.ProductId)
             {
@@ -205,7 +215,7 @@ namespace Papu.Services
                 Product product = _dbContext.Products
                     .FirstOrDefault(s => s.ProductId == addProduct);
 
-                BreakfastProduct productBreakfast = new BreakfastProduct
+                BreakfastProduct productBreakfast = new()
                 {
                     Breakfast = breakfast,
                     Product = product
@@ -221,7 +231,7 @@ namespace Papu.Services
                 Dish dish = _dbContext.Dishes
                     .FirstOrDefault(s => s.DishId == addDish);
 
-                BreakfastDish dishBreakfast = new BreakfastDish
+                BreakfastDish dishBreakfast = new()
                 {
                     Dish = dish,
                     Breakfast = breakfast
@@ -241,6 +251,8 @@ namespace Papu.Services
         {
 
             var secondBreakfast = _mapper.Map<SecondBreakfast>(dtoSecondBreakfast);
+            //Dostaniemy informację jaki użytkownik stworzył konkretne drugie śniadanie w bazie danych
+            secondBreakfast.CreatedById = _userContextService.GetUserId;
 
             foreach (var addProduct in dtoSecondBreakfast.ProductId)
             {
@@ -248,7 +260,7 @@ namespace Papu.Services
                 Product product = _dbContext.Products
                     .FirstOrDefault(s => s.ProductId == addProduct);
 
-                SecondBreakfastProduct secondProductBreakfast = new SecondBreakfastProduct
+                SecondBreakfastProduct secondProductBreakfast = new()
                 {
                     SecondBreakfast = secondBreakfast,
                     Product = product
@@ -264,7 +276,7 @@ namespace Papu.Services
                 Dish dish = _dbContext.Dishes
                     .FirstOrDefault(s => s.DishId == addDish);
 
-                SecondBreakfastDish dishSecondBreakfast = new SecondBreakfastDish
+                SecondBreakfastDish dishSecondBreakfast = new()
                 {
                     Dish = dish,
                     SecondBreakfast = secondBreakfast
@@ -284,6 +296,8 @@ namespace Papu.Services
         {
 
             var lunch = _mapper.Map<Lunch>(dtoLunch);
+            //Dostaniemy informację jaki użytkownik stworzył konkretny obiad w bazie danych
+            lunch.CreatedById = _userContextService.GetUserId;
 
             foreach (var addProduct in dtoLunch.ProductId)
             {
@@ -291,7 +305,7 @@ namespace Papu.Services
                 Product product = _dbContext.Products
                     .FirstOrDefault(s => s.ProductId == addProduct);
 
-                LunchProduct lunchProduct = new LunchProduct
+                LunchProduct lunchProduct = new()
                 {
                     Lunch = lunch,
                     Product = product
@@ -307,7 +321,7 @@ namespace Papu.Services
                 Dish dish = _dbContext.Dishes
                     .FirstOrDefault(s => s.DishId == addDish);
 
-                LunchDish lunchDish = new LunchDish
+                LunchDish lunchDish = new()
                 {
                     Dish = dish,
                     Lunch = lunch
@@ -327,6 +341,8 @@ namespace Papu.Services
         {
 
             var snack = _mapper.Map<Snack>(dtoSnack);
+            //Dostaniemy informację jaki użytkownik stworzył konkretny podwieczorek w bazie danych
+            snack.CreatedById = _userContextService.GetUserId;
 
             foreach (var addProduct in dtoSnack.ProductId)
             {
@@ -334,7 +350,7 @@ namespace Papu.Services
                 Product product = _dbContext.Products
                     .FirstOrDefault(s => s.ProductId == addProduct);
 
-                SnackProduct snackProduct = new SnackProduct
+                SnackProduct snackProduct = new()
                 {
                     Snack = snack,
                     Product = product
@@ -350,7 +366,7 @@ namespace Papu.Services
                 Dish dish = _dbContext.Dishes
                     .FirstOrDefault(s => s.DishId == addDish);
 
-                SnackDish snackDish = new SnackDish
+                SnackDish snackDish = new()
                 {
                     Snack = snack,
                     Dish = dish
@@ -370,6 +386,8 @@ namespace Papu.Services
         {
 
             var dinner = _mapper.Map<Dinner>(dtoDinner);
+            //Dostaniemy informację jaki użytkownik stworzył konkretną kolację w bazie danych
+            dinner.CreatedById = _userContextService.GetUserId;
 
             foreach (var addProduct in dtoDinner.ProductId)
             {
@@ -377,7 +395,7 @@ namespace Papu.Services
                 Product product = _dbContext.Products
                     .FirstOrDefault(s => s.ProductId == addProduct);
 
-                DinnerProduct dinnerProduct = new DinnerProduct
+                DinnerProduct dinnerProduct = new()
                 {
                     Dinner = dinner,
                     Product = product
@@ -393,7 +411,7 @@ namespace Papu.Services
                 Dish dish = _dbContext.Dishes
                     .FirstOrDefault(s => s.DishId == addDish);
 
-                DinnerDish dinnerDish = new DinnerDish
+                DinnerDish dinnerDish = new()
                 {
                     Dinner = dinner,
                     Dish = dish
@@ -423,6 +441,16 @@ namespace Papu.Services
                 throw new NotFoundException("Breakfast not found");
             }
 
+            //Sprawdzamy czy to użytkownik który stworzył dane śniadanie chce je zmodyfikować
+            var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User,
+                breakfast, new ResourceOperationRequirement(ResourceOperation.Update)).Result;
+
+            //Sprawdzamy czy autoryzacja użytkownika nie powiodła się
+            if (!authorizationResult.Succeeded)
+            {
+                throw new ForbidException("This breakfast is not your");
+            }
+
             foreach (var old in breakfast.Products)
             {
                 _dbContext.ProductBreakfasts.Remove(old);
@@ -436,7 +464,7 @@ namespace Papu.Services
                 Product product = _dbContext.Products
                     .FirstOrDefault(s => s.ProductId == addProduct);
 
-                BreakfastProduct productBreakfast = new BreakfastProduct
+                BreakfastProduct productBreakfast = new()
                 {
                     Breakfast = breakfast,
                     Product = product
@@ -459,7 +487,7 @@ namespace Papu.Services
                 Dish dish = _dbContext.Dishes
                     .FirstOrDefault(s => s.DishId == addDish);
 
-                BreakfastDish dishBreakfast = new BreakfastDish
+                BreakfastDish dishBreakfast = new()
                 {
                     Dish = dish,
                     Breakfast = breakfast
@@ -486,6 +514,16 @@ namespace Papu.Services
                 throw new NotFoundException("Second breakfast not found");
             }
 
+            //Sprawdzamy czy to użytkownik który stworzył dane drugie śniadanie chce je zmodyfikować
+            var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User,
+                secondBreakfast, new ResourceOperationRequirement(ResourceOperation.Update)).Result;
+
+            //Sprawdzamy czy autoryzacja użytkownika nie powiodła się
+            if (!authorizationResult.Succeeded)
+            {
+                throw new ForbidException("This second breakfast is not your");
+            }
+
             foreach (var old in secondBreakfast.Products)
             {
                 _dbContext.ProductSecondBreakfasts.Remove(old);
@@ -499,7 +537,7 @@ namespace Papu.Services
                 Product product = _dbContext.Products
                     .FirstOrDefault(s => s.ProductId == addProduct);
 
-                SecondBreakfastProduct productSecondBreakfast = new SecondBreakfastProduct
+                SecondBreakfastProduct productSecondBreakfast = new()
                 {
                     SecondBreakfast = secondBreakfast,
                     Product = product
@@ -522,7 +560,7 @@ namespace Papu.Services
                 Dish dish = _dbContext.Dishes
                     .FirstOrDefault(s => s.DishId == addDish);
 
-                SecondBreakfastDish dishSecondBreakfast = new SecondBreakfastDish
+                SecondBreakfastDish dishSecondBreakfast = new()
                 {
                     Dish = dish,
                     SecondBreakfast = secondBreakfast
@@ -549,6 +587,16 @@ namespace Papu.Services
                 throw new NotFoundException("Lunch not found");
             }
 
+            //Sprawdzamy czy to użytkownik który stworzył dany obiady chce go zmodyfikować
+            var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User,
+                lunch, new ResourceOperationRequirement(ResourceOperation.Update)).Result;
+
+            //Sprawdzamy czy autoryzacja użytkownika nie powiodła się
+            if (!authorizationResult.Succeeded)
+            {
+                throw new ForbidException("This lunch is not your");
+            }
+
             foreach (var old in lunch.Products)
             {
                 _dbContext.LunchProducts.Remove(old);
@@ -562,7 +610,7 @@ namespace Papu.Services
                 Product product = _dbContext.Products
                     .FirstOrDefault(s => s.ProductId == addProduct);
 
-                LunchProduct lunchProduct = new LunchProduct
+                LunchProduct lunchProduct = new()
                 {
                     Lunch = lunch,
                     Product = product
@@ -585,7 +633,7 @@ namespace Papu.Services
                 Dish dish = _dbContext.Dishes
                     .FirstOrDefault(s => s.DishId == addDish);
 
-                LunchDish lunchDish = new LunchDish
+                LunchDish lunchDish = new()
                 {
                     Dish = dish,
                     Lunch = lunch
@@ -612,6 +660,16 @@ namespace Papu.Services
                 throw new NotFoundException("Snack not found");
             }
 
+            //Sprawdzamy czy to użytkownik który stworzył dany podwieczorek chce go zmodyfikować
+            var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User,
+                snack, new ResourceOperationRequirement(ResourceOperation.Update)).Result;
+
+            //Sprawdzamy czy autoryzacja użytkownika nie powiodła się
+            if (!authorizationResult.Succeeded)
+            {
+                throw new ForbidException("This snack is not your");
+            }
+
             foreach (var old in snack.Products)
             {
                 _dbContext.SnackProducts.Remove(old);
@@ -625,7 +683,7 @@ namespace Papu.Services
                 Product product = _dbContext.Products
                     .FirstOrDefault(s => s.ProductId == addProduct);
 
-                SnackProduct snackProduct = new SnackProduct
+                SnackProduct snackProduct = new()
                 {
                     Snack = snack,
                     Product = product
@@ -648,7 +706,7 @@ namespace Papu.Services
                 Dish dish = _dbContext.Dishes
                     .FirstOrDefault(s => s.DishId == addDish);
 
-                SnackDish snackDish = new SnackDish
+                SnackDish snackDish = new()
                 {
                     Snack = snack,
                     Dish = dish
@@ -675,6 +733,16 @@ namespace Papu.Services
                 throw new NotFoundException("Dinner not found");
             }
 
+            //Sprawdzamy czy to użytkownik który stworzył daną kolację chce go zmodyfikować
+            var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User,
+                dinner, new ResourceOperationRequirement(ResourceOperation.Update)).Result;
+
+            //Sprawdzamy czy autoryzacja użytkownika nie powiodła się
+            if (!authorizationResult.Succeeded)
+            {
+                throw new ForbidException("This dinner is not your");
+            }
+
             foreach (var old in dinner.Products)
             {
                 _dbContext.DinnerProducts.Remove(old);
@@ -688,7 +756,7 @@ namespace Papu.Services
                 Product product = _dbContext.Products
                     .FirstOrDefault(s => s.ProductId == addProduct);
 
-                DinnerProduct dinnerProduct = new DinnerProduct
+                DinnerProduct dinnerProduct = new()
                 {
                     Dinner = dinner,
                     Product = product
@@ -711,7 +779,7 @@ namespace Papu.Services
                 Dish dish = _dbContext.Dishes
                     .FirstOrDefault(s => s.DishId == addDish);
 
-                DinnerDish dinnerDish = new DinnerDish
+                DinnerDish dinnerDish = new()
                 {
                     Dinner = dinner,
                     Dish = dish
@@ -740,6 +808,16 @@ namespace Papu.Services
                 throw new NotFoundException("Breakfast not found");
             }
 
+            //Sprawdzamy czy to użytkownik który stworzył dane śniadanie chce je zmodyfikować
+            var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User,
+                breakfast, new ResourceOperationRequirement(ResourceOperation.Delete)).Result;
+
+            //Sprawdzamy czy autoryzacja użytkownika nie powiodła się
+            if (!authorizationResult.Succeeded)
+            {
+                throw new ForbidException("This breakfast is not your");
+            }
+
             _dbContext.Breakfasts.Remove(breakfast);
             _dbContext.SaveChanges();
         }
@@ -759,6 +837,16 @@ namespace Papu.Services
             if (secondBreakfast is null)
             {
                 throw new NotFoundException("Second breakfast not found");
+            }
+
+            //Sprawdzamy czy to użytkownik który stworzył dane drugie śniadanie chce je zmodyfikować
+            var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User,
+                secondBreakfast, new ResourceOperationRequirement(ResourceOperation.Delete)).Result;
+
+            //Sprawdzamy czy autoryzacja użytkownika nie powiodła się
+            if (!authorizationResult.Succeeded)
+            {
+                throw new ForbidException("This second breakfast is not your");
             }
 
             _dbContext.SecondBreakfasts.Remove(secondBreakfast);
@@ -782,6 +870,16 @@ namespace Papu.Services
                 throw new NotFoundException("Lunch not found");
             }
 
+            //Sprawdzamy czy to użytkownik który stworzył dany obiady chce go zmodyfikować
+            var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User,
+                lunch, new ResourceOperationRequirement(ResourceOperation.Delete)).Result;
+
+            //Sprawdzamy czy autoryzacja użytkownika nie powiodła się
+            if (!authorizationResult.Succeeded)
+            {
+                throw new ForbidException("This lunch is not your");
+            }
+
             _dbContext.Lunches.Remove(lunch);
             _dbContext.SaveChanges();
         }
@@ -801,6 +899,15 @@ namespace Papu.Services
             if (snack is null)
             {
                 throw new NotFoundException("Snack not found");
+            }
+            //Sprawdzamy czy to użytkownik który stworzył dany podwieczorek chce go zmodyfikować
+            var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User,
+                snack, new ResourceOperationRequirement(ResourceOperation.Delete)).Result;
+
+            //Sprawdzamy czy autoryzacja użytkownika nie powiodła się
+            if (!authorizationResult.Succeeded)
+            {
+                throw new ForbidException("This snack is not your");
             }
 
             _dbContext.Snacks.Remove(snack);
@@ -822,6 +929,16 @@ namespace Papu.Services
             if (dinner is null)
             {
                 throw new NotFoundException("Dinner not found");
+            }
+
+            //Sprawdzamy czy to użytkownik który stworzył daną kolację chce go zmodyfikować
+            var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User,
+                dinner, new ResourceOperationRequirement(ResourceOperation.Delete)).Result;
+
+            //Sprawdzamy czy autoryzacja użytkownika nie powiodła się
+            if (!authorizationResult.Succeeded)
+            {
+                throw new ForbidException("This dinner is not your");
             }
 
             _dbContext.Dinners.Remove(dinner);

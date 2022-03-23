@@ -48,8 +48,7 @@ namespace Papu.Controllers
         [HttpPost]
         public ActionResult CreateProduct([FromBody] CreateProductDto dto)
         {
-            var userId = int.Parse(User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier).Value);
-            var newProductId = _productService.CreateProduct(dto, userId);
+            var newProductId = _productService.CreateProduct(dto);
 
             //Jako pierwszy parametr ścieżka, a jako drugi
             //możemy zwrócić ciało odpowiedzi, ale w tym wypadku zwracamy null
@@ -60,7 +59,7 @@ namespace Papu.Controllers
         [HttpPut("{id}")]
         public ActionResult UpdateProduct([FromBody] UpdateProductDto dto, [FromRoute] int id)
         {
-            _productService.UpdateProduct(id, dto, User);
+            _productService.UpdateProduct(id, dto);
 
             return Ok();
         }
@@ -69,7 +68,7 @@ namespace Papu.Controllers
         [HttpDelete("{id}")]
         public ActionResult DeleteProduct([FromRoute] int id)
         {
-            _productService.DeleteProduct(id, User);
+            _productService.DeleteProduct(id);
 
             //operacja zakończona sukcesem
             return NoContent();

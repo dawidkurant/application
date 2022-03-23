@@ -4,6 +4,7 @@ using Papu.Models;
 using Papu.Models.Update.TimesOfDay;
 using Papu.Services;
 using System.Collections.Generic;
+using System.Security.Claims;
 
 namespace Papu.Controllers
 {
@@ -124,7 +125,6 @@ namespace Papu.Controllers
         [HttpPost("createbreakfast")]
         public ActionResult CreateBreakfast([FromBody] CreateBreakfastDto dtoBreakfast)
         {
-
             var newBreakfastId = _timesOfDayService.CreateBreakfast(dtoBreakfast);
 
             //Jako pierwszy parametr ścieżka, a jako drugi

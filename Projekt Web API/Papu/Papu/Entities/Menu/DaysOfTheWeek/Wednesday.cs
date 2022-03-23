@@ -14,5 +14,11 @@
         public int? DinnerId { get; set; }
         public virtual Dinner Dinner { get; set; }
         public virtual Menu Menu { get; set; }
+
+        //Twórca danej środy
+        public int? CreatedById { get; set; }
+
+        //Zmienna reperezentująca twórcę danej środy
+        public virtual User CreatedBy { get; set; }
     }
 }

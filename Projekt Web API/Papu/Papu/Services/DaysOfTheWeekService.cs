@@ -1,12 +1,15 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Papu.Authorization;
 using Papu.Entities;
 using Papu.Exceptions;
 using Papu.Models;
 using Papu.Models.Update.DayOfTheWeek;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 
 namespace Papu.Services
 {
@@ -16,12 +19,17 @@ namespace Papu.Services
         private readonly PapuDbContext _dbContext;
         private readonly IMapper _mapper;
         private readonly ILogger<DaysOfTheWeekService> _logger;
+        private readonly IAuthorizationService _authorizationService;
+        private readonly IUserContextService _userContextService;
 
-        public DaysOfTheWeekService(PapuDbContext dbContext, IMapper mapper, ILogger<DaysOfTheWeekService> logger)
+        public DaysOfTheWeekService(PapuDbContext dbContext, IMapper mapper, ILogger<DaysOfTheWeekService> logger, 
+            IAuthorizationService authorizationService, IUserContextService userContextService)
         {
             _dbContext = dbContext;
             _mapper = mapper;
             _logger = logger;
+            _authorizationService = authorizationService;
+            _userContextService = userContextService;
         }
 
         //Wyświetlanie jednego poniedziałku
@@ -81,6 +89,8 @@ namespace Papu.Services
         public int CreateMonday(CreateMondayDto dtoMonday)
         {
             var monday = _mapper.Map<Monday>(dtoMonday);
+            //Dostaniemy informację jaki użytkownik stworzył konkretny poniedziałek w bazie danych
+            monday.CreatedById = _userContextService.GetUserId;
 
             monday.BreakfastId = dtoMonday.BreakfastMondayId;
             monday.SecondBreakfastId = dtoMonday.SecondBreakfastMondayId;
@@ -118,6 +128,16 @@ namespace Papu.Services
                 throw new NotFoundException("Monday not found");
             }
 
+            //Sprawdzamy czy to użytkownik który stworzył dany poniedziałek chce go zmodyfikować
+            var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User,
+                monday, new ResourceOperationRequirement(ResourceOperation.Update)).Result;
+
+            //Sprawdzamy czy autoryzacja użytkownika nie powiodła się
+            if (!authorizationResult.Succeeded)
+            {
+                throw new ForbidException("This monday is not your");
+            }
+
             monday.BreakfastId = dto.BreakfastMondayId;
             monday.SecondBreakfastId = dto.SecondBreakfastMondayId;
             monday.LunchId = dto.LunchMondayId;
@@ -149,6 +169,16 @@ namespace Papu.Services
             if (monday is null)
             {
                 throw new NotFoundException("Monday not found");
+            }
+
+            //Sprawdzamy czy to użytkownik który stworzył dany poniedziałek chce go zmodyfikować
+            var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User,
+                monday, new ResourceOperationRequirement(ResourceOperation.Delete)).Result;
+
+            //Sprawdzamy czy autoryzacja użytkownika nie powiodła się
+            if (!authorizationResult.Succeeded)
+            {
+                throw new ForbidException("This monday is not your");
             }
 
             _dbContext.Mondays.Remove(monday);
@@ -209,6 +239,8 @@ namespace Papu.Services
         public int CreateTuesday(CreateTuesdayDto dtoTuesday)
         {
             var tuesday = _mapper.Map<Tuesday>(dtoTuesday);
+            //Dostaniemy informację jaki użytkownik stworzył konkretny wtorek w bazie danych
+            tuesday.CreatedById = _userContextService.GetUserId;
 
             tuesday.BreakfastId = dtoTuesday.BreakfastTuesdayId;
             tuesday.SecondBreakfastId = dtoTuesday.SecondBreakfastTuesdayId;
@@ -246,6 +278,16 @@ namespace Papu.Services
                 throw new NotFoundException("Tuesday not found");
             }
 
+            //Sprawdzamy czy to użytkownik który stworzył dany wtorek chce go zmodyfikować
+            var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User,
+                tuesday, new ResourceOperationRequirement(ResourceOperation.Update)).Result;
+
+            //Sprawdzamy czy autoryzacja użytkownika nie powiodła się
+            if (!authorizationResult.Succeeded)
+            {
+                throw new ForbidException("This tuesday is not your");
+            }
+
             tuesday.BreakfastId = dto.BreakfastTuesdayId;
             tuesday.SecondBreakfastId = dto.SecondBreakfastTuesdayId;
             tuesday.LunchId = dto.LunchTuesdayId;
@@ -277,6 +319,16 @@ namespace Papu.Services
             if (tuesday is null)
             {
                 throw new NotFoundException("Tuesday not found");
+            }
+
+            //Sprawdzamy czy to użytkownik który stworzył dany wtorek chce go zmodyfikować
+            var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User,
+                tuesday, new ResourceOperationRequirement(ResourceOperation.Delete)).Result;
+
+            //Sprawdzamy czy autoryzacja użytkownika nie powiodła się
+            if (!authorizationResult.Succeeded)
+            {
+                throw new ForbidException("This tuesday is not your");
             }
 
             _dbContext.Tuesdays.Remove(tuesday);
@@ -337,6 +389,8 @@ namespace Papu.Services
         public int CreateWednesday(CreateWednesdayDto dtoWednesday)
         {
             var wednesday = _mapper.Map<Wednesday>(dtoWednesday);
+            //Dostaniemy informację jaki użytkownik stworzył konkretną środę w bazie danych
+            wednesday.CreatedById = _userContextService.GetUserId;
 
             wednesday.BreakfastId = dtoWednesday.BreakfastWednesdayId;
             wednesday.SecondBreakfastId = dtoWednesday.SecondBreakfastWednesdayId;
@@ -374,6 +428,16 @@ namespace Papu.Services
                 throw new NotFoundException("Wednesday not found");
             }
 
+            //Sprawdzamy czy to użytkownik który stworzył daną środę chce ją zmodyfikować
+            var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User,
+                wednesday, new ResourceOperationRequirement(ResourceOperation.Update)).Result;
+
+            //Sprawdzamy czy autoryzacja użytkownika nie powiodła się
+            if (!authorizationResult.Succeeded)
+            {
+                throw new ForbidException("This wednesday is not your");
+            }
+
             wednesday.BreakfastId = dto.BreakfastWednesdayId;
             wednesday.SecondBreakfastId = dto.SecondBreakfastWednesdayId;
             wednesday.LunchId = dto.LunchWednesdayId;
@@ -405,6 +469,16 @@ namespace Papu.Services
             if (wednesday is null)
             {
                 throw new NotFoundException("Wednesday not found");
+            }
+
+            //Sprawdzamy czy to użytkownik który stworzył daną środę chce ją zmodyfikować
+            var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User,
+                wednesday, new ResourceOperationRequirement(ResourceOperation.Delete)).Result;
+
+            //Sprawdzamy czy autoryzacja użytkownika nie powiodła się
+            if (!authorizationResult.Succeeded)
+            {
+                throw new ForbidException("This wednesday is not your");
             }
 
             _dbContext.Wednesdays.Remove(wednesday);
@@ -465,6 +539,8 @@ namespace Papu.Services
         public int CreateThursday(CreateThursdayDto dtoThursday)
         {
             var thursday = _mapper.Map<Thursday>(dtoThursday);
+            //Dostaniemy informację jaki użytkownik stworzył konkretny czwartek w bazie danych
+            thursday.CreatedById = _userContextService.GetUserId;
 
             thursday.BreakfastId = dtoThursday.BreakfastThursdayId;
             thursday.SecondBreakfastId = dtoThursday.SecondBreakfastThursdayId;
@@ -502,6 +578,16 @@ namespace Papu.Services
                 throw new NotFoundException("Thursday not found");
             }
 
+            //Sprawdzamy czy to użytkownik który stworzył dany czwartek chce go zmodyfikować
+            var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User,
+                thursday, new ResourceOperationRequirement(ResourceOperation.Update)).Result;
+
+            //Sprawdzamy czy autoryzacja użytkownika nie powiodła się
+            if (!authorizationResult.Succeeded)
+            {
+                throw new ForbidException("This thursday is not your");
+            }
+
             thursday.BreakfastId = dto.BreakfastThursdayId;
             thursday.SecondBreakfastId = dto.SecondBreakfastThursdayId;
             thursday.LunchId = dto.LunchThursdayId;
@@ -533,6 +619,16 @@ namespace Papu.Services
             if (thursday is null)
             {
                 throw new NotFoundException("Thursday not found");
+            }
+
+            //Sprawdzamy czy to użytkownik który stworzył dany czwartek chce go zmodyfikować
+            var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User,
+                thursday, new ResourceOperationRequirement(ResourceOperation.Delete)).Result;
+
+            //Sprawdzamy czy autoryzacja użytkownika nie powiodła się
+            if (!authorizationResult.Succeeded)
+            {
+                throw new ForbidException("This thursday is not your");
             }
 
             _dbContext.Thursdays.Remove(thursday);
@@ -593,6 +689,8 @@ namespace Papu.Services
         public int CreateFriday(CreateFridayDto dtoFriday)
         {
             var friday = _mapper.Map<Friday>(dtoFriday);
+            //Dostaniemy informację jaki użytkownik stworzył konkretny piątek w bazie danych
+            friday.CreatedById = _userContextService.GetUserId;
 
             friday.BreakfastId = dtoFriday.BreakfastFridayId;
             friday.SecondBreakfastId = dtoFriday.SecondBreakfastFridayId;
@@ -630,6 +728,16 @@ namespace Papu.Services
                 throw new NotFoundException("Friday not found");
             }
 
+            //Sprawdzamy czy to użytkownik który stworzył dany piątek chce go zmodyfikować
+            var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User,
+                friday, new ResourceOperationRequirement(ResourceOperation.Update)).Result;
+
+            //Sprawdzamy czy autoryzacja użytkownika nie powiodła się
+            if (!authorizationResult.Succeeded)
+            {
+                throw new ForbidException("This friday is not your");
+            }
+
             friday.BreakfastId = dto.BreakfastFridayId;
             friday.SecondBreakfastId = dto.SecondBreakfastFridayId;
             friday.LunchId = dto.LunchFridayId;
@@ -661,6 +769,16 @@ namespace Papu.Services
             if (friday is null)
             {
                 throw new NotFoundException("Friday not found");
+            }
+
+            //Sprawdzamy czy to użytkownik który stworzył dany piątek chce go zmodyfikować
+            var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User,
+                friday, new ResourceOperationRequirement(ResourceOperation.Delete)).Result;
+
+            //Sprawdzamy czy autoryzacja użytkownika nie powiodła się
+            if (!authorizationResult.Succeeded)
+            {
+                throw new ForbidException("This friday is not your");
             }
 
             _dbContext.Fridays.Remove(friday);
@@ -721,6 +839,8 @@ namespace Papu.Services
         public int CreateSaturday(CreateSaturdayDto dtoSaturday)
         {
             var saturday = _mapper.Map<Saturday>(dtoSaturday);
+            //Dostaniemy informację jaki użytkownik stworzył konkretną sobotę w bazie danych
+            saturday.CreatedById = _userContextService.GetUserId;
 
             saturday.BreakfastId = dtoSaturday.BreakfastSaturdayId;
             saturday.SecondBreakfastId = dtoSaturday.SecondBreakfastSaturdayId;
@@ -758,6 +878,16 @@ namespace Papu.Services
                 throw new NotFoundException("Saturday not found");
             }
 
+            //Sprawdzamy czy to użytkownik który stworzył daną sobotę chce ją zmodyfikować
+            var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User,
+                saturday, new ResourceOperationRequirement(ResourceOperation.Update)).Result;
+
+            //Sprawdzamy czy autoryzacja użytkownika nie powiodła się
+            if (!authorizationResult.Succeeded)
+            {
+                throw new ForbidException("This saturday is not your");
+            }
+
             saturday.BreakfastId = dto.BreakfastSaturdayId;
             saturday.SecondBreakfastId = dto.SecondBreakfastSaturdayId;
             saturday.LunchId = dto.LunchSaturdayId;
@@ -789,6 +919,16 @@ namespace Papu.Services
             if (saturday is null)
             {
                 throw new NotFoundException("Saturday not found");
+            }
+
+            //Sprawdzamy czy to użytkownik który stworzył daną sobotę chce ją zmodyfikować
+            var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User,
+                saturday, new ResourceOperationRequirement(ResourceOperation.Delete)).Result;
+
+            //Sprawdzamy czy autoryzacja użytkownika nie powiodła się
+            if (!authorizationResult.Succeeded)
+            {
+                throw new ForbidException("This saturday is not your");
             }
 
             _dbContext.Saturdays.Remove(saturday);
@@ -849,6 +989,8 @@ namespace Papu.Services
         public int CreateSunday(CreateSundayDto dtoSunday)
         {
             var sunday = _mapper.Map<Sunday>(dtoSunday);
+            //Dostaniemy informację jaki użytkownik stworzył konkretną niedzielę w bazie danych
+            sunday.CreatedById = _userContextService.GetUserId;
 
             sunday.BreakfastId = dtoSunday.BreakfastSundayId;
             sunday.SecondBreakfastId = dtoSunday.SecondBreakfastSundayId;
@@ -886,6 +1028,16 @@ namespace Papu.Services
                 throw new NotFoundException("Sunday not found");
             }
 
+            //Sprawdzamy czy to użytkownik który stworzył daną niedzielę chce ją zmodyfikować
+            var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User,
+                sunday, new ResourceOperationRequirement(ResourceOperation.Update)).Result;
+
+            //Sprawdzamy czy autoryzacja użytkownika nie powiodła się
+            if (!authorizationResult.Succeeded)
+            {
+                throw new ForbidException("This sunday is not your");
+            }
+
             sunday.BreakfastId = dto.BreakfastSundayId;
             sunday.SecondBreakfastId = dto.SecondBreakfastSundayId;
             sunday.LunchId = dto.LunchSundayId;
@@ -917,6 +1069,16 @@ namespace Papu.Services
             if (sunday is null)
             {
                 throw new NotFoundException("Sunday not found");
+            }
+
+            //Sprawdzamy czy to użytkownik który stworzył daną niedzielę chce ją zmodyfikować
+            var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User,
+                sunday, new ResourceOperationRequirement(ResourceOperation.Delete)).Result;
+
+            //Sprawdzamy czy autoryzacja użytkownika nie powiodła się
+            if (!authorizationResult.Succeeded)
+            {
+                throw new ForbidException("This sunday is not your");
             }
 
             _dbContext.Sundays.Remove(sunday);

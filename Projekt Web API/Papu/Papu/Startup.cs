@@ -15,6 +15,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Papu.Authorization;
+using Papu.Authorization.DaysOfTheWeek;
+using Papu.Authorization.TimesOfDay;
 using Papu.Data;
 using Papu.Entities;
 using Papu.Middleware;
@@ -73,6 +75,21 @@ namespace Papu
             });
 
             services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementProductHandler>();
+            services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementDishHandler>();
+            services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementMenuHandler>();
+            services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementBreakfastHandler>();
+            services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementSecondBreakfastHandler>();
+            services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementLunchHandler>();
+            services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementSnackHandler>();
+            services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementDinnerHandler>();
+            services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementMondayHandler>();
+            services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementTuesdayHandler>();
+            services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementWednesdayHandler>();
+            services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementThursdayHandler>();
+            services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementFridayHandler>();
+            services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementSaturdayHandler>();
+            services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementSundayHandler>();
+
             //W ten sposób dodajemy walidację do projektu
             services.AddControllers().AddFluentValidation();
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -98,6 +115,11 @@ namespace Papu
             services.AddScoped<RequestTimeMiddleware>();
             services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
             services.AddScoped<IValidator<RegisterUserDto>, RegisterUserDtoValidator>();
+            services.AddScoped<IUserContextService, UserContextService>();
+            //Przez to że korzystamy z accessora musimy dodać tę rejestrację
+            //aby wstrzyknąć referencję do klasy IHttpContextAccessor
+            services.AddHttpContextAccessor();
+
             //Rejestrujemy niezbędne serwisy do wygenerowania specyfikacji openapi na podstawie
             //naszego api
             services.AddSwaggerGen();

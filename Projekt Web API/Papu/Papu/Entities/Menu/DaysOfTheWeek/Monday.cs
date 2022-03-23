@@ -18,5 +18,11 @@ namespace Papu.Entities
         public int? DinnerId { get; set; }
         public virtual Dinner Dinner { get; set; }
         public virtual Menu Menu { get; set; }
+
+        //Twórca danego poniedziałku
+        public int? CreatedById { get; set; }
+
+        //Zmienna reperezentująca twórcę danego poniedziałku
+        public virtual User CreatedBy { get; set; }
     }
 }

@@ -1,12 +1,15 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Papu.Authorization;
 using Papu.Entities;
 using Papu.Exceptions;
 using Papu.Models;
 using Papu.Models.Update;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 
 namespace Papu.Services
 {
@@ -15,12 +18,17 @@ namespace Papu.Services
         private readonly PapuDbContext _dbContext;
         private readonly IMapper _mapper;
         private readonly ILogger<DishService> _logger;
+        private readonly IAuthorizationService _authorizationService;
+        private readonly IUserContextService _userContextService;
 
-        public DishService(PapuDbContext dbContext, IMapper mapper, ILogger<DishService> logger)
+        public DishService(PapuDbContext dbContext, IMapper mapper, ILogger<DishService> logger, 
+            IAuthorizationService authorizationService, IUserContextService userContextService)
         {
             _dbContext = dbContext;
             _mapper = mapper;
             _logger = logger;
+            _authorizationService = authorizationService;
+            _userContextService = userContextService;
         }
 
         //Pobranie jednej potrawy po id 
@@ -63,6 +71,8 @@ namespace Papu.Services
         public int CreateDish(CreateDishDto dto)
         {
             var dish = _mapper.Map<Dish>(dto);
+            //Dostaniemy informację jaki użytkownik stworzył konkretną potrawę w bazie danych
+            dish.CreatedById = _userContextService.GetUserId;
 
             foreach (var addType in dto.TypeId)
             {
@@ -70,7 +80,7 @@ namespace Papu.Services
                 Type type = _dbContext.Types
                     .FirstOrDefault(s => s.TypeId == addType);
 
-                DishType dishType = new DishType
+                DishType dishType = new()
                 {
                     Dish = dish,
                     Type = type
@@ -85,7 +95,7 @@ namespace Papu.Services
                 KindOf kindOf = _dbContext.KindsOf
                     .FirstOrDefault(s => s.KindOfId == addKindOf);
 
-                DishKindOf dishKindOf = new DishKindOf
+                DishKindOf dishKindOf = new()
                 {
                     Dish = dish,
                     KindOf = kindOf
@@ -100,7 +110,7 @@ namespace Papu.Services
                 Product product = _dbContext.Products
                     .FirstOrDefault(s => s.ProductId == addProduct);
 
-                ProductDish productDish = new ProductDish
+                ProductDish productDish = new()
                 {
                     Dish = dish,
                     Product = product
@@ -131,6 +141,16 @@ namespace Papu.Services
                 throw new NotFoundException("Dish not found");
             }
 
+            //Sprawdzamy czy to użytkownik który stworzył daną potrawę chce ją zmodyfikować
+            var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User,
+                dish, new ResourceOperationRequirement(ResourceOperation.Update)).Result;
+
+            //Sprawdzamy czy autoryzacja użytkownika nie powiodła się
+            if (!authorizationResult.Succeeded)
+            {
+                throw new ForbidException("This dish is not your");
+            }
+
             dish.DishName = dto.DishName;
             dish.DishDescription = dto.DishDescription;
             dish.MethodOfPeparation = dto.MethodOfPeparation;
@@ -152,7 +172,7 @@ namespace Papu.Services
                 Type type = _dbContext.Types
                     .FirstOrDefault(s => s.TypeId == addType);
 
-                DishType dishType = new DishType
+                DishType dishType = new()
                 {
                     Dish = dish,
                     Type = type
@@ -174,7 +194,7 @@ namespace Papu.Services
                 KindOf kindOf = _dbContext.KindsOf
                     .FirstOrDefault(s => s.KindOfId == addKindOf);
 
-                DishKindOf dishKindOf = new DishKindOf
+                DishKindOf dishKindOf = new()
                 {
                     Dish = dish,
                     KindOf = kindOf
@@ -196,7 +216,7 @@ namespace Papu.Services
                 Product product = _dbContext.Products
                     .FirstOrDefault(s => s.ProductId == addProduct);
 
-                ProductDish productDish = new ProductDish
+                ProductDish productDish = new()
                 {
                     Dish = dish,
                     Product = product
@@ -224,6 +244,16 @@ namespace Papu.Services
             if (dish is null)
             {
                 throw new NotFoundException("Dish not found");
+            }
+
+            //Sprawdzamy czy to użytkownik który stworzył daną potrawę chce ją zmodyfikować
+            var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User,
+                dish, new ResourceOperationRequirement(ResourceOperation.Delete)).Result;
+
+            //Sprawdzamy czy autoryzacja użytkownika nie powiodła się
+            if (!authorizationResult.Succeeded)
+            {
+                throw new ForbidException("This dish is not your");
             }
 
             _dbContext.Dishes.Remove(dish);

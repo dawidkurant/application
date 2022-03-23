@@ -40,5 +40,11 @@
         //Niedziela
         public int? SundayId { get; set; }
         public virtual Sunday Sunday { get; set; }
+
+        //Twórca danego jadłospisu
+        public int? CreatedById { get; set; }
+
+        //Zmienna reperezentująca twórcę danego jadłospisu
+        public virtual User CreatedBy { get; set; }
     }
 }

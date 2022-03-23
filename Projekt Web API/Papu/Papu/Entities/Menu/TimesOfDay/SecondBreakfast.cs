@@ -15,6 +15,11 @@ namespace Papu.Entities
         //Potrawy wchodzące w skład drugiego śniadania
         public virtual ICollection<SecondBreakfastDish> Dishes { get; set; }
 
+        //Twórca danego drugiego śniadania
+        public int? CreatedById { get; set; }
+
+        //Zmienna reperezentująca twórcę danego drugiego śniadania
+        public virtual User CreatedBy { get; set; }
         public virtual Monday Monday { get; set; }
         public virtual Tuesday Tuesday { get; set; }
         public virtual Wednesday Wednesday { get; set; }

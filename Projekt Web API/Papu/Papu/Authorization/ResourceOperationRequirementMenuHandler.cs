@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace Papu.Authorization
 {
-    public class ResourceOperationRequirementProductHandler : AuthorizationHandler<ResourceOperationRequirement, Product>
+    public class ResourceOperationRequirementMenuHandler : AuthorizationHandler<ResourceOperationRequirement, Menu>
     {
-        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, 
-            ResourceOperationRequirement requirement, Product product)
+        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context,
+            ResourceOperationRequirement requirement, Menu menu)
         {
             //Sprawdzamy czy chodzi o akcję czytania i tworzenia (dostępna dla wszystkich użytkowników)
             if (requirement.ResourceOperation == ResourceOperation.Read ||
@@ -21,8 +21,8 @@ namespace Papu.Authorization
             //Przypisujemy id użytkownika 
             var userId = context.User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier).Value;
 
-            //Sprawdzamy czy pobrane id pokrywa się z twórcą danego produktu 
-            if (product.CreatedById == int.Parse(userId))
+            //Sprawdzamy czy pobrane id pokrywa się z twórcą danego jadłospisu 
+            if (menu.CreatedById == int.Parse(userId))
             {
                 context.Succeed(requirement);
             }

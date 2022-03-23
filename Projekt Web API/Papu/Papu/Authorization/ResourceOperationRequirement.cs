@@ -12,9 +12,9 @@ namespace Papu.Authorization
     }
 
     //Klasa reperezentująca nasze wymagania oraz typ konkrentej akcji 
-    public class ResourceOperationRequirementProduct : IAuthorizationRequirement
+    public class ResourceOperationRequirement : IAuthorizationRequirement
     {
-        public ResourceOperationRequirementProduct(ResourceOperation resourceOperation)
+        public ResourceOperationRequirement(ResourceOperation resourceOperation)
         {
             ResourceOperation = resourceOperation;
         }

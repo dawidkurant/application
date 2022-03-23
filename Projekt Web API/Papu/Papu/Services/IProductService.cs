@@ -9,8 +9,8 @@ namespace Papu.Services
     {
         IEnumerable<ProductDto> GetAllProducts();
         ProductDto GetByIdProduct(int id);
-        int CreateProduct(CreateProductDto dto, int userId);
-        void UpdateProduct(int id, UpdateProductDto dto, ClaimsPrincipal user);
-        void DeleteProduct(int id, ClaimsPrincipal user);
+        int CreateProduct(CreateProductDto dto);
+        void UpdateProduct(int id, UpdateProductDto dto);
+        void DeleteProduct(int id);
     }
 }

@@ -18,15 +18,18 @@ namespace Papu.Services
         private readonly IMapper _mapper;
         private readonly ILogger<ProductService> _logger;
         private readonly IAuthorizationService _authorizationService;
+        private readonly IUserContextService _userContextService;
 
         //Dzięki IAuthorization (serwisowi) Asp.Net Core na podstawie wymagania
         //będzie wstanie wywołać odpowiedni handler
-        public ProductService(PapuDbContext dbContext, IMapper mapper, ILogger<ProductService> logger, IAuthorizationService authorizationService)
+        public ProductService(PapuDbContext dbContext, IMapper mapper, ILogger<ProductService> logger, 
+            IAuthorizationService authorizationService, IUserContextService userContextService)
         {
             _dbContext = dbContext;
             _mapper = mapper;
             _logger = logger;
             _authorizationService = authorizationService;
+            _userContextService = userContextService;
         }
 
         //Pobranie jednego produktu po id 
@@ -66,11 +69,11 @@ namespace Papu.Services
         }
 
         //Utworzenie jednego produktu na podstawie obiektu dto 
-        public int CreateProduct(CreateProductDto dto, int userId)
+        public int CreateProduct(CreateProductDto dto)
         {
             var product = _mapper.Map<Product>(dto);
             //Dostaniemy informację jaki użytkownik stworzył konkretny produkt w bazie danych
-            product.CreatedById = userId;
+            product.CreatedById = _userContextService.GetUserId;
 
             Category category = _dbContext.Categories
                 .FirstOrDefault(c => c.CategoryName == dto.CategoryName);
@@ -87,7 +90,7 @@ namespace Papu.Services
                 Group group = _dbContext.Groups
                     .FirstOrDefault(s => s.GroupId == addGroup);
 
-                ProductGroup productGroup = new ProductGroup
+                ProductGroup productGroup = new()
                 {
                     Product = product,
                     Group = group
@@ -103,7 +106,7 @@ namespace Papu.Services
 
         //Edycja jednego produktu na podstawie id i obiektu dto
         //Tylko ten kto utworzył dany zasób, będzie mógł go modyfikować lub usuwać
-        public void UpdateProduct(int id, UpdateProductDto dto, ClaimsPrincipal user)
+        public void UpdateProduct(int id, UpdateProductDto dto)
         {
             var product =
                 _dbContext.Products
@@ -119,8 +122,8 @@ namespace Papu.Services
             }
 
             //Sprawdzamy czy to użytkownik który stworzył dany produkt chce go zmodyfikować
-            var authorizationResult = _authorizationService.AuthorizeAsync(user, 
-                product, new ResourceOperationRequirementProduct(ResourceOperation.Update)).Result;
+            var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User, 
+                product, new ResourceOperationRequirement(ResourceOperation.Update)).Result;
 
             //Sprawdzamy czy autoryzacja użytkownika nie powiodła się
             if (!authorizationResult.Succeeded)
@@ -153,7 +156,7 @@ namespace Papu.Services
                 Group group = _dbContext.Groups
                     .FirstOrDefault(s => s.GroupId == addGroup);
 
-                ProductGroup productGroup = new ProductGroup
+                ProductGroup productGroup = new()
                 {
                     Product = product,
                     Group = group
@@ -168,7 +171,7 @@ namespace Papu.Services
 
         //Usunięcie jednego produktu na podstawie id
         //tylko ten kto utworzył dany zasób, będzie mógł go modyfikować lub usuwać
-        public void DeleteProduct(int id, ClaimsPrincipal user)
+        public void DeleteProduct(int id)
         {
             _logger.LogError($"Product with id: {id} DELETE action invoked");
 
@@ -185,8 +188,8 @@ namespace Papu.Services
             }
 
             //Sprawdzamy czy to użytkownik który stworzył dany produkt chce go usunąć
-            var authorizationResult = _authorizationService.AuthorizeAsync(user,
-                product, new ResourceOperationRequirementProduct(ResourceOperation.Delete)).Result;
+            var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User,
+                product, new ResourceOperationRequirement(ResourceOperation.Delete)).Result;
 
             //Sprawdzamy czy autoryzacja użytkownika nie powiodła się
             if (!authorizationResult.Succeeded)

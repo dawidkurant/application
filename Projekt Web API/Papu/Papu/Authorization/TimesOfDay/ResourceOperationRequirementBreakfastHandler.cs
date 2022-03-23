@@ -3,12 +3,12 @@ using Papu.Entities;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace Papu.Authorization
+namespace Papu.Authorization.TimesOfDay
 {
-    public class ResourceOperationRequirementProductHandler : AuthorizationHandler<ResourceOperationRequirement, Product>
+    public class ResourceOperationRequirementBreakfastHandler : AuthorizationHandler<ResourceOperationRequirement, Breakfast>
     {
-        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, 
-            ResourceOperationRequirement requirement, Product product)
+        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context,
+            ResourceOperationRequirement requirement, Breakfast breakfast)
         {
             //Sprawdzamy czy chodzi o akcję czytania i tworzenia (dostępna dla wszystkich użytkowników)
             if (requirement.ResourceOperation == ResourceOperation.Read ||
@@ -21,8 +21,8 @@ namespace Papu.Authorization
             //Przypisujemy id użytkownika 
             var userId = context.User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier).Value;
 
-            //Sprawdzamy czy pobrane id pokrywa się z twórcą danego produktu 
-            if (product.CreatedById == int.Parse(userId))
+            //Sprawdzamy czy pobrane id pokrywa się z twórcą danego śniadania 
+            if (breakfast.CreatedById == int.Parse(userId))
             {
                 context.Succeed(requirement);
             }

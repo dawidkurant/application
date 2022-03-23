@@ -4,6 +4,7 @@ using Papu.Models;
 using Papu.Models.Update.DayOfTheWeek;
 using Papu.Services;
 using System.Collections.Generic;
+using System.Security.Claims;
 
 namespace Papu.Controllers
 {
@@ -342,7 +343,7 @@ namespace Papu.Controllers
         //Tworzenie nowej niedzieli
         [HttpPost("createsunday")]
         public ActionResult CreateSunday([FromBody] CreateSundayDto dto)
-        { 
+        {
             var newSundayId = _daysOfTheWeekService.CreateSunday(dto);
 
             //Jako pierwszy parametr ścieżka, a jako drugi

@@ -15,6 +15,12 @@ namespace Papu.Entities
         //Potrawy wchodzące w skład kolacji
         public virtual ICollection<DinnerDish> Dishes { get; set; }
 
+        //Twórca danej kolacji
+        public int? CreatedById { get; set; }
+
+        //Zmienna reperezentująca twórcę danej kolacji
+        public virtual User CreatedBy { get; set; }
+
         public virtual Monday Monday { get; set; }
         public virtual Tuesday Tuesday { get; set; }
         public virtual Wednesday Wednesday { get; set; }

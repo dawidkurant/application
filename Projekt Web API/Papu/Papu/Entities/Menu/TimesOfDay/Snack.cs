@@ -15,6 +15,11 @@ namespace Papu.Entities
         //Potrawy wchodzące w skład podwieczorka
         public virtual ICollection<SnackDish> Dishes { get; set; }
 
+        //Twórca danego podwieczorka
+        public int? CreatedById { get; set; }
+
+        //Zmienna reperezentująca twórcę danego podwieczorka
+        public virtual User CreatedBy { get; set; }
         public virtual Monday Monday { get; set; }
         public virtual Tuesday Tuesday { get; set; }
         public virtual Wednesday Wednesday { get; set; }
