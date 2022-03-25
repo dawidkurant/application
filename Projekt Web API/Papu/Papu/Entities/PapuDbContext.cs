@@ -5,7 +5,7 @@ namespace Papu.Entities
     //Klasa odpowiadająca bazie danych
     public class PapuDbContext : DbContext
     {
-        private string _connectionString =
+        private readonly string _connectionString =
             "Server=(localdb)\\mssqllocaldb;Database=PapuDb;Trusted_Connection=True;";
         public DbSet<Product> Products { get; set; }
         public DbSet<Menu> Menus { get; set; }

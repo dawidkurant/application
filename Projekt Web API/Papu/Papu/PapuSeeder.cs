@@ -158,7 +158,7 @@ namespace Papu
 
         //Metoda zwracająca kolekcję ról, które będą zawsze istnieć w tabeli role
         //baza automatycznie przydzieli id
-        private IEnumerable<Role> GetRoles()
+        private static IEnumerable<Role> GetRoles()
         {
             var roles = new List<Role>()
             {
@@ -181,7 +181,7 @@ namespace Papu
 
         //Metoda zwracająca kolekcję grup produktów, które będą zawsze istnieć w tabeli group
         //baza automatycznie przydzieli id
-        private IEnumerable<Group> GetGroups()
+        private static IEnumerable<Group> GetGroups()
         {
             var groups = new List<Group>()
             {
@@ -284,7 +284,7 @@ namespace Papu
 
         //Metoda zwracająca kolekcję jednostek miary produktów, które będą zawsze istnieć w tabeli unit
         //baza automatycznie przydzieli id
-        private IEnumerable<Unit> GetUnits()
+        private static IEnumerable<Unit> GetUnits()
         {
             var units = new List<Unit>()
             {
@@ -399,7 +399,7 @@ namespace Papu
 
         //Metoda zwracająca kolekcję kategorii produktów, które będą zawsze istnieć w tabeli category
         //baza automatycznie przydzieli id
-        private IEnumerable<Category> GetCategories()
+        private static IEnumerable<Category> GetCategories()
         {
             var categories = new List<Category>()
             {
@@ -454,7 +454,7 @@ namespace Papu
 
         //Metoda zwracająca kolekcję typów potraw, które będą zawsze istnieć w tabeli type
         //baza automatycznie przydzieli id
-        private IEnumerable<Type> GetTypes()
+        private static IEnumerable<Type> GetTypes()
         {
             var types = new List<Type>()
             {
@@ -489,7 +489,7 @@ namespace Papu
 
         //Metoda zwracająca kolekcję rodzajów potraw, które będą zawsze istnieć w tabeli kindOf
         //baza automatycznie przydzieli id
-        private IEnumerable<KindOf> GetKindsOf()
+        private static IEnumerable<KindOf> GetKindsOf()
         {
             var kindsOf = new List<KindOf>()
             {
@@ -520,7 +520,7 @@ namespace Papu
 
         //Metoda zwracająca kolekcję produktów, które będą zawsze istnieć w tabeli product
         //baza automatycznie przydzieli id
-        private IEnumerable<Product> GetProducts()
+        private static IEnumerable<Product> GetProducts()
         {
             var products = new List<Product>()
             {
@@ -541,7 +541,7 @@ namespace Papu
 
         //Metoda zwracająca kolekcję potraw, które będą zawsze istnieć w tabeli product
         //baza automatycznie przydzieli id
-        private IEnumerable<Dish> GetDishes()
+        private static IEnumerable<Dish> GetDishes()
         {
             var dishes = new List<Dish>()
             {
@@ -578,7 +578,7 @@ namespace Papu
 
         //Metoda zwracająca kolekcję śniadań, które będą zawsze istnieć w tabeli breakfast
         //baza automatycznie przydzieli id
-        private IEnumerable<Breakfast> GetBreakfasts()
+        private static IEnumerable<Breakfast> GetBreakfasts()
         {
             var breakfasts = new List<Breakfast>()
             {
@@ -626,7 +626,7 @@ namespace Papu
 
         //Metoda zwracająca kolekcję poniedziałków, które będą zawsze istnieć w tabeli monday
         //baza automatycznie przydzieli id
-        private IEnumerable<Monday> GetMondays()
+        private static IEnumerable<Monday> GetMondays()
         {
             var mondays = new List<Monday>()
             {
@@ -833,7 +833,7 @@ namespace Papu
 
         //Metoda zwracająca kolekcję wtorków, które będą zawsze istnieć w tabeli tuesday
         //baza automatycznie przydzieli id
-        private IEnumerable<Tuesday> GetTuesdays()
+        private static IEnumerable<Tuesday> GetTuesdays()
         {
             var tuesdays = new List<Tuesday>()
             {
@@ -1035,7 +1035,7 @@ namespace Papu
 
         //Metoda zwracająca kolekcję śród, które będą zawsze istnieć w tabeli wednesday
         //baza automatycznie przydzieli id
-        private IEnumerable<Wednesday> GetWednesdays()
+        private static IEnumerable<Wednesday> GetWednesdays()
         {
             var wednesdays = new List<Wednesday>()
             {
@@ -1232,7 +1232,7 @@ namespace Papu
 
         //Metoda zwracająca kolekcję czwartków, które będą zawsze istnieć w tabeli thursday
         //baza automatycznie przydzieli id
-        private IEnumerable<Thursday> GetThursdays()
+        private static IEnumerable<Thursday> GetThursdays()
         {
             var thursdays = new List<Thursday>()
             {
@@ -1408,7 +1408,7 @@ namespace Papu
 
         //Metoda zwracająca kolekcję piątków, które będą zawsze istnieć w tabeli friday
         //baza automatycznie przydzieli id
-        private IEnumerable<Friday> GetFridays()
+        private static IEnumerable<Friday> GetFridays()
         {
             var fridays = new List<Friday>()
             {
@@ -1590,7 +1590,7 @@ namespace Papu
 
         //Metoda zwracająca kolekcję sobót, które będą zawsze istnieć w tabeli saturday
         //baza automatycznie przydzieli id
-        private IEnumerable<Saturday> GetSaturdays()
+        private static IEnumerable<Saturday> GetSaturdays()
         {
             var saturdays = new List<Saturday>()
             {
@@ -1767,7 +1767,7 @@ namespace Papu
 
         //Metoda zwracająca kolekcję niedziel, które będą zawsze istnieć w tabeli sunday
         //baza automatycznie przydzieli id
-        private IEnumerable<Sunday> GetSundays()
+        private static IEnumerable<Sunday> GetSundays()
         {
             var sundays = new List<Sunday>()
             {
@@ -1943,7 +1943,7 @@ namespace Papu
 
         //Metoda zwracająca kolekcję jadłospisów, które będą zawsze istnieć w tabeli menu
         //baza automatycznie przydzieli id
-        private IEnumerable<Menu> GetMenus()
+        private static IEnumerable<Menu> GetMenus()
         {
             var menus = new List<Menu>()
             {
