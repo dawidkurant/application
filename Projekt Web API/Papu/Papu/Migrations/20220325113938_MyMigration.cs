@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Papu.Migrations
 {
@@ -6,18 +7,6 @@ namespace Papu.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Breakfasts",
-                columns: table => new
-                {
-                    BreakfastId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Breakfasts", x => x.BreakfastId);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Categories",
                 columns: table => new
@@ -29,37 +18,6 @@ namespace Papu.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Categories", x => x.CategoryId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Dinners",
-                columns: table => new
-                {
-                    DinnerId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Dinners", x => x.DinnerId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Dishes",
-                columns: table => new
-                {
-                    DishId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DishName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    DishDescription = table.Column<string>(type: "nvarchar(1300)", maxLength: 1300, nullable: false),
-                    MethodOfPeparation = table.Column<string>(type: "nvarchar(1300)", maxLength: 1300, nullable: false),
-                    Portions = table.Column<int>(type: "int", maxLength: 3, nullable: false),
-                    PreparationTime = table.Column<int>(type: "int", maxLength: 3, nullable: false),
-                    Size = table.Column<int>(type: "int", maxLength: 3, nullable: false),
-                    DishImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Dishes", x => x.DishId);
                 });
 
             migrationBuilder.CreateTable(
@@ -89,39 +47,16 @@ namespace Papu.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Lunches",
+                name: "Roles",
                 columns: table => new
                 {
-                    LunchId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Lunches", x => x.LunchId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "SecondBreakfasts",
-                columns: table => new
-                {
-                    SecondBreakfastId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SecondBreakfasts", x => x.SecondBreakfastId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Snacks",
-                columns: table => new
-                {
-                    SnackId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Snacks", x => x.SnackId);
+                    table.PrimaryKey("PK_Roles", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -148,6 +83,188 @@ namespace Papu.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Units", x => x.UnitId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Nationality = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RoleId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Users_Roles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "Roles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Breakfasts",
+                columns: table => new
+                {
+                    BreakfastId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedById = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Breakfasts", x => x.BreakfastId);
+                    table.ForeignKey(
+                        name: "FK_Breakfasts_Users_CreatedById",
+                        column: x => x.CreatedById,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Dinners",
+                columns: table => new
+                {
+                    DinnerId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedById = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Dinners", x => x.DinnerId);
+                    table.ForeignKey(
+                        name: "FK_Dinners_Users_CreatedById",
+                        column: x => x.CreatedById,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Dishes",
+                columns: table => new
+                {
+                    DishId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DishName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    DishDescription = table.Column<string>(type: "nvarchar(1300)", maxLength: 1300, nullable: false),
+                    MethodOfPeparation = table.Column<string>(type: "nvarchar(1300)", maxLength: 1300, nullable: false),
+                    Portions = table.Column<int>(type: "int", maxLength: 3, nullable: false),
+                    PreparationTime = table.Column<int>(type: "int", maxLength: 3, nullable: false),
+                    Size = table.Column<int>(type: "int", maxLength: 3, nullable: false),
+                    DishImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedById = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Dishes", x => x.DishId);
+                    table.ForeignKey(
+                        name: "FK_Dishes_Users_CreatedById",
+                        column: x => x.CreatedById,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Lunches",
+                columns: table => new
+                {
+                    LunchId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedById = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Lunches", x => x.LunchId);
+                    table.ForeignKey(
+                        name: "FK_Lunches_Users_CreatedById",
+                        column: x => x.CreatedById,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Products",
+                columns: table => new
+                {
+                    ProductId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: true),
+                    UnitId = table.Column<int>(type: "int", nullable: true),
+                    Weight = table.Column<decimal>(type: "decimal(7,2)", maxLength: 8, nullable: false),
+                    ProductImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedById = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.ProductId);
+                    table.ForeignKey(
+                        name: "FK_Products_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "CategoryId",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Products_Units_UnitId",
+                        column: x => x.UnitId,
+                        principalTable: "Units",
+                        principalColumn: "UnitId",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Products_Users_CreatedById",
+                        column: x => x.CreatedById,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SecondBreakfasts",
+                columns: table => new
+                {
+                    SecondBreakfastId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedById = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SecondBreakfasts", x => x.SecondBreakfastId);
+                    table.ForeignKey(
+                        name: "FK_SecondBreakfasts_Users_CreatedById",
+                        column: x => x.CreatedById,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Snacks",
+                columns: table => new
+                {
+                    SnackId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedById = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Snacks", x => x.SnackId);
+                    table.ForeignKey(
+                        name: "FK_Snacks_Users_CreatedById",
+                        column: x => x.CreatedById,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -223,407 +340,6 @@ namespace Papu.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "LunchDishes",
-                columns: table => new
-                {
-                    LunchId = table.Column<int>(type: "int", nullable: false),
-                    DishId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_LunchDishes", x => new { x.LunchId, x.DishId });
-                    table.ForeignKey(
-                        name: "FK_LunchDishes_Dishes_DishId",
-                        column: x => x.DishId,
-                        principalTable: "Dishes",
-                        principalColumn: "DishId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_LunchDishes_Lunches_LunchId",
-                        column: x => x.LunchId,
-                        principalTable: "Lunches",
-                        principalColumn: "LunchId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "DishSecondBreakfasts",
-                columns: table => new
-                {
-                    SecondBreakfastId = table.Column<int>(type: "int", nullable: false),
-                    DishId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DishSecondBreakfasts", x => new { x.SecondBreakfastId, x.DishId });
-                    table.ForeignKey(
-                        name: "FK_DishSecondBreakfasts_Dishes_DishId",
-                        column: x => x.DishId,
-                        principalTable: "Dishes",
-                        principalColumn: "DishId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_DishSecondBreakfasts_SecondBreakfasts_SecondBreakfastId",
-                        column: x => x.SecondBreakfastId,
-                        principalTable: "SecondBreakfasts",
-                        principalColumn: "SecondBreakfastId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Fridays",
-                columns: table => new
-                {
-                    FridayId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    BreakfastId = table.Column<int>(type: "int", nullable: true),
-                    SecondBreakfastId = table.Column<int>(type: "int", nullable: true),
-                    LunchId = table.Column<int>(type: "int", nullable: true),
-                    SnackId = table.Column<int>(type: "int", nullable: true),
-                    DinnerId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Fridays", x => x.FridayId);
-                    table.ForeignKey(
-                        name: "FK_Fridays_Breakfasts_BreakfastId",
-                        column: x => x.BreakfastId,
-                        principalTable: "Breakfasts",
-                        principalColumn: "BreakfastId",
-                        onDelete: ReferentialAction.SetNull);
-                    table.ForeignKey(
-                        name: "FK_Fridays_Dinners_DinnerId",
-                        column: x => x.DinnerId,
-                        principalTable: "Dinners",
-                        principalColumn: "DinnerId",
-                        onDelete: ReferentialAction.SetNull);
-                    table.ForeignKey(
-                        name: "FK_Fridays_Lunches_LunchId",
-                        column: x => x.LunchId,
-                        principalTable: "Lunches",
-                        principalColumn: "LunchId",
-                        onDelete: ReferentialAction.SetNull);
-                    table.ForeignKey(
-                        name: "FK_Fridays_SecondBreakfasts_SecondBreakfastId",
-                        column: x => x.SecondBreakfastId,
-                        principalTable: "SecondBreakfasts",
-                        principalColumn: "SecondBreakfastId",
-                        onDelete: ReferentialAction.SetNull);
-                    table.ForeignKey(
-                        name: "FK_Fridays_Snacks_SnackId",
-                        column: x => x.SnackId,
-                        principalTable: "Snacks",
-                        principalColumn: "SnackId",
-                        onDelete: ReferentialAction.SetNull);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Mondays",
-                columns: table => new
-                {
-                    MondayId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    BreakfastId = table.Column<int>(type: "int", nullable: true),
-                    SecondBreakfastId = table.Column<int>(type: "int", nullable: true),
-                    LunchId = table.Column<int>(type: "int", nullable: true),
-                    SnackId = table.Column<int>(type: "int", nullable: true),
-                    DinnerId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Mondays", x => x.MondayId);
-                    table.ForeignKey(
-                        name: "FK_Mondays_Breakfasts_BreakfastId",
-                        column: x => x.BreakfastId,
-                        principalTable: "Breakfasts",
-                        principalColumn: "BreakfastId",
-                        onDelete: ReferentialAction.SetNull);
-                    table.ForeignKey(
-                        name: "FK_Mondays_Dinners_DinnerId",
-                        column: x => x.DinnerId,
-                        principalTable: "Dinners",
-                        principalColumn: "DinnerId",
-                        onDelete: ReferentialAction.SetNull);
-                    table.ForeignKey(
-                        name: "FK_Mondays_Lunches_LunchId",
-                        column: x => x.LunchId,
-                        principalTable: "Lunches",
-                        principalColumn: "LunchId",
-                        onDelete: ReferentialAction.SetNull);
-                    table.ForeignKey(
-                        name: "FK_Mondays_SecondBreakfasts_SecondBreakfastId",
-                        column: x => x.SecondBreakfastId,
-                        principalTable: "SecondBreakfasts",
-                        principalColumn: "SecondBreakfastId",
-                        onDelete: ReferentialAction.SetNull);
-                    table.ForeignKey(
-                        name: "FK_Mondays_Snacks_SnackId",
-                        column: x => x.SnackId,
-                        principalTable: "Snacks",
-                        principalColumn: "SnackId",
-                        onDelete: ReferentialAction.SetNull);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Saturdays",
-                columns: table => new
-                {
-                    SaturdayId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    BreakfastId = table.Column<int>(type: "int", nullable: true),
-                    SecondBreakfastId = table.Column<int>(type: "int", nullable: true),
-                    LunchId = table.Column<int>(type: "int", nullable: true),
-                    SnackId = table.Column<int>(type: "int", nullable: true),
-                    DinnerId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Saturdays", x => x.SaturdayId);
-                    table.ForeignKey(
-                        name: "FK_Saturdays_Breakfasts_BreakfastId",
-                        column: x => x.BreakfastId,
-                        principalTable: "Breakfasts",
-                        principalColumn: "BreakfastId",
-                        onDelete: ReferentialAction.SetNull);
-                    table.ForeignKey(
-                        name: "FK_Saturdays_Dinners_DinnerId",
-                        column: x => x.DinnerId,
-                        principalTable: "Dinners",
-                        principalColumn: "DinnerId",
-                        onDelete: ReferentialAction.SetNull);
-                    table.ForeignKey(
-                        name: "FK_Saturdays_Lunches_LunchId",
-                        column: x => x.LunchId,
-                        principalTable: "Lunches",
-                        principalColumn: "LunchId",
-                        onDelete: ReferentialAction.SetNull);
-                    table.ForeignKey(
-                        name: "FK_Saturdays_SecondBreakfasts_SecondBreakfastId",
-                        column: x => x.SecondBreakfastId,
-                        principalTable: "SecondBreakfasts",
-                        principalColumn: "SecondBreakfastId",
-                        onDelete: ReferentialAction.SetNull);
-                    table.ForeignKey(
-                        name: "FK_Saturdays_Snacks_SnackId",
-                        column: x => x.SnackId,
-                        principalTable: "Snacks",
-                        principalColumn: "SnackId",
-                        onDelete: ReferentialAction.SetNull);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "SnackDishes",
-                columns: table => new
-                {
-                    SnackId = table.Column<int>(type: "int", nullable: false),
-                    DishId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SnackDishes", x => new { x.SnackId, x.DishId });
-                    table.ForeignKey(
-                        name: "FK_SnackDishes_Dishes_DishId",
-                        column: x => x.DishId,
-                        principalTable: "Dishes",
-                        principalColumn: "DishId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_SnackDishes_Snacks_SnackId",
-                        column: x => x.SnackId,
-                        principalTable: "Snacks",
-                        principalColumn: "SnackId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Sundays",
-                columns: table => new
-                {
-                    SundayId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    BreakfastId = table.Column<int>(type: "int", nullable: true),
-                    SecondBreakfastId = table.Column<int>(type: "int", nullable: true),
-                    LunchId = table.Column<int>(type: "int", nullable: true),
-                    SnackId = table.Column<int>(type: "int", nullable: true),
-                    DinnerId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Sundays", x => x.SundayId);
-                    table.ForeignKey(
-                        name: "FK_Sundays_Breakfasts_BreakfastId",
-                        column: x => x.BreakfastId,
-                        principalTable: "Breakfasts",
-                        principalColumn: "BreakfastId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Sundays_Dinners_DinnerId",
-                        column: x => x.DinnerId,
-                        principalTable: "Dinners",
-                        principalColumn: "DinnerId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Sundays_Lunches_LunchId",
-                        column: x => x.LunchId,
-                        principalTable: "Lunches",
-                        principalColumn: "LunchId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Sundays_SecondBreakfasts_SecondBreakfastId",
-                        column: x => x.SecondBreakfastId,
-                        principalTable: "SecondBreakfasts",
-                        principalColumn: "SecondBreakfastId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Sundays_Snacks_SnackId",
-                        column: x => x.SnackId,
-                        principalTable: "Snacks",
-                        principalColumn: "SnackId",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Thursdays",
-                columns: table => new
-                {
-                    ThursdayId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    BreakfastId = table.Column<int>(type: "int", nullable: true),
-                    SecondBreakfastId = table.Column<int>(type: "int", nullable: true),
-                    LunchId = table.Column<int>(type: "int", nullable: true),
-                    SnackId = table.Column<int>(type: "int", nullable: true),
-                    DinnerId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Thursdays", x => x.ThursdayId);
-                    table.ForeignKey(
-                        name: "FK_Thursdays_Breakfasts_BreakfastId",
-                        column: x => x.BreakfastId,
-                        principalTable: "Breakfasts",
-                        principalColumn: "BreakfastId",
-                        onDelete: ReferentialAction.SetNull);
-                    table.ForeignKey(
-                        name: "FK_Thursdays_Dinners_DinnerId",
-                        column: x => x.DinnerId,
-                        principalTable: "Dinners",
-                        principalColumn: "DinnerId",
-                        onDelete: ReferentialAction.SetNull);
-                    table.ForeignKey(
-                        name: "FK_Thursdays_Lunches_LunchId",
-                        column: x => x.LunchId,
-                        principalTable: "Lunches",
-                        principalColumn: "LunchId",
-                        onDelete: ReferentialAction.SetNull);
-                    table.ForeignKey(
-                        name: "FK_Thursdays_SecondBreakfasts_SecondBreakfastId",
-                        column: x => x.SecondBreakfastId,
-                        principalTable: "SecondBreakfasts",
-                        principalColumn: "SecondBreakfastId",
-                        onDelete: ReferentialAction.SetNull);
-                    table.ForeignKey(
-                        name: "FK_Thursdays_Snacks_SnackId",
-                        column: x => x.SnackId,
-                        principalTable: "Snacks",
-                        principalColumn: "SnackId",
-                        onDelete: ReferentialAction.SetNull);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Tuesdays",
-                columns: table => new
-                {
-                    TuesdayId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    BreakfastId = table.Column<int>(type: "int", nullable: true),
-                    SecondBreakfastId = table.Column<int>(type: "int", nullable: true),
-                    LunchId = table.Column<int>(type: "int", nullable: true),
-                    SnackId = table.Column<int>(type: "int", nullable: true),
-                    DinnerId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Tuesdays", x => x.TuesdayId);
-                    table.ForeignKey(
-                        name: "FK_Tuesdays_Breakfasts_BreakfastId",
-                        column: x => x.BreakfastId,
-                        principalTable: "Breakfasts",
-                        principalColumn: "BreakfastId",
-                        onDelete: ReferentialAction.SetNull);
-                    table.ForeignKey(
-                        name: "FK_Tuesdays_Dinners_DinnerId",
-                        column: x => x.DinnerId,
-                        principalTable: "Dinners",
-                        principalColumn: "DinnerId",
-                        onDelete: ReferentialAction.SetNull);
-                    table.ForeignKey(
-                        name: "FK_Tuesdays_Lunches_LunchId",
-                        column: x => x.LunchId,
-                        principalTable: "Lunches",
-                        principalColumn: "LunchId",
-                        onDelete: ReferentialAction.SetNull);
-                    table.ForeignKey(
-                        name: "FK_Tuesdays_SecondBreakfasts_SecondBreakfastId",
-                        column: x => x.SecondBreakfastId,
-                        principalTable: "SecondBreakfasts",
-                        principalColumn: "SecondBreakfastId",
-                        onDelete: ReferentialAction.SetNull);
-                    table.ForeignKey(
-                        name: "FK_Tuesdays_Snacks_SnackId",
-                        column: x => x.SnackId,
-                        principalTable: "Snacks",
-                        principalColumn: "SnackId",
-                        onDelete: ReferentialAction.SetNull);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Wednesdays",
-                columns: table => new
-                {
-                    WednesdayId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    BreakfastId = table.Column<int>(type: "int", nullable: true),
-                    SecondBreakfastId = table.Column<int>(type: "int", nullable: true),
-                    LunchId = table.Column<int>(type: "int", nullable: true),
-                    SnackId = table.Column<int>(type: "int", nullable: true),
-                    DinnerId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Wednesdays", x => x.WednesdayId);
-                    table.ForeignKey(
-                        name: "FK_Wednesdays_Breakfasts_BreakfastId",
-                        column: x => x.BreakfastId,
-                        principalTable: "Breakfasts",
-                        principalColumn: "BreakfastId",
-                        onDelete: ReferentialAction.SetNull);
-                    table.ForeignKey(
-                        name: "FK_Wednesdays_Dinners_DinnerId",
-                        column: x => x.DinnerId,
-                        principalTable: "Dinners",
-                        principalColumn: "DinnerId",
-                        onDelete: ReferentialAction.SetNull);
-                    table.ForeignKey(
-                        name: "FK_Wednesdays_Lunches_LunchId",
-                        column: x => x.LunchId,
-                        principalTable: "Lunches",
-                        principalColumn: "LunchId",
-                        onDelete: ReferentialAction.SetNull);
-                    table.ForeignKey(
-                        name: "FK_Wednesdays_SecondBreakfasts_SecondBreakfastId",
-                        column: x => x.SecondBreakfastId,
-                        principalTable: "SecondBreakfasts",
-                        principalColumn: "SecondBreakfastId",
-                        onDelete: ReferentialAction.SetNull);
-                    table.ForeignKey(
-                        name: "FK_Wednesdays_Snacks_SnackId",
-                        column: x => x.SnackId,
-                        principalTable: "Snacks",
-                        principalColumn: "SnackId",
-                        onDelete: ReferentialAction.SetNull);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "DishTypes",
                 columns: table => new
                 {
@@ -648,95 +364,27 @@ namespace Papu.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Products",
+                name: "LunchDishes",
                 columns: table => new
                 {
-                    ProductId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: true),
-                    UnitId = table.Column<int>(type: "int", nullable: true),
-                    Weight = table.Column<decimal>(type: "decimal(7,2)", maxLength: 8, nullable: false),
-                    ProductImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    LunchId = table.Column<int>(type: "int", nullable: false),
+                    DishId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Products", x => x.ProductId);
+                    table.PrimaryKey("PK_LunchDishes", x => new { x.LunchId, x.DishId });
                     table.ForeignKey(
-                        name: "FK_Products_Categories_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Categories",
-                        principalColumn: "CategoryId",
-                        onDelete: ReferentialAction.SetNull);
+                        name: "FK_LunchDishes_Dishes_DishId",
+                        column: x => x.DishId,
+                        principalTable: "Dishes",
+                        principalColumn: "DishId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Products_Units_UnitId",
-                        column: x => x.UnitId,
-                        principalTable: "Units",
-                        principalColumn: "UnitId",
-                        onDelete: ReferentialAction.SetNull);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Menus",
-                columns: table => new
-                {
-                    MenuId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    MenuName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    MenuDescription = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    MondayId = table.Column<int>(type: "int", nullable: true),
-                    TuesdayId = table.Column<int>(type: "int", nullable: true),
-                    WednesdayId = table.Column<int>(type: "int", nullable: true),
-                    ThursdayId = table.Column<int>(type: "int", nullable: true),
-                    FridayId = table.Column<int>(type: "int", nullable: true),
-                    SaturdayId = table.Column<int>(type: "int", nullable: true),
-                    SundayId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Menus", x => x.MenuId);
-                    table.ForeignKey(
-                        name: "FK_Menus_Fridays_FridayId",
-                        column: x => x.FridayId,
-                        principalTable: "Fridays",
-                        principalColumn: "FridayId",
-                        onDelete: ReferentialAction.SetNull);
-                    table.ForeignKey(
-                        name: "FK_Menus_Mondays_MondayId",
-                        column: x => x.MondayId,
-                        principalTable: "Mondays",
-                        principalColumn: "MondayId",
-                        onDelete: ReferentialAction.SetNull);
-                    table.ForeignKey(
-                        name: "FK_Menus_Saturdays_SaturdayId",
-                        column: x => x.SaturdayId,
-                        principalTable: "Saturdays",
-                        principalColumn: "SaturdayId",
-                        onDelete: ReferentialAction.SetNull);
-                    table.ForeignKey(
-                        name: "FK_Menus_Sundays_SundayId",
-                        column: x => x.SundayId,
-                        principalTable: "Sundays",
-                        principalColumn: "SundayId",
-                        onDelete: ReferentialAction.SetNull);
-                    table.ForeignKey(
-                        name: "FK_Menus_Thursdays_ThursdayId",
-                        column: x => x.ThursdayId,
-                        principalTable: "Thursdays",
-                        principalColumn: "ThursdayId",
-                        onDelete: ReferentialAction.SetNull);
-                    table.ForeignKey(
-                        name: "FK_Menus_Tuesdays_TuesdayId",
-                        column: x => x.TuesdayId,
-                        principalTable: "Tuesdays",
-                        principalColumn: "TuesdayId",
-                        onDelete: ReferentialAction.SetNull);
-                    table.ForeignKey(
-                        name: "FK_Menus_Wednesdays_WednesdayId",
-                        column: x => x.WednesdayId,
-                        principalTable: "Wednesdays",
-                        principalColumn: "WednesdayId",
-                        onDelete: ReferentialAction.SetNull);
+                        name: "FK_LunchDishes_Lunches_LunchId",
+                        column: x => x.LunchId,
+                        principalTable: "Lunches",
+                        principalColumn: "LunchId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -860,6 +508,30 @@ namespace Papu.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "DishSecondBreakfasts",
+                columns: table => new
+                {
+                    SecondBreakfastId = table.Column<int>(type: "int", nullable: false),
+                    DishId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DishSecondBreakfasts", x => new { x.SecondBreakfastId, x.DishId });
+                    table.ForeignKey(
+                        name: "FK_DishSecondBreakfasts_Dishes_DishId",
+                        column: x => x.DishId,
+                        principalTable: "Dishes",
+                        principalColumn: "DishId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DishSecondBreakfasts_SecondBreakfasts_SecondBreakfastId",
+                        column: x => x.SecondBreakfastId,
+                        principalTable: "SecondBreakfasts",
+                        principalColumn: "SecondBreakfastId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ProductSecondBreakfasts",
                 columns: table => new
                 {
@@ -880,6 +552,192 @@ namespace Papu.Migrations
                         column: x => x.SecondBreakfastId,
                         principalTable: "SecondBreakfasts",
                         principalColumn: "SecondBreakfastId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Fridays",
+                columns: table => new
+                {
+                    FridayId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BreakfastId = table.Column<int>(type: "int", nullable: true),
+                    SecondBreakfastId = table.Column<int>(type: "int", nullable: true),
+                    LunchId = table.Column<int>(type: "int", nullable: true),
+                    SnackId = table.Column<int>(type: "int", nullable: true),
+                    DinnerId = table.Column<int>(type: "int", nullable: true),
+                    CreatedById = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Fridays", x => x.FridayId);
+                    table.ForeignKey(
+                        name: "FK_Fridays_Breakfasts_BreakfastId",
+                        column: x => x.BreakfastId,
+                        principalTable: "Breakfasts",
+                        principalColumn: "BreakfastId",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Fridays_Dinners_DinnerId",
+                        column: x => x.DinnerId,
+                        principalTable: "Dinners",
+                        principalColumn: "DinnerId",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Fridays_Lunches_LunchId",
+                        column: x => x.LunchId,
+                        principalTable: "Lunches",
+                        principalColumn: "LunchId",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Fridays_SecondBreakfasts_SecondBreakfastId",
+                        column: x => x.SecondBreakfastId,
+                        principalTable: "SecondBreakfasts",
+                        principalColumn: "SecondBreakfastId",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Fridays_Snacks_SnackId",
+                        column: x => x.SnackId,
+                        principalTable: "Snacks",
+                        principalColumn: "SnackId",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Fridays_Users_CreatedById",
+                        column: x => x.CreatedById,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Mondays",
+                columns: table => new
+                {
+                    MondayId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BreakfastId = table.Column<int>(type: "int", nullable: true),
+                    SecondBreakfastId = table.Column<int>(type: "int", nullable: true),
+                    LunchId = table.Column<int>(type: "int", nullable: true),
+                    SnackId = table.Column<int>(type: "int", nullable: true),
+                    DinnerId = table.Column<int>(type: "int", nullable: true),
+                    CreatedById = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Mondays", x => x.MondayId);
+                    table.ForeignKey(
+                        name: "FK_Mondays_Breakfasts_BreakfastId",
+                        column: x => x.BreakfastId,
+                        principalTable: "Breakfasts",
+                        principalColumn: "BreakfastId",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Mondays_Dinners_DinnerId",
+                        column: x => x.DinnerId,
+                        principalTable: "Dinners",
+                        principalColumn: "DinnerId",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Mondays_Lunches_LunchId",
+                        column: x => x.LunchId,
+                        principalTable: "Lunches",
+                        principalColumn: "LunchId",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Mondays_SecondBreakfasts_SecondBreakfastId",
+                        column: x => x.SecondBreakfastId,
+                        principalTable: "SecondBreakfasts",
+                        principalColumn: "SecondBreakfastId",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Mondays_Snacks_SnackId",
+                        column: x => x.SnackId,
+                        principalTable: "Snacks",
+                        principalColumn: "SnackId",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Mondays_Users_CreatedById",
+                        column: x => x.CreatedById,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Saturdays",
+                columns: table => new
+                {
+                    SaturdayId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BreakfastId = table.Column<int>(type: "int", nullable: true),
+                    SecondBreakfastId = table.Column<int>(type: "int", nullable: true),
+                    LunchId = table.Column<int>(type: "int", nullable: true),
+                    SnackId = table.Column<int>(type: "int", nullable: true),
+                    DinnerId = table.Column<int>(type: "int", nullable: true),
+                    CreatedById = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Saturdays", x => x.SaturdayId);
+                    table.ForeignKey(
+                        name: "FK_Saturdays_Breakfasts_BreakfastId",
+                        column: x => x.BreakfastId,
+                        principalTable: "Breakfasts",
+                        principalColumn: "BreakfastId",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Saturdays_Dinners_DinnerId",
+                        column: x => x.DinnerId,
+                        principalTable: "Dinners",
+                        principalColumn: "DinnerId",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Saturdays_Lunches_LunchId",
+                        column: x => x.LunchId,
+                        principalTable: "Lunches",
+                        principalColumn: "LunchId",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Saturdays_SecondBreakfasts_SecondBreakfastId",
+                        column: x => x.SecondBreakfastId,
+                        principalTable: "SecondBreakfasts",
+                        principalColumn: "SecondBreakfastId",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Saturdays_Snacks_SnackId",
+                        column: x => x.SnackId,
+                        principalTable: "Snacks",
+                        principalColumn: "SnackId",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Saturdays_Users_CreatedById",
+                        column: x => x.CreatedById,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SnackDishes",
+                columns: table => new
+                {
+                    SnackId = table.Column<int>(type: "int", nullable: false),
+                    DishId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SnackDishes", x => new { x.SnackId, x.DishId });
+                    table.ForeignKey(
+                        name: "FK_SnackDishes_Dishes_DishId",
+                        column: x => x.DishId,
+                        principalTable: "Dishes",
+                        principalColumn: "DishId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_SnackDishes_Snacks_SnackId",
+                        column: x => x.SnackId,
+                        principalTable: "Snacks",
+                        principalColumn: "SnackId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -907,6 +765,297 @@ namespace Papu.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Sundays",
+                columns: table => new
+                {
+                    SundayId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BreakfastId = table.Column<int>(type: "int", nullable: true),
+                    SecondBreakfastId = table.Column<int>(type: "int", nullable: true),
+                    LunchId = table.Column<int>(type: "int", nullable: true),
+                    SnackId = table.Column<int>(type: "int", nullable: true),
+                    DinnerId = table.Column<int>(type: "int", nullable: true),
+                    CreatedById = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Sundays", x => x.SundayId);
+                    table.ForeignKey(
+                        name: "FK_Sundays_Breakfasts_BreakfastId",
+                        column: x => x.BreakfastId,
+                        principalTable: "Breakfasts",
+                        principalColumn: "BreakfastId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Sundays_Dinners_DinnerId",
+                        column: x => x.DinnerId,
+                        principalTable: "Dinners",
+                        principalColumn: "DinnerId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Sundays_Lunches_LunchId",
+                        column: x => x.LunchId,
+                        principalTable: "Lunches",
+                        principalColumn: "LunchId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Sundays_SecondBreakfasts_SecondBreakfastId",
+                        column: x => x.SecondBreakfastId,
+                        principalTable: "SecondBreakfasts",
+                        principalColumn: "SecondBreakfastId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Sundays_Snacks_SnackId",
+                        column: x => x.SnackId,
+                        principalTable: "Snacks",
+                        principalColumn: "SnackId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Sundays_Users_CreatedById",
+                        column: x => x.CreatedById,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Thursdays",
+                columns: table => new
+                {
+                    ThursdayId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BreakfastId = table.Column<int>(type: "int", nullable: true),
+                    SecondBreakfastId = table.Column<int>(type: "int", nullable: true),
+                    LunchId = table.Column<int>(type: "int", nullable: true),
+                    SnackId = table.Column<int>(type: "int", nullable: true),
+                    DinnerId = table.Column<int>(type: "int", nullable: true),
+                    CreatedById = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Thursdays", x => x.ThursdayId);
+                    table.ForeignKey(
+                        name: "FK_Thursdays_Breakfasts_BreakfastId",
+                        column: x => x.BreakfastId,
+                        principalTable: "Breakfasts",
+                        principalColumn: "BreakfastId",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Thursdays_Dinners_DinnerId",
+                        column: x => x.DinnerId,
+                        principalTable: "Dinners",
+                        principalColumn: "DinnerId",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Thursdays_Lunches_LunchId",
+                        column: x => x.LunchId,
+                        principalTable: "Lunches",
+                        principalColumn: "LunchId",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Thursdays_SecondBreakfasts_SecondBreakfastId",
+                        column: x => x.SecondBreakfastId,
+                        principalTable: "SecondBreakfasts",
+                        principalColumn: "SecondBreakfastId",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Thursdays_Snacks_SnackId",
+                        column: x => x.SnackId,
+                        principalTable: "Snacks",
+                        principalColumn: "SnackId",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Thursdays_Users_CreatedById",
+                        column: x => x.CreatedById,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Tuesdays",
+                columns: table => new
+                {
+                    TuesdayId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BreakfastId = table.Column<int>(type: "int", nullable: true),
+                    SecondBreakfastId = table.Column<int>(type: "int", nullable: true),
+                    LunchId = table.Column<int>(type: "int", nullable: true),
+                    SnackId = table.Column<int>(type: "int", nullable: true),
+                    DinnerId = table.Column<int>(type: "int", nullable: true),
+                    CreatedById = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tuesdays", x => x.TuesdayId);
+                    table.ForeignKey(
+                        name: "FK_Tuesdays_Breakfasts_BreakfastId",
+                        column: x => x.BreakfastId,
+                        principalTable: "Breakfasts",
+                        principalColumn: "BreakfastId",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Tuesdays_Dinners_DinnerId",
+                        column: x => x.DinnerId,
+                        principalTable: "Dinners",
+                        principalColumn: "DinnerId",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Tuesdays_Lunches_LunchId",
+                        column: x => x.LunchId,
+                        principalTable: "Lunches",
+                        principalColumn: "LunchId",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Tuesdays_SecondBreakfasts_SecondBreakfastId",
+                        column: x => x.SecondBreakfastId,
+                        principalTable: "SecondBreakfasts",
+                        principalColumn: "SecondBreakfastId",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Tuesdays_Snacks_SnackId",
+                        column: x => x.SnackId,
+                        principalTable: "Snacks",
+                        principalColumn: "SnackId",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Tuesdays_Users_CreatedById",
+                        column: x => x.CreatedById,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Wednesdays",
+                columns: table => new
+                {
+                    WednesdayId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BreakfastId = table.Column<int>(type: "int", nullable: true),
+                    SecondBreakfastId = table.Column<int>(type: "int", nullable: true),
+                    LunchId = table.Column<int>(type: "int", nullable: true),
+                    SnackId = table.Column<int>(type: "int", nullable: true),
+                    DinnerId = table.Column<int>(type: "int", nullable: true),
+                    CreatedById = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Wednesdays", x => x.WednesdayId);
+                    table.ForeignKey(
+                        name: "FK_Wednesdays_Breakfasts_BreakfastId",
+                        column: x => x.BreakfastId,
+                        principalTable: "Breakfasts",
+                        principalColumn: "BreakfastId",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Wednesdays_Dinners_DinnerId",
+                        column: x => x.DinnerId,
+                        principalTable: "Dinners",
+                        principalColumn: "DinnerId",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Wednesdays_Lunches_LunchId",
+                        column: x => x.LunchId,
+                        principalTable: "Lunches",
+                        principalColumn: "LunchId",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Wednesdays_SecondBreakfasts_SecondBreakfastId",
+                        column: x => x.SecondBreakfastId,
+                        principalTable: "SecondBreakfasts",
+                        principalColumn: "SecondBreakfastId",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Wednesdays_Snacks_SnackId",
+                        column: x => x.SnackId,
+                        principalTable: "Snacks",
+                        principalColumn: "SnackId",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Wednesdays_Users_CreatedById",
+                        column: x => x.CreatedById,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Menus",
+                columns: table => new
+                {
+                    MenuId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MenuName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    MenuDescription = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    MondayId = table.Column<int>(type: "int", nullable: true),
+                    TuesdayId = table.Column<int>(type: "int", nullable: true),
+                    WednesdayId = table.Column<int>(type: "int", nullable: true),
+                    ThursdayId = table.Column<int>(type: "int", nullable: true),
+                    FridayId = table.Column<int>(type: "int", nullable: true),
+                    SaturdayId = table.Column<int>(type: "int", nullable: true),
+                    SundayId = table.Column<int>(type: "int", nullable: true),
+                    CreatedById = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Menus", x => x.MenuId);
+                    table.ForeignKey(
+                        name: "FK_Menus_Fridays_FridayId",
+                        column: x => x.FridayId,
+                        principalTable: "Fridays",
+                        principalColumn: "FridayId",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Menus_Mondays_MondayId",
+                        column: x => x.MondayId,
+                        principalTable: "Mondays",
+                        principalColumn: "MondayId",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Menus_Saturdays_SaturdayId",
+                        column: x => x.SaturdayId,
+                        principalTable: "Saturdays",
+                        principalColumn: "SaturdayId",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Menus_Sundays_SundayId",
+                        column: x => x.SundayId,
+                        principalTable: "Sundays",
+                        principalColumn: "SundayId",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Menus_Thursdays_ThursdayId",
+                        column: x => x.ThursdayId,
+                        principalTable: "Thursdays",
+                        principalColumn: "ThursdayId",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Menus_Tuesdays_TuesdayId",
+                        column: x => x.TuesdayId,
+                        principalTable: "Tuesdays",
+                        principalColumn: "TuesdayId",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Menus_Users_CreatedById",
+                        column: x => x.CreatedById,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Menus_Wednesdays_WednesdayId",
+                        column: x => x.WednesdayId,
+                        principalTable: "Wednesdays",
+                        principalColumn: "WednesdayId",
+                        onDelete: ReferentialAction.SetNull);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Breakfasts_CreatedById",
+                table: "Breakfasts",
+                column: "CreatedById");
+
             migrationBuilder.CreateIndex(
                 name: "IX_DinnerDishes_DishId",
                 table: "DinnerDishes",
@@ -918,9 +1067,19 @@ namespace Papu.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Dinners_CreatedById",
+                table: "Dinners",
+                column: "CreatedById");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_DishBreakfasts_DishId",
                 table: "DishBreakfasts",
                 column: "DishId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Dishes_CreatedById",
+                table: "Dishes",
+                column: "CreatedById");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DishKindsOf_KindOfId",
@@ -948,6 +1107,11 @@ namespace Papu.Migrations
                 column: "BreakfastId",
                 unique: true,
                 filter: "[BreakfastId] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Fridays_CreatedById",
+                table: "Fridays",
+                column: "CreatedById");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Fridays_DinnerId",
@@ -983,9 +1147,19 @@ namespace Papu.Migrations
                 column: "DishId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Lunches_CreatedById",
+                table: "Lunches",
+                column: "CreatedById");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_LunchProducts_ProductId",
                 table: "LunchProducts",
                 column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Menus_CreatedById",
+                table: "Menus",
+                column: "CreatedById");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Menus_FridayId",
@@ -1044,6 +1218,11 @@ namespace Papu.Migrations
                 filter: "[BreakfastId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Mondays_CreatedById",
+                table: "Mondays",
+                column: "CreatedById");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Mondays_DinnerId",
                 table: "Mondays",
                 column: "DinnerId",
@@ -1087,6 +1266,11 @@ namespace Papu.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Products_CreatedById",
+                table: "Products",
+                column: "CreatedById");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Products_UnitId",
                 table: "Products",
                 column: "UnitId");
@@ -1102,6 +1286,11 @@ namespace Papu.Migrations
                 column: "BreakfastId",
                 unique: true,
                 filter: "[BreakfastId] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Saturdays_CreatedById",
+                table: "Saturdays",
+                column: "CreatedById");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Saturdays_DinnerId",
@@ -1132,6 +1321,11 @@ namespace Papu.Migrations
                 filter: "[SnackId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_SecondBreakfasts_CreatedById",
+                table: "SecondBreakfasts",
+                column: "CreatedById");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_SnackDishes_DishId",
                 table: "SnackDishes",
                 column: "DishId");
@@ -1142,11 +1336,21 @@ namespace Papu.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Snacks_CreatedById",
+                table: "Snacks",
+                column: "CreatedById");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Sundays_BreakfastId",
                 table: "Sundays",
                 column: "BreakfastId",
                 unique: true,
                 filter: "[BreakfastId] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Sundays_CreatedById",
+                table: "Sundays",
+                column: "CreatedById");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Sundays_DinnerId",
@@ -1184,6 +1388,11 @@ namespace Papu.Migrations
                 filter: "[BreakfastId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Thursdays_CreatedById",
+                table: "Thursdays",
+                column: "CreatedById");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Thursdays_DinnerId",
                 table: "Thursdays",
                 column: "DinnerId",
@@ -1219,6 +1428,11 @@ namespace Papu.Migrations
                 filter: "[BreakfastId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Tuesdays_CreatedById",
+                table: "Tuesdays",
+                column: "CreatedById");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Tuesdays_DinnerId",
                 table: "Tuesdays",
                 column: "DinnerId",
@@ -1247,11 +1461,21 @@ namespace Papu.Migrations
                 filter: "[SnackId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Users_RoleId",
+                table: "Users",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Wednesdays_BreakfastId",
                 table: "Wednesdays",
                 column: "BreakfastId",
                 unique: true,
                 filter: "[BreakfastId] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Wednesdays_CreatedById",
+                table: "Wednesdays",
+                column: "CreatedById");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Wednesdays_DinnerId",
@@ -1385,6 +1609,12 @@ namespace Papu.Migrations
 
             migrationBuilder.DropTable(
                 name: "Units");
+
+            migrationBuilder.DropTable(
+                name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Roles");
         }
     }
 }
