@@ -27,5 +27,28 @@ namespace PapuAPI.IntegrationTests
             //sprawdzamy czy status kod z tej odpowiedzi jest równy ok
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
         }
+
+        //getAnotherOneProduct
+        [Theory]
+        [InlineData("1")]
+        [InlineData("2")]
+        public async Task AnotherGetProduct_WithParameter_ReturnsOkResult(string queryParams)
+        {
+            //arrange
+
+            var factory = new WebApplicationFactory<Startup>();
+            var client = factory.CreateClient();
+
+            //act
+
+            var response = await client.GetAsync("https://localhost:5001/api/product/" + queryParams);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy ok
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        }
+
+
     }
 }

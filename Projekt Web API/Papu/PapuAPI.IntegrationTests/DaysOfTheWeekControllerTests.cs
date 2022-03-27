@@ -141,5 +141,152 @@ namespace PapuAPI.IntegrationTests
             //sprawdzamy czy status kod z tej odpowiedzi jest równy ok
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
         }
+
+        //getAnotherOneMonday
+        [Theory]
+        [InlineData("1")]
+        [InlineData("2")]
+        public async Task AnotherGetMonday_WithParameter_ReturnsOkResult(string queryParams)
+        {
+            //arrange
+
+            var factory = new WebApplicationFactory<Startup>();
+            var client = factory.CreateClient();
+
+            //act
+
+            var response = await client.GetAsync("https://localhost:5001/api/monday/" + queryParams);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy ok
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        }
+
+        //getAnotherOneTuesday
+        [Theory]
+        [InlineData("1")]
+        [InlineData("2")]
+        public async Task AnotherGetTuesday_WithParameter_ReturnsOkResult(string queryParams)
+        {
+            //arrange
+
+            var factory = new WebApplicationFactory<Startup>();
+            var client = factory.CreateClient();
+
+            //act
+
+            var response = await client.GetAsync("https://localhost:5001/api/tuesday/" + queryParams);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy ok
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        }
+
+        //getAnotherOneWednesday
+        [Theory]
+        [InlineData("1")]
+        [InlineData("2")]
+        public async Task AnotherGetWednesday_WithParameter_ReturnsOkResult(string queryParams)
+        {
+            //arrange
+
+            var factory = new WebApplicationFactory<Startup>();
+            var client = factory.CreateClient();
+
+            //act
+
+            var response = await client.GetAsync("https://localhost:5001/api/wednesday/" + queryParams);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy ok
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        }
+
+        //getAnotherOneThursday
+        [Theory]
+        [InlineData("1")]
+        [InlineData("2")]
+        public async Task AnotherGetThursday_WithParameter_ReturnsOkResult(string queryParams)
+        {
+            //arrange
+
+            var factory = new WebApplicationFactory<Startup>();
+            var client = factory.CreateClient();
+
+            //act
+
+            var response = await client.GetAsync("https://localhost:5001/api/thursday/" + queryParams);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy ok
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        }
+
+        //getAnotherOneFriday
+        [Theory]
+        [InlineData("1")]
+        [InlineData("2")]
+        public async Task AnotherGetFriday_WithParameter_ReturnsOkResult(string queryParams)
+        {
+            //arrange
+
+            var factory = new WebApplicationFactory<Startup>();
+            var client = factory.CreateClient();
+
+            //act
+
+            var response = await client.GetAsync("https://localhost:5001/api/friday/" + queryParams);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy ok
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        }
+
+        //getAnotherOneSaturday
+        [Theory]
+        [InlineData("1")]
+        [InlineData("2")]
+        public async Task AnotherGetSaturday_WithParameter_ReturnsOkResult(string queryParams)
+        {
+            //arrange
+
+            var factory = new WebApplicationFactory<Startup>();
+            var client = factory.CreateClient();
+
+            //act
+
+            var response = await client.GetAsync("https://localhost:5001/api/saturday/" + queryParams);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy ok
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        }
+
+        //getAnotherOneSunday
+        [Theory]
+        [InlineData("1")]
+        [InlineData("2")]
+        public async Task AnotherGetSunday_WithParameter_ReturnsOkResult(string queryParams)
+        {
+            //arrange
+
+            var factory = new WebApplicationFactory<Startup>();
+            var client = factory.CreateClient();
+
+            //act
+
+            var response = await client.GetAsync("https://localhost:5001/api/sunday/" + queryParams);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy ok
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        }
     }
 }
