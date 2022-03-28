@@ -1,13 +1,28 @@
 ﻿using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Papu;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace PapuAPI.IntegrationTests
 {
-    public class ProductControllerTests
+    public class ProductControllerTests : IClassFixture<WebApplicationFactory<Startup>>
     {
+        private HttpClient _client;
+
+        //Konstruktor po to, aby nie tworzyć klienta oddzielnie dla każdego testu
+        //jeśli chcemy aby kontekst był współdzielony między testami (czyli obiekt Product
+        //ControllerTests był stworzony raz, a nie za każdym razem, kiedy uruchamia się test)
+        public ProductControllerTests(WebApplicationFactory<Startup> factory)
+        {
+            //Tutaj chcemy uruchomić nasze Api po to abyśmy byli w stanie wysłać zapytanie http jakimś
+            //klientem http z kodu 
+            //należy dodać zależność, aby startup działał
+            _client = factory.CreateClient();
+            //Wykorzystujemy fabrykę aby zwróciła nam odpowiedniego klienta http
+            //z pomocą klienta odwołujemy się do metod z naszego api
+        }
 
         //getOneProduct
         [Fact]
@@ -15,12 +30,9 @@ namespace PapuAPI.IntegrationTests
         {
             //arrange
 
-            var factory = new WebApplicationFactory<Startup>();
-            var client = factory.CreateClient();
-
             //act
 
-            var response = await client.GetAsync("https://localhost:5001/api/product/1");
+            var response = await _client.GetAsync("https://localhost:5001/api/product/1");
 
             //assert
 
@@ -36,12 +48,9 @@ namespace PapuAPI.IntegrationTests
         {
             //arrange
 
-            var factory = new WebApplicationFactory<Startup>();
-            var client = factory.CreateClient();
-
             //act
 
-            var response = await client.GetAsync("https://localhost:5001/api/product/" + queryParams);
+            var response = await _client.GetAsync("https://localhost:5001/api/product/" + queryParams);
 
             //assert
 
@@ -57,12 +66,9 @@ namespace PapuAPI.IntegrationTests
         {
             //arrange
 
-            var factory = new WebApplicationFactory<Startup>();
-            var client = factory.CreateClient();
-
             //act
 
-            var response = await client.GetAsync("https://localhost:5001/api/product/" + queryParams);
+            var response = await _client.GetAsync("https://localhost:5001/api/product/" + queryParams);
 
             //assert
 

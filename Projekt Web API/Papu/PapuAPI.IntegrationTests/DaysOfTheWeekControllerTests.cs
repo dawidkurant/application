@@ -1,13 +1,28 @@
 ﻿using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Papu;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace PapuAPI.IntegrationTests
 {
-    public class DaysOfTheWeekControllerTests
+    public class DaysOfTheWeekControllerTests : IClassFixture<WebApplicationFactory<Startup>>
     {
+        private HttpClient _client;
+
+        //Konstruktor po to, aby nie tworzyć klienta oddzielnie dla każdego testu
+        //jeśli chcemy aby kontekst był współdzielony między testami (czyli obiekt DaysOfTheWeek
+        //ControllerTests był stworzony raz, a nie za każdym razem, kiedy uruchamia się test)
+        public DaysOfTheWeekControllerTests(WebApplicationFactory<Startup> factory)
+        {
+            //Tutaj chcemy uruchomić nasze Api po to abyśmy byli w stanie wysłać zapytanie http jakimś
+            //klientem http z kodu 
+            //należy dodać zależność, aby startup działał
+            _client = factory.CreateClient();
+            //Wykorzystujemy fabrykę aby zwróciła nam odpowiedniego klienta http
+            //z pomocą klienta odwołujemy się do metod z naszego api
+        }
 
         //getOneMonday
         [Fact]
@@ -15,12 +30,9 @@ namespace PapuAPI.IntegrationTests
         {
             //arrange
 
-            var factory = new WebApplicationFactory<Startup>();
-            var client = factory.CreateClient();
-
             //act
 
-            var response = await client.GetAsync("https://localhost:5001/api/monday/1");
+            var response = await _client.GetAsync("https://localhost:5001/api/monday/1");
 
             //assert
 
@@ -34,12 +46,9 @@ namespace PapuAPI.IntegrationTests
         {
             //arrange
 
-            var factory = new WebApplicationFactory<Startup>();
-            var client = factory.CreateClient();
-
             //act
 
-            var response = await client.GetAsync("https://localhost:5001/api/tuesday/1");
+            var response = await _client.GetAsync("https://localhost:5001/api/tuesday/1");
 
             //assert
 
@@ -53,12 +62,9 @@ namespace PapuAPI.IntegrationTests
         {
             //arrange
 
-            var factory = new WebApplicationFactory<Startup>();
-            var client = factory.CreateClient();
-
             //act
 
-            var response = await client.GetAsync("https://localhost:5001/api/wednesday/1");
+            var response = await _client.GetAsync("https://localhost:5001/api/wednesday/1");
 
             //assert
 
@@ -72,12 +78,9 @@ namespace PapuAPI.IntegrationTests
         {
             //arrange
 
-            var factory = new WebApplicationFactory<Startup>();
-            var client = factory.CreateClient();
-
             //act
 
-            var response = await client.GetAsync("https://localhost:5001/api/thursday/1");
+            var response = await _client.GetAsync("https://localhost:5001/api/thursday/1");
 
             //assert
 
@@ -91,12 +94,9 @@ namespace PapuAPI.IntegrationTests
         {
             //arrange
 
-            var factory = new WebApplicationFactory<Startup>();
-            var client = factory.CreateClient();
-
             //act
 
-            var response = await client.GetAsync("https://localhost:5001/api/friday/1");
+            var response = await _client.GetAsync("https://localhost:5001/api/friday/1");
 
             //assert
 
@@ -110,12 +110,9 @@ namespace PapuAPI.IntegrationTests
         {
             //arrange
 
-            var factory = new WebApplicationFactory<Startup>();
-            var client = factory.CreateClient();
-
             //act
 
-            var response = await client.GetAsync("https://localhost:5001/api/saturday/1");
+            var response = await _client.GetAsync("https://localhost:5001/api/saturday/1");
 
             //assert
 
@@ -129,12 +126,9 @@ namespace PapuAPI.IntegrationTests
         {
             //arrange
 
-            var factory = new WebApplicationFactory<Startup>();
-            var client = factory.CreateClient();
-
             //act
 
-            var response = await client.GetAsync("https://localhost:5001/api/sunday/1");
+            var response = await _client.GetAsync("https://localhost:5001/api/sunday/1");
 
             //assert
 
@@ -150,12 +144,9 @@ namespace PapuAPI.IntegrationTests
         {
             //arrange
 
-            var factory = new WebApplicationFactory<Startup>();
-            var client = factory.CreateClient();
-
             //act
 
-            var response = await client.GetAsync("https://localhost:5001/api/monday/" + queryParams);
+            var response = await _client.GetAsync("https://localhost:5001/api/monday/" + queryParams);
 
             //assert
 
@@ -171,12 +162,9 @@ namespace PapuAPI.IntegrationTests
         {
             //arrange
 
-            var factory = new WebApplicationFactory<Startup>();
-            var client = factory.CreateClient();
-
             //act
 
-            var response = await client.GetAsync("https://localhost:5001/api/tuesday/" + queryParams);
+            var response = await _client.GetAsync("https://localhost:5001/api/tuesday/" + queryParams);
 
             //assert
 
@@ -192,12 +180,9 @@ namespace PapuAPI.IntegrationTests
         {
             //arrange
 
-            var factory = new WebApplicationFactory<Startup>();
-            var client = factory.CreateClient();
-
             //act
 
-            var response = await client.GetAsync("https://localhost:5001/api/wednesday/" + queryParams);
+            var response = await _client.GetAsync("https://localhost:5001/api/wednesday/" + queryParams);
 
             //assert
 
@@ -213,12 +198,9 @@ namespace PapuAPI.IntegrationTests
         {
             //arrange
 
-            var factory = new WebApplicationFactory<Startup>();
-            var client = factory.CreateClient();
-
             //act
 
-            var response = await client.GetAsync("https://localhost:5001/api/thursday/" + queryParams);
+            var response = await _client.GetAsync("https://localhost:5001/api/thursday/" + queryParams);
 
             //assert
 
@@ -234,12 +216,9 @@ namespace PapuAPI.IntegrationTests
         {
             //arrange
 
-            var factory = new WebApplicationFactory<Startup>();
-            var client = factory.CreateClient();
-
             //act
 
-            var response = await client.GetAsync("https://localhost:5001/api/friday/" + queryParams);
+            var response = await _client.GetAsync("https://localhost:5001/api/friday/" + queryParams);
 
             //assert
 
@@ -255,12 +234,9 @@ namespace PapuAPI.IntegrationTests
         {
             //arrange
 
-            var factory = new WebApplicationFactory<Startup>();
-            var client = factory.CreateClient();
-
             //act
 
-            var response = await client.GetAsync("https://localhost:5001/api/saturday/" + queryParams);
+            var response = await _client.GetAsync("https://localhost:5001/api/saturday/" + queryParams);
 
             //assert
 
@@ -276,12 +252,9 @@ namespace PapuAPI.IntegrationTests
         {
             //arrange
 
-            var factory = new WebApplicationFactory<Startup>();
-            var client = factory.CreateClient();
-
             //act
 
-            var response = await client.GetAsync("https://localhost:5001/api/sunday/" + queryParams);
+            var response = await _client.GetAsync("https://localhost:5001/api/sunday/" + queryParams);
 
             //assert
 
@@ -297,12 +270,9 @@ namespace PapuAPI.IntegrationTests
         {
             //arrange
 
-            var factory = new WebApplicationFactory<Startup>();
-            var client = factory.CreateClient();
-
             //act
 
-            var response = await client.GetAsync("https://localhost:5001/api/monday/" + queryParams);
+            var response = await _client.GetAsync("https://localhost:5001/api/monday/" + queryParams);
 
             //assert
 
@@ -318,12 +288,9 @@ namespace PapuAPI.IntegrationTests
         {
             //arrange
 
-            var factory = new WebApplicationFactory<Startup>();
-            var client = factory.CreateClient();
-
             //act
 
-            var response = await client.GetAsync("https://localhost:5001/api/tuesday/" + queryParams);
+            var response = await _client.GetAsync("https://localhost:5001/api/tuesday/" + queryParams);
 
             //assert
 
@@ -339,12 +306,9 @@ namespace PapuAPI.IntegrationTests
         {
             //arrange
 
-            var factory = new WebApplicationFactory<Startup>();
-            var client = factory.CreateClient();
-
             //act
 
-            var response = await client.GetAsync("https://localhost:5001/api/wednesday/" + queryParams);
+            var response = await _client.GetAsync("https://localhost:5001/api/wednesday/" + queryParams);
 
             //assert
 
@@ -360,12 +324,9 @@ namespace PapuAPI.IntegrationTests
         {
             //arrange
 
-            var factory = new WebApplicationFactory<Startup>();
-            var client = factory.CreateClient();
-
             //act
 
-            var response = await client.GetAsync("https://localhost:5001/api/thursday/" + queryParams);
+            var response = await _client.GetAsync("https://localhost:5001/api/thursday/" + queryParams);
 
             //assert
 
@@ -381,12 +342,9 @@ namespace PapuAPI.IntegrationTests
         {
             //arrange
 
-            var factory = new WebApplicationFactory<Startup>();
-            var client = factory.CreateClient();
-
             //act
 
-            var response = await client.GetAsync("https://localhost:5001/api/friday/" + queryParams);
+            var response = await _client.GetAsync("https://localhost:5001/api/friday/" + queryParams);
 
             //assert
 
@@ -402,12 +360,9 @@ namespace PapuAPI.IntegrationTests
         {
             //arrange
 
-            var factory = new WebApplicationFactory<Startup>();
-            var client = factory.CreateClient();
-
             //act
 
-            var response = await client.GetAsync("https://localhost:5001/api/saturday/" + queryParams);
+            var response = await _client.GetAsync("https://localhost:5001/api/saturday/" + queryParams);
 
             //assert
 
@@ -423,12 +378,9 @@ namespace PapuAPI.IntegrationTests
         {
             //arrange
 
-            var factory = new WebApplicationFactory<Startup>();
-            var client = factory.CreateClient();
-
             //act
 
-            var response = await client.GetAsync("https://localhost:5001/api/sunday/" + queryParams);
+            var response = await _client.GetAsync("https://localhost:5001/api/sunday/" + queryParams);
 
             //assert
 

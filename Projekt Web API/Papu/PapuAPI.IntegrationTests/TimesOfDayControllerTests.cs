@@ -1,13 +1,28 @@
 ﻿using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Papu;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace PapuAPI.IntegrationTests
 {
-    public class TimesOfDayControllerTests
+    public class TimesOfDayControllerTests : IClassFixture<WebApplicationFactory<Startup>>
     {
+        private HttpClient _client;
+
+        //Konstruktor po to, aby nie tworzyć klienta oddzielnie dla każdego testu
+        //jeśli chcemy aby kontekst był współdzielony między testami (czyli obiekt TimesOfDay
+        //ControllerTests był stworzony raz, a nie za każdym razem, kiedy uruchamia się test)
+        public TimesOfDayControllerTests(WebApplicationFactory<Startup> factory)
+        {
+            //Tutaj chcemy uruchomić nasze Api po to abyśmy byli w stanie wysłać zapytanie http jakimś
+            //klientem http z kodu 
+            //należy dodać zależność, aby startup działał
+            _client = factory.CreateClient();
+            //Wykorzystujemy fabrykę aby zwróciła nam odpowiedniego klienta http
+            //z pomocą klienta odwołujemy się do metod z naszego api
+        }
 
         //getOneBreakfast
         [Fact]
@@ -15,12 +30,9 @@ namespace PapuAPI.IntegrationTests
         {
             //arrange
 
-            var factory = new WebApplicationFactory<Startup>();
-            var client = factory.CreateClient();
-
             //act
 
-            var response = await client.GetAsync("https://localhost:5001/api/breakfast/1");
+            var response = await _client.GetAsync("https://localhost:5001/api/breakfast/1");
 
             //assert
 
@@ -34,12 +46,9 @@ namespace PapuAPI.IntegrationTests
         {
             //arrange
 
-            var factory = new WebApplicationFactory<Startup>();
-            var client = factory.CreateClient();
-
             //act
 
-            var response = await client.GetAsync("https://localhost:5001/api/secondbreakfast/1");
+            var response = await _client.GetAsync("https://localhost:5001/api/secondbreakfast/1");
 
             //assert
 
@@ -53,12 +62,9 @@ namespace PapuAPI.IntegrationTests
         {
             //arrange
 
-            var factory = new WebApplicationFactory<Startup>();
-            var client = factory.CreateClient();
-
             //act
 
-            var response = await client.GetAsync("https://localhost:5001/api/lunch/1");
+            var response = await _client.GetAsync("https://localhost:5001/api/lunch/1");
 
             //assert
 
@@ -72,12 +78,9 @@ namespace PapuAPI.IntegrationTests
         {
             //arrange
 
-            var factory = new WebApplicationFactory<Startup>();
-            var client = factory.CreateClient();
-
             //act
 
-            var response = await client.GetAsync("https://localhost:5001/api/snack/1");
+            var response = await _client.GetAsync("https://localhost:5001/api/snack/1");
 
             //assert
 
@@ -91,12 +94,9 @@ namespace PapuAPI.IntegrationTests
         {
             //arrange
 
-            var factory = new WebApplicationFactory<Startup>();
-            var client = factory.CreateClient();
-
             //act
 
-            var response = await client.GetAsync("https://localhost:5001/api/dinner/1");
+            var response = await _client.GetAsync("https://localhost:5001/api/dinner/1");
 
             //assert
 
@@ -112,12 +112,9 @@ namespace PapuAPI.IntegrationTests
         {
             //arrange
 
-            var factory = new WebApplicationFactory<Startup>();
-            var client = factory.CreateClient();
-
             //act
 
-            var response = await client.GetAsync("https://localhost:5001/api/breakfast/" + queryParams);
+            var response = await _client.GetAsync("https://localhost:5001/api/breakfast/" + queryParams);
 
             //assert
 
@@ -133,12 +130,9 @@ namespace PapuAPI.IntegrationTests
         {
             //arrange
 
-            var factory = new WebApplicationFactory<Startup>();
-            var client = factory.CreateClient();
-
             //act
 
-            var response = await client.GetAsync("https://localhost:5001/api/secondbreakfast/" + queryParams);
+            var response = await _client.GetAsync("https://localhost:5001/api/secondbreakfast/" + queryParams);
 
             //assert
 
@@ -154,12 +148,9 @@ namespace PapuAPI.IntegrationTests
         {
             //arrange
 
-            var factory = new WebApplicationFactory<Startup>();
-            var client = factory.CreateClient();
-
             //act
 
-            var response = await client.GetAsync("https://localhost:5001/api/lunch/" + queryParams);
+            var response = await _client.GetAsync("https://localhost:5001/api/lunch/" + queryParams);
 
             //assert
 
@@ -175,12 +166,9 @@ namespace PapuAPI.IntegrationTests
         {
             //arrange
 
-            var factory = new WebApplicationFactory<Startup>();
-            var client = factory.CreateClient();
-
             //act
 
-            var response = await client.GetAsync("https://localhost:5001/api/snack/" + queryParams);
+            var response = await _client.GetAsync("https://localhost:5001/api/snack/" + queryParams);
 
             //assert
 
@@ -196,12 +184,9 @@ namespace PapuAPI.IntegrationTests
         {
             //arrange
 
-            var factory = new WebApplicationFactory<Startup>();
-            var client = factory.CreateClient();
-
             //act
 
-            var response = await client.GetAsync("https://localhost:5001/api/dinner/" + queryParams);
+            var response = await _client.GetAsync("https://localhost:5001/api/dinner/" + queryParams);
 
             //assert
 
@@ -217,12 +202,9 @@ namespace PapuAPI.IntegrationTests
         {
             //arrange
 
-            var factory = new WebApplicationFactory<Startup>();
-            var client = factory.CreateClient();
-
             //act
 
-            var response = await client.GetAsync("https://localhost:5001/api/breakfast/" + queryParams);
+            var response = await _client.GetAsync("https://localhost:5001/api/breakfast/" + queryParams);
 
             //assert
 
@@ -238,12 +220,9 @@ namespace PapuAPI.IntegrationTests
         {
             //arrange
 
-            var factory = new WebApplicationFactory<Startup>();
-            var client = factory.CreateClient();
-
             //act
 
-            var response = await client.GetAsync("https://localhost:5001/api/secondbreakfast/" + queryParams);
+            var response = await _client.GetAsync("https://localhost:5001/api/secondbreakfast/" + queryParams);
 
             //assert
 
@@ -259,12 +238,9 @@ namespace PapuAPI.IntegrationTests
         {
             //arrange
 
-            var factory = new WebApplicationFactory<Startup>();
-            var client = factory.CreateClient();
-
             //act
 
-            var response = await client.GetAsync("https://localhost:5001/api/lunch/" + queryParams);
+            var response = await _client.GetAsync("https://localhost:5001/api/lunch/" + queryParams);
 
             //assert
 
@@ -280,12 +256,9 @@ namespace PapuAPI.IntegrationTests
         {
             //arrange
 
-            var factory = new WebApplicationFactory<Startup>();
-            var client = factory.CreateClient();
-
             //act
 
-            var response = await client.GetAsync("https://localhost:5001/api/snack/" + queryParams);
+            var response = await _client.GetAsync("https://localhost:5001/api/snack/" + queryParams);
 
             //assert
 
@@ -301,12 +274,9 @@ namespace PapuAPI.IntegrationTests
         {
             //arrange
 
-            var factory = new WebApplicationFactory<Startup>();
-            var client = factory.CreateClient();
-
             //act
 
-            var response = await client.GetAsync("https://localhost:5001/api/dinner/" + queryParams);
+            var response = await _client.GetAsync("https://localhost:5001/api/dinner/" + queryParams);
 
             //assert
 
