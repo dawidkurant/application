@@ -48,5 +48,26 @@ namespace PapuAPI.IntegrationTests
             //sprawdzamy czy status kod z tej odpowiedzi jest równy ok
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
         }
+
+        //getAnotherOneDish
+        [Theory]
+        [InlineData("100")]
+        [InlineData("200")]
+        public async Task AnotherGetDish_WithInvalidParameter_ReturnsNotFound(string queryParams)
+        {
+            //arrange
+
+            var factory = new WebApplicationFactory<Startup>();
+            var client = factory.CreateClient();
+
+            //act
+
+            var response = await client.GetAsync("https://localhost:5001/api/dish/" + queryParams);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy not found
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
+        }
     }
 }

@@ -288,5 +288,152 @@ namespace PapuAPI.IntegrationTests
             //sprawdzamy czy status kod z tej odpowiedzi jest równy ok
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
         }
+
+        //getAnotherOneMonday
+        [Theory]
+        [InlineData("100")]
+        [InlineData("200")]
+        public async Task AnotherGetMonday_WithInvalidParameter_ReturnsNotFound(string queryParams)
+        {
+            //arrange
+
+            var factory = new WebApplicationFactory<Startup>();
+            var client = factory.CreateClient();
+
+            //act
+
+            var response = await client.GetAsync("https://localhost:5001/api/monday/" + queryParams);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy not found
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
+        }
+
+        //getAnotherOneTuesday
+        [Theory]
+        [InlineData("100")]
+        [InlineData("200")]
+        public async Task AnotherGetTuesday_WithInvalidParameter_ReturnsNotFound(string queryParams)
+        {
+            //arrange
+
+            var factory = new WebApplicationFactory<Startup>();
+            var client = factory.CreateClient();
+
+            //act
+
+            var response = await client.GetAsync("https://localhost:5001/api/tuesday/" + queryParams);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy not found
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
+        }
+
+        //getAnotherOneWednesday
+        [Theory]
+        [InlineData("100")]
+        [InlineData("200")]
+        public async Task AnotherGetWednesday_WithInvalidParameter_ReturnsNotFound(string queryParams)
+        {
+            //arrange
+
+            var factory = new WebApplicationFactory<Startup>();
+            var client = factory.CreateClient();
+
+            //act
+
+            var response = await client.GetAsync("https://localhost:5001/api/wednesday/" + queryParams);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy not found
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
+        }
+
+        //getAnotherOneThursday
+        [Theory]
+        [InlineData("100")]
+        [InlineData("200")]
+        public async Task AnotherGetThursday_WithInvalidParameter_ReturnsNotFound(string queryParams)
+        {
+            //arrange
+
+            var factory = new WebApplicationFactory<Startup>();
+            var client = factory.CreateClient();
+
+            //act
+
+            var response = await client.GetAsync("https://localhost:5001/api/thursday/" + queryParams);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy not found
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
+        }
+
+        //getAnotherOneFriday
+        [Theory]
+        [InlineData("100")]
+        [InlineData("200")]
+        public async Task AnotherGetFriday_WithInvalidParameter_ReturnsNotFound(string queryParams)
+        {
+            //arrange
+
+            var factory = new WebApplicationFactory<Startup>();
+            var client = factory.CreateClient();
+
+            //act
+
+            var response = await client.GetAsync("https://localhost:5001/api/friday/" + queryParams);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy not found
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
+        }
+
+        //getAnotherOneSaturday
+        [Theory]
+        [InlineData("100")]
+        [InlineData("200")]
+        public async Task AnotherGetSaturday_WithInvalidParameter_ReturnsNotFound(string queryParams)
+        {
+            //arrange
+
+            var factory = new WebApplicationFactory<Startup>();
+            var client = factory.CreateClient();
+
+            //act
+
+            var response = await client.GetAsync("https://localhost:5001/api/saturday/" + queryParams);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy not found
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
+        }
+
+        //getAnotherOneSunday
+        [Theory]
+        [InlineData("100")]
+        [InlineData("200")]
+        public async Task AnotherGetSunday_WithInvalidParameter_ReturnsNotFound(string queryParams)
+        {
+            //arrange
+
+            var factory = new WebApplicationFactory<Startup>();
+            var client = factory.CreateClient();
+
+            //act
+
+            var response = await client.GetAsync("https://localhost:5001/api/sunday/" + queryParams);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy not found
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
+        }
     }
 }

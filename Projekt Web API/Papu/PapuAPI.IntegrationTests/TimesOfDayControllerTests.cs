@@ -208,5 +208,110 @@ namespace PapuAPI.IntegrationTests
             //sprawdzamy czy status kod z tej odpowiedzi jest równy ok
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
         }
+
+        //getAnotherOneBreakfast
+        [Theory]
+        [InlineData("100")]
+        [InlineData("200")]
+        public async Task AnotherGetBreakfast_WithInvalidParameter_ReturnsNotFound(string queryParams)
+        {
+            //arrange
+
+            var factory = new WebApplicationFactory<Startup>();
+            var client = factory.CreateClient();
+
+            //act
+
+            var response = await client.GetAsync("https://localhost:5001/api/breakfast/" + queryParams);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy not found
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
+        }
+
+        //getAnotherOneSecondBreakfast
+        [Theory]
+        [InlineData("100")]
+        [InlineData("200")]
+        public async Task AnotherGetSecondBreakfast_WithInvalidParameter_ReturnsNotFound(string queryParams)
+        {
+            //arrange
+
+            var factory = new WebApplicationFactory<Startup>();
+            var client = factory.CreateClient();
+
+            //act
+
+            var response = await client.GetAsync("https://localhost:5001/api/secondbreakfast/" + queryParams);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy not found
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
+        }
+
+        //getAnotherOneLunch
+        [Theory]
+        [InlineData("100")]
+        [InlineData("200")]
+        public async Task AnotherGetLunch_WithInvalidParameter_ReturnsNotFound(string queryParams)
+        {
+            //arrange
+
+            var factory = new WebApplicationFactory<Startup>();
+            var client = factory.CreateClient();
+
+            //act
+
+            var response = await client.GetAsync("https://localhost:5001/api/lunch/" + queryParams);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy not found
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
+        }
+
+        //getAnotherOneSnack
+        [Theory]
+        [InlineData("100")]
+        [InlineData("200")]
+        public async Task AnotherGetSnack_WithInvalidParameter_ReturnsNotFound(string queryParams)
+        {
+            //arrange
+
+            var factory = new WebApplicationFactory<Startup>();
+            var client = factory.CreateClient();
+
+            //act
+
+            var response = await client.GetAsync("https://localhost:5001/api/snack/" + queryParams);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy not found
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
+        }
+
+        //getAnotherOneDinner
+        [Theory]
+        [InlineData("100")]
+        [InlineData("200")]
+        public async Task AnotherGetDinner_WithInvalidParameter_ReturnsNotFound(string queryParams)
+        {
+            //arrange
+
+            var factory = new WebApplicationFactory<Startup>();
+            var client = factory.CreateClient();
+
+            //act
+
+            var response = await client.GetAsync("https://localhost:5001/api/dinner/" + queryParams);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy not found
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
+        }
     }
 }
