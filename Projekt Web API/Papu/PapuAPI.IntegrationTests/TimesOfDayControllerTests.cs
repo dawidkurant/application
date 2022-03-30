@@ -1,7 +1,15 @@
 ﻿using FluentAssertions;
+using Microsoft.AspNetCore.Authorization.Policy;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 using Papu;
+using Papu.Entities;
+using Papu.Models;
+using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -9,7 +17,7 @@ namespace PapuAPI.IntegrationTests
 {
     public class TimesOfDayControllerTests : IClassFixture<WebApplicationFactory<Startup>>
     {
-        private HttpClient _client;
+        private readonly HttpClient _client;
 
         //Konstruktor po to, aby nie tworzyć klienta oddzielnie dla każdego testu
         //jeśli chcemy aby kontekst był współdzielony między testami (czyli obiekt TimesOfDay
@@ -19,9 +27,28 @@ namespace PapuAPI.IntegrationTests
             //Tutaj chcemy uruchomić nasze Api po to abyśmy byli w stanie wysłać zapytanie http jakimś
             //klientem http z kodu 
             //należy dodać zależność, aby startup działał
-            _client = factory.CreateClient();
             //Wykorzystujemy fabrykę aby zwróciła nam odpowiedniego klienta http
             //z pomocą klienta odwołujemy się do metod z naszego api
+            _client = factory
+                //Umożliwia nam modyfikację wbudowanego webhosta, aby podczas testów nie korzystać z bazy danych sql
+                .WithWebHostBuilder(builder =>
+                {
+                    builder.ConfigureServices(services =>
+                    {
+                        //Szukamy zarejestrowanego już serwisu dla istniejących opcji dbcontext
+                        var dbContextOptions = services
+                        .SingleOrDefault(service => service.ServiceType == typeof(DbContextOptions<PapuDbContext>));
+
+                        /* services.Remove(dbContextOptions);
+
+                        services.AddDbContext<PapuDbContext>(options => options.UseInMemoryDatabase("PapuDb"));*/
+
+                        //Rejestrujemy żeby uniknąć autentykacji podczas testów
+                        services.AddSingleton<IPolicyEvaluator, FakePolicyEvaluator>();
+                        services.AddMvc(option => option.Filters.Add(new FakeUserFilter()));
+                    });
+                })
+                .CreateClient();
         }
 
         //getOneBreakfast
@@ -282,6 +309,86 @@ namespace PapuAPI.IntegrationTests
 
             //sprawdzamy czy status kod z tej odpowiedzi jest równy not found
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
+        }
+
+        //getAllBreakfast
+        [Fact]
+        public async Task GetAllBreakfasts_WithParameter_ReturnsOkResult()
+        {
+            //arrange
+
+            //act
+
+            var response = await _client.GetAsync("https://localhost:5001/api/breakfast");
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy ok
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        }
+
+        //getAllSecondBreakfasts
+        [Fact]
+        public async Task GetAllSecondBreakfasts_WithParameter_ReturnsOkResult()
+        {
+            //arrange
+
+            //act
+
+            var response = await _client.GetAsync("https://localhost:5001/api/secondbreakfast");
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy ok
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        }
+
+        //getAllLunches
+        [Fact]
+        public async Task GetAllLunches_WithParameter_ReturnsOkResult()
+        {
+            //arrange
+
+            //act
+
+            var response = await _client.GetAsync("https://localhost:5001/api/lunch");
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy ok
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        }
+
+        //getAllSnacks
+        [Fact]
+        public async Task GetAllSnacks_WithParameter_ReturnsOkResult()
+        {
+            //arrange
+
+            //act
+
+            var response = await _client.GetAsync("https://localhost:5001/api/snack");
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy ok
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        }
+
+        //getAllDinners
+        [Fact]
+        public async Task GetAllDinners_WithParameter_ReturnsOkResult()
+        {
+            //arrange
+
+            //act
+
+            var response = await _client.GetAsync("https://localhost:5001/api/dinner");
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy ok
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
         }
     }
 }

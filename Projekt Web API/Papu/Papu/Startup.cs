@@ -92,6 +92,7 @@ namespace Papu
 
             //W ten sposób dodajemy walidację do projektu
             services.AddControllers().AddFluentValidation();
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));

@@ -10,7 +10,7 @@ using Papu.Entities;
 namespace Papu.Migrations
 {
     [DbContext(typeof(PapuDbContext))]
-    [Migration("20220325113938_MyMigration")]
+    [Migration("20220329094033_MyMigration")]
     partial class MyMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

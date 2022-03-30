@@ -7,6 +7,7 @@ namespace Papu.Entities
     {
         private readonly string _connectionString =
             "Server=(localdb)\\mssqllocaldb;Database=PapuDb;Trusted_Connection=True;";
+
         public DbSet<Product> Products { get; set; }
         public DbSet<Menu> Menus { get; set; }
         public DbSet<ProductDish> DishProducts { get; set; }
@@ -502,7 +503,10 @@ namespace Papu.Entities
         //Konfiguracja połączenia do bazy danych
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(_connectionString);
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer(_connectionString);
+            }
         }
     }
 }
