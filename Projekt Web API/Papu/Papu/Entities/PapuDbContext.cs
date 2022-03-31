@@ -5,8 +5,10 @@ namespace Papu.Entities
     //Klasa odpowiadająca bazie danych
     public class PapuDbContext : DbContext
     {
-        private readonly string _connectionString =
-            "Server=(localdb)\\mssqllocaldb;Database=PapuDb;Trusted_Connection=True;";
+        public PapuDbContext(DbContextOptions<PapuDbContext> options) : base(options)
+        {
+
+        }
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Menu> Menus { get; set; }
@@ -498,15 +500,6 @@ namespace Papu.Entities
                 .Property(r => r.Size)
                 .IsRequired()
                 .HasMaxLength(3);
-        }
-
-        //Konfiguracja połączenia do bazy danych
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer(_connectionString);
-            }
         }
     }
 }

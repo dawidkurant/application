@@ -1,18 +1,12 @@
 ﻿using FluentAssertions;
 using Microsoft.AspNetCore.Authorization.Policy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Moq;
 using Newtonsoft.Json;
 using Papu;
-using Papu.Controllers;
 using Papu.Entities;
 using Papu.Models;
-using Papu.Services;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -44,10 +38,10 @@ namespace PapuAPI.IntegrationTests
                         //Szukamy zarejestrowanego już serwisu dla istniejących opcji dbcontext
                         var dbContextOptions = services
                         .SingleOrDefault(service => service.ServiceType == typeof(DbContextOptions<PapuDbContext>));
-                        
-                        //services.Remove(dbContextOptions);
 
-                        //services.AddDbContext<PapuDbContext>(options => options.UseInMemoryDatabase("PapuDb"));
+                        services.Remove(dbContextOptions);
+
+                        services.AddDbContext<PapuDbContext>(options => options.UseInMemoryDatabase("PapuDb"));
 
                         //Rejestrujemy żeby uniknąć autentykacji podczas testów
                         services.AddSingleton<IPolicyEvaluator, FakePolicyEvaluator>();
@@ -93,8 +87,8 @@ namespace PapuAPI.IntegrationTests
 
         //getAnotherOneProduct
         [Theory]
-        [InlineData("100")]
-        [InlineData("200")]
+        [InlineData("1000")]
+        [InlineData("2000")]
         public async Task AnotherGetProduct_WithInvalidParameter_ReturnsNotFound(string queryParams)
         {
             //arrange
@@ -127,14 +121,16 @@ namespace PapuAPI.IntegrationTests
 
         //createProduct
         [Fact]
-        public async Task CreateProduct_WithValidModel_ReturnsBadRequest()
+        public async Task CreateProduct_WithValidModel_ReturnsCreated()
         {
             //arrange
 
             //Tworzymy model, ktory chcemy wysłać na serwer
+
             var model = new CreateProductDto
             {
-                ProductName = "ToJestBłędnaNazwaToJestBłędnaNazwaToJestBłędnaNazwaToJestBłędnaNazwa",
+                ProductName = "NazwaTestowa",
+                GroupId = new int[] { 1 },
                 Weight = 200
             };
 
@@ -151,10 +147,10 @@ namespace PapuAPI.IntegrationTests
             //assert
 
             //Sprawdzamy czy status kod z tej odpowiedzi jest równy created
-            response.StatusCode.Should().Be(System.Net.HttpStatusCode.BadRequest);
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.Created);
 
             //Sprawdzamy czy odpowiedź serwera zawiera nagłówek z lokacją
-            response.Headers.Location.Should().BeNull();
+            response.Headers.Location.Should().NotBeNull();
         }
     }
 }

@@ -84,6 +84,11 @@ namespace Papu.Services
             product.Category = category;
             product.Unit = unit;
 
+            if (dto.GroupId is null)
+            {
+                dto.GroupId = new int[] { 1 };
+            }
+
             foreach (var addGroup in dto.GroupId)
             {
 

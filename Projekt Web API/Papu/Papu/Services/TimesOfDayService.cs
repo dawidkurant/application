@@ -209,6 +209,11 @@ namespace Papu.Services
             //Dostaniemy informację jaki użytkownik stworzył konkretne śniadanie w bazie danych
             breakfast.CreatedById = _userContextService.GetUserId;
 
+            if (dtoBreakfast.ProductId is null)
+            {
+                dtoBreakfast.ProductId = new int[] { 1 };
+            }
+
             foreach (var addProduct in dtoBreakfast.ProductId)
             {
 
@@ -223,6 +228,11 @@ namespace Papu.Services
 
                 _dbContext.ProductBreakfasts.Add(productBreakfast);
 
+            }
+
+            if (dtoBreakfast.DishId is null)
+            {
+                dtoBreakfast.DishId = new int[] { 1 };
             }
 
             foreach (var addDish in dtoBreakfast.DishId)
@@ -254,6 +264,11 @@ namespace Papu.Services
             //Dostaniemy informację jaki użytkownik stworzył konkretne drugie śniadanie w bazie danych
             secondBreakfast.CreatedById = _userContextService.GetUserId;
 
+            if (dtoSecondBreakfast.ProductId is null)
+            {
+                dtoSecondBreakfast.ProductId = new int[] { 1 };
+            }
+
             foreach (var addProduct in dtoSecondBreakfast.ProductId)
             {
 
@@ -268,6 +283,11 @@ namespace Papu.Services
 
                 _dbContext.ProductSecondBreakfasts.Add(secondProductBreakfast);
 
+            }
+
+            if (dtoSecondBreakfast.DishId is null)
+            {
+                dtoSecondBreakfast.DishId = new int[] { 1 };
             }
 
             foreach (var addDish in dtoSecondBreakfast.DishId)
@@ -299,6 +319,11 @@ namespace Papu.Services
             //Dostaniemy informację jaki użytkownik stworzył konkretny obiad w bazie danych
             lunch.CreatedById = _userContextService.GetUserId;
 
+            if (dtoLunch.ProductId is null)
+            {
+                dtoLunch.ProductId = new int[] { 1 };
+            }
+
             foreach (var addProduct in dtoLunch.ProductId)
             {
 
@@ -313,6 +338,11 @@ namespace Papu.Services
 
                 _dbContext.LunchProducts.Add(lunchProduct);
 
+            }
+
+            if (dtoLunch.DishId is null)
+            {
+                dtoLunch.DishId = new int[] { 1 };
             }
 
             foreach (var addDish in dtoLunch.DishId)
@@ -344,6 +374,11 @@ namespace Papu.Services
             //Dostaniemy informację jaki użytkownik stworzył konkretny podwieczorek w bazie danych
             snack.CreatedById = _userContextService.GetUserId;
 
+            if (dtoSnack.ProductId is null)
+            {
+                dtoSnack.ProductId = new int[] { 1 };
+            }
+
             foreach (var addProduct in dtoSnack.ProductId)
             {
 
@@ -358,6 +393,11 @@ namespace Papu.Services
 
                 _dbContext.SnackProducts.Add(snackProduct);
 
+            }
+
+            if (dtoSnack.DishId is null)
+            {
+                dtoSnack.DishId = new int[] { 1 };
             }
 
             foreach (var addDish in dtoSnack.DishId)
@@ -389,6 +429,11 @@ namespace Papu.Services
             //Dostaniemy informację jaki użytkownik stworzył konkretną kolację w bazie danych
             dinner.CreatedById = _userContextService.GetUserId;
 
+            if (dtoDinner.ProductId is null)
+            {
+                dtoDinner.ProductId = new int[] { 1 };
+            }
+
             foreach (var addProduct in dtoDinner.ProductId)
             {
 
@@ -403,6 +448,11 @@ namespace Papu.Services
 
                 _dbContext.DinnerProducts.Add(dinnerProduct);
 
+            }
+
+            if (dtoDinner.DishId is null)
+            {
+                dtoDinner.DishId = new int[] { 1 };
             }
 
             foreach (var addDish in dtoDinner.DishId)

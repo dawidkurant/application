@@ -39,9 +39,9 @@ namespace PapuAPI.IntegrationTests
                         var dbContextOptions = services
                         .SingleOrDefault(service => service.ServiceType == typeof(DbContextOptions<PapuDbContext>));
 
-                        /* services.Remove(dbContextOptions);
+                        services.Remove(dbContextOptions);
 
-                        services.AddDbContext<PapuDbContext>(options => options.UseInMemoryDatabase("PapuDb"));*/
+                        services.AddDbContext<PapuDbContext>(options => options.UseInMemoryDatabase("PapuDb"));
 
                         //Rejestrujemy żeby uniknąć autentykacji podczas testów
                         services.AddSingleton<IPolicyEvaluator, FakePolicyEvaluator>();
@@ -87,8 +87,8 @@ namespace PapuAPI.IntegrationTests
 
         //getAnotherOneDish
         [Theory]
-        [InlineData("100")]
-        [InlineData("200")]
+        [InlineData("1000")]
+        [InlineData("2000")]
         public async Task AnotherGetDish_WithInvalidParameter_ReturnsNotFound(string queryParams)
         {
             //arrange
@@ -117,6 +117,46 @@ namespace PapuAPI.IntegrationTests
 
             //sprawdzamy czy status kod z tej odpowiedzi jest równy ok
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        }
+
+        //createDish
+        [Fact]
+        public async Task CreateDish_WithValidModel_ReturnsCreated()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy wysłać na serwer
+
+            var model = new CreateDishDto
+            {
+                DishName = "PotrawaTestowa",
+                DishDescription = "PrzykładowyOpis",
+                DishImagePath = "PrzykładowyLink",
+                MethodOfPeparation = "PrzykładowaMetoda",
+                PreparationTime = 1,
+                Portions = 2,
+                Size = 1,
+                TypeId = new int[] { 1 },
+                KindOfId = new int[] { 1 }
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //act
+
+            //Wysyłamy model na serwer
+            var response = await _client.PostAsync("https://localhost:5001/api/dish", httpContent);
+
+            //assert
+
+            //Sprawdzamy czy status kod z tej odpowiedzi jest równy created
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.Created);
+
+            //Sprawdzamy czy odpowiedź serwera zawiera nagłówek z lokacją
+            response.Headers.Location.Should().NotBeNull();
         }
     }
 }

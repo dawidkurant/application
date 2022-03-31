@@ -39,9 +39,9 @@ namespace PapuAPI.IntegrationTests
                         var dbContextOptions = services
                         .SingleOrDefault(service => service.ServiceType == typeof(DbContextOptions<PapuDbContext>));
 
-                        /* services.Remove(dbContextOptions);
+                        services.Remove(dbContextOptions);
 
-                        services.AddDbContext<PapuDbContext>(options => options.UseInMemoryDatabase("PapuDb"));*/
+                        services.AddDbContext<PapuDbContext>(options => options.UseInMemoryDatabase("PapuDb"));
 
                         //Rejestrujemy żeby uniknąć autentykacji podczas testów
                         services.AddSingleton<IPolicyEvaluator, FakePolicyEvaluator>();
@@ -389,6 +389,171 @@ namespace PapuAPI.IntegrationTests
 
             //sprawdzamy czy status kod z tej odpowiedzi jest równy ok
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        }
+
+        //createBreakfast
+        [Fact]
+        public async Task CreateBreakfast_WithValidModel_ReturnsCreated()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy wysłać na serwer
+
+            var model = new CreateBreakfastDto
+            {
+                DishId = new int[] { 1 },
+                ProductId = new int[] { 1 }
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //act
+
+            //Wysyłamy model na serwer
+            var response = await _client.PostAsync("https://localhost:5001/api/createbreakfast", httpContent);
+
+            //assert
+
+            //Sprawdzamy czy status kod z tej odpowiedzi jest równy created
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.Created);
+
+            //Sprawdzamy czy odpowiedź serwera zawiera nagłówek z lokacją
+            response.Headers.Location.Should().NotBeNull();
+        }
+
+        //createSecondBreakfast
+        [Fact]
+        public async Task CreateSecondBreakfast_WithValidModel_ReturnsCreated()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy wysłać na serwer
+
+            var model = new CreateSecondBreakfastDto
+            {
+                DishId = new int[] { 1 },
+                ProductId = new int[] { 1 }
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //act
+
+            //Wysyłamy model na serwer
+            var response = await _client.PostAsync("https://localhost:5001/api/createsecondbreakfast", httpContent);
+
+            //assert
+
+            //Sprawdzamy czy status kod z tej odpowiedzi jest równy created
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.Created);
+
+            //Sprawdzamy czy odpowiedź serwera zawiera nagłówek z lokacją
+            response.Headers.Location.Should().NotBeNull();
+        }
+
+        //createLunch
+        [Fact]
+        public async Task CreateLunch_WithValidModel_ReturnsCreated()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy wysłać na serwer
+
+            var model = new CreateLunchDto
+            {
+                DishId = new int[] { 1 },
+                ProductId = new int[] { 1 }
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //act
+
+            //Wysyłamy model na serwer
+            var response = await _client.PostAsync("https://localhost:5001/api/createlunch", httpContent);
+
+            //assert
+
+            //Sprawdzamy czy status kod z tej odpowiedzi jest równy created
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.Created);
+
+            //Sprawdzamy czy odpowiedź serwera zawiera nagłówek z lokacją
+            response.Headers.Location.Should().NotBeNull();
+        }
+
+        //createSnack
+        [Fact]
+        public async Task CreateSnack_WithValidModel_ReturnsCreated()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy wysłać na serwer
+
+            var model = new CreateSnackDto
+            {
+                DishId = new int[] { 1 },
+                ProductId = new int[] { 1 }
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //act
+
+            //Wysyłamy model na serwer
+            var response = await _client.PostAsync("https://localhost:5001/api/createsnack", httpContent);
+
+            //assert
+
+            //Sprawdzamy czy status kod z tej odpowiedzi jest równy created
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.Created);
+
+            //Sprawdzamy czy odpowiedź serwera zawiera nagłówek z lokacją
+            response.Headers.Location.Should().NotBeNull();
+        }
+
+        //createDinner
+        [Fact]
+        public async Task CreateDinner_WithValidModel_ReturnsCreated()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy wysłać na serwer
+
+            var model = new CreateDinnerDto
+            {
+                DishId = new int[] { 1 },
+                ProductId = new int[] { 1 }
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //act
+
+            //Wysyłamy model na serwer
+            var response = await _client.PostAsync("https://localhost:5001/api/createdinner", httpContent);
+
+            //assert
+
+            //Sprawdzamy czy status kod z tej odpowiedzi jest równy created
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.Created);
+
+            //Sprawdzamy czy odpowiedź serwera zawiera nagłówek z lokacją
+            response.Headers.Location.Should().NotBeNull();
         }
     }
 }

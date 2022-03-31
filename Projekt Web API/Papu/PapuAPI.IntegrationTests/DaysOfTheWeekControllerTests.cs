@@ -39,9 +39,9 @@ namespace PapuAPI.IntegrationTests
                         var dbContextOptions = services
                         .SingleOrDefault(service => service.ServiceType == typeof(DbContextOptions<PapuDbContext>));
 
-                        /* services.Remove(dbContextOptions);
+                        services.Remove(dbContextOptions);
 
-                        services.AddDbContext<PapuDbContext>(options => options.UseInMemoryDatabase("PapuDb"));*/
+                        services.AddDbContext<PapuDbContext>(options => options.UseInMemoryDatabase("PapuDb"));
 
                         //Rejestrujemy żeby uniknąć autentykacji podczas testów
                         services.AddSingleton<IPolicyEvaluator, FakePolicyEvaluator>();
@@ -525,6 +525,237 @@ namespace PapuAPI.IntegrationTests
 
             //sprawdzamy czy status kod z tej odpowiedzi jest równy ok
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        }
+
+        //createMonday
+        [Fact]
+        public async Task CreateMonday_WithValidModel_ReturnsCreated()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy wysłać na serwer
+
+            var model = new CreateMondayDto
+            {
+                BreakfastMondayId = 1,
+                SecondBreakfastMondayId = 1
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //act
+
+            //Wysyłamy model na serwer
+            var response = await _client.PostAsync("https://localhost:5001/api/createmonday", httpContent);
+
+            //assert
+
+            //Sprawdzamy czy status kod z tej odpowiedzi jest równy created
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.Created);
+
+            //Sprawdzamy czy odpowiedź serwera zawiera nagłówek z lokacją
+            response.Headers.Location.Should().NotBeNull();
+        }
+
+        //createTuesday
+        [Fact]
+        public async Task CreateTuesday_WithValidModel_ReturnsCreated()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy wysłać na serwer
+
+            var model = new CreateTuesdayDto
+            {
+                BreakfastTuesdayId = 1,
+                SecondBreakfastTuesdayId = 1
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //act
+
+            //Wysyłamy model na serwer
+            var response = await _client.PostAsync("https://localhost:5001/api/createtuesday", httpContent);
+
+            //assert
+
+            //Sprawdzamy czy status kod z tej odpowiedzi jest równy created
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.Created);
+
+            //Sprawdzamy czy odpowiedź serwera zawiera nagłówek z lokacją
+            response.Headers.Location.Should().NotBeNull();
+        }
+
+        //createWednesday
+        [Fact]
+        public async Task CreateWednesday_WithValidModel_ReturnsCreated()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy wysłać na serwer
+
+            var model = new CreateWednesdayDto
+            {
+                BreakfastWednesdayId = 1,
+                SecondBreakfastWednesdayId = 1
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //act
+
+            //Wysyłamy model na serwer
+            var response = await _client.PostAsync("https://localhost:5001/api/createwednesday", httpContent);
+
+            //assert
+
+            //Sprawdzamy czy status kod z tej odpowiedzi jest równy created
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.Created);
+
+            //Sprawdzamy czy odpowiedź serwera zawiera nagłówek z lokacją
+            response.Headers.Location.Should().NotBeNull();
+        }
+
+        //createThursday
+        [Fact]
+        public async Task CreateThursday_WithValidModel_ReturnsCreated()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy wysłać na serwer
+
+            var model = new CreateThursdayDto
+            {
+                BreakfastThursdayId = 1,
+                SecondBreakfastThursdayId = 1
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //act
+
+            //Wysyłamy model na serwer
+            var response = await _client.PostAsync("https://localhost:5001/api/createthursday", httpContent);
+
+            //assert
+
+            //Sprawdzamy czy status kod z tej odpowiedzi jest równy created
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.Created);
+
+            //Sprawdzamy czy odpowiedź serwera zawiera nagłówek z lokacją
+            response.Headers.Location.Should().NotBeNull();
+        }
+
+        //createFriday
+        [Fact]
+        public async Task CreateFriday_WithValidModel_ReturnsCreated()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy wysłać na serwer
+
+            var model = new CreateFridayDto
+            {
+                BreakfastFridayId = 1,
+                SecondBreakfastFridayId = 1
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //act
+
+            //Wysyłamy model na serwer
+            var response = await _client.PostAsync("https://localhost:5001/api/createfriday", httpContent);
+
+            //assert
+
+            //Sprawdzamy czy status kod z tej odpowiedzi jest równy created
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.Created);
+
+            //Sprawdzamy czy odpowiedź serwera zawiera nagłówek z lokacją
+            response.Headers.Location.Should().NotBeNull();
+        }
+
+        //createSaturday
+        [Fact]
+        public async Task CreateSaturday_WithValidModel_ReturnsCreated()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy wysłać na serwer
+
+            var model = new CreateSaturdayDto
+            {
+                BreakfastSaturdayId = 1,
+                SecondBreakfastSaturdayId = 1
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //act
+
+            //Wysyłamy model na serwer
+            var response = await _client.PostAsync("https://localhost:5001/api/createsaturday", httpContent);
+
+            //assert
+
+            //Sprawdzamy czy status kod z tej odpowiedzi jest równy created
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.Created);
+
+            //Sprawdzamy czy odpowiedź serwera zawiera nagłówek z lokacją
+            response.Headers.Location.Should().NotBeNull();
+        }
+
+        //createSunday
+        [Fact]
+        public async Task CreateSunday_WithValidModel_ReturnsCreated()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy wysłać na serwer
+
+            var model = new CreateSundayDto
+            {
+                BreakfastSundayId = 1,
+                SecondBreakfastSundayId = 1
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //act
+
+            //Wysyłamy model na serwer
+            var response = await _client.PostAsync("https://localhost:5001/api/createsunday", httpContent);
+
+            //assert
+
+            //Sprawdzamy czy status kod z tej odpowiedzi jest równy created
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.Created);
+
+            //Sprawdzamy czy odpowiedź serwera zawiera nagłówek z lokacją
+            response.Headers.Location.Should().NotBeNull();
         }
     }
 }

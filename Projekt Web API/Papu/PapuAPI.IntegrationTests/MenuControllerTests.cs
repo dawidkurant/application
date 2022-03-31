@@ -39,9 +39,9 @@ namespace PapuAPI.IntegrationTests
                         var dbContextOptions = services
                         .SingleOrDefault(service => service.ServiceType == typeof(DbContextOptions<PapuDbContext>));
 
-                        /* services.Remove(dbContextOptions);
+                        services.Remove(dbContextOptions);
 
-                        services.AddDbContext<PapuDbContext>(options => options.UseInMemoryDatabase("PapuDb"));*/
+                        services.AddDbContext<PapuDbContext>(options => options.UseInMemoryDatabase("PapuDb"));
 
                         //Rejestrujemy żeby uniknąć autentykacji podczas testów
                         services.AddSingleton<IPolicyEvaluator, FakePolicyEvaluator>();
@@ -116,6 +116,40 @@ namespace PapuAPI.IntegrationTests
 
             //sprawdzamy czy status kod z tej odpowiedzi jest równy ok
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        }
+
+        //createMenu
+        [Fact]
+        public async Task CreateMenu_WithValidModel_ReturnsCreated()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy wysłać na serwer
+
+            var model = new CreateMenuDto
+            {
+                MenuName = "MenuTestowe",
+                MenuDescription = "PrzykładowyOpis",
+                MondayId = 1
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //act
+
+            //Wysyłamy model na serwer
+            var response = await _client.PostAsync("https://localhost:5001/api/menu", httpContent);
+
+            //assert
+
+            //Sprawdzamy czy status kod z tej odpowiedzi jest równy created
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.Created);
+
+            //Sprawdzamy czy odpowiedź serwera zawiera nagłówek z lokacją
+            response.Headers.Location.Should().NotBeNull();
         }
     }
 }

@@ -5,9 +5,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -93,12 +91,6 @@ namespace Papu
             //W ten sposób dodajemy walidację do projektu
             services.AddControllers().AddFluentValidation();
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
-
-            //Rejestracja kontekstu bazy danych
-            services.AddDbContext<PapuDbContext>();
             //Rejestracja serwisu seedującego
             services.AddScoped<PapuSeeder>();
             //AddAutoMapper - jako parametr przekazujemy źródło projektu, którym
@@ -120,6 +112,10 @@ namespace Papu
             //Przez to że korzystamy z accessora musimy dodać tę rejestrację
             //aby wstrzyknąć referencję do klasy IHttpContextAccessor
             services.AddHttpContextAccessor();
+
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));
 
             //Rejestrujemy niezbędne serwisy do wygenerowania specyfikacji openapi na podstawie
             //naszego api
@@ -145,6 +141,11 @@ namespace Papu
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            //Rejestracja kontekstu bazy danych
+            services.AddDbContext<PapuDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("PapuDbConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -14,7 +14,7 @@ namespace PapuAPI.IntegrationTests
             claimsPrincipal.AddIdentity(new ClaimsIdentity(
                 new[]
                 {
-                    new Claim(ClaimTypes.NameIdentifier, "2"),
+                    new Claim(ClaimTypes.NameIdentifier, "22"),
                     new Claim(ClaimTypes.Role, "Manager"),
                 }));
 

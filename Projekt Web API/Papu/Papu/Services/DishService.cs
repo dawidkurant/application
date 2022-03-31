@@ -74,6 +74,11 @@ namespace Papu.Services
             //Dostaniemy informację jaki użytkownik stworzył konkretną potrawę w bazie danych
             dish.CreatedById = _userContextService.GetUserId;
 
+            if (dto.TypeId is null)
+            {
+                dto.TypeId = new int[] { 1 };
+            }
+
             foreach (var addType in dto.TypeId)
             {
 
@@ -89,6 +94,11 @@ namespace Papu.Services
                 _dbContext.DishTypes.Add(dishType);
             }
 
+            if (dto.KindOfId is null)
+            {
+                dto.KindOfId = new int[] { 1 };
+            }
+
             foreach (var addKindOf in dto.KindOfId)
             {
 
@@ -102,6 +112,11 @@ namespace Papu.Services
                 };
 
                 _dbContext.DishKindsOf.Add(dishKindOf);
+            }
+
+            if (dto.ProductId is null)
+            {
+                dto.ProductId = new int[] { 1 };
             }
 
             foreach (var addProduct in dto.ProductId)

@@ -1,4 +1,5 @@
-﻿using Papu.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Papu.Entities;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -18,6 +19,15 @@ namespace Papu
             //Sprawdzamy połączenie do bazy danych zostało nawiązane
             if (_dbContext.Database.CanConnect())
             {
+                if (_dbContext.Database.IsRelational())
+                {
+                    var pendingMigrations = _dbContext.Database.GetPendingMigrations();
+                    if (pendingMigrations != null && pendingMigrations.Any())
+                    {
+                        _dbContext.Database.Migrate();
+                    }
+                }
+
                 //Sprawdzamy czy tabela z rolami jest pusta
                 if (!_dbContext.Roles.Any())
                 {
