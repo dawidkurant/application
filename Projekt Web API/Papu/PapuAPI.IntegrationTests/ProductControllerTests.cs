@@ -152,5 +152,39 @@ namespace PapuAPI.IntegrationTests
             //Sprawdzamy czy odpowiedź serwera zawiera nagłówek z lokacją
             response.Headers.Location.Should().NotBeNull();
         }
+
+        //createAnotherProduct
+        [Fact]
+        public async Task CreateAnotherProduct_WithInvalidModel_ReturnsBadRequest()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy wysłać na serwer
+
+            var model = new CreateProductDto
+            {
+                ProductName = "NazwaTestowaBłędnaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                GroupId = new int[] { 1 },
+                Weight = 200
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //act
+
+            //Wysyłamy model na serwer
+            var response = await _client.PostAsync("https://localhost:5001/api/product", httpContent);
+
+            //assert
+
+            //Sprawdzamy czy status kod z tej odpowiedzi jest równy created
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.BadRequest);
+
+            //Sprawdzamy czy odpowiedź serwera zawiera nagłówek z lokacją
+            response.Headers.Location.Should().BeNull();
+        }
     }
 }

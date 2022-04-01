@@ -9,7 +9,6 @@ using Papu.Models;
 using Papu.Models.Update;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 
 namespace Papu.Services
 {
@@ -132,6 +131,10 @@ namespace Papu.Services
                 };
 
                 _dbContext.DishProducts.Add(productDish);
+            }
+            if (dish is null)
+            {
+
             }
 
             _dbContext.SaveChanges();

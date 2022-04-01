@@ -13,6 +13,7 @@ using System.Security.Claims;
 namespace Papu.Controllers
 {
     [Route("api/dish")]
+    [ApiController]
     //Atrybut potrzebny aby dane akcje były zablokowane przed niezalogowanymi użytkownikami
     [Authorize]
     public class DishController : ControllerBase

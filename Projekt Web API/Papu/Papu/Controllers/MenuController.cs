@@ -9,6 +9,7 @@ using System.Security.Claims;
 namespace Papu.Controllers
 {
     [Route("api/menu")]
+    [ApiController]
     //Atrybut potrzebny aby dane akcje były zablokowane przed niezalogowanymi użytkownikami
     [Authorize]
     public class MenuController : ControllerBase
