@@ -132,10 +132,6 @@ namespace Papu.Services
 
                 _dbContext.DishProducts.Add(productDish);
             }
-            if (dish is null)
-            {
-
-            }
 
             _dbContext.SaveChanges();
 

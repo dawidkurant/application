@@ -757,5 +757,229 @@ namespace PapuAPI.IntegrationTests
             //Sprawdzamy czy odpowiedź serwera zawiera nagłówek z lokacją
             response.Headers.Location.Should().NotBeNull();
         }
+
+        //deleteMonday
+        [Fact]
+        public async Task DeleteMonday_WithParameter_ReturnsNoContentResult()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy wysłać na serwer
+
+            var model = new CreateMondayDto
+            {
+                BreakfastMondayId = 1,
+                SecondBreakfastMondayId = 1
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //Wysyłamy model na serwer
+            await _client.PostAsync("https://localhost:5001/api/createmonday", httpContent);
+
+            //act
+
+            var response2 = await _client.DeleteAsync("https://localhost:5001/api/monday/3");
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy no content
+            response2.StatusCode.Should().Be(System.Net.HttpStatusCode.NoContent);
+        }
+
+        //deleteTuesday
+        [Fact]
+        public async Task DeleteTuesday_WithParameter_ReturnsNoContentResult()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy wysłać na serwer
+
+            var model = new CreateTuesdayDto
+            {
+                BreakfastTuesdayId = 1,
+                SecondBreakfastTuesdayId = 1
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //Wysyłamy model na serwer
+            await _client.PostAsync("https://localhost:5001/api/createtuesday", httpContent);
+
+            //act
+
+            var response2 = await _client.DeleteAsync("https://localhost:5001/api/tuesday/3");
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy no content
+            response2.StatusCode.Should().Be(System.Net.HttpStatusCode.NoContent);
+        }
+
+        //deleteWednesday
+        [Fact]
+        public async Task DeleteWednesday_WithParameter_ReturnsNoContentResult()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy wysłać na serwer
+
+            var model = new CreateWednesdayDto
+            {
+                BreakfastWednesdayId = 1,
+                SecondBreakfastWednesdayId = 1
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //Wysyłamy model na serwer
+            await _client.PostAsync("https://localhost:5001/api/createwednesday", httpContent);
+
+            //act
+
+            var response2 = await _client.DeleteAsync("https://localhost:5001/api/wednesday/3");
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy no content
+            response2.StatusCode.Should().Be(System.Net.HttpStatusCode.NoContent);
+        }
+
+        //deleteThursday
+        [Fact]
+        public async Task DeleteThursday_WithParameter_ReturnsNoContentResult()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy wysłać na serwer
+
+            var model = new CreateThursdayDto
+            {
+                BreakfastThursdayId = 1,
+                SecondBreakfastThursdayId = 1
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //Wysyłamy model na serwer
+            await _client.PostAsync("https://localhost:5001/api/createthursday", httpContent);
+
+            //act
+
+            var response2 = await _client.DeleteAsync("https://localhost:5001/api/thursday/3");
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy no content
+            response2.StatusCode.Should().Be(System.Net.HttpStatusCode.NoContent);
+        }
+
+        //deleteFriday
+        [Fact]
+        public async Task DeleteFriday_WithParameter_ReturnsNoContentResult()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy wysłać na serwer
+
+            var model = new CreateFridayDto
+            {
+                BreakfastFridayId = 1,
+                SecondBreakfastFridayId = 1
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //Wysyłamy model na serwer
+            await _client.PostAsync("https://localhost:5001/api/createfriday", httpContent);
+
+            //act
+
+            var response2 = await _client.DeleteAsync("https://localhost:5001/api/friday/3");
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy no content
+            response2.StatusCode.Should().Be(System.Net.HttpStatusCode.NoContent);
+        }
+
+        //deleteSaturday
+        [Fact]
+        public async Task DeleteSaturday_WithParameter_ReturnsNoContentResult()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy wysłać na serwer
+
+            var model = new CreateSaturdayDto
+            {
+                BreakfastSaturdayId = 1,
+                SecondBreakfastSaturdayId = 1
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //Wysyłamy model na serwer
+            await _client.PostAsync("https://localhost:5001/api/createsaturday", httpContent);
+
+            //act
+
+            var response2 = await _client.DeleteAsync("https://localhost:5001/api/saturday/3");
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy no content
+            response2.StatusCode.Should().Be(System.Net.HttpStatusCode.NoContent);
+        }
+
+        //deleteSunday
+        [Fact]
+        public async Task DeleteSunday_WithParameter_ReturnsNoContentResult()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy wysłać na serwer
+
+            var model = new CreateSundayDto
+            {
+                BreakfastSundayId = 1,
+                SecondBreakfastSundayId = 1
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //Wysyłamy model na serwer
+            await _client.PostAsync("https://localhost:5001/api/createsunday", httpContent);
+
+            //act
+
+            var response2 = await _client.DeleteAsync("https://localhost:5001/api/sunday/3");
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy no content
+            response2.StatusCode.Should().Be(System.Net.HttpStatusCode.NoContent);
+        }
     }
 }

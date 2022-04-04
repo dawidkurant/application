@@ -69,8 +69,8 @@ namespace PapuAPI.IntegrationTests
 
         //getAnotherOneDish
         [Theory]
-        [InlineData("1")]
-        [InlineData("2")]
+        [InlineData("77")]
+        [InlineData("73")]
         public async Task AnotherGetDish_WithParameter_ReturnsOkResult(string queryParams)
         {
             //arrange
@@ -190,6 +190,39 @@ namespace PapuAPI.IntegrationTests
 
             //Sprawdzamy czy odpowiedź serwera zawiera nagłówek z lokacją
             response.Headers.Location.Should().BeNull();
+        }
+
+        //deleteDish
+        [Fact]
+        public async Task DeleteDish_WithParameter_ReturnsNoContentResult()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy wysłać na serwer
+
+            var model = new CreateDishDto
+            {
+                DishName = "NazwaTestowa",
+                DishDescription = "PrzykładowyOpis",
+                DishImagePath = "LinkTestowy"
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //Wysyłamy model na serwer
+            await _client.PostAsync("https://localhost:5001/api/dish", httpContent);
+
+            //act
+
+            var response2 = await _client.DeleteAsync("https://localhost:5001/api/dish/145");
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy no content
+            response2.StatusCode.Should().Be(System.Net.HttpStatusCode.NoContent);
         }
     }
 }

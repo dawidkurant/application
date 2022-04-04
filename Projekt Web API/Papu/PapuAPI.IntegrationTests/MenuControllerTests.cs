@@ -185,5 +185,37 @@ namespace PapuAPI.IntegrationTests
             //Sprawdzamy czy odpowiedź serwera zawiera nagłówek z lokacją
             response.Headers.Location.Should().BeNull();
         }
+
+        //deleteMenu
+        [Fact]
+        public async Task DeleteMenu_WithParameter_ReturnsNoContentResult()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy wysłać na serwer
+
+            var model = new CreateMenuDto
+            {
+                MenuDescription = "PrzykładowyOpis",
+                MenuName = "PrzykładyJadłospi"
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //Wysyłamy model na serwer
+            await _client.PostAsync("https://localhost:5001/api/menu", httpContent);
+
+            //act
+
+            var response2 = await _client.DeleteAsync("https://localhost:5001/api/menu/2");
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy no content
+            response2.StatusCode.Should().Be(System.Net.HttpStatusCode.NoContent);
+        }
     }
 }

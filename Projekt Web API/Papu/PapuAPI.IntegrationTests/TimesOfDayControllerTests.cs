@@ -555,5 +555,165 @@ namespace PapuAPI.IntegrationTests
             //Sprawdzamy czy odpowiedź serwera zawiera nagłówek z lokacją
             response.Headers.Location.Should().NotBeNull();
         }
+
+        //deleteBreakfast
+        [Fact]
+        public async Task DeleteBreakfast_WithParameter_ReturnsNoContentResult()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy wysłać na serwer
+
+            var model = new CreateBreakfastDto
+            {
+                DishId = new int[] { 1 },
+                ProductId = new int[] { 1 }
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //Wysyłamy model na serwer
+            await _client.PostAsync("https://localhost:5001/api/createbreakfast", httpContent);
+
+            //act
+
+            var response2 = await _client.DeleteAsync("https://localhost:5001/api/breakfast/17");
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy no content
+            response2.StatusCode.Should().Be(System.Net.HttpStatusCode.NoContent);
+        }
+
+        //deleteSecondBreakfast
+        [Fact]
+        public async Task DeleteSecondBreakfast_WithParameter_ReturnsNoContentResult()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy wysłać na serwer
+
+            var model = new CreateSecondBreakfastDto
+            {
+                DishId = new int[] { 1 },
+                ProductId = new int[] { 1 }
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //Wysyłamy model na serwer
+            await _client.PostAsync("https://localhost:5001/api/createsecondbreakfast", httpContent);
+
+            //act
+
+            var response2 = await _client.DeleteAsync("https://localhost:5001/api/secondbreakfast/18");
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy no content
+            response2.StatusCode.Should().Be(System.Net.HttpStatusCode.NoContent);
+        }
+
+        //deleteLunch
+        [Fact]
+        public async Task DeleteLunch_WithParameter_ReturnsNoContentResult()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy wysłać na serwer
+
+            var model = new CreateLunchDto
+            {
+                DishId = new int[] { 1 },
+                ProductId = new int[] { 1 }
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //Wysyłamy model na serwer
+            await _client.PostAsync("https://localhost:5001/api/createlunch", httpContent);
+
+            //act
+
+            var response2 = await _client.DeleteAsync("https://localhost:5001/api/lunch/16");
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy no content
+            response2.StatusCode.Should().Be(System.Net.HttpStatusCode.NoContent);
+        }
+
+        //deleteSnack
+        [Fact]
+        public async Task DeleteSnack_WithParameter_ReturnsNoContentResult()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy wysłać na serwer
+
+            var model = new CreateSnackDto
+            {
+                DishId = new int[] { 1 },
+                ProductId = new int[] { 1 }
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //Wysyłamy model na serwer
+            await _client.PostAsync("https://localhost:5001/api/createsnack", httpContent);
+
+            //act
+
+            var response2 = await _client.DeleteAsync("https://localhost:5001/api/snack/16");
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy no content
+            response2.StatusCode.Should().Be(System.Net.HttpStatusCode.NoContent);
+        }
+
+        //deleteDinner
+        [Fact]
+        public async Task DeleteDinner_WithParameter_ReturnsNoContentResult()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy wysłać na serwer
+
+            var model = new CreateDinnerDto
+            {
+                DishId = new int[] { 1 },
+                ProductId = new int[] { 1 }
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //Wysyłamy model na serwer
+            await _client.PostAsync("https://localhost:5001/api/createdinner", httpContent);
+
+            //act
+
+            var response2 = await _client.DeleteAsync("https://localhost:5001/api/dinner/16");
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy no content
+            response2.StatusCode.Should().Be(System.Net.HttpStatusCode.NoContent);
+        }
     }
 }

@@ -186,5 +186,38 @@ namespace PapuAPI.IntegrationTests
             //Sprawdzamy czy odpowiedź serwera zawiera nagłówek z lokacją
             response.Headers.Location.Should().BeNull();
         }
+
+        //deleteProduct
+        [Fact]
+        public async Task DeleteProduct_WithParameter_ReturnsNoContentResult()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy wysłać na serwer
+
+            var model = new CreateProductDto
+            {
+                ProductName = "NazwaTestowa",
+                GroupId = new int[] { 1 },
+                Weight = 200
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //Wysyłamy model na serwer
+            await _client.PostAsync("https://localhost:5001/api/product", httpContent);
+
+            //act
+
+            var response2 = await _client.DeleteAsync("https://localhost:5001/api/product/148");
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy no content
+            response2.StatusCode.Should().Be(System.Net.HttpStatusCode.NoContent);
+        }
     }
 }
