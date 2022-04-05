@@ -715,5 +715,85 @@ namespace PapuAPI.IntegrationTests
             //sprawdzamy czy status kod z tej odpowiedzi jest równy no content
             response2.StatusCode.Should().Be(System.Net.HttpStatusCode.NoContent);
         }
+
+        //deleteAnotherBreakfast
+        [Fact]
+        public async Task DeleteBreakfast_WithParameter_ReturnsForbiddenResult()
+        {
+            //arrange
+
+            //act
+
+            var response = await _client.DeleteAsync("https://localhost:5001/api/breakfast/2");
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy no content
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.Forbidden);
+        }
+
+        //deleteAnotherSecondBreakfast
+        [Fact]
+        public async Task DeleteSecondBreakfast_WithParameter_ReturnsForbiddenResult()
+        {
+            //arrange
+
+            //act
+
+            var response = await _client.DeleteAsync("https://localhost:5001/api/secondbreakfast/2");
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy no content
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.Forbidden);
+        }
+
+        //deleteAnotherLunch
+        [Fact]
+        public async Task DeleteLunch_WithParameter_ReturnsForbiddenResult()
+        {
+            //arrange
+
+            //act
+
+            var response = await _client.DeleteAsync("https://localhost:5001/api/lunch/2");
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy no content
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.Forbidden);
+        }
+
+        //deleteAnotherSnack
+        [Fact]
+        public async Task DeleteSnack_WithParameter_ReturnsForbiddenResult()
+        {
+            //arrange
+
+            //act
+
+            var response = await _client.DeleteAsync("https://localhost:5001/api/snack/2");
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy no content
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.Forbidden);
+        }
+
+        //deleteAnotherDinner
+        [Fact]
+        public async Task DeleteDinner_WithParameter_ReturnsForbiddenResult()
+        {
+            //arrange
+
+            //act
+
+            var response = await _client.DeleteAsync("https://localhost:5001/api/dinner/2");
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy no content
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.Forbidden);
+        }
     }
 }

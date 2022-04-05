@@ -219,5 +219,21 @@ namespace PapuAPI.IntegrationTests
             //sprawdzamy czy status kod z tej odpowiedzi jest równy no content
             response2.StatusCode.Should().Be(System.Net.HttpStatusCode.NoContent);
         }
+
+        //deleteAnotherProduct
+        [Fact]
+        public async Task DeleteProduct_WithParameter_ReturnsForbiddenResult()
+        {
+            //arrange
+
+            //act
+
+            var response = await _client.DeleteAsync("https://localhost:5001/api/product/2");
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy no content
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.Forbidden);
+        }
     }
 }

@@ -981,5 +981,117 @@ namespace PapuAPI.IntegrationTests
             //sprawdzamy czy status kod z tej odpowiedzi jest równy no content
             response2.StatusCode.Should().Be(System.Net.HttpStatusCode.NoContent);
         }
+
+        //deleteAnotherMonday
+        [Fact]
+        public async Task DeleteMonday_WithParameter_ReturnsForbiddenResult()
+        {
+            //arrange
+
+            //act
+
+            var response = await _client.DeleteAsync("https://localhost:5001/api/monday/2");
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy no content
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.Forbidden);
+        }
+
+        //deleteAnotherTuesday
+        [Fact]
+        public async Task DeleteTuesday_WithParameter_ReturnsForbiddenResult()
+        {
+            //arrange
+
+            //act
+
+            var response = await _client.DeleteAsync("https://localhost:5001/api/tuesday/2");
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy no content
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.Forbidden);
+        }
+
+        //deleteAnotherWednesday
+        [Fact]
+        public async Task DeleteWednesday_WithParameter_ReturnsForbiddenResult()
+        {
+            //arrange
+
+            //act
+
+            var response = await _client.DeleteAsync("https://localhost:5001/api/wednesday/2");
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy no content
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.Forbidden);
+        }
+
+        //deleteAnotherThursday
+        [Fact]
+        public async Task DeleteThursday_WithParameter_ReturnsForbiddenResult()
+        {
+            //arrange
+
+            //act
+
+            var response = await _client.DeleteAsync("https://localhost:5001/api/thursday/2");
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy no content
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.Forbidden);
+        }
+
+        //deleteAnotherFriday
+        [Fact]
+        public async Task DeleteFriday_WithParameter_ReturnsForbiddenResult()
+        {
+            //arrange
+
+            //act
+
+            var response = await _client.DeleteAsync("https://localhost:5001/api/friday/2");
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy no content
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.Forbidden);
+        }
+
+        //deleteAnotherSaturday
+        [Fact]
+        public async Task DeleteSaturday_WithParameter_ReturnsForbiddenResult()
+        {
+            //arrange
+
+            //act
+
+            var response = await _client.DeleteAsync("https://localhost:5001/api/saturday/2");
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy no content
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.Forbidden);
+        }
+
+        //deleteAnotherSunday
+        [Fact]
+        public async Task DeleteSunday_WithParameter_ReturnsForbiddenResult()
+        {
+            //arrange
+
+            //act
+
+            var response = await _client.DeleteAsync("https://localhost:5001/api/sunday/2");
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy no content
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.Forbidden);
+        }
     }
 }
