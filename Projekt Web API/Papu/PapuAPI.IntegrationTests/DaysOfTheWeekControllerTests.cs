@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using Papu;
 using Papu.Entities;
 using Papu.Models;
+using Papu.Models.Update.DayOfTheWeek;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -758,6 +759,209 @@ namespace PapuAPI.IntegrationTests
             response.Headers.Location.Should().NotBeNull();
         }
 
+        //updateAnotherMonday
+        [Fact]
+        public async Task UpdateMonday_WithInvalidModel_ReturnsMethodNotAllowedResult()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy edytować i wysłać na serwer
+
+            var model = new UpdateMondayDto
+            {
+                BreakfastMondayId = 1 ,
+                SecondBreakfastMondayId = 1
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //act
+
+            var response = await _client.PatchAsync("https://localhost:5001/api/monday/1", httpContent);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy method not allowed
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.MethodNotAllowed);
+        }
+
+        //updateAnotherTuesday
+        [Fact]
+        public async Task UpdateTuesday_WithInvalidModel_ReturnsMethodNotAllowedResult()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy edytować i wysłać na serwer
+
+            var model = new UpdateTuesdayDto
+            {
+                BreakfastTuesdayId = 1,
+                SecondBreakfastTuesdayId = 1
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //act
+
+            var response = await _client.PatchAsync("https://localhost:5001/api/tuesday/1", httpContent);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy method not allowed
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.MethodNotAllowed);
+        }
+
+        //updateAnotherWednesday
+        [Fact]
+        public async Task UpdateWednesday_WithInvalidModel_ReturnsMethodNotAllowedResult()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy edytować i wysłać na serwer
+
+            var model = new UpdateWednesdayDto
+            {
+                BreakfastWednesdayId = 1,
+                SecondBreakfastWednesdayId = 1
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //act
+
+            var response = await _client.PatchAsync("https://localhost:5001/api/wednesday/1", httpContent);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy method not allowed
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.MethodNotAllowed);
+        }
+
+        //updateAnotherThursday
+        [Fact]
+        public async Task UpdateThursday_WithInvalidModel_ReturnsMethodNotAllowedResult()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy edytować i wysłać na serwer
+
+            var model = new UpdateThursdayDto
+            {
+                BreakfastThursdayId = 1,
+                SecondBreakfastThursdayId = 1
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //act
+
+            var response = await _client.PatchAsync("https://localhost:5001/api/thursday/1", httpContent);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy method not allowed
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.MethodNotAllowed);
+        }
+
+        //updateAnotherFriday
+        [Fact]
+        public async Task UpdateFriday_WithInvalidModel_ReturnsMethodNotAllowedResult()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy edytować i wysłać na serwer
+
+            var model = new UpdateFridayDto
+            {
+                BreakfastFridayId = 1,
+                SecondBreakfastFridayId = 1
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //act
+
+            var response = await _client.PatchAsync("https://localhost:5001/api/friday/1", httpContent);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy method not allowed
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.MethodNotAllowed);
+        }
+
+        //updateAnotherSaturday
+        [Fact]
+        public async Task UpdateSaturday_WithInvalidModel_ReturnsMethodNotAllowedResult()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy edytować i wysłać na serwer
+
+            var model = new UpdateSaturdayDto
+            {
+                BreakfastSaturdayId = 1,
+                SecondBreakfastSaturdayId = 1
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //act
+
+            var response = await _client.PatchAsync("https://localhost:5001/api/saturday/1", httpContent);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy method not allowed
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.MethodNotAllowed);
+        }
+
+        //updateAnotherSunday
+        [Fact]
+        public async Task UpdateSunday_WithInvalidModel_ReturnsMethodNotAllowedResult()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy edytować i wysłać na serwer
+
+            var model = new UpdateSundayDto
+            {
+                BreakfastSundayId = 1,
+                SecondBreakfastSundayId = 1
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //act
+
+            var response = await _client.PatchAsync("https://localhost:5001/api/sunday/1", httpContent);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy method not allowed
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.MethodNotAllowed);
+        }
+
         //deleteMonday
         [Fact]
         public async Task DeleteMonday_WithParameter_ReturnsNoContentResult()
@@ -1093,5 +1297,7 @@ namespace PapuAPI.IntegrationTests
             //sprawdzamy czy status kod z tej odpowiedzi jest równy no content
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.Forbidden);
         }
+
+
     }
 }

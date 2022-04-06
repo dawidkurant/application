@@ -187,6 +187,36 @@ namespace PapuAPI.IntegrationTests
             response.Headers.Location.Should().BeNull();
         }
 
+        //updateAnotherProduct
+        [Fact]
+        public async Task UpdateProduct_WithInvalidModel_ReturnsMethodNotAllowedResult()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy edytować i wysłać na serwer
+
+            var model = new UpdateProductDto
+            {
+                ProductName = "NazwaTestowaEdytowana",
+                GroupId = new int[] { 1 },
+                Weight = 200
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //act
+
+            var response = await _client.PatchAsync("https://localhost:5001/api/product/2", httpContent);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy method not allowed
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.MethodNotAllowed);
+        }
+
         //deleteProduct
         [Fact]
         public async Task DeleteProduct_WithParameter_ReturnsNoContentResult()

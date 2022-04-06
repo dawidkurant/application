@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using Papu;
 using Papu.Entities;
 using Papu.Models;
+using Papu.Models.Update.TimesOfDay;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -554,6 +555,151 @@ namespace PapuAPI.IntegrationTests
 
             //Sprawdzamy czy odpowiedź serwera zawiera nagłówek z lokacją
             response.Headers.Location.Should().NotBeNull();
+        }
+
+        //updateAnotherBreakfast
+        [Fact]
+        public async Task UpdateBreakfast_WithInvalidModel_ReturnsMethodNotAllowedResult()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy edytować i wysłać na serwer
+
+            var model = new UpdateBreakfastDto
+            {
+                DishId = new int[] { 1 },
+                ProductId = new int[] { 1 }
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //act
+
+            var response = await _client.PatchAsync("https://localhost:5001/api/breakfast/2", httpContent);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy method not allowed
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.MethodNotAllowed);
+        }
+
+        //updateAnotherSecondBreakfast
+        [Fact]
+        public async Task UpdateSecondBreakfast_WithInvalidModel_ReturnsMethodNotAllowedResult()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy edytować i wysłać na serwer
+
+            var model = new UpdateSecondBreakfastDto
+            {
+                DishId = new int[] { 1 },
+                ProductId = new int[] { 1 }
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //act
+
+            var response = await _client.PatchAsync("https://localhost:5001/api/secondbreakfast/2", httpContent);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy method not allowed
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.MethodNotAllowed);
+        }
+
+        //updateAnotherLunch
+        [Fact]
+        public async Task UpdateLunch_WithInvalidModel_ReturnsMethodNotAllowedResult()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy edytować i wysłać na serwer
+
+            var model = new UpdateLunchDto
+            {
+                DishId = new int[] { 1 },
+                ProductId = new int[] { 1 }
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //act
+
+            var response = await _client.PatchAsync("https://localhost:5001/api/lunch/2", httpContent);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy method not allowed
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.MethodNotAllowed);
+        }
+
+        //updateAnotherSnack
+        [Fact]
+        public async Task UpdateSnack_WithInvalidModel_ReturnsMethodNotAllowedResult()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy edytować i wysłać na serwer
+
+            var model = new UpdateSnackDto
+            {
+                DishId = new int[] { 1 },
+                ProductId = new int[] { 1 }
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //act
+
+            var response = await _client.PatchAsync("https://localhost:5001/api/snack/2", httpContent);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy method not allowed
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.MethodNotAllowed);
+        }
+
+        //updateAnotherDinner
+        [Fact]
+        public async Task UpdateDinner_WithInvalidModel_ReturnsMethodNotAllowedResult()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy edytować i wysłać na serwer
+
+            var model = new UpdateDinnerDto
+            {
+                DishId = new int[] { 1 },
+                ProductId = new int[] { 1 }
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //act
+
+            var response = await _client.PatchAsync("https://localhost:5001/api/dinner/2", httpContent);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy method not allowed
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.MethodNotAllowed);
         }
 
         //deleteBreakfast
