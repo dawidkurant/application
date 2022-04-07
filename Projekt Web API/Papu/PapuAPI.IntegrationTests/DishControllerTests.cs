@@ -193,6 +193,65 @@ namespace PapuAPI.IntegrationTests
             response.Headers.Location.Should().BeNull();
         }
 
+        //updateDish
+        [Fact]
+        public async Task UpdateDish_WithValidModel_ReturnsOKResult()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy edytować i wysłać na serwer
+
+            var model = new CreateDishDto
+            {
+                DishName = "PotrawaTestowa",
+                DishDescription = "PrzykładowyOpis",
+                DishImagePath = "PrzykładowyLink",
+                MethodOfPeparation = "PrzykładowaMetoda",
+                PreparationTime = 1,
+                Portions = 2,
+                Size = 1,
+                TypeId = new int[] { 1 },
+                KindOfId = new int[] { 1 }
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //Wysyłamy model na serwer
+            await _client.PostAsync("https://localhost:5001/api/dish", httpContent);
+
+            //Edytujemy model
+
+            var modelUpdated = new UpdateDishDto
+            {
+                DishName = "PotrawaTestowaEdytowana",
+                DishDescription = "PrzykładowyOpis",
+                DishImagePath = "PrzykładowyLink",
+                MethodOfPeparation = "PrzykładowaMetoda",
+                PreparationTime = 1,
+                Portions = 2,
+                Size = 1,
+                TypeId = new int[] { 1 },
+                KindOfId = new int[] { 1 }
+            };
+
+            //Serializujemy model do formatu json
+            var json2 = JsonConvert.SerializeObject(modelUpdated);
+
+            StringContent httpContent2 = new(json2, Encoding.UTF8, "application/json");
+
+            //act
+
+            var response2 = await _client.PutAsync("https://localhost:5001/api/dish/149", httpContent2);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy OK
+            response2.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        }
+
         //updateAnotherDish
         [Fact]
         public async Task UpdateDish_WithInvalidModel_ReturnsMethodNotAllowedResult()

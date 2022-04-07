@@ -180,6 +180,11 @@ namespace Papu.Services
 
             dish.DishTypes.Clear();
 
+            if (dto.TypeId is null)
+            {
+                dto.TypeId = new int[] { 1 };
+            }
+
             foreach (var addType in dto.TypeId)
             {
 
@@ -202,6 +207,11 @@ namespace Papu.Services
 
             dish.DishKindsOf.Clear();
 
+            if (dto.KindOfId is null)
+            {
+                dto.KindOfId = new int[] { 1 };
+            }
+
             foreach (var addKindOf in dto.KindOfId)
             {
 
@@ -223,6 +233,11 @@ namespace Papu.Services
             }
 
             dish.DishProducts.Clear();
+
+            if (dto.ProductId is null)
+            {
+                dto.ProductId = new int[] { 1 };
+            }
 
             foreach (var addProduct in dto.ProductId)
             {

@@ -759,6 +759,321 @@ namespace PapuAPI.IntegrationTests
             response.Headers.Location.Should().NotBeNull();
         }
 
+        //updateMonday
+        [Fact]
+        public async Task UpdateMonday_WithValidModel_ReturnsOKResult()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy edytować i wysłać na serwer
+
+            var model = new CreateMondayDto
+            {
+                BreakfastMondayId = 1,
+                SecondBreakfastMondayId = 1
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //Wysyłamy model na serwer
+            await _client.PostAsync("https://localhost:5001/api/createmonday", httpContent);
+
+            //Edytujemy model
+
+            var modelUpdated = new UpdateMondayDto
+            {
+                BreakfastMondayId = 1,
+                SecondBreakfastMondayId = 1
+            };
+
+            //Serializujemy model do formatu json
+            var json2 = JsonConvert.SerializeObject(modelUpdated);
+
+            StringContent httpContent2 = new(json2, Encoding.UTF8, "application/json");
+
+            //act
+
+            var response2 = await _client.PutAsync("https://localhost:5001/api/monday/4", httpContent2);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy OK
+            response2.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        }
+
+        //updateTuesday
+        [Fact]
+        public async Task UpdateTuesday_WithValidModel_ReturnsOKResult()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy edytować i wysłać na serwer
+
+            var model = new CreateTuesdayDto
+            {
+                BreakfastTuesdayId = 1,
+                SecondBreakfastTuesdayId = 1
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //Wysyłamy model na serwer
+            await _client.PostAsync("https://localhost:5001/api/createtuesday", httpContent);
+
+            //Edytujemy model
+
+            var modelUpdated = new UpdateTuesdayDto
+            {
+                BreakfastTuesdayId = 1,
+                SecondBreakfastTuesdayId = 1
+            };
+
+            //Serializujemy model do formatu json
+            var json2 = JsonConvert.SerializeObject(modelUpdated);
+
+            StringContent httpContent2 = new(json2, Encoding.UTF8, "application/json");
+
+            //act
+
+            var response2 = await _client.PutAsync("https://localhost:5001/api/tuesday/3", httpContent2);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy OK
+            response2.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        }
+
+        //updateWednesday
+        [Fact]
+        public async Task UpdateWednesday_WithValidModel_ReturnsOKResult()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy edytować i wysłać na serwer
+
+            var model = new CreateWednesdayDto
+            {
+                BreakfastWednesdayId = 1,
+                SecondBreakfastWednesdayId = 1
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //Wysyłamy model na serwer
+            await _client.PostAsync("https://localhost:5001/api/createwednesday", httpContent);
+
+            //Edytujemy model
+
+            var modelUpdated = new UpdateWednesdayDto
+            {
+                BreakfastWednesdayId = 1,
+                SecondBreakfastWednesdayId = 1
+            };
+
+            //Serializujemy model do formatu json
+            var json2 = JsonConvert.SerializeObject(modelUpdated);
+
+            StringContent httpContent2 = new(json2, Encoding.UTF8, "application/json");
+
+            //act
+
+            var response2 = await _client.PutAsync("https://localhost:5001/api/wednesday/4", httpContent2);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy OK
+            response2.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        }
+
+        //updateThursday
+        [Fact]
+        public async Task UpdateThursday_WithValidModel_ReturnsOKResult()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy edytować i wysłać na serwer
+
+            var model = new CreateThursdayDto
+            {
+                BreakfastThursdayId = 1,
+                SecondBreakfastThursdayId = 1
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //Wysyłamy model na serwer
+            await _client.PostAsync("https://localhost:5001/api/createthursday", httpContent);
+
+            //Edytujemy model
+
+            var modelUpdated = new UpdateThursdayDto
+            {
+                BreakfastThursdayId = 1,
+                SecondBreakfastThursdayId = 1
+            };
+
+            //Serializujemy model do formatu json
+            var json2 = JsonConvert.SerializeObject(modelUpdated);
+
+            StringContent httpContent2 = new(json2, Encoding.UTF8, "application/json");
+
+            //act
+
+            var response2 = await _client.PutAsync("https://localhost:5001/api/thursday/3", httpContent2);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy OK
+            response2.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        }
+
+        //updateFriday
+        [Fact]
+        public async Task UpdateFriday_WithValidModel_ReturnsOKResult()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy edytować i wysłać na serwer
+
+            var model = new CreateFridayDto
+            {
+                BreakfastFridayId = 1,
+                SecondBreakfastFridayId = 1
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //Wysyłamy model na serwer
+            await _client.PostAsync("https://localhost:5001/api/createfriday", httpContent);
+
+            //Edytujemy model
+
+            var modelUpdated = new UpdateFridayDto
+            {
+                BreakfastFridayId = 1,
+                SecondBreakfastFridayId = 1
+            };
+
+            //Serializujemy model do formatu json
+            var json2 = JsonConvert.SerializeObject(modelUpdated);
+
+            StringContent httpContent2 = new(json2, Encoding.UTF8, "application/json");
+
+            //act
+
+            var response2 = await _client.PutAsync("https://localhost:5001/api/friday/3", httpContent2);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy OK
+            response2.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        }
+
+        //updateSaturday
+        [Fact]
+        public async Task UpdateSaturday_WithValidModel_ReturnsOKResult()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy edytować i wysłać na serwer
+
+            var model = new CreateSaturdayDto
+            {
+                BreakfastSaturdayId = 1,
+                SecondBreakfastSaturdayId = 1
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //Wysyłamy model na serwer
+            await _client.PostAsync("https://localhost:5001/api/createsaturday", httpContent);
+
+            //Edytujemy model
+
+            var modelUpdated = new UpdateSaturdayDto
+            {
+                BreakfastSaturdayId = 1,
+                SecondBreakfastSaturdayId = 1
+            };
+
+            //Serializujemy model do formatu json
+            var json2 = JsonConvert.SerializeObject(modelUpdated);
+
+            StringContent httpContent2 = new(json2, Encoding.UTF8, "application/json");
+
+            //act
+
+            var response2 = await _client.PutAsync("https://localhost:5001/api/saturday/4", httpContent2);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy OK
+            response2.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        }
+
+        //updateSunday
+        [Fact]
+        public async Task UpdateSunday_WithValidModel_ReturnsOKResult()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy edytować i wysłać na serwer
+
+            var model = new CreateSundayDto
+            {
+                BreakfastSundayId = 1,
+                SecondBreakfastSundayId = 1
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //Wysyłamy model na serwer
+            await _client.PostAsync("https://localhost:5001/api/createsunday", httpContent);
+
+            //Edytujemy model
+
+            var modelUpdated = new UpdateSundayDto
+            {
+                BreakfastSundayId = 1,
+                SecondBreakfastSundayId = 1
+            };
+
+            //Serializujemy model do formatu json
+            var json2 = JsonConvert.SerializeObject(modelUpdated);
+
+            StringContent httpContent2 = new(json2, Encoding.UTF8, "application/json");
+
+            //act
+
+            var response2 = await _client.PutAsync("https://localhost:5001/api/sunday/4", httpContent2);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy OK
+            response2.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        }
+
         //updateAnotherMonday
         [Fact]
         public async Task UpdateMonday_WithInvalidModel_ReturnsMethodNotAllowedResult()

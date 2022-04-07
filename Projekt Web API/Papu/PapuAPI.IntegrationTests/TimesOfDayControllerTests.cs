@@ -557,6 +557,231 @@ namespace PapuAPI.IntegrationTests
             response.Headers.Location.Should().NotBeNull();
         }
 
+        //updateBreakfast
+        [Fact]
+        public async Task UpdateBreakfast_WithValidModel_ReturnsOKResult()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy edytować i wysłać na serwer
+
+            var model = new CreateBreakfastDto
+            {
+                DishId = new int[] { 1 },
+                ProductId = new int[] { 1 }
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //Wysyłamy model na serwer
+            await _client.PostAsync("https://localhost:5001/api/createbreakfast", httpContent);
+
+            //Edytujemy model
+
+            var modelUpdated = new UpdateBreakfastDto
+            {
+                DishId = new int[] { 1 },
+                ProductId = new int[] { 1 }
+            };
+
+            //Serializujemy model do formatu json
+            var json2 = JsonConvert.SerializeObject(modelUpdated);
+
+            StringContent httpContent2 = new(json2, Encoding.UTF8, "application/json");
+
+            //act
+
+            var response2 = await _client.PutAsync("https://localhost:5001/api/breakfast/17", httpContent2);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy OK
+            response2.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        }
+
+        //updateSecondBreakfast
+        [Fact]
+        public async Task UpdateSecondBreakfast_WithValidModel_ReturnsOKResult()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy edytować i wysłać na serwer
+
+            var model = new CreateSecondBreakfastDto
+            {
+                DishId = new int[] { 1 },
+                ProductId = new int[] { 1 }
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //Wysyłamy model na serwer
+            await _client.PostAsync("https://localhost:5001/api/createsecondbreakfast", httpContent);
+
+            //Edytujemy model
+
+            var modelUpdated = new UpdateSecondBreakfastDto
+            {
+                DishId = new int[] { 1 },
+                ProductId = new int[] { 1 }
+            };
+
+            //Serializujemy model do formatu json
+            var json2 = JsonConvert.SerializeObject(modelUpdated);
+
+            StringContent httpContent2 = new(json2, Encoding.UTF8, "application/json");
+
+            //act
+
+            var response2 = await _client.PutAsync("https://localhost:5001/api/secondbreakfast/20", httpContent2);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy OK
+            response2.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        }
+
+        //updateLunch
+        [Fact]
+        public async Task UpdateLunch_WithValidModel_ReturnsOKResult()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy edytować i wysłać na serwer
+
+            var model = new CreateLunchDto
+            {
+                DishId = new int[] { 1 },
+                ProductId = new int[] { 1 }
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //Wysyłamy model na serwer
+            await _client.PostAsync("https://localhost:5001/api/createlunch", httpContent);
+
+            //Edytujemy model
+
+            var modelUpdated = new UpdateLunchDto
+            {
+                DishId = new int[] { 1 },
+                ProductId = new int[] { 1 }
+            };
+
+            //Serializujemy model do formatu json
+            var json2 = JsonConvert.SerializeObject(modelUpdated);
+
+            StringContent httpContent2 = new(json2, Encoding.UTF8, "application/json");
+
+            //act
+
+            var response2 = await _client.PutAsync("https://localhost:5001/api/lunch/18", httpContent2);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy OK
+            response2.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        }
+
+        //updateSnack
+        [Fact]
+        public async Task UpdateSnack_WithValidModel_ReturnsOKResult()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy edytować i wysłać na serwer
+
+            var model = new CreateSnackDto
+            {
+                DishId = new int[] { 1 },
+                ProductId = new int[] { 1 }
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //Wysyłamy model na serwer
+            await _client.PostAsync("https://localhost:5001/api/createsnack", httpContent);
+
+            //Edytujemy model
+
+            var modelUpdated = new UpdateSnackDto
+            {
+                DishId = new int[] { 1 },
+                ProductId = new int[] { 1 }
+            };
+
+            //Serializujemy model do formatu json
+            var json2 = JsonConvert.SerializeObject(modelUpdated);
+
+            StringContent httpContent2 = new(json2, Encoding.UTF8, "application/json");
+
+            //act
+
+            var response2 = await _client.PutAsync("https://localhost:5001/api/snack/18", httpContent2);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy OK
+            response2.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        }
+
+        //updateDinner
+        [Fact]
+        public async Task UpdateDinner_WithValidModel_ReturnsOKResult()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy edytować i wysłać na serwer
+
+            var model = new CreateDinnerDto
+            {
+                DishId = new int[] { 1 },
+                ProductId = new int[] { 1 }
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //Wysyłamy model na serwer
+            await _client.PostAsync("https://localhost:5001/api/createdinner", httpContent);
+
+            //Edytujemy model
+
+            var modelUpdated = new UpdateDinnerDto
+            {
+                DishId = new int[] { 1 },
+                ProductId = new int[] { 1 }
+            };
+
+            //Serializujemy model do formatu json
+            var json2 = JsonConvert.SerializeObject(modelUpdated);
+
+            StringContent httpContent2 = new(json2, Encoding.UTF8, "application/json");
+
+            //act
+
+            var response2 = await _client.PutAsync("https://localhost:5001/api/dinner/16", httpContent2);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy OK
+            response2.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        }
+
         //updateAnotherBreakfast
         [Fact]
         public async Task UpdateBreakfast_WithInvalidModel_ReturnsMethodNotAllowedResult()

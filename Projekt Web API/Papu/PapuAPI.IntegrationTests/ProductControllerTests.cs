@@ -187,6 +187,53 @@ namespace PapuAPI.IntegrationTests
             response.Headers.Location.Should().BeNull();
         }
 
+        //updateProduct
+        [Fact]
+        public async Task UpdateProduct_WithValidModel_ReturnsOKResult()
+        {
+            //arrange
+
+            //Tworzymy model, ktory chcemy edytować i wysłać na serwer
+
+            var model = new CreateProductDto
+            {
+                ProductName = "NazwaTestowa",
+                GroupId = new int[] { 1 },
+                Weight = 200
+            };
+
+            //Serializujemy model do formatu json
+            var json = JsonConvert.SerializeObject(model);
+
+            StringContent httpContent = new(json, Encoding.UTF8, "application/json");
+
+            //Wysyłamy model na serwer
+            await _client.PostAsync("https://localhost:5001/api/product", httpContent);
+
+            //Edytujemy model
+
+            var modelUpdated = new UpdateProductDto
+            {
+                ProductName = "NazwaTestowaEdytowana",
+                GroupId = new int[] { 1 },
+                Weight = 200
+            };
+
+            //Serializujemy model do formatu json
+            var json2 = JsonConvert.SerializeObject(modelUpdated);
+
+            StringContent httpContent2 = new(json2, Encoding.UTF8, "application/json");
+
+            //act
+
+            var response2 = await _client.PutAsync("https://localhost:5001/api/product/148", httpContent2);
+
+            //assert
+
+            //sprawdzamy czy status kod z tej odpowiedzi jest równy OK
+            response2.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        }
+
         //updateAnotherProduct
         [Fact]
         public async Task UpdateProduct_WithInvalidModel_ReturnsMethodNotAllowedResult()
