@@ -180,12 +180,25 @@ namespace Papu
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                //domy�lna �cie�ka do pliku wygenerowanego przez swaggera, a drugi parametr to nazwa
+                //Domyślna ścieżka do pliku wygenerowanego przez swaggera, a drugi parametr to nazwa
                 //dokumentacji naszego api
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Papu API");
             });
 
-            app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                OnPrepareResponse = (context) =>
+                {
+                    //Pobieranie konfiguracji pamięci podręcznej z pliku appsettings.json
+                    context.Context.Response.Headers["Cache-Control"] =
+                    Configuration["StaticFiles:Heades:Cache-Control"];
+                    context.Context.Response.Headers["Pragma"] =
+                    Configuration["StaticFiles:Heades:Pragma"];
+                    context.Context.Response.Headers["Expires"] =
+                    Configuration["StaticFiles:Heades:Expires"];
+                }
+            });
+
             if (!env.IsDevelopment())
             {
                 app.UseSpaStaticFiles();
