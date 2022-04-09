@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Papu.Authorization;
 using Papu.Authorization.DaysOfTheWeek;
@@ -21,6 +22,7 @@ using Papu.Middleware;
 using Papu.Models;
 using Papu.Models.Validators;
 using Papu.Services;
+using Papu.wwwroot;
 using System.Text;
 
 namespace Papu
@@ -37,6 +39,8 @@ namespace Papu
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<StaticFilesConfiguration>(Configuration.GetSection(""));
+
             var authenticationSettings = new AuthenticationSettings();
             //Pobieranie informacji zapisanych w pliku appsettings.json
             //bind czyli połączenie wartości z pliku ze zmienną authenticationSettings
@@ -149,8 +153,11 @@ namespace Papu
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, PapuSeeder seeder)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, PapuSeeder seeder, 
+            IOptions<StaticFilesConfiguration> options)
         {
+            env.EnvironmentName = "Production";
+
             //Każde zapytanie do naszego API przejdzie przez proces seedowania przez co encje zostaną dodane już
             //przy pierwszym zapytaniu do naszego API
             seeder.Seed();
@@ -189,13 +196,15 @@ namespace Papu
             {
                 OnPrepareResponse = (context) =>
                 {
+                    StaticFilesConfiguration headers = options.Value;
+
                     //Pobieranie konfiguracji pamięci podręcznej z pliku appsettings.json
                     context.Context.Response.Headers["Cache-Control"] =
-                    Configuration["StaticFiles:Heades:Cache-Control"];
+                    headers.CacheControl;
                     context.Context.Response.Headers["Pragma"] =
-                    Configuration["StaticFiles:Heades:Pragma"];
+                    headers.Pragma;
                     context.Context.Response.Headers["Expires"] =
-                    Configuration["StaticFiles:Heades:Expires"];
+                    headers.Expires;
                 }
             });
 
