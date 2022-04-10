@@ -156,7 +156,7 @@ namespace Papu
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, PapuSeeder seeder, 
             IOptions<StaticFilesConfiguration> options)
         {
-            env.EnvironmentName = "Production";
+            env.EnvironmentName = "Development";
 
             //Każde zapytanie do naszego API przejdzie przez proces seedowania przez co encje zostaną dodane już
             //przy pierwszym zapytaniu do naszego API
