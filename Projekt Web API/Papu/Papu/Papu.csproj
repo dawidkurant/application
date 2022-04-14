@@ -46,7 +46,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="ClientApp\src\app\getAll-product\getAll-product.component.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\getall-product\getall-product.component.ts" />
   </ItemGroup>
 
   <ItemGroup>

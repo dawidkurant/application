@@ -37,6 +37,7 @@ namespace Papu.Controllers
 
         //Pobranie wszystkich produktów z bazy i zwrócenie ich do klienta z kodem 200 czyli OK
         [HttpGet]
+        [AllowAnonymous] //do usunięcia
         public ActionResult<IEnumerable<ProductDto>> GetAllProducts()
         {
             var productsDtos = _productService.GetAllProducts();

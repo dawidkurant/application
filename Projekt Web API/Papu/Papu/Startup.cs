@@ -39,7 +39,8 @@ namespace Papu
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<StaticFilesConfiguration>(Configuration.GetSection(""));
+            services.Configure<StaticFilesConfiguration>
+                (Configuration.GetSection("StaticFiles:Headers"));
 
             var authenticationSettings = new AuthenticationSettings();
             //Pobieranie informacji zapisanych w pliku appsettings.json

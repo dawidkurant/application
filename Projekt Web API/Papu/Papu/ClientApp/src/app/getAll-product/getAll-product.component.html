@@ -1,10 +1,29 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
+<h1>Wszystkie produkty</h1>
 
-</body>
-</html>
+<p *ngIf="!result"><em>Wczytywanie...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel"
+       *ngIf="result">
+  <thead>
+    <tr>
+      <th>Nazwa produktu</th>
+      <th>Kategoria</th>
+      <th>Grupa</th>
+      <th>Jednostka</th>
+      <th>Waga</th>
+      <th>Zdjęcie</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of result">
+      <td>{{ product.productName }}</td>
+      <td>{{ product.categoryName }}</td>
+      <td><ul *ngFor ="let group of product.groups">
+      {{ group.groupName }}
+      </ul></td>
+      <td>{{ product.unitName }}</td>
+      <td>{{ product.weight }}</td>
+      <td>{{ product.productImagePath }}</td>
+    </tr>
+  </tbody>
+</table>
