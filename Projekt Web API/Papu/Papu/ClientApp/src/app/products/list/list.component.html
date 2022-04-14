@@ -1,0 +1,37 @@
+<h1>Wszystkie produkty</h1>
+
+<p *ngIf="!result"><em>Wczytywanie...</em></p>
+
+<table class="table table-bordered" aria-labelledby="tableLabel"
+       *ngIf="result">
+  <thead>
+  <tr>
+    <th>Nazwa produktu</th>
+    <th>Kategoria</th>
+    <th>Grupa</th>
+    <th>Jednostka</th>
+    <th>Waga</th>
+    <th>Zdjęcie</th>
+    <th width="200px"></th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of result">
+      <td>{{ product.productName }}</td>
+      <td>{{ product.categoryName }}</td>
+      <td>
+        <ul *ngFor="let group of product.groups">
+          {{ group.groupName }}
+        </ul>
+      </td>
+      <td>{{ product.unitName }}</td>
+      <td>{{ product.weight }}</td>
+      <td>{{ product.productImagePath }}</td>
+      <td class="text-center">
+        <a href="#" [routerLink]="['/products/', product.id, 'details']" class="btn btn-info btn-sm">View</a>
+        <a href="#" [routerLink]="['/products/', product.id, 'edit']" class="btn btn-primary btn-sm">Edit</a>
+        <button type="button" (click)="deleteProduct(product.id)" class="btn btn-danger btn-sm">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

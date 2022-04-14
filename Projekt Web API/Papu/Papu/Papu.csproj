@@ -46,7 +46,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Remove="ClientApp\src\app\getall-product\getall-product.component.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\products\list\list.component.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\products\list\product.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\products\products-routing.module.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\products\products.module.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\products\products.service.spec.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\products\products.service.ts" />
   </ItemGroup>
 
   <ItemGroup>
