@@ -47,6 +47,7 @@ namespace Papu.Controllers
 
         //Tworzenie nowego produktu
         [HttpPost]
+        [AllowAnonymous] //do usunięcia
         public ActionResult CreateProduct([FromBody] CreateProductDto dto)
         {
             var newProductId = _productService.CreateProduct(dto);
@@ -67,6 +68,7 @@ namespace Papu.Controllers
 
         //Usuwanie produktu
         [HttpDelete("{id}")]
+        [AllowAnonymous] //do usunięcia
         public ActionResult DeleteProduct([FromRoute] int id)
         {
             _productService.DeleteProduct(id);

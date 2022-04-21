@@ -29,7 +29,7 @@ import { ListComponent } from "./products/list/list.component";
     ProductsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'products', component: ListComponent },
+      { path: 'product', component: ListComponent },
     ])
   ],
   providers: [

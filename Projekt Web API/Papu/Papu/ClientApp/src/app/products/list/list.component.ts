@@ -1,9 +1,7 @@
-import { Component, Inject, Injectable, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Component, Injectable, OnInit } from '@angular/core';
 
 import { Product } from "../product";
+import { ProductsService } from '../products.service';
 
 @Component({
   selector: 'app-list',
@@ -16,31 +14,21 @@ import { Product } from "../product";
 })
 
 export class ListComponent implements OnInit {
-  public result: Product[];
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    })
-  };
-  constructor(
-    private http: HttpClient,
-    @Inject('BASE_URL') private baseUrl: string) {
+  products: Product[] = [];
+
+  constructor(public productsService: ProductsService) {
   }
 
-  ngOnInit() {
-    return this.http.get<Product[]>(this.baseUrl + 'api/product').subscribe(result => {
-      this.result = result;
-    }, catchError(this.errorHandler));
+  ngOnInit(): void {
+    this.productsService.getProducts().subscribe((data: Product[]) => {
+      this.products = data;
+    });
   }
 
-  errorHandler(error) {
-    let errorMessage = '';
-
-    if (error.error instanceof ErrorEvent) {
-      errorMessage = error.error.message;
-    } else {
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    return throwError(errorMessage);
+  deleteProduct(productId) {
+    this.productsService.deleteProduct(productId).subscribe(res => {
+      this.products = this.products.filter(item => item.productId !== productId);
+    });
   }
+
 }

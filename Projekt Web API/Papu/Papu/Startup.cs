@@ -103,6 +103,8 @@ namespace Papu
             //utworzenia konfiguracji         
             services.AddAutoMapper(this.GetType().Assembly);
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IUnitService, UnitService>();
             services.AddScoped<IDishService, DishService>();
             services.AddScoped<ITimesOfDayService, TimesOfDayService>();
             services.AddScoped<IDaysOfTheWeekService, DaysOfTheWeekService>();

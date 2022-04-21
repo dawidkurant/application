@@ -25,7 +25,7 @@ namespace Papu.Middleware
             _stopWatch.Stop();
 
             var elapsedMilliseconds = _stopWatch.ElapsedMilliseconds;
-            if (elapsedMilliseconds / 1000 > 4)
+            if (elapsedMilliseconds / 1000 > 6)
             {
                 var message =
                     $"Request [{context.Request.Method}] at {context.Request.Path} took {elapsedMilliseconds} ms";

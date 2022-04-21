@@ -1,9 +1,12 @@
 <h1>Wszystkie produkty</h1>
 
-<p *ngIf="!result"><em>Wczytywanie...</em></p>
-
+<p *ngIf="!products"><em>Wczytywanie...</em></p>
+<div class="col text-right">
+  <a href="#" routerLink="/products/create/" class="btn btn-success btn-sm">Stwórz nowy</a>
+</div>
+<br />
 <table class="table table-bordered" aria-labelledby="tableLabel"
-       *ngIf="result">
+       *ngIf="products">
   <thead>
   <tr>
     <th>Nazwa produktu</th>
@@ -12,11 +15,11 @@
     <th>Jednostka</th>
     <th>Waga</th>
     <th>Zdjęcie</th>
-    <th width="200px"></th>
+    <th width="300px"></th>
   </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let product of result">
+    <tr *ngFor="let product of products">
       <td>{{ product.productName }}</td>
       <td>{{ product.categoryName }}</td>
       <td>
@@ -28,9 +31,9 @@
       <td>{{ product.weight }}</td>
       <td>{{ product.productImagePath }}</td>
       <td class="text-center">
-        <a href="#" [routerLink]="['/products/', product.id, 'details']" class="btn btn-info btn-sm">View</a>
-        <a href="#" [routerLink]="['/products/', product.id, 'edit']" class="btn btn-primary btn-sm">Edit</a>
-        <button type="button" (click)="deleteProduct(product.id)" class="btn btn-danger btn-sm">Delete</button>
+        <a href="#" [routerLink]="['/products/', product.productId, 'details']" class="btn btn-info btn-sm">Wyświetl</a>
+        <a href="#" [routerLink]="['/products/', product.productId, 'edit']" class="btn btn-primary btn-sm">Edytuj</a>
+        <button type="button" (click)="deleteProduct(product.productId)" class="btn btn-danger btn-sm">Usuń</button>
       </td>
     </tr>
   </tbody>
