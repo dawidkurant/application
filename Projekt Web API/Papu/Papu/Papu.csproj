@@ -49,6 +49,8 @@
     <None Remove="ClientApp\src\app\products\categories.service.spec.ts" />
     <None Remove="ClientApp\src\app\products\categories.service.ts" />
     <None Remove="ClientApp\src\app\products\category.ts" />
+    <None Remove="ClientApp\src\app\products\groups.service.spec.ts" />
+    <None Remove="ClientApp\src\app\products\groups.service.ts" />
     <None Remove="ClientApp\src\app\products\unit.ts" />
     <None Remove="ClientApp\src\app\products\units.service.spec.ts" />
     <None Remove="ClientApp\src\app\products\units.service.ts" />
@@ -57,6 +59,8 @@
   <ItemGroup>
     <TypeScriptCompile Remove="ClientApp\src\app\products\create\create.component.ts" />
     <TypeScriptCompile Remove="ClientApp\src\app\products\details\details.component.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\products\edit\edit.component.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\products\group.ts" />
     <TypeScriptCompile Remove="ClientApp\src\app\products\list\list.component.ts" />
     <TypeScriptCompile Remove="ClientApp\src\app\products\list\product.ts" />
     <TypeScriptCompile Remove="ClientApp\src\app\products\products-routing.module.ts" />

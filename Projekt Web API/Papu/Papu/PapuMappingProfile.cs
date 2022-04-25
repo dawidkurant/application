@@ -24,6 +24,7 @@ namespace Papu
 
             CreateMap<Category, CategoryDto>();
             CreateMap<Unit, UnitDto>();
+            CreateMap<Group, GroupDto>();
 
 
             CreateMap<Dish, DishDto>()

@@ -2,14 +2,18 @@
   <br />
   <div class="row">
     <div class="col">
-      <h3>Stwórz produkt</h3>
+      <h3>Edytuj produkt</h3>
     </div>
     <div class="col text-right">
       <a href="#" routerLink="/products/list" class="btn btn-secondary btn-sm">Powrót do listy produktów</a>
     </div>
   </div>
   <br />
-  <form [formGroup]="createForm" (ngSubmit)="onSubmit(createForm)">
+  <form [formGroup]="editForm" (ngSubmit)="onSubmit(editForm)">
+
+    <input formControlName="productId"
+           id="productId"
+           type="hidden" />
 
     <div class="form-group">
       <label for="productName">Nazwa produktu:</label>
@@ -68,6 +72,6 @@
              class="form-control" />
     </div>
 
-    <button class="btn btn-primary" type="submit" [disabled]="!createForm.valid">Stwórz</button>
+    <button class="btn btn-primary" type="submit" [disabled]="!editForm.valid">Edytuj</button>
   </form>
 </div>

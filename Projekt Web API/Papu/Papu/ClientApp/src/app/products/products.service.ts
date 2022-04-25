@@ -40,6 +40,13 @@ export class ProductsService {
       );
   }
 
+  updateProduct(productId, product): Observable<Product> {
+    return this.httpClient.put<Product>(this.apiURL + '/product/' + productId, JSON.stringify(product), this.httpOptions)
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
+
   deleteProduct(productId) {
     return this.httpClient.delete<Product>(this.apiURL + '/product/' + productId, this.httpOptions)
       .pipe(

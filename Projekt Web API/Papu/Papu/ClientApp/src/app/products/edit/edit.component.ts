@@ -1,28 +1,30 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators  } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
+import { Product } from "../product";
 import { Category } from "../category";
 import { Unit } from "../unit";
 import { Group } from "../group";
 import { ProductsService } from '../products.service';
-import { ActivatedRoute, Router } from '@angular/router';
 import { CategoriesService } from '../categories.service';
 import { UnitsService } from '../units.service';
 import { GroupsService } from '../groups.service';
-
+ 
 @Component({
-  selector: 'app-create',
-  templateUrl: './create.component.html',
-  styleUrls: ['./create.component.css']
+  selector: 'app-edit',
+  templateUrl: './edit.component.html',
+  styleUrls: ['./edit.component.css']
 })
-
-export class CreateComponent implements OnInit {
-
+export class EditComponent implements OnInit {
+ 
+  productId: number;
+  product: Product;
   categories: Category[] = [];
   units: Unit[] = [];
   groups: Group[] = [];
-  createForm;
-
+  editForm;
+ 
   constructor(
     public productsService: ProductsService,
     public categoriesService: CategoriesService,
@@ -30,10 +32,10 @@ export class CreateComponent implements OnInit {
     public groupsService: GroupsService,
     private route: ActivatedRoute,
     private router: Router,
-    private formBuilder: FormBuilder) {
-
-    this.createForm = this.formBuilder.group({
-      productName: ['Przykładowa', Validators.required],
+    private formBuilder: FormBuilder
+  ) {
+    this.editForm = this.formBuilder.group({
+      productName: ['', Validators.required],
       categoryName: [''],
       groupName: [''],
       unitName: [''],
@@ -41,8 +43,10 @@ export class CreateComponent implements OnInit {
       productImagePath: [''],
     });
   }
-
+ 
   ngOnInit(): void {
+    this.productId = this.route.snapshot.params['productId'];
+ 
     this.categoriesService.getCategories().subscribe((data: Category[]) => {
       this.categories = data;
     });
@@ -54,12 +58,16 @@ export class CreateComponent implements OnInit {
     this.groupsService.getGroups().subscribe((data: Group[]) => {
       this.groups = data;
     });
+ 
+    this.productsService.getProduct(this.productId).subscribe((data: Product) => {
+      this.product = data;
+      this.editForm.patchValue(data);
+    });
   }
-
+ 
   onSubmit(formData) {
-    this.productsService.createProduct(formData.value).subscribe(res => {
+    this.productsService.updateProduct(this.productId, formData.value).subscribe(res => {
       this.router.navigateByUrl('/products/list');
     });
   }
-
 }
