@@ -46,6 +46,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\login\login.component.spec.ts" />
+    <None Remove="ClientApp\src\app\login\login.component.ts" />
     <None Remove="ClientApp\src\app\products\categories.service.spec.ts" />
     <None Remove="ClientApp\src\app\products\categories.service.ts" />
     <None Remove="ClientApp\src\app\products\category.ts" />
