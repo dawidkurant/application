@@ -14,3 +14,13 @@ code {
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
+
+body {
+}
+
+form {
+  border: 1px solid grey;
+  padding: 10% 15%;
+  margin-top: 20%;
+}
+

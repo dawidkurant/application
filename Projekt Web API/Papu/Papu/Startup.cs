@@ -23,6 +23,7 @@ using Papu.Models;
 using Papu.Models.Validators;
 using Papu.Services;
 using Papu.wwwroot;
+using System;
 using System.Text;
 
 namespace Papu
@@ -239,6 +240,7 @@ namespace Papu
                 // see https://go.microsoft.com/fwlink/?linkid=864501
 
                 spa.Options.SourcePath = "ClientApp";
+                spa.Options.StartupTimeout = new TimeSpan(0, 5, 0);
 
                 if (env.IsDevelopment())
                 {
