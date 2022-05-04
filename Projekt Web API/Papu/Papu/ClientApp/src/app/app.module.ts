@@ -16,6 +16,7 @@ import { ListComponent } from "./products/list/list.component";
 import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./register/register.component";
 import { AuthService } from "./services/auth.service";
+import { NationalitiesService } from './register/nationalities.service';
 
 
 @NgModule({
@@ -24,7 +25,7 @@ import { AuthService } from "./services/auth.service";
     NavMenuComponent,
     HomeComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -40,7 +41,7 @@ import { AuthService } from "./services/auth.service";
       { path: 'register', component: RegisterComponent },
     ])
   ],
-  providers: [ AuthService,
+  providers: [AuthService, NationalitiesService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]

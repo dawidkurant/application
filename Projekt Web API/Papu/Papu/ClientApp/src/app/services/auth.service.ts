@@ -7,8 +7,8 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class AuthService {
-  private loginPath = environment.apiUrl + 'login';
-  private registerPath = environment.apiUrl + 'register';
+  private loginPath = environment.apiUrl + '/login';
+  private registerPath = environment.apiUrl + '/register';
 
   constructor(private http: HttpClient) { }
 
