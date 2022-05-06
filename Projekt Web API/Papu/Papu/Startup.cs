@@ -97,6 +97,8 @@ namespace Papu
             //W ten sposób dodajemy walidację do projektu
             services.AddControllers().AddFluentValidation();
 
+            services.AddCors();
+
             //Rejestracja serwisu seedującego
             services.AddScoped<PapuSeeder>();
             //AddAutoMapper - jako parametr przekazujemy źródło projektu, którym
@@ -220,6 +222,7 @@ namespace Papu
 
             app.UseRouting();
 
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseIdentityServer();
 

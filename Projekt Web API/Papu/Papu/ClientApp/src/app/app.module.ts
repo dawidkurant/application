@@ -41,9 +41,7 @@ import { NationalitiesService } from './register/nationalities.service';
       { path: 'register', component: RegisterComponent },
     ])
   ],
-  providers: [AuthService, NationalitiesService,
-    { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
-  ],
+  providers: [AuthService, NationalitiesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

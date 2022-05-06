@@ -29,7 +29,7 @@
               id="categoryName"
               class="form-control">
         <option value="">- Select -</option>
-        <option *ngFor="let category of categories" [ngValue]="category.categoryId">
+        <option *ngFor="let category of categories" [ngValue]="category.categoryName">
           {{category.categoryName}}
         </option>
       </select>
@@ -50,7 +50,7 @@
               id="unitName"
               class="form-control">
         <option value="">- Select -</option>
-        <option *ngFor="let unit of units" [ngValue]="unit.unitId">
+        <option *ngFor="let unit of units" [ngValue]="unit.unitName">
           {{unit.unitName}}
         </option>
       </select>

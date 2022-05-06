@@ -37,7 +37,7 @@ export class CreateComponent implements OnInit {
       categoryName: [''],
       groupName: [''],
       unitName: [''],
-      weight: [''],
+      weight: ['500'],
       productImagePath: [''],
     });
   }

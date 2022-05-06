@@ -34,7 +34,7 @@ namespace Papu.Entities
 
         //Twórca danego produktu
         public int? CreatedById { get; set; }
-        
+
         //Zmienna reperezentująca twórcę danego produktu
         public virtual User CreatedBy { get; set; }
 

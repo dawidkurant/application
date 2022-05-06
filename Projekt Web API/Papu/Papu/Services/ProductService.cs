@@ -155,6 +155,11 @@ namespace Papu.Services
 
             product.ProductGroups.Clear();
 
+            if (dto.GroupId is null)
+            {
+                dto.GroupId = new int[] { 1 };
+            }
+
             foreach (var addGroup in dto.GroupId)
             {
 

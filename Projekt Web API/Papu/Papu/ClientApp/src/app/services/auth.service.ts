@@ -7,16 +7,33 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class AuthService {
-  private loginPath = environment.apiUrl + '/login';
-  private registerPath = environment.apiUrl + '/register';
+  private loginPath = environment.apiUrl + 'account/login';
+  private registerPath = environment.apiUrl + 'account/register';
 
   constructor(private http: HttpClient) { }
 
+  //{ responseType: 'text' }
+
   login(data): Observable<any> {
-    return this.http.post(this.loginPath, data)
+    return this.http.post(this.loginPath, data);
   }
 
   register(data): Observable<any> {
-    return this.http.post(this.registerPath, data)
+    return this.http.post(this.registerPath, data);
+  }
+
+  saveToken(token) {
+    localStorage.setItem('token', token);
+  }
+
+  getToken() {
+    return localStorage.getItem('token');
+  }
+
+  isAuthenticated() {
+    if (this.getToken()) {
+      return true;
+    }
+    return false;
   }
 }

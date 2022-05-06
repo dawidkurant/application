@@ -60,6 +60,8 @@
     <None Remove="ClientApp\src\app\register\nationalities.service.ts" />
     <None Remove="ClientApp\src\app\register\register.component.spec.ts" />
     <None Remove="ClientApp\src\app\register\register.component.ts" />
+    <None Remove="ClientApp\src\app\services\auth-guard.service.spec.ts" />
+    <None Remove="ClientApp\src\app\services\auth-guard.service.ts" />
     <None Remove="ClientApp\src\app\services\auth.service.spec.ts" />
     <None Remove="ClientApp\src\app\services\auth.service.ts" />
   </ItemGroup>

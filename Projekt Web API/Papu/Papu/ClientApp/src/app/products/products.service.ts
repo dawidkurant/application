@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 import { Product } from "./product";
+import { AuthService } from '../services/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +19,7 @@ export class ProductsService {
     })
   };
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private authService: AuthService) { }
 
   getProducts(): Observable<Product[]> {
     return this.httpClient.get<Product[]>(this.apiURL + '/product')
@@ -34,7 +36,9 @@ export class ProductsService {
   }
 
   createProduct(product): Observable<Product> {
-    return this.httpClient.post<Product>(this.apiURL + '/product/', JSON.stringify(product), this.httpOptions)
+    let headers = new HttpHeaders();
+      headers = headers.set('Authorization', `Bearer ${this.authService.getToken()}`);
+    return this.httpClient.post<Product>(this.apiURL + '/product', JSON.stringify(product), {headers})
       .pipe(
         catchError(this.errorHandler)
       );
