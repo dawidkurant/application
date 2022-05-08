@@ -17,6 +17,9 @@ import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./register/register.component";
 import { AuthService } from "./services/auth.service";
 import { NationalitiesService } from './register/nationalities.service';
+import { TokenInterceptorService } from './services/token-interceptor.service';
+import { AuthGuardService } from './services/auth-guard.service';
+
 
 
 @NgModule({
@@ -41,7 +44,16 @@ import { NationalitiesService } from './register/nationalities.service';
       { path: 'register', component: RegisterComponent },
     ])
   ],
-  providers: [AuthService, NationalitiesService],
+  providers: [
+    AuthService,
+    NationalitiesService,
+    AuthGuardService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

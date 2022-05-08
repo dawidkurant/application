@@ -12,10 +12,8 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  //{ responseType: 'text' }
-
   login(data): Observable<any> {
-    return this.http.post(this.loginPath, data);
+    return this.http.post(this.loginPath, data, { responseType: 'text' });
   }
 
   register(data): Observable<any> {
@@ -23,7 +21,7 @@ export class AuthService {
   }
 
   saveToken(token) {
-    localStorage.setItem('token', token);
+    localStorage.setItem('token', JSON.stringify({ token }));
   }
 
   getToken() {

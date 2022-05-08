@@ -36,16 +36,14 @@ export class ProductsService {
   }
 
   createProduct(product): Observable<Product> {
-    let headers = new HttpHeaders();
-      headers = headers.set('Authorization', `Bearer ${this.authService.getToken()}`);
-    return this.httpClient.post<Product>(this.apiURL + '/product', JSON.stringify(product), {headers})
+    return this.httpClient.post<Product>(this.apiURL + '/product', product, this.httpOptions)
       .pipe(
         catchError(this.errorHandler)
       );
   }
 
   updateProduct(productId, product): Observable<Product> {
-    return this.httpClient.put<Product>(this.apiURL + '/product/' + productId, JSON.stringify(product), this.httpOptions)
+    return this.httpClient.put<Product>(this.apiURL + '/product/' + productId, product, this.httpOptions)
       .pipe(
         catchError(this.errorHandler)
       );
