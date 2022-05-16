@@ -34,7 +34,7 @@
     <label for="groupName">Grupa:</label>
     <div class="m-checkbox-list">
       <div *ngFor="let group of groups">
-        <input type="checkbox" [checked]="group.checked"> {{group.groupName}}
+        <input type="checkbox" (change)="onChange(group.groupId, $event.target.checked)"> {{group.groupName}}
         <span></span>
       </div>
     </div>

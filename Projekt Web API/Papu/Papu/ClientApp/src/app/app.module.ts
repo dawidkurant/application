@@ -19,6 +19,7 @@ import { AuthService } from "./services/auth.service";
 import { NationalitiesService } from './register/nationalities.service';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { AuthGuardService } from './services/auth-guard.service';
+import { ProductsService } from './products/products.service';
 
 
 
@@ -46,6 +47,7 @@ import { AuthGuardService } from './services/auth-guard.service';
   ],
   providers: [
     AuthService,
+    ProductsService,
     NationalitiesService,
     AuthGuardService,
     {

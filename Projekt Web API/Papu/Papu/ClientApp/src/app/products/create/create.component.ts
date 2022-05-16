@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl, FormArray } from '@angular/forms';
 
 import { Category } from "../category";
 import { Unit } from "../unit";
@@ -21,7 +21,7 @@ export class CreateComponent implements OnInit {
   categories: Category[] = [];
   units: Unit[] = [];
   groups: Group[] = [];
-  createForm;
+  createForm: FormGroup;
 
   constructor(
     public productsService: ProductsService,
@@ -35,11 +35,22 @@ export class CreateComponent implements OnInit {
     this.createForm = this.formBuilder.group({
       productName: ['Przykładowa', Validators.required],
       categoryName: [''],
-      groupName: [''],
+      groupId: this.formBuilder.array([]),
       unitName: [''],
-      weight: ['500'],
+      weight: ['500', Validators.required],
       productImagePath: [''],
     });
+  }
+
+  onChange(groupId: number, isChecked: boolean) {
+    const groups = (this.createForm.controls.groupId as FormArray);
+
+    if (isChecked) {
+      groups.push(new FormControl(groupId));
+    } else {
+      const index = groups.controls.findIndex(x => x.value === groupId);
+      groups.removeAt(index);
+    }
   }
 
   ngOnInit(): void {
@@ -58,6 +69,7 @@ export class CreateComponent implements OnInit {
 
   onSubmit(formData) {
     this.productsService.createProduct(formData.value).subscribe(res => {
+      console.log(res);
       this.router.navigateByUrl('/products/list');
     });
   }

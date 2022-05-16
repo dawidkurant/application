@@ -36,21 +36,21 @@ export class ProductsService {
   }
 
   createProduct(product): Observable<Product> {
-    return this.httpClient.post<Product>(this.apiURL + '/product', product, this.httpOptions)
+    return this.httpClient.post<Product>(this.apiURL + '/product', product)
       .pipe(
         catchError(this.errorHandler)
       );
   }
 
   updateProduct(productId, product): Observable<Product> {
-    return this.httpClient.put<Product>(this.apiURL + '/product/' + productId, product, this.httpOptions)
+    return this.httpClient.put<Product>(this.apiURL + '/product/' + productId, product)
       .pipe(
         catchError(this.errorHandler)
       );
   }
 
   deleteProduct(productId) {
-    return this.httpClient.delete<Product>(this.apiURL + '/product/' + productId, this.httpOptions)
+    return this.httpClient.delete<Product>(this.apiURL + '/product/' + productId)
       .pipe(
         catchError(this.errorHandler)
       );
