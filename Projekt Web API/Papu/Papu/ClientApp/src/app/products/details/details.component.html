@@ -18,7 +18,7 @@
       <li class="list-group-item"><b>Grupa:</b><ul *ngFor="let group of product.groups">{{ group.groupName }}</ul></li>
       <li class="list-group-item"><b>Jednostka:</b> {{ product.unitName }}</li>
       <li class="list-group-item"><b>Waga:</b> {{ product.weight }}</li>
-      <li class="list-group-item"><b>Zdjęcie:</b> {{ product.productImagePath }}</li>
+      <li class="list-group-item"><b>Zdjęcie:</b><img [src]="product.productImagePath" alt="..." width="100" height="100" /></li>
     </ul>
   </div>
 </div>
