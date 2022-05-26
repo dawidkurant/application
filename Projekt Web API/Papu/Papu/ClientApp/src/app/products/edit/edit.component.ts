@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators  } from '@angular/forms';
+import { FormBuilder, Validators, FormControl, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Product } from "../product";
@@ -37,13 +37,24 @@ export class EditComponent implements OnInit {
     this.editForm = this.formBuilder.group({
       productName: ['', Validators.required],
       categoryName: [''],
-      groupName: [''],
+      groupId: this.formBuilder.array([]),
       unitName: [''],
       weight: [''],
       productImagePath: [''],
     });
   }
- 
+
+  onChange(groupId: number, isChecked: boolean) {
+    const groups = (this.editForm.controls.groupId as FormArray);
+
+    if (isChecked) {
+      groups.push(new FormControl(groupId));
+    } else {
+      const index = groups.controls.findIndex(x => x.value === groupId);
+      groups.removeAt(index);
+    }
+  }
+
   ngOnInit(): void {
     this.productId = this.route.snapshot.params['productId'];
  
@@ -57,6 +68,7 @@ export class EditComponent implements OnInit {
 
     this.groupsService.getGroups().subscribe((data: Group[]) => {
       this.groups = data;
+      console.log(data);
     });
  
     this.productsService.getProduct(this.productId).subscribe((data: Product) => {
