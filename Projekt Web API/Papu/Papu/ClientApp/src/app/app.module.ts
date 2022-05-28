@@ -21,6 +21,8 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { ProductsService } from './products/products.service';
 
+import { NgxPaginationModule } from 'ngx-pagination';
+
 
 
 @NgModule({
@@ -38,12 +40,13 @@ import { ProductsService } from './products/products.service';
     ApiAuthorizationModule,
     ProductsModule,
     ReactiveFormsModule,
+    NgxPaginationModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'product', component: ListComponent },
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
-    ])
+    ]),
   ],
   providers: [
     AuthService,

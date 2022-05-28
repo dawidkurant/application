@@ -19,9 +19,17 @@ export class ListComponent implements OnInit {
   constructor(public productsService: ProductsService) {
   }
 
+  totalLenght: any;
+  page: number = 1;
+
   ngOnInit(): void {
     this.productsService.getProducts().subscribe((data: Product[]) => {
       this.products = data;
+
+      console.log(this.products);
+
+      this.totalLenght = data.length;
+
     });
   }
 
