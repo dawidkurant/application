@@ -1,8 +1,14 @@
 <h1>Wszystkie produkty</h1>
 
 <p *ngIf="!products"><em>Wczytywanie...</em></p>
-<div class="col text-right">
-  <a href="#" routerLink="/products/create/" class="btn btn-success btn-sm">Stwórz nowy</a>
+<div class="row">
+  <div class="text-left col-sm-6">
+    <input class="form-control" type="text" name="productName" [(ngModel)]="productName" (ngModelChange)="Search()"
+           placeholder="Wprowadź nazwę produktu" />
+  </div>
+  <div class="col-sm-6 text-right">
+    <a href="#" routerLink="/products/create/" class="btn btn-success btn-sm">Stwórz nowy</a>
+  </div>
 </div>
 <br />
 <table class="table table-bordered" aria-labelledby="tableLabel"

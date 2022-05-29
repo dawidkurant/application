@@ -22,6 +22,8 @@ export class ListComponent implements OnInit {
   totalLenght: any;
   page: number = 1;
 
+  productName: any;
+
   ngOnInit(): void {
     this.productsService.getProducts().subscribe((data: Product[]) => {
       this.products = data;
@@ -31,6 +33,16 @@ export class ListComponent implements OnInit {
       this.totalLenght = data.length;
 
     });
+  }
+
+  Search() {
+    if(this.productName == ""){
+      this.ngOnInit();
+    }else{
+      this.products = this.products.filter(res =>{
+        return res.productName.toLocaleLowerCase().match(this.productName.toLocaleLowerCase());
+      })
+    }
   }
 
   deleteProduct(productId) {
