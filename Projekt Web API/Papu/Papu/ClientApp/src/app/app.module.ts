@@ -24,7 +24,6 @@ import { ProductsService } from './products/products.service';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,

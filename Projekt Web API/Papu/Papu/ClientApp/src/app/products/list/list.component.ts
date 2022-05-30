@@ -2,6 +2,7 @@ import { Component, Injectable, OnInit } from '@angular/core';
 
 import { Product } from "../product";
 import { ProductsService } from '../products.service';
+import { Ng2OrderModule } from 'ng2-order-pipe';
 
 @Component({
   selector: 'app-list',
@@ -24,6 +25,9 @@ export class ListComponent implements OnInit {
 
   productName: any;
 
+  order = false;
+  isDesc: boolean = false;
+
   ngOnInit(): void {
     this.productsService.getProducts().subscribe((data: Product[]) => {
       this.products = data;
@@ -35,7 +39,7 @@ export class ListComponent implements OnInit {
     });
   }
 
-  Search() {
+  search() {
     if(this.productName == ""){
       this.ngOnInit();
     }else{
@@ -43,6 +47,37 @@ export class ListComponent implements OnInit {
         return res.productName.toLocaleLowerCase().match(this.productName.toLocaleLowerCase());
       })
     }
+  }
+
+  sortByNumber() {
+    if(this.order) {
+      let newarr = this.products.sort((a,b) => a.weight - b.weight);
+      this.products = newarr;
+    }
+    else {
+      let newarr = this.products.sort((a,b) => b.weight - a.weight);
+      this.products = newarr;
+    }
+
+    this.order = !this.order;
+  }
+
+  sortByString(property) {
+    this.isDesc = !this.isDesc;
+
+    let direction = this.isDesc ? 1: -1;
+
+    this.products.sort(function (a, b) {
+      if(a[property] < b[property]) {
+        return -1 * direction;
+      }
+      else if(a[property] > b[property]) {
+        return 1 * direction;
+      }
+      else {
+        return 0;
+      }
+    });
   }
 
   deleteProduct(productId) {

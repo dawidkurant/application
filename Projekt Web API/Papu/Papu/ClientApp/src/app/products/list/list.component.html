@@ -3,7 +3,7 @@
 <p *ngIf="!products"><em>Wczytywanie...</em></p>
 <div class="row">
   <div class="text-left col-sm-6">
-    <input class="form-control" type="text" name="productName" [(ngModel)]="productName" (ngModelChange)="Search()"
+    <input class="form-control" type="text" name="productName" [(ngModel)]="productName" (ngModelChange)="search()"
            placeholder="Wprowadź nazwę produktu" />
   </div>
   <div class="col-sm-6 text-right">
@@ -15,11 +15,11 @@
        *ngIf="products">
   <thead>
   <tr>
-    <th>Nazwa produktu</th>
+    <th (click)="sortByString('productName')">Nazwa produktu</th>
     <th>Kategoria</th>
     <th>Grupa</th>
     <th>Jednostka</th>
-    <th>Waga</th>
+    <th (click)="sortByNumber()">Waga</th>
     <th>Zdjęcie</th>
     <th width="300px"></th>
   </tr>
