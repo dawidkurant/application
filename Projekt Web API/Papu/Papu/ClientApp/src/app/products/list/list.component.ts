@@ -28,6 +28,10 @@ export class ListComponent implements OnInit {
   order = false;
   isDesc: boolean = false;
 
+  categoryName: boolean = false;
+  groupName: boolean = false;
+  unitName: boolean = false;
+
   ngOnInit(): void {
     this.productsService.getProducts().subscribe((data: Product[]) => {
       this.products = data;
@@ -78,6 +82,18 @@ export class ListComponent implements OnInit {
         return 0;
       }
     });
+  }
+
+  showCategories() {
+    this.categoryName = !this.categoryName;
+  }
+
+  showGroups() {
+    this.groupName = !this.groupName;
+  }
+
+  showUnits() {
+    this.unitName = !this.unitName;
   }
 
   deleteProduct(productId) {

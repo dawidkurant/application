@@ -11,14 +11,21 @@
   </div>
 </div>
 <br />
-<table class="table table-bordered" aria-labelledby="tableLabel"
+<h3>Pokaż kolumnę:</h3>
+<div>
+  <input type="checkbox" (click)="showCategories()"> Kategoria
+  <input type="checkbox" (click)="showGroups()"> Grupa
+  <input type="checkbox" (click)="showUnits()"> Jednostka
+</div>
+<br />
+<table class="table table-bordered" scrollX="true" aria-labelledby="tableLabel"
        *ngIf="products">
   <thead>
   <tr>
     <th (click)="sortByString('productName')">Nazwa produktu</th>
-    <th>Kategoria</th>
-    <th>Grupa</th>
-    <th>Jednostka</th>
+    <th *ngIf="categoryName">Kategoria</th>
+    <th *ngIf="groupName">Grupa</th>
+    <th *ngIf="unitName">Jednostka</th>
     <th (click)="sortByNumber()">Waga</th>
     <th>Zdjęcie</th>
     <th width="300px"></th>
@@ -31,13 +38,13 @@
         totalItems: totalLength
         }">
       <td>{{ product.productName }}</td>
-      <td>{{ product.categoryName }}</td>
-      <td>
+      <td *ngIf="categoryName">{{ product.categoryName }}</td>
+      <td *ngIf="groupName">
         <ul *ngFor="let group of product.groups">
           {{ group.groupName }}
         </ul>
       </td>
-      <td>{{ product.unitName }}</td>
+      <td *ngIf="unitName">{{ product.unitName }}</td>
       <td>{{ product.weight }}</td>
       <td><img [src]="product.productImagePath" alt="..." width="100" height="100"/></td>
       <td class="text-center">
