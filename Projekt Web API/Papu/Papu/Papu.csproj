@@ -7,7 +7,8 @@
     <IsPackable>false</IsPackable>
     <SpaRoot>ClientApp\</SpaRoot>
     <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
-
+    <TypeScriptExperimentalDecorators>true</TypeScriptExperimentalDecorators>
+	 
     <!-- Set this to true if you enable server-side prerendering -->
     <BuildServerSideRenderer>false</BuildServerSideRenderer>
   </PropertyGroup>
@@ -64,6 +65,8 @@
     <None Remove="ClientApp\src\app\services\auth-guard.service.ts" />
     <None Remove="ClientApp\src\app\services\auth.service.spec.ts" />
     <None Remove="ClientApp\src\app\services\auth.service.ts" />
+    <None Remove="ClientApp\src\app\services\error-interceptor.service.spec.ts" />
+    <None Remove="ClientApp\src\app\services\error-interceptor.service.ts" />
     <None Remove="ClientApp\src\app\services\token-interceptor.service.spec.ts" />
     <None Remove="ClientApp\src\app\services\token-interceptor.service.ts" />
   </ItemGroup>

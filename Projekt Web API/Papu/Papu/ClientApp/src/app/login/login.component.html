@@ -9,6 +9,9 @@
   <div class="row">
     <div class="col-lg-4"></div>
     <div class="col-lg-4">
+      <div class="alert alert-danger" *ngIf="loginError">
+        {{loginError}}
+      </div>
       <form [formGroup]="loginForm" (ngSubmit)="login()">
         <div class="form-group">
           <label for="email">Adres email</label>

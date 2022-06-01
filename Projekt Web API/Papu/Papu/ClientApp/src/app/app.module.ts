@@ -22,6 +22,7 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { ProductsService } from './products/products.service';
 
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ErrorInterceptorService } from './services/error-interceptor.service';
 
 
 @NgModule({
@@ -55,6 +56,11 @@ import { NgxPaginationModule } from 'ngx-pagination';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptorService,
       multi: true
     }
 ],
