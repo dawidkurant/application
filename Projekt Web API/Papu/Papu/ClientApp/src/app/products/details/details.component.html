@@ -17,7 +17,22 @@
       <li class="list-group-item"><b>Kategoria:</b> {{ product.categoryName }}</li>
       <li class="list-group-item"><b>Grupa:</b><ul *ngFor="let group of product.groups">{{ group.groupName }}</ul></li>
       <li class="list-group-item"><b>Jednostka:</b> {{ product.unitName }}</li>
-      <li class="list-group-item"><b>Waga:</b> {{ product.weight }}</li>
+      <li class="list-group-item"><b>Waga:</b> {{ product.weight }} g</li>
+      <li class="list-group">
+        <table class="table table-bordered">
+          <tr>
+            <td><b>Żelazo:</b> {{ product.iron }} g</td>
+            <td><b>Witamina B12:</b> {{ product.vitaminB12 }} g</td>
+            <td><b>Foliany:</b> {{ product.folate }} g</td>
+            <td><b>Witamina D:</b> {{ product.vitaminD }} g</td>
+            <td><b>Wapń:</b> {{ product.calcium }} g</td>
+            <td><b>Magnez:</b> {{ product.magnesium }} g</td>
+          </tr>
+          <tr>
+            <td><b>Kolejna linia:</b> {{ product.magnesium }} g</td>
+          </tr>
+        </table>
+      </li>
       <li class="list-group-item"><b>Zdjęcie:</b><img [src]="product.productImagePath" alt="..." width="100" height="100" /></li>
     </ul>
   </div>

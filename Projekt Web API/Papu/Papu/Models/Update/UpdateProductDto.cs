@@ -35,6 +35,42 @@ namespace Papu.Models
         [Column(TypeName = "decimal(7,2)")]
         public decimal Weight { get; set; }
 
+        //Żelazo
+        //Maksymalna długość łańcucha żelaza wynosi 4
+        [Range(0, 9999, ErrorMessage = "Rating must between 0 to 9999")]
+        [Column(TypeName = "decimal(7,2)")]
+        public decimal Iron { get; set; }
+
+        //Witamina B12
+        //Maksymalna długość łańcucha witaminy B12 wynosi 4
+        [Range(0, 9999, ErrorMessage = "Rating must between 0 to 9999")]
+        [Column(TypeName = "decimal(7,2)")]
+        public decimal VitaminB12 { get; set; }
+
+        //Foliany
+        //Maksymalna długość łańcucha folian wynosi 4
+        [Range(0, 9999, ErrorMessage = "Rating must between 0 to 9999")]
+        [Column(TypeName = "decimal(7,2)")]
+        public decimal Folate { get; set; }
+
+        //Witamina D
+        //Maksymalna długość łańcucha witaminy D wynosi 4
+        [Range(0, 9999, ErrorMessage = "Rating must between 0 to 9999")]
+        [Column(TypeName = "decimal(7,2)")]
+        public decimal VitaminD { get; set; }
+
+        //Wapń
+        //Maksymalna długość łańcucha wapna wynosi 4
+        [Range(0, 9999, ErrorMessage = "Rating must between 0 to 9999")]
+        [Column(TypeName = "decimal(7,2)")]
+        public decimal Calcium { get; set; }
+
+        //Magnez
+        //Maksymalna długość łańcucha magnezu wynosi 4
+        [Range(0, 9999, ErrorMessage = "Rating must between 0 to 9999")]
+        [Column(TypeName = "decimal(7,2)")]
+        public decimal Magnesium { get; set; }
+
         //Zdjęcie
         public string ProductImagePath { get; set; }
     }

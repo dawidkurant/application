@@ -29,6 +29,24 @@ namespace Papu.Entities
         //Waga jednostki miary
         public decimal Weight { get; set; }
 
+        //Żelazo
+        public decimal Iron { get; set; }
+
+        //Witamina B12
+        public decimal VitaminB12 { get; set; }
+
+        //Foliany
+        public decimal Folate { get; set; }
+
+        //Witamina D
+        public decimal VitaminD { get; set; }
+
+        //Wapń
+        public decimal Calcium { get; set; }
+
+        //Magnez
+        public decimal Magnesium { get; set; }
+
         //Zdjęcie
         public string ProductImagePath { get; set; }
 

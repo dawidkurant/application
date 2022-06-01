@@ -146,6 +146,12 @@ namespace Papu.Services
             product.Category = category;
             product.Unit = unit;
             product.Weight = dto.Weight;
+            product.Iron = dto.Iron;
+            product.VitaminB12 = dto.VitaminB12;
+            product.Folate = dto.Folate;
+            product.VitaminD = dto.VitaminD;
+            product.Calcium = dto.Calcium;
+            product.Magnesium = dto.Magnesium;
             product.ProductImagePath = dto.ProductImagePath;
 
             foreach (var old in product.ProductGroups)

@@ -5,5 +5,10 @@ export interface Product {
   groupId: string[];
   unitName: string;
   weight: number;
-  productImagePath: string;
+  iron: number;
+  vitaminB12: number;
+  folate: number;
+  vitaminD: number;
+  calcium: number;
+  magnesium: number;
 }

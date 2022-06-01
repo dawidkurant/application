@@ -31,6 +31,12 @@ export class ListComponent implements OnInit {
   categoryName: boolean = false;
   groupName: boolean = false;
   unitName: boolean = false;
+  iron: boolean = false;
+  vitaminB12: boolean = false;
+  folate: boolean = false;
+  vitaminD: boolean = false;
+  calcium: boolean = false;
+  magnesium: boolean = false;
 
   ngOnInit(): void {
     this.productsService.getProducts().subscribe((data: Product[]) => {
@@ -94,6 +100,30 @@ export class ListComponent implements OnInit {
 
   showUnits() {
     this.unitName = !this.unitName;
+  }
+
+  showIron() {
+    this.iron = !this.iron;
+  }
+
+  showVitaminB12() {
+    this.vitaminB12 = !this.vitaminB12;
+  }
+
+  showFolate() {
+    this.folate = !this.folate;
+  }
+
+  showVitaminD() {
+    this.vitaminD = !this.vitaminD;
+  }
+
+  showCalcium() {
+    this.calcium = !this.calcium;
+  }
+
+  showMagnesium() {
+    this.magnesium = !this.magnesium;
   }
 
   deleteProduct(productId) {

@@ -85,6 +85,36 @@ namespace Papu.Entities
                 .HasMaxLength(8)
                 .HasColumnType("decimal(7,2)");
 
+            modelBuilder.Entity<Product>()
+                .Property(r => r.Iron)
+                .HasMaxLength(8)
+                .HasColumnType("decimal(7,2)");
+
+            modelBuilder.Entity<Product>()
+                .Property(r => r.VitaminB12)
+                .HasMaxLength(8)
+                .HasColumnType("decimal(7,2)");
+
+            modelBuilder.Entity<Product>()
+                .Property(r => r.Folate)
+                .HasMaxLength(8)
+                .HasColumnType("decimal(7,2)");
+
+            modelBuilder.Entity<Product>()
+                .Property(r => r.VitaminD)
+                .HasMaxLength(8)
+                .HasColumnType("decimal(7,2)");
+
+            modelBuilder.Entity<Product>()
+                .Property(r => r.Calcium)
+                .HasMaxLength(8)
+                .HasColumnType("decimal(7,2)");
+
+            modelBuilder.Entity<Product>()
+                .Property(r => r.Magnesium)
+                .HasMaxLength(8)
+                .HasColumnType("decimal(7,2)");
+
             modelBuilder.Entity<Category>()
                 .HasMany(c => c.Products)
                 .WithOne(p => p.Category);
@@ -113,7 +143,6 @@ namespace Papu.Entities
                 .WithMany(g => g.ProductGroups)
                 .HasForeignKey(pg => pg.GroupId)
                 .OnDelete(DeleteBehavior.Cascade);
-
 
             modelBuilder.Entity<DishKindOf>()
                 .HasKey(bc => new { bc.DishId, bc.KindOfId });

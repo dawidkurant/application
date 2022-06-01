@@ -12,49 +12,71 @@
 </div>
 <br />
 <h3>Pokaż kolumnę:</h3>
-<div>
+<div class="box-shadow" style="width: 400px; height: 75px; overflow: auto;">
   <input type="checkbox" (click)="showCategories()"> Kategoria
   <input type="checkbox" (click)="showGroups()"> Grupa
   <input type="checkbox" (click)="showUnits()"> Jednostka
+  <input type="checkbox" (click)="showIron()"> Żelazo
+  <br />
+  <input type="checkbox" (click)="showVitaminB12()"> Witamina B12
+  <input type="checkbox" (click)="showFolate()"> Foliany
+  <input type="checkbox" (click)="showVitaminD()"> Witamina D
+  <input type="checkbox" (click)="showCalcium()"> Wapń
+  <br />
+  <input type="checkbox" (click)="showMagnesium()"> Magnez
 </div>
 <br />
-<table class="table table-bordered" scrollX="true" aria-labelledby="tableLabel"
-       *ngIf="products">
-  <thead>
-  <tr>
-    <th (click)="sortByString('productName')">Nazwa produktu</th>
-    <th *ngIf="categoryName">Kategoria</th>
-    <th *ngIf="groupName">Grupa</th>
-    <th *ngIf="unitName">Jednostka</th>
-    <th (click)="sortByNumber()">Waga</th>
-    <th>Zdjęcie</th>
-    <th width="300px"></th>
-  </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let product of products | paginate: {
+<div class="table-responsive text-nowrap">
+  <table class="table table-bordered text-center" scrollX="true" aria-labelledby="tableLabel"
+         *ngIf="products">
+    <thead>
+      <tr>
+        <th (click)="sortByString('productName')">Nazwa produktu</th>
+        <th *ngIf="categoryName">Kategoria</th>
+        <th *ngIf="groupName">Grupa</th>
+        <th *ngIf="unitName">Jednostka</th>
+        <th (click)="sortByNumber()">Waga</th>
+        <th *ngIf="iron">Żelazo</th>
+        <th *ngIf="vitaminB12">Witamina B12</th>
+        <th *ngIf="folate">Foliany</th>
+        <th *ngIf="vitaminD">Witamina D</th>
+        <th *ngIf="calcium">Wapń</th>
+        <th *ngIf="magnesium">Magnez</th>
+        <th>Zdjęcie</th>
+        <th width="300px"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products | paginate: {
         itemsPerPage: 10,
         currentPage: page,
         totalItems: totalLength
         }">
-      <td>{{ product.productName }}</td>
-      <td *ngIf="categoryName">{{ product.categoryName }}</td>
-      <td *ngIf="groupName">
-        <ul *ngFor="let group of product.groups">
-          {{ group.groupName }}
-        </ul>
-      </td>
-      <td *ngIf="unitName">{{ product.unitName }}</td>
-      <td>{{ product.weight }}</td>
-      <td><img [src]="product.productImagePath" alt="..." width="100" height="100"/></td>
-      <td class="text-center">
-        <a href="#" [routerLink]="['/products/', product.productId, 'details']" class="btn btn-info btn-sm">Wyświetl</a>
-        <a href="#" [routerLink]="['/products/', product.productId, 'edit']" class="btn btn-primary btn-sm">Edytuj</a>
-        <button type="button" (click)="deleteProduct(product.productId)" class="btn btn-danger btn-sm">Usuń</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+        <td>{{ product.productName }}</td>
+        <td *ngIf="categoryName">{{ product.categoryName }}</td>
+        <td class="text-left" *ngIf="groupName">
+          <ul *ngFor="let group of product.groups">
+            <li class="list-group">{{ group.groupName }}</li>
+          </ul>
+        </td>
+        <td *ngIf="unitName">{{ product.unitName }}</td>
+        <td>{{ product.weight }} g</td>
+        <td *ngIf="iron">{{ product.iron }} g</td>
+        <td *ngIf="vitaminB12">{{ product.vitaminB12 }} g</td>
+        <td *ngIf="folate">{{ product.folate }} g</td>
+        <td *ngIf="vitaminD">{{ product.vitaminD }} g</td>
+        <td *ngIf="calcium">{{ product.calcium }} g</td>
+        <td *ngIf="magnesium">{{ product.magnesium }} g</td>
+        <td><img [src]="product.productImagePath" alt="..." width="100" height="100" /></td>
+        <td class="text-center">
+          <a href="#" [routerLink]="['/products/', product.productId, 'details']" class="btn btn-info btn-sm">Wyświetl</a>
+          <a href="#" [routerLink]="['/products/', product.productId, 'edit']" class="btn btn-primary btn-sm">Edytuj</a>
+          <button type="button" (click)="deleteProduct(product.productId)" class="btn btn-danger btn-sm">Usuń</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 <div>
   <pagination-controls (pageChange)="page = $event"></pagination-controls>
 </div>
