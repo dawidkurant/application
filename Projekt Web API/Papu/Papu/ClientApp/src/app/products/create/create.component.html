@@ -24,7 +24,7 @@
       <select formControlName="categoryName"
               id="categoryName"
               class="form-control">
-        <option value="">- Select -</option>
+        <option value="">- Wybierz -</option>
         <option *ngFor="let category of categories" [ngValue]="category.categoryId">
           {{category.categoryName}}
         </option>
@@ -45,7 +45,7 @@
       <select formControlName="unitName"
               id="unitName"
               class="form-control">
-        <option value="">- Select -</option>
+        <option value="">- Wybierz -</option>
         <option *ngFor="let unit of units" [ngValue]="unit.unitId">
           {{unit.unitName}}
         </option>
@@ -53,11 +53,68 @@
     </div>
 
     <div class="form-group">
-      <label for="weight">Waga:</label>
+      <label for="weight">Waga[g]:</label>
       <input formControlName="weight"
              id="weight"
              type="number"
              class="form-control" />
+    </div>
+
+    <div class="form-group table-responsive text-nowrap">
+      <table class="table table-bordered">
+        <tr>
+          <td>
+            <label for="iron">Żelazo[mg]:</label>
+            <input formControlName="iron"
+                   id="iron"
+                   type="number"
+                   class="form-control" />
+          </td>
+          <td>
+            <label for="vitaminB12">Witamina B12[qg]:</label>
+            <input formControlName="vitaminB12"
+                   id="vitaminB12"
+                   type="number"
+                   class="form-control" />
+          </td>
+          <td>
+            <label for="folate">Foliany[qg]:</label>
+            <input formControlName="folate"
+                   id="folate"
+                   type="number"
+                   class="form-control" />
+          </td>
+          <td>
+            <label for="vitaminD">Witamina D[qg]:</label>
+            <input formControlName="vitaminD"
+                   id="vitaminD"
+                   type="number"
+                   class="form-control" />
+          </td>
+          <td>
+            <label for="calcium">Wapń[mg]:</label>
+            <input formControlName="calcium"
+                   id="calcium"
+                   type="number"
+                   class="form-control" />
+          </td>
+          <td>
+            <label for="magnesium">Magnez[mg]:</label>
+            <input formControlName="magnesium"
+                   id="magnesium"
+                   type="number"
+                   class="form-control" />
+          </td>
+        </tr>
+        <tr>
+          <td><label for="magnesium">Magnez[mg]:</label>
+            <input formControlName="magnesium"
+                   id="magnesium"
+                   type="number"
+                   class="form-control" />
+          </td>
+        </tr>
+      </table>
     </div>
 
     <div class="form-group">

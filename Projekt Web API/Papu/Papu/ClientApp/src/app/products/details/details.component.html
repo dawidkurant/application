@@ -17,16 +17,16 @@
       <li class="list-group-item"><b>Kategoria:</b> {{ product.categoryName }}</li>
       <li class="list-group-item"><b>Grupa:</b><ul *ngFor="let group of product.groups">{{ group.groupName }}</ul></li>
       <li class="list-group-item"><b>Jednostka:</b> {{ product.unitName }}</li>
-      <li class="list-group-item"><b>Waga:</b> {{ product.weight }} g</li>
+      <li class="list-group-item"><b>Waga[g]:</b> {{ product.weight }} g</li>
       <li class="list-group">
         <table class="table table-bordered">
           <tr>
-            <td><b>Żelazo:</b> {{ product.iron }} g</td>
-            <td><b>Witamina B12:</b> {{ product.vitaminB12 }} g</td>
-            <td><b>Foliany:</b> {{ product.folate }} g</td>
-            <td><b>Witamina D:</b> {{ product.vitaminD }} g</td>
-            <td><b>Wapń:</b> {{ product.calcium }} g</td>
-            <td><b>Magnez:</b> {{ product.magnesium }} g</td>
+            <td><b>Żelazo[mg]:</b> {{ product.iron }} mg</td>
+            <td><b>Witamina B12[qg]:</b> {{ product.vitaminB12 }} qg</td>
+            <td><b>Foliany[qg]:</b> {{ product.folate }} qg</td>
+            <td><b>Witamina D[qg]:</b> {{ product.vitaminD }} qg</td>
+            <td><b>Wapń[mg]:</b> {{ product.calcium }} mg</td>
+            <td><b>Magnez[mg]:</b> {{ product.magnesium }} mg</td>
           </tr>
           <tr>
             <td><b>Kolejna linia:</b> {{ product.magnesium }} g</td>

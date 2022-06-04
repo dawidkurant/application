@@ -38,6 +38,12 @@ export class CreateComponent implements OnInit {
       groupId: this.formBuilder.array([]),
       unitName: [''],
       weight: ['500', Validators.required],
+      iron: ['0'],
+      vitaminB12: ['0'],
+      folate: ['0'],
+      vitaminD: ['0'],
+      calcium: ['0'],
+      magnesium: ['0'],
       productImagePath: [''],
     });
   }

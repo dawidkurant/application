@@ -35,13 +35,13 @@
         <th *ngIf="categoryName">Kategoria</th>
         <th *ngIf="groupName">Grupa</th>
         <th *ngIf="unitName">Jednostka</th>
-        <th (click)="sortByNumber()">Waga</th>
-        <th *ngIf="iron">Żelazo</th>
-        <th *ngIf="vitaminB12">Witamina B12</th>
-        <th *ngIf="folate">Foliany</th>
-        <th *ngIf="vitaminD">Witamina D</th>
-        <th *ngIf="calcium">Wapń</th>
-        <th *ngIf="magnesium">Magnez</th>
+        <th (click)="sortByNumber()">Waga[g]</th>
+        <th *ngIf="iron">Żelazo[mg]</th>
+        <th *ngIf="vitaminB12">Witamina B12[qg]</th>
+        <th *ngIf="folate">Foliany[qg]</th>
+        <th *ngIf="vitaminD">Witamina D[qg]</th>
+        <th *ngIf="calcium">Wapń[mg]</th>
+        <th *ngIf="magnesium">Magnez[mg]</th>
         <th>Zdjęcie</th>
         <th width="300px"></th>
       </tr>
@@ -61,12 +61,12 @@
         </td>
         <td *ngIf="unitName">{{ product.unitName }}</td>
         <td>{{ product.weight }} g</td>
-        <td *ngIf="iron">{{ product.iron }} g</td>
-        <td *ngIf="vitaminB12">{{ product.vitaminB12 }} g</td>
-        <td *ngIf="folate">{{ product.folate }} g</td>
-        <td *ngIf="vitaminD">{{ product.vitaminD }} g</td>
-        <td *ngIf="calcium">{{ product.calcium }} g</td>
-        <td *ngIf="magnesium">{{ product.magnesium }} g</td>
+        <td *ngIf="iron">{{ product.iron }} mg</td>
+        <td *ngIf="vitaminB12">{{ product.vitaminB12 }} qg</td>
+        <td *ngIf="folate">{{ product.folate }} qg</td>
+        <td *ngIf="vitaminD">{{ product.vitaminD }} qg</td>
+        <td *ngIf="calcium">{{ product.calcium }} mg</td>
+        <td *ngIf="magnesium">{{ product.magnesium }} mg</td>
         <td><img [src]="product.productImagePath" alt="..." width="100" height="100" /></td>
         <td class="text-center">
           <a href="#" [routerLink]="['/products/', product.productId, 'details']" class="btn btn-info btn-sm">Wyświetl</a>

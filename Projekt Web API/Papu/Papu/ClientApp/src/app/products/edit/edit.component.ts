@@ -40,6 +40,12 @@ export class EditComponent implements OnInit {
       groupId: this.formBuilder.array([]),
       unitName: [''],
       weight: [''],
+      iron: [''],
+      vitaminB12: [''],
+      folate: [''],
+      vitaminD: [''],
+      calcium: [''],
+      magnesium: [''],
       productImagePath: [''],
     });
   }
@@ -68,7 +74,6 @@ export class EditComponent implements OnInit {
 
     this.groupsService.getGroups().subscribe((data: Group[]) => {
       this.groups = data;
-      console.log(data);
     });
  
     this.productsService.getProduct(this.productId).subscribe((data: Product) => {
