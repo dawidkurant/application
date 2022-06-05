@@ -45,6 +45,21 @@ namespace Papu.Models
         //Magnez
         public decimal Magnesium { get; set; }
 
+        //Błonnik
+        public decimal Fiber { get; set; }
+
+        //Białko
+        public decimal Protein { get; set; }
+
+        //Tłuszcz
+        public decimal Fat { get; set; }
+
+        //Węglowodany przyswajalne
+        public decimal AssimilableCarbohydrates { get; set; }
+
+        //Wymiennik węglowodanowy
+        public decimal CarbohydrateReplacement { get; set; }
+
         //Zdjęcie
         public string ProductImagePath { get; set; }
     }

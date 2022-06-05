@@ -115,6 +115,31 @@ namespace Papu.Entities
                 .HasMaxLength(8)
                 .HasColumnType("decimal(7,2)");
 
+            modelBuilder.Entity<Product>()
+                .Property(r => r.Fiber)
+                .HasMaxLength(8)
+                .HasColumnType("decimal(7,2)");
+
+            modelBuilder.Entity<Product>()
+                .Property(r => r.Protein)
+                .HasMaxLength(8)
+                .HasColumnType("decimal(7,2)");
+
+            modelBuilder.Entity<Product>()
+                .Property(r => r.Fat)
+                .HasMaxLength(8)
+                .HasColumnType("decimal(7,2)");
+
+            modelBuilder.Entity<Product>()
+                .Property(r => r.AssimilableCarbohydrates)
+                .HasMaxLength(8)
+                .HasColumnType("decimal(7,2)");
+
+            modelBuilder.Entity<Product>()
+                .Property(r => r.CarbohydrateReplacement)
+                .HasMaxLength(8)
+                .HasColumnType("decimal(7,2)");
+
             modelBuilder.Entity<Category>()
                 .HasMany(c => c.Products)
                 .WithOne(p => p.Category);

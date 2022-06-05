@@ -11,4 +11,9 @@ export interface Product {
   vitaminD: number;
   calcium: number;
   magnesium: number;
+  fiber: number;
+  protein: number;
+  fat: number;
+  assimilableCarbohydrates: number;
+  carbohydrateReplacement: number;
 }

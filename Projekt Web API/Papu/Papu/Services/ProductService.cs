@@ -152,6 +152,11 @@ namespace Papu.Services
             product.VitaminD = dto.VitaminD;
             product.Calcium = dto.Calcium;
             product.Magnesium = dto.Magnesium;
+            product.Fiber = dto.Fiber;
+            product.Protein = dto.Protein;
+            product.Fat = dto.Fat;
+            product.AssimilableCarbohydrates = dto.AssimilableCarbohydrates;
+            product.CarbohydrateReplacement = dto.CarbohydrateReplacement;
             product.ProductImagePath = dto.ProductImagePath;
 
             foreach (var old in product.ProductGroups)

@@ -44,6 +44,11 @@ export class CreateComponent implements OnInit {
       vitaminD: ['0'],
       calcium: ['0'],
       magnesium: ['0'],
+      fiber: ['0'],
+      protein: ['0'],
+      fat: ['0'],
+      assimilableCarbohydrates: ['0'],
+      carbohydrateReplacement: ['0'],
       productImagePath: [''],
     });
   }

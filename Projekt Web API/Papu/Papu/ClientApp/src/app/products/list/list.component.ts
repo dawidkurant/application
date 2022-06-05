@@ -37,6 +37,11 @@ export class ListComponent implements OnInit {
   vitaminD: boolean = false;
   calcium: boolean = false;
   magnesium: boolean = false;
+  fiber: boolean = false;
+  protein: boolean = false;
+  fat: boolean = false;
+  assimilableCarbohydrates: boolean = false;
+  carbohydrateReplacement: boolean = false;
 
   ngOnInit(): void {
     this.productsService.getProducts().subscribe((data: Product[]) => {
@@ -124,6 +129,26 @@ export class ListComponent implements OnInit {
 
   showMagnesium() {
     this.magnesium = !this.magnesium;
+  }
+
+  showFiber() {
+    this.fiber = !this.fiber;
+  }
+
+  showProtein() {
+    this.protein = !this.protein;
+  }
+
+  showFat() {
+    this.fat = !this.fat;
+  }
+
+  showAssimilableCarbohydrates() {
+    this.assimilableCarbohydrates = !this.assimilableCarbohydrates;
+  }
+
+  showCarbohydrateReplacement() {
+    this.carbohydrateReplacement = !this.carbohydrateReplacement;
   }
 
   deleteProduct(productId) {

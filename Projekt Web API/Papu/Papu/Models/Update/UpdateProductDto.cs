@@ -71,6 +71,36 @@ namespace Papu.Models
         [Column(TypeName = "decimal(7,2)")]
         public decimal Magnesium { get; set; }
 
+        //Błonnik
+        //Maksymalna długość łańcucha błonnika wynosi 4
+        [Range(0, 9999, ErrorMessage = "Rating must between 0 to 9999")]
+        [Column(TypeName = "decimal(7,2)")]
+        public decimal Fiber { get; set; }
+
+        //Białko
+        //Maksymalna długość łańcucha białka wynosi 4
+        [Range(0, 9999, ErrorMessage = "Rating must between 0 to 9999")]
+        [Column(TypeName = "decimal(7,2)")]
+        public decimal Protein { get; set; }
+
+        //Tłuszcz
+        //Maksymalna długość łańcucha tłuszczu wynosi 4
+        [Range(0, 9999, ErrorMessage = "Rating must between 0 to 9999")]
+        [Column(TypeName = "decimal(7,2)")]
+        public decimal Fat { get; set; }
+
+        //Węglowodany przyswajalne
+        //Maksymalna długość łańcucha węglowodanów przyswajalnych wynosi 4
+        [Range(0, 9999, ErrorMessage = "Rating must between 0 to 9999")]
+        [Column(TypeName = "decimal(7,2)")]
+        public decimal AssimilableCarbohydrates { get; set; }
+
+        //Wymiennik węglowodanowy
+        //Maksymalna długość łańcucha wymiennika węglowodanowego wynosi 4
+        [Range(0, 9999, ErrorMessage = "Rating must between 0 to 9999")]
+        [Column(TypeName = "decimal(7,2)")]
+        public decimal CarbohydrateReplacement { get; set; }
+
         //Zdjęcie
         public string ProductImagePath { get; set; }
     }

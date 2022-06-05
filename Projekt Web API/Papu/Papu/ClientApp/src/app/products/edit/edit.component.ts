@@ -46,6 +46,11 @@ export class EditComponent implements OnInit {
       vitaminD: [''],
       calcium: [''],
       magnesium: [''],
+      fiber: [''],
+      protein: [''],
+      fat: [''],
+      assimilableCarbohydrates: [''],
+      carbohydrateReplacement: [''],
       productImagePath: [''],
     });
   }
