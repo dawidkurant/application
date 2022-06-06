@@ -12,13 +12,11 @@ namespace Papu.Services
     {
         private readonly PapuDbContext _dbContext;
         private readonly IMapper _mapper;
-        private readonly ILogger<CategoryService> _logger;
 
-        public CategoryService(PapuDbContext dbContext, IMapper mapper, ILogger<CategoryService> logger)
+        public CategoryService(PapuDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
             _mapper = mapper;
-            _logger = logger;
         }
 
         //Pobranie jednej kategorii po id 

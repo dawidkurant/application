@@ -110,6 +110,8 @@ namespace Papu
             services.AddScoped<IUnitService, UnitService>();
             services.AddScoped<IGroupService, GroupService>();
             services.AddScoped<IDishService, DishService>();
+            services.AddScoped<IKindOfService, KindOfService>();
+            services.AddScoped<ITypeService, TypeService>();
             services.AddScoped<ITimesOfDayService, TimesOfDayService>();
             services.AddScoped<IDaysOfTheWeekService, DaysOfTheWeekService>();
             services.AddScoped<IMenuService, MenuService>();

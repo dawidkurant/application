@@ -47,6 +47,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\dishes\dish.ts" />
+    <None Remove="ClientApp\src\app\dishes\kindOf.ts" />
+    <None Remove="ClientApp\src\app\dishes\type.ts" />
     <None Remove="ClientApp\src\app\login\login.component.spec.ts" />
     <None Remove="ClientApp\src\app\login\login.component.ts" />
     <None Remove="ClientApp\src\app\products\categories.service.spec.ts" />

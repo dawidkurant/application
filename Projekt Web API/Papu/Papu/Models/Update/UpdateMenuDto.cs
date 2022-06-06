@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Papu.Models.Update
+namespace Papu.Models
 {
     public class UpdateMenuDto
     {

@@ -24,10 +24,10 @@
             <a class="nav-link text-dark" [routerLink]="['/product']">Produkty</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="[]">Potrawy</a>
+            <a class="nav-link text-dark" [routerLink]="['/dish']">Potrawy</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="[]">Jadłospisy</a>
+            <a class="nav-link text-dark" [routerLink]="['/menu']">Jadłospisy</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="!isLoggedIn">
             <a class="nav-link text-dark" [routerLink]="['/login']">Logowanie</a>

@@ -12,13 +12,11 @@ namespace Papu.Services
     {
         private readonly PapuDbContext _dbContext;
         private readonly IMapper _mapper;
-        private readonly ILogger<UnitService> _logger;
 
-        public UnitService(PapuDbContext dbContext, IMapper mapper, ILogger<UnitService> logger)
+        public UnitService(PapuDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
             _mapper = mapper;
-            _logger = logger;
         }
 
         //Pobranie jednej jednostki po id 

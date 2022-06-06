@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Papu.Entities;
 using Papu.Models;
+using Papu.Models.Dish;
 using Papu.Models.Product;
 using Papu.Models.Update;
 using Papu.Models.Update.DayOfTheWeek;
@@ -26,11 +27,13 @@ namespace Papu
             CreateMap<Unit, UnitDto>();
             CreateMap<Group, GroupDto>();
 
-
             CreateMap<Dish, DishDto>()
                 .ForMember(dto => dto.KindsOf, c => c.MapFrom(dto => dto.DishKindsOf.Select(cs => cs.KindOf)))
                 .ForMember(dto => dto.Types, c => c.MapFrom(dto => dto.DishTypes.Select(cs => cs.Type)))
                 .ForMember(dto => dto.Products, c => c.MapFrom(dto => dto.DishProducts.Select(cs => cs.Product)));
+
+            CreateMap<KindOf, KindOfDto>();
+            CreateMap<Type, TypeDto>();
 
             CreateMap<Breakfast, BreakfastDto>()
                 .ForMember(x => x.Products, c => c.MapFrom(x => x.Products.Select(cs => cs.Product)))
