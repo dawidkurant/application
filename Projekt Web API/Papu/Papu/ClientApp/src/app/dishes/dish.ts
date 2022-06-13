@@ -5,7 +5,7 @@ export interface Dish {
   methodOfPeparation: string;
   portions: number;
   preparationTime: number;
-  kindsOfId: string[];
+  kindOfId: string[];
   size: number;
   typeId: string[];
   products: string[];

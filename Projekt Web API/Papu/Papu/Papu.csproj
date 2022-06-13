@@ -48,8 +48,14 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\app\dishes\dish.ts" />
+    <None Remove="ClientApp\src\app\dishes\dishes-routing.module.ts" />
+    <None Remove="ClientApp\src\app\dishes\dishes.module.ts" />
     <None Remove="ClientApp\src\app\dishes\kindOf.ts" />
+    <None Remove="ClientApp\src\app\dishes\kindsOf.module.ts" />
+    <None Remove="ClientApp\src\app\dishes\kindsOf.service.spec.ts" />
     <None Remove="ClientApp\src\app\dishes\type.ts" />
+    <None Remove="ClientApp\src\app\dishes\types.module.ts" />
+    <None Remove="ClientApp\src\app\dishes\types.service.spec.ts" />
     <None Remove="ClientApp\src\app\login\login.component.spec.ts" />
     <None Remove="ClientApp\src\app\login\login.component.ts" />
     <None Remove="ClientApp\src\app\products\categories.service.spec.ts" />
@@ -75,6 +81,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Remove="ClientApp\src\app\dishes\dishes.service.spec.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\dishes\dishes.service.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\dishes\list\listDishes.component.ts" />
     <TypeScriptCompile Remove="ClientApp\src\app\products\create\create.component.ts" />
     <TypeScriptCompile Remove="ClientApp\src\app\products\details\details.component.ts" />
     <TypeScriptCompile Remove="ClientApp\src\app\products\edit\edit.component.ts" />
@@ -92,6 +101,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ClientApp\src\app\dishes\create\" />
+    <Folder Include="ClientApp\src\app\dishes\details\" />
+    <Folder Include="ClientApp\src\app\dishes\edit\" />
     <Folder Include="Images\" />
   </ItemGroup>
 
