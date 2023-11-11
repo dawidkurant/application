@@ -1,18 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using Papu.Models.TimesOfDay;
 
 namespace Papu.Models
 {
-    public class LunchDto
+    public class LunchDto : TimesOfDayDto
     {
         //Podstawowe informacje dotyczące obiadu dostępne dla klienta
 
         //Id obiadu
         public int LunchId { get; set; }
-
-        //Produkty wchodzące w skład obiadu
-        public virtual ICollection<ProductDto> Products { get; set; }
-
-        //Potrawy wchodzące w skład obiadu
-        public virtual ICollection<DishDto> Dishes { get; set; }
     }
 }

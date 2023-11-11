@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Papu.Entities;
+﻿using Papu.Entities;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Papu.Models
 {

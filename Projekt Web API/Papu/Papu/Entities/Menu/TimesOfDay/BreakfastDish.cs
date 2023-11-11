@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace Papu.Entities
+﻿namespace Papu.Entities
 {
     public class BreakfastDish
     {

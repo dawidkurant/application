@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.Extensions.Logging;
 using Papu.Entities;
 using Papu.Exceptions;
 using Papu.Models.Product;
@@ -24,14 +23,8 @@ namespace Papu.Services
         {
             Group group =
                 _dbContext.Groups
-                .FirstOrDefault(c => c.GroupId == id);
-
-
-            if (group is null)
-            {
-                throw new NotFoundException("Group not found");
-            }
-
+                .FirstOrDefault(c => c.GroupId == id) ?? throw new NotFoundException("Group not found");
+            
             var result = _mapper.Map<GroupDto>(group);
 
             return result;

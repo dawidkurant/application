@@ -1,16 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
+﻿using System.Collections.Generic;
 
 namespace Papu.Entities
 {
+    /// <summary>
+    /// Podstawowe informacje dotyczące produktu
+    /// </summary>
     public class Product
     {
-
-        //Podstawowe informacje dotyczące produktu
-
         //Id
         public int ProductId { get; set; }
 
@@ -88,6 +84,5 @@ namespace Papu.Entities
 
         //Produkty zawierające się w kolacji
         public virtual ICollection<DinnerProduct> DinnerProducts { get; set; }
-
     }
 }

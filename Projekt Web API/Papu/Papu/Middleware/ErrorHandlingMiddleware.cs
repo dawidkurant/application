@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace Papu.Middleware
 {
-    //Middleware - jest dodany do klasy startup przez co każde zapytanie
-    //przychodzące do naszego api, będzie procesowane przez niego
-    //aby wyłapywać wyjątki np.brak możliwości połączenia z bazą danych
+    /// <summary>
+    /// Middleware - jest dodany do klasy startup przez co każde zapytanie
+    /// przychodzące do naszego api, będzie procesowane przez niego
+    /// aby wyłapywać wyjątki np.brak możliwości połączenia z bazą danych
+    /// </summary>
     public class ErrorHandlingMiddleware : IMiddleware
     {
         private readonly ILogger<ErrorHandlingMiddleware> _logger;

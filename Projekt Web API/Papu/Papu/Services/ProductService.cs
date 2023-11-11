@@ -8,7 +8,6 @@ using Papu.Exceptions;
 using Papu.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 
 namespace Papu.Services
 {
@@ -40,14 +39,7 @@ namespace Papu.Services
                 .Include(c => c.Category)
                 .Include(c => c.Unit)
                 .Include(c => c.ProductGroups).ThenInclude(cs => cs.Group)
-                .FirstOrDefault(c => c.ProductId == id);
-
-
-            if (product is null)
-            {
-                throw new NotFoundException("Product not found");
-            }
-
+                .FirstOrDefault(c => c.ProductId == id) ?? throw new NotFoundException("Product not found");
             var result = _mapper.Map<ProductDto>(product);
 
             return result;
@@ -84,10 +76,7 @@ namespace Papu.Services
             product.Category = category;
             product.Unit = unit;
 
-            if (dto.GroupId is null)
-            {
-                dto.GroupId = new int[] { 1 };
-            }
+            dto.GroupId ??= new int[] { 1 };
 
             foreach (var addGroup in dto.GroupId)
             {
@@ -118,13 +107,7 @@ namespace Papu.Services
                 .Include(c => c.Category)
                 .Include(c => c.Unit)
                 .Include(c => c.ProductGroups).ThenInclude(cs => cs.Group)
-                .FirstOrDefault(c => c.ProductId == id);
-
-            //Jeśli jesteśmy pewni, że dany produkt nie istnieje, zwracamy wyjątek
-            if (product is null)
-            {
-                throw new NotFoundException("Product not found");
-            }
+                .FirstOrDefault(c => c.ProductId == id) ?? throw new NotFoundException("Product not found");
 
             //Sprawdzamy czy to użytkownik który stworzył dany produkt chce go zmodyfikować
             var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User, 
@@ -166,10 +149,7 @@ namespace Papu.Services
 
             product.ProductGroups.Clear();
 
-            if (dto.GroupId is null)
-            {
-                dto.GroupId = new int[] { 1 };
-            }
+            dto.GroupId ??= new int[] { 1 };
 
             foreach (var addGroup in dto.GroupId)
             {
@@ -201,12 +181,7 @@ namespace Papu.Services
                 .Include(c => c.Category)
                 .Include(c => c.Unit)
                 .Include(c => c.ProductGroups).ThenInclude(cs => cs.Group)
-                .FirstOrDefault(c => c.ProductId == id);
-
-            if (product is null)
-            {
-                throw new NotFoundException("Product not found");
-            }
+                .FirstOrDefault(c => c.ProductId == id) ?? throw new NotFoundException("Product not found");
 
             //Sprawdzamy czy to użytkownik który stworzył dany produkt chce go usunąć
             var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User,

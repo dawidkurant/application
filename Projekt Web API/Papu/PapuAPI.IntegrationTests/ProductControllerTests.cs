@@ -77,7 +77,7 @@ namespace PapuAPI.IntegrationTests
 
             //act
 
-            var response = await _client.GetAsync("https://localhost:5001/api/product/" + queryParams);
+            var response = await _client.GetAsync($"https://localhost:5001/api/product/{queryParams}");
 
             //assert
 

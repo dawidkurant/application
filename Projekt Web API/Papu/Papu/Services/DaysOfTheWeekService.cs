@@ -9,7 +9,6 @@ using Papu.Models;
 using Papu.Models.Update.DayOfTheWeek;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 
 namespace Papu.Services
 {
@@ -92,11 +91,11 @@ namespace Papu.Services
             //Dostaniemy informację jaki użytkownik stworzył konkretny poniedziałek w bazie danych
             monday.CreatedById = _userContextService.GetUserId;
 
-            monday.BreakfastId = dtoMonday.BreakfastMondayId;
-            monday.SecondBreakfastId = dtoMonday.SecondBreakfastMondayId;
-            monday.LunchId = dtoMonday.LunchMondayId;
-            monday.SnackId = dtoMonday.SnackMondayId;
-            monday.DinnerId = dtoMonday.DinnerMondayId;
+            monday.BreakfastId = dtoMonday.BreakfastId;
+            monday.SecondBreakfastId = dtoMonday.SecondBreakfastId;
+            monday.LunchId = dtoMonday.LunchId;
+            monday.SnackId = dtoMonday.SnackId;
+            monday.DinnerId = dtoMonday.DinnerId;
 
             _dbContext.Mondays.Add(monday);
             _dbContext.SaveChanges();
@@ -138,11 +137,11 @@ namespace Papu.Services
                 throw new ForbidException("This monday is not your");
             }
 
-            monday.BreakfastId = dto.BreakfastMondayId;
-            monday.SecondBreakfastId = dto.SecondBreakfastMondayId;
-            monday.LunchId = dto.LunchMondayId;
-            monday.SnackId = dto.SnackMondayId;
-            monday.DinnerId = dto.DinnerMondayId;
+            monday.BreakfastId = dto.BreakfastId;
+            monday.SecondBreakfastId = dto.SecondBreakfastId;
+            monday.LunchId = dto.LunchId;
+            monday.SnackId = dto.SnackId;
+            monday.DinnerId = dto.DinnerId;
 
             _dbContext.SaveChanges();
         }
@@ -242,11 +241,11 @@ namespace Papu.Services
             //Dostaniemy informację jaki użytkownik stworzył konkretny wtorek w bazie danych
             tuesday.CreatedById = _userContextService.GetUserId;
 
-            tuesday.BreakfastId = dtoTuesday.BreakfastTuesdayId;
-            tuesday.SecondBreakfastId = dtoTuesday.SecondBreakfastTuesdayId;
-            tuesday.LunchId = dtoTuesday.LunchTuesdayId;
-            tuesday.SnackId = dtoTuesday.SnackTuesdayId;
-            tuesday.DinnerId = dtoTuesday.DinnerTuesdayId;
+            tuesday.BreakfastId = dtoTuesday.BreakfastId;
+            tuesday.SecondBreakfastId = dtoTuesday.SecondBreakfastId;
+            tuesday.LunchId = dtoTuesday.LunchId;
+            tuesday.SnackId = dtoTuesday.SnackId;
+            tuesday.DinnerId = dtoTuesday.DinnerId;
 
             _dbContext.Tuesdays.Add(tuesday);
             _dbContext.SaveChanges();
@@ -288,11 +287,11 @@ namespace Papu.Services
                 throw new ForbidException("This tuesday is not your");
             }
 
-            tuesday.BreakfastId = dto.BreakfastTuesdayId;
-            tuesday.SecondBreakfastId = dto.SecondBreakfastTuesdayId;
-            tuesday.LunchId = dto.LunchTuesdayId;
-            tuesday.SnackId = dto.SnackTuesdayId;
-            tuesday.DinnerId = dto.DinnerTuesdayId;
+            tuesday.BreakfastId = dto.BreakfastId;
+            tuesday.SecondBreakfastId = dto.SecondBreakfastId;
+            tuesday.LunchId = dto.LunchId;
+            tuesday.SnackId = dto.SnackId;
+            tuesday.DinnerId = dto.DinnerId;
 
             _dbContext.SaveChanges();
         }
@@ -392,11 +391,11 @@ namespace Papu.Services
             //Dostaniemy informację jaki użytkownik stworzył konkretną środę w bazie danych
             wednesday.CreatedById = _userContextService.GetUserId;
 
-            wednesday.BreakfastId = dtoWednesday.BreakfastWednesdayId;
-            wednesday.SecondBreakfastId = dtoWednesday.SecondBreakfastWednesdayId;
-            wednesday.LunchId = dtoWednesday.LunchWednesdayId;
-            wednesday.SnackId = dtoWednesday.SnackWednesdayId;
-            wednesday.DinnerId = dtoWednesday.DinnerWednesdayId;
+            wednesday.BreakfastId = dtoWednesday.BreakfastId;
+            wednesday.SecondBreakfastId = dtoWednesday.SecondBreakfastId;
+            wednesday.LunchId = dtoWednesday.LunchId;
+            wednesday.SnackId = dtoWednesday.SnackId;
+            wednesday.DinnerId = dtoWednesday.DinnerId;
 
             _dbContext.Wednesdays.Add(wednesday);
             _dbContext.SaveChanges();
@@ -438,11 +437,11 @@ namespace Papu.Services
                 throw new ForbidException("This wednesday is not your");
             }
 
-            wednesday.BreakfastId = dto.BreakfastWednesdayId;
-            wednesday.SecondBreakfastId = dto.SecondBreakfastWednesdayId;
-            wednesday.LunchId = dto.LunchWednesdayId;
-            wednesday.SnackId = dto.SnackWednesdayId;
-            wednesday.DinnerId = dto.DinnerWednesdayId;
+            wednesday.BreakfastId = dto.BreakfastId;
+            wednesday.SecondBreakfastId = dto.SecondBreakfastId;
+            wednesday.LunchId = dto.LunchId;
+            wednesday.SnackId = dto.SnackId;
+            wednesday.DinnerId = dto.DinnerId;
 
             _dbContext.SaveChanges();
         }
@@ -542,11 +541,11 @@ namespace Papu.Services
             //Dostaniemy informację jaki użytkownik stworzył konkretny czwartek w bazie danych
             thursday.CreatedById = _userContextService.GetUserId;
 
-            thursday.BreakfastId = dtoThursday.BreakfastThursdayId;
-            thursday.SecondBreakfastId = dtoThursday.SecondBreakfastThursdayId;
-            thursday.LunchId = dtoThursday.LunchThursdayId;
-            thursday.SnackId = dtoThursday.SnackThursdayId;
-            thursday.DinnerId = dtoThursday.DinnerThursdayId;
+            thursday.BreakfastId = dtoThursday.BreakfastId;
+            thursday.SecondBreakfastId = dtoThursday.SecondBreakfastId;
+            thursday.LunchId = dtoThursday.LunchId;
+            thursday.SnackId = dtoThursday.SnackId;
+            thursday.DinnerId = dtoThursday.DinnerId;
 
             _dbContext.Thursdays.Add(thursday);
             _dbContext.SaveChanges();
@@ -588,11 +587,11 @@ namespace Papu.Services
                 throw new ForbidException("This thursday is not your");
             }
 
-            thursday.BreakfastId = dto.BreakfastThursdayId;
-            thursday.SecondBreakfastId = dto.SecondBreakfastThursdayId;
-            thursday.LunchId = dto.LunchThursdayId;
-            thursday.SnackId = dto.SnackThursdayId;
-            thursday.DinnerId = dto.DinnerThursdayId;
+            thursday.BreakfastId = dto.BreakfastId;
+            thursday.SecondBreakfastId = dto.SecondBreakfastId;
+            thursday.LunchId = dto.LunchId;
+            thursday.SnackId = dto.SnackId;
+            thursday.DinnerId = dto.DinnerId;
 
             _dbContext.SaveChanges();
         }
@@ -692,11 +691,11 @@ namespace Papu.Services
             //Dostaniemy informację jaki użytkownik stworzył konkretny piątek w bazie danych
             friday.CreatedById = _userContextService.GetUserId;
 
-            friday.BreakfastId = dtoFriday.BreakfastFridayId;
-            friday.SecondBreakfastId = dtoFriday.SecondBreakfastFridayId;
-            friday.LunchId = dtoFriday.LunchFridayId;
-            friday.SnackId = dtoFriday.SnackFridayId;
-            friday.DinnerId = dtoFriday.DinnerFridayId;
+            friday.BreakfastId = dtoFriday.BreakfastId;
+            friday.SecondBreakfastId = dtoFriday.SecondBreakfastId;
+            friday.LunchId = dtoFriday.LunchId;
+            friday.SnackId = dtoFriday.SnackId;
+            friday.DinnerId = dtoFriday.DinnerId;
 
             _dbContext.Fridays.Add(friday);
             _dbContext.SaveChanges();
@@ -738,11 +737,11 @@ namespace Papu.Services
                 throw new ForbidException("This friday is not your");
             }
 
-            friday.BreakfastId = dto.BreakfastFridayId;
-            friday.SecondBreakfastId = dto.SecondBreakfastFridayId;
-            friday.LunchId = dto.LunchFridayId;
-            friday.SnackId = dto.SnackFridayId;
-            friday.DinnerId = dto.DinnerFridayId;
+            friday.BreakfastId = dto.BreakfastId;
+            friday.SecondBreakfastId = dto.SecondBreakfastId;
+            friday.LunchId = dto.LunchId;
+            friday.SnackId = dto.SnackId;
+            friday.DinnerId = dto.DinnerId;
 
             _dbContext.SaveChanges();
         }
@@ -842,11 +841,11 @@ namespace Papu.Services
             //Dostaniemy informację jaki użytkownik stworzył konkretną sobotę w bazie danych
             saturday.CreatedById = _userContextService.GetUserId;
 
-            saturday.BreakfastId = dtoSaturday.BreakfastSaturdayId;
-            saturday.SecondBreakfastId = dtoSaturday.SecondBreakfastSaturdayId;
-            saturday.LunchId = dtoSaturday.LunchSaturdayId;
-            saturday.SnackId = dtoSaturday.SnackSaturdayId;
-            saturday.DinnerId = dtoSaturday.DinnerSaturdayId;
+            saturday.BreakfastId = dtoSaturday.BreakfastId;
+            saturday.SecondBreakfastId = dtoSaturday.SecondBreakfastId;
+            saturday.LunchId = dtoSaturday.LunchId;
+            saturday.SnackId = dtoSaturday.SnackId;
+            saturday.DinnerId = dtoSaturday.DinnerId;
 
             _dbContext.Saturdays.Add(saturday);
             _dbContext.SaveChanges();
@@ -888,11 +887,11 @@ namespace Papu.Services
                 throw new ForbidException("This saturday is not your");
             }
 
-            saturday.BreakfastId = dto.BreakfastSaturdayId;
-            saturday.SecondBreakfastId = dto.SecondBreakfastSaturdayId;
-            saturday.LunchId = dto.LunchSaturdayId;
-            saturday.SnackId = dto.SnackSaturdayId;
-            saturday.DinnerId = dto.DinnerSaturdayId;
+            saturday.BreakfastId = dto.BreakfastId;
+            saturday.SecondBreakfastId = dto.SecondBreakfastId;
+            saturday.LunchId = dto.LunchId;
+            saturday.SnackId = dto.SnackId;
+            saturday.DinnerId = dto.DinnerId;
 
             _dbContext.SaveChanges();
         }
@@ -950,14 +949,8 @@ namespace Papu.Services
                 .Include(c => c.Snack).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
                 .Include(c => c.Dinner).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
                 .Include(c => c.Dinner).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
-                .FirstOrDefault(c => c.SundayId == id);
-
-
-            if (sunday is null)
-            {
-                throw new NotFoundException("Sunday not found");
-            }
-
+                .FirstOrDefault(c => c.SundayId == id) ?? throw new NotFoundException("Sunday not found");
+            
             var result = _mapper.Map<SundayDto>(sunday);
 
             return result;
@@ -992,11 +985,11 @@ namespace Papu.Services
             //Dostaniemy informację jaki użytkownik stworzył konkretną niedzielę w bazie danych
             sunday.CreatedById = _userContextService.GetUserId;
 
-            sunday.BreakfastId = dtoSunday.BreakfastSundayId;
-            sunday.SecondBreakfastId = dtoSunday.SecondBreakfastSundayId;
-            sunday.LunchId = dtoSunday.LunchSundayId;
-            sunday.SnackId = dtoSunday.SnackSundayId;
-            sunday.DinnerId = dtoSunday.DinnerSundayId;
+            sunday.BreakfastId = dtoSunday.BreakfastId;
+            sunday.SecondBreakfastId = dtoSunday.SecondBreakfastId;
+            sunday.LunchId = dtoSunday.LunchId;
+            sunday.SnackId = dtoSunday.SnackId;
+            sunday.DinnerId = dtoSunday.DinnerId;
 
             _dbContext.Sundays.Add(sunday);
             _dbContext.SaveChanges();
@@ -1019,14 +1012,7 @@ namespace Papu.Services
                 .Include(c => c.Snack).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
                 .Include(c => c.Dinner).ThenInclude(cs => cs.Products).ThenInclude(cs => cs.Product)
                 .Include(c => c.Dinner).ThenInclude(cs => cs.Dishes).ThenInclude(cs => cs.Dish)
-                .FirstOrDefault(c => c.SundayId == id);
-
-
-            //Jeśli jesteśmy pewni, że dana niedziela nie istnieje, zwracamy wyjątek
-            if (sunday is null)
-            {
-                throw new NotFoundException("Sunday not found");
-            }
+                .FirstOrDefault(c => c.SundayId == id) ?? throw new NotFoundException("Sunday not found");
 
             //Sprawdzamy czy to użytkownik który stworzył daną niedzielę chce ją zmodyfikować
             var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User,
@@ -1038,11 +1024,11 @@ namespace Papu.Services
                 throw new ForbidException("This sunday is not your");
             }
 
-            sunday.BreakfastId = dto.BreakfastSundayId;
-            sunday.SecondBreakfastId = dto.SecondBreakfastSundayId;
-            sunday.LunchId = dto.LunchSundayId;
-            sunday.SnackId = dto.SnackSundayId;
-            sunday.DinnerId = dto.DinnerSundayId;
+            sunday.BreakfastId = dto.BreakfastId;
+            sunday.SecondBreakfastId = dto.SecondBreakfastId;
+            sunday.LunchId = dto.LunchId;
+            sunday.SnackId = dto.SnackId;
+            sunday.DinnerId = dto.DinnerId;
 
             _dbContext.SaveChanges();
         }

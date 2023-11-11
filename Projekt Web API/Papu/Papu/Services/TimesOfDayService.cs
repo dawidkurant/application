@@ -9,7 +9,6 @@ using Papu.Models;
 using Papu.Models.Update.TimesOfDay;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 
 namespace Papu.Services
 {
@@ -38,14 +37,7 @@ namespace Papu.Services
                 .Breakfasts
                 .Include(c => c.Products).ThenInclude(cs => cs.Product)
                 .Include(c => c.Dishes).ThenInclude(cs => cs.Dish)
-                .FirstOrDefault(c => c.BreakfastId == id);
-
-
-            if (breakfast is null)
-            {
-                throw new NotFoundException("Breakfast not found");
-            }
-
+                .FirstOrDefault(c => c.BreakfastId == id) ?? throw new NotFoundException("Breakfast not found");
             var result = _mapper.Map<BreakfastDto>(breakfast);
 
             return result;
@@ -58,14 +50,7 @@ namespace Papu.Services
                 .SecondBreakfasts
                 .Include(c => c.Products).ThenInclude(cs => cs.Product)
                 .Include(c => c.Dishes).ThenInclude(cs => cs.Dish)
-                .FirstOrDefault(c => c.SecondBreakfastId == id);
-
-
-            if (secondBreakfast is null)
-            {
-                throw new NotFoundException("Second breakfast not found");
-            }
-
+                .FirstOrDefault(c => c.SecondBreakfastId == id) ?? throw new NotFoundException("Second breakfast not found");
             var result = _mapper.Map<SecondBreakfastDto>(secondBreakfast);
 
             return result;
@@ -78,14 +63,7 @@ namespace Papu.Services
                 .Lunches
                 .Include(c => c.Products).ThenInclude(cs => cs.Product)
                 .Include(c => c.Dishes).ThenInclude(cs => cs.Dish)
-                .FirstOrDefault(c => c.LunchId == id);
-
-
-            if (lunch is null)
-            {
-                throw new NotFoundException("Lunch not found");
-            }
-
+                .FirstOrDefault(c => c.LunchId == id) ?? throw new NotFoundException("Lunch not found");
             var result = _mapper.Map<LunchDto>(lunch);
 
             return result;
@@ -98,14 +76,7 @@ namespace Papu.Services
                 .Snacks
                 .Include(c => c.Products).ThenInclude(cs => cs.Product)
                 .Include(c => c.Dishes).ThenInclude(cs => cs.Dish)
-                .FirstOrDefault(c => c.SnackId == id);
-
-
-            if (snack is null)
-            {
-                throw new NotFoundException("Snack not found");
-            }
-
+                .FirstOrDefault(c => c.SnackId == id) ?? throw new NotFoundException("Snack not found");
             var result = _mapper.Map<SnackDto>(snack);
 
             return result;
@@ -118,14 +89,8 @@ namespace Papu.Services
                 .Dinners
                 .Include(c => c.Products).ThenInclude(cs => cs.Product)
                 .Include(c => c.Dishes).ThenInclude(cs => cs.Dish)
-                .FirstOrDefault(c => c.DinnerId == id);
-
-
-            if (dinner is null)
-            {
-                throw new NotFoundException("Dinner not found");
-            }
-
+                .FirstOrDefault(c => c.DinnerId == id) ?? throw new NotFoundException("Dinner not found");
+            
             var result = _mapper.Map<DinnerDto>(dinner);
 
             return result;
@@ -209,10 +174,7 @@ namespace Papu.Services
             //Dostaniemy informację jaki użytkownik stworzył konkretne śniadanie w bazie danych
             breakfast.CreatedById = _userContextService.GetUserId;
 
-            if (dtoBreakfast.ProductId is null)
-            {
-                dtoBreakfast.ProductId = new int[] { 1 };
-            }
+            dtoBreakfast.ProductId ??= new int[] { 1 };
 
             foreach (var addProduct in dtoBreakfast.ProductId)
             {
@@ -285,10 +247,7 @@ namespace Papu.Services
 
             }
 
-            if (dtoSecondBreakfast.DishId is null)
-            {
-                dtoSecondBreakfast.DishId = new int[] { 1 };
-            }
+            dtoSecondBreakfast.DishId ??= new int[] { 1 };
 
             foreach (var addDish in dtoSecondBreakfast.DishId)
             {
@@ -483,13 +442,7 @@ namespace Papu.Services
                 .Breakfasts
                 .Include(c => c.Products).ThenInclude(cs => cs.Product)
                 .Include(c => c.Dishes).ThenInclude(cs => cs.Dish)
-                .FirstOrDefault(c => c.BreakfastId == id);
-
-            //Jeśli jesteśmy pewni, że dane śniadanie nie istnieje, zwracamy wyjątek
-            if (breakfast is null)
-            {
-                throw new NotFoundException("Breakfast not found");
-            }
+                .FirstOrDefault(c => c.BreakfastId == id) ?? throw new NotFoundException("Breakfast not found");
 
             //Sprawdzamy czy to użytkownik który stworzył dane śniadanie chce je zmodyfikować
             var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User,
@@ -556,13 +509,7 @@ namespace Papu.Services
                 .SecondBreakfasts
                 .Include(c => c.Products).ThenInclude(cs => cs.Product)
                 .Include(c => c.Dishes).ThenInclude(cs => cs.Dish)
-                .FirstOrDefault(c => c.SecondBreakfastId == id);
-
-            //Jeśli jesteśmy pewni, że dane drugie śniadanie nie istnieje, zwracamy wyjątek
-            if (secondBreakfast is null)
-            {
-                throw new NotFoundException("Second breakfast not found");
-            }
+                .FirstOrDefault(c => c.SecondBreakfastId == id) ?? throw new NotFoundException("Second breakfast not found");
 
             //Sprawdzamy czy to użytkownik który stworzył dane drugie śniadanie chce je zmodyfikować
             var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User,
@@ -629,13 +576,7 @@ namespace Papu.Services
                 .Lunches
                 .Include(c => c.Products).ThenInclude(cs => cs.Product)
                 .Include(c => c.Dishes).ThenInclude(cs => cs.Dish)
-                .FirstOrDefault(c => c.LunchId == id);
-
-            //Jeśli jesteśmy pewni, że dany obiad nie istnieje, zwracamy wyjątek
-            if (lunch is null)
-            {
-                throw new NotFoundException("Lunch not found");
-            }
+                .FirstOrDefault(c => c.LunchId == id) ?? throw new NotFoundException("Lunch not found");
 
             //Sprawdzamy czy to użytkownik który stworzył dany obiady chce go zmodyfikować
             var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User,
@@ -702,13 +643,7 @@ namespace Papu.Services
                 .Snacks
                 .Include(c => c.Products).ThenInclude(cs => cs.Product)
                 .Include(c => c.Dishes).ThenInclude(cs => cs.Dish)
-                .FirstOrDefault(c => c.SnackId == id);
-
-            //Jeśli jesteśmy pewni, że dany podwieczorek nie istnieje, zwracamy wyjątek
-            if (snack is null)
-            {
-                throw new NotFoundException("Snack not found");
-            }
+                .FirstOrDefault(c => c.SnackId == id) ?? throw new NotFoundException("Snack not found");
 
             //Sprawdzamy czy to użytkownik który stworzył dany podwieczorek chce go zmodyfikować
             var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User,
@@ -851,12 +786,7 @@ namespace Papu.Services
                 .Breakfasts
                 .Include(c => c.Products).ThenInclude(cs => cs.Product)
                 .Include(c => c.Dishes).ThenInclude(cs => cs.Dish)
-                .FirstOrDefault(c => c.BreakfastId == id);
-
-            if (breakfast is null)
-            {
-                throw new NotFoundException("Breakfast not found");
-            }
+                .FirstOrDefault(c => c.BreakfastId == id) ?? throw new NotFoundException("Breakfast not found");
 
             //Sprawdzamy czy to użytkownik który stworzył dane śniadanie chce je zmodyfikować
             var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User,
@@ -882,12 +812,7 @@ namespace Papu.Services
                 .SecondBreakfasts
                 .Include(c => c.Products).ThenInclude(cs => cs.Product)
                 .Include(c => c.Dishes).ThenInclude(cs => cs.Dish)
-                .FirstOrDefault(c => c.SecondBreakfastId == id);
-
-            if (secondBreakfast is null)
-            {
-                throw new NotFoundException("Second breakfast not found");
-            }
+                .FirstOrDefault(c => c.SecondBreakfastId == id) ?? throw new NotFoundException("Second breakfast not found");
 
             //Sprawdzamy czy to użytkownik który stworzył dane drugie śniadanie chce je zmodyfikować
             var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User,
@@ -913,12 +838,7 @@ namespace Papu.Services
                 .Lunches
                 .Include(c => c.Products).ThenInclude(cs => cs.Product)
                 .Include(c => c.Dishes).ThenInclude(cs => cs.Dish)
-                .FirstOrDefault(c => c.LunchId == id);
-
-            if (lunch is null)
-            {
-                throw new NotFoundException("Lunch not found");
-            }
+                .FirstOrDefault(c => c.LunchId == id) ?? throw new NotFoundException("Lunch not found");
 
             //Sprawdzamy czy to użytkownik który stworzył dany obiady chce go zmodyfikować
             var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User,
@@ -944,12 +864,7 @@ namespace Papu.Services
                 .Snacks
                 .Include(c => c.Products).ThenInclude(cs => cs.Product)
                 .Include(c => c.Dishes).ThenInclude(cs => cs.Dish)
-                .FirstOrDefault(c => c.SnackId == id);
-
-            if (snack is null)
-            {
-                throw new NotFoundException("Snack not found");
-            }
+                .FirstOrDefault(c => c.SnackId == id) ?? throw new NotFoundException("Snack not found");
             //Sprawdzamy czy to użytkownik który stworzył dany podwieczorek chce go zmodyfikować
             var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User,
                 snack, new ResourceOperationRequirement(ResourceOperation.Delete)).Result;
@@ -974,12 +889,7 @@ namespace Papu.Services
                 .Dinners
                 .Include(c => c.Products).ThenInclude(cs => cs.Product)
                 .Include(c => c.Dishes).ThenInclude(cs => cs.Dish)
-                .FirstOrDefault(c => c.DinnerId == id);
-
-            if (dinner is null)
-            {
-                throw new NotFoundException("Dinner not found");
-            }
+                .FirstOrDefault(c => c.DinnerId == id) ?? throw new NotFoundException("Dinner not found");
 
             //Sprawdzamy czy to użytkownik który stworzył daną kolację chce go zmodyfikować
             var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User,

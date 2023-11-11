@@ -13,9 +13,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Papu.Authorization;
-using Papu.Authorization.DaysOfTheWeek;
-using Papu.Authorization.TimesOfDay;
 using Papu.Data;
 using Papu.Entities;
 using Papu.Middleware;
@@ -24,6 +21,7 @@ using Papu.Models.Validators;
 using Papu.Services;
 using Papu.wwwroot;
 using System;
+using System.Linq;
 using System.Text;
 
 namespace Papu
@@ -37,73 +35,61 @@ namespace Papu
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// Ta metoda jest wywoływana przez środowisko wykonawcze. Użyj tej metody do dodawania usług do kontenera.
+        /// </summary>
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<StaticFilesConfiguration>
                 (Configuration.GetSection("StaticFiles:Headers"));
 
-            var authenticationSettings = new AuthenticationSettings();
-            //Pobieranie informacji zapisanych w pliku appsettings.json
-            //bind czyli połączenie wartości z pliku ze zmienną authenticationSettings
-            Configuration.GetSection("Authentication").Bind(authenticationSettings);
-
-            //Abyśmy mogli wstrzyknąć konfigurację do api
-            services.AddSingleton(authenticationSettings);
-
-            //Konfiguracja autentykacji, przekazujemy opcje autentykacji
-            //dla tych opcji domyślny schemat autentykacji będzie równy Bearer
-            services.AddAuthentication(option =>
-            {
-                option.DefaultAuthenticateScheme = "Bearer";
-                option.DefaultScheme = "Bearer";
-                option.DefaultChallengeScheme = "Bearer";
-                //Aby dodać konfigurację JWT, przekazujemy konfigurację
-            }).AddJwtBearer(cfg =>
-            {
-                //Nie wymuszamy od klienta protokołu https
-                cfg.RequireHttpsMetadata = false;
-                //Dany token powinien zostać zapisany po stronie serwera do celów autentykacji 
-                cfg.SaveToken = true;
-                //Parametry walidacji po to aby sprawdzić czy dany token wysłany przez klienta
-                //jest zgodny z tym co wie serwer
-                cfg.TokenValidationParameters = new TokenValidationParameters
-                {
-                    //Wydawca danego tokenu 
-                    ValidIssuer = authenticationSettings.JwtIssuer,
-                    //Jakie podmioty mogą używać tego tokenu
-                    ValidAudience = authenticationSettings.JwtIssuer,
-                    //Klucz prywatny wygenerowany na podstawie wartości z pliku appsettings.json
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authenticationSettings.JwtKey)),
-                };
-            });
-
-            services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementProductHandler>();
-            services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementDishHandler>();
-            services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementMenuHandler>();
-            services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementBreakfastHandler>();
-            services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementSecondBreakfastHandler>();
-            services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementLunchHandler>();
-            services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementSnackHandler>();
-            services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementDinnerHandler>();
-            services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementMondayHandler>();
-            services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementTuesdayHandler>();
-            services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementWednesdayHandler>();
-            services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementThursdayHandler>();
-            services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementFridayHandler>();
-            services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementSaturdayHandler>();
-            services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementSundayHandler>();
-
-            //W ten sposób dodajemy walidację do projektu
-            services.AddControllers().AddFluentValidation();
+            ConfigurateAuthentication(services);
+            ConfigureAuthorization(services);
+            ConfigureFluentValidation(services);
 
             services.AddCors();
 
-            //Rejestracja serwisu seedującego
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(options =>
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore); ;
+
+            services.AddDatabaseDeveloperPageExceptionFilter();
+
+            /// <summary>
+            /// Rejestrujemy niezbędne serwisy do wygenerowania specyfikacji openapi na podstawie
+            /// naszego api
+            /// </summary>
+            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddIdentityServer()
+                .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+
+            services.AddAuthentication()
+                .AddIdentityServerJwt();
+
+            /// <summary>
+            /// Przez to że korzystamy z accessora musimy dodać tę rejestrację
+            /// aby wstrzyknąć referencję do klasy IHttpContextAccessor
+            /// </summary>
+            services.AddHttpContextAccessor();
+
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddSwaggerGen();
+
+            /// <summary>
+            /// Rejestracja serwisu seedującego
+            /// </summary>
             services.AddScoped<PapuSeeder>();
-            //AddAutoMapper - jako parametr przekazujemy źródło projektu, którym
-            //AutoMapper przeszuka wszystkie typy i znajdzie profile które są potrzebne do
-            //utworzenia konfiguracji         
+
+            /// <summary>
+            /// AddAutoMapper - jako parametr przekazujemy źródło projektu, którym
+            /// AutoMapper przeszuka wszystkie typy i znajdzie profile które są potrzebne do
+            /// utworzenia konfiguracji
+            /// </summary>
             services.AddAutoMapper(this.GetType().Assembly);
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ICategoryService, CategoryService>();
@@ -116,60 +102,46 @@ namespace Papu
             services.AddScoped<IDaysOfTheWeekService, DaysOfTheWeekService>();
             services.AddScoped<IMenuService, MenuService>();
             services.AddScoped<IAccountService, AccountService>();
-            //Papu middleware aby kontener dependenciInjection mógł go poprawnie zaizolować
+
+            /// <summary>
+            /// Papu middleware aby kontener dependenciInjection mógł go poprawnie zaizolować
+            /// </summary>
             services.AddScoped<ErrorHandlingMiddleware>();
             services.AddScoped<RequestTimeMiddleware>();
             services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
-            services.AddScoped<IValidator<RegisterUserDto>, RegisterUserDtoValidator>();
             services.AddScoped<IUserContextService, UserContextService>();
-            //Przez to że korzystamy z accessora musimy dodać tę rejestrację
-            //aby wstrzyknąć referencję do klasy IHttpContextAccessor
-            services.AddHttpContextAccessor();
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+            /// <summary>
+            /// Rejestracja kontekstu bazy danych
+            /// </summary>
+            services.AddDbContext<PapuDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("PapuDbConnection")));
 
-            //Rejestrujemy niezbędne serwisy do wygenerowania specyfikacji openapi na podstawie
-            //naszego api
-            services.AddSwaggerGen();
-
-            services.AddControllers().AddNewtonsoftJson(options =>
-                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-
-            services.AddDatabaseDeveloperPageExceptionFilter();
-
-            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
-
-            services.AddIdentityServer()
-                .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
-
-            services.AddAuthentication()
-                .AddIdentityServerJwt();
-            services.AddControllersWithViews();
-            services.AddRazorPages();
-            // In production, the Angular files will be served from this directory
+            /// <summary>
+            /// W środowisku produkcyjnym pliki Angulara będą dostarczane z tego katalogu
+            /// </summary>
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
             });
 
-            //Rejestracja kontekstu bazy danych
-            services.AddDbContext<PapuDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("PapuDbConnection")));
+            services.AddRazorPages();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// Ta metoda jest wywoływana przez środowisko wykonawcze. Użyj tej metody do skonfigurowania potoku żądania HTTP
+        /// </summary>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, PapuSeeder seeder, 
             IOptions<StaticFilesConfiguration> options)
         {
             env.EnvironmentName = "Development";
 
-            //Każde zapytanie do naszego API przejdzie przez proces seedowania przez co encje zostaną dodane już
-            //przy pierwszym zapytaniu do naszego API
+            /// <summary>
+            /// Każde zapytanie do naszego API przejdzie przez proces seedowania przez co encje zostaną dodane już
+            /// przy pierwszym zapytaniu do naszego API
+            /// </summary>
             seeder.Seed();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -178,26 +150,38 @@ namespace Papu
             else
             {
                 app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+
+                /// <summary>
+                /// Domyślna wartość HSTS wynosi 30 dni. Możesz chcieć to zmienić w scenariuszach produkcyjnych, zobacz https://aka.ms/aspnetcore-hsts
+                /// </summary>
                 app.UseHsts();
             }
 
-            //Aby skorzystać z middleware to musi być
+            /// <summary>
+            /// To jest potrzebne aby korzystać z middleware
+            /// </summary>
             app.UseMiddleware<ErrorHandlingMiddleware>();
             app.UseMiddleware<RequestTimeMiddleware>();
 
-            //W ten sposób mówimy naszemu Api o tym, że każdy request wysłany przez klienta api
-            //będzie podlegał autentykacji 
+            /// <summary>
+            /// W ten sposób mówimy naszemu Api o tym, że każdy request wysłany przez klienta api
+            /// będzie podlegał autentykacji 
+            /// </summary>
             app.UseAuthentication();
             app.UseHttpsRedirection();
-            //Api wygeneruje plik swagger.json zgodny ze specyfikacją openapi i udostępnia
-            //na podstawie tego pliku, userinterface czyli stronę która będzie widoczna dla
-            //użytkowników bazującą na pliku swagger.json
+
+            /// <summary>
+            /// Api wygeneruje plik swagger.json zgodny ze specyfikacją openapi i udostępnia
+            /// na podstawie tego pliku, userinterface czyli stronę która będzie widoczna dla
+            /// użytkowników bazującą na pliku swagger.json
+            /// </summary>
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                //Domyślna ścieżka do pliku wygenerowanego przez swaggera, a drugi parametr to nazwa
-                //dokumentacji naszego api
+                /// <summary>
+                /// Domyślna ścieżka do pliku wygenerowanego przez swaggera, a drugi parametr to nazwa
+                /// dokumentacji naszego api
+                /// </summary>
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Papu API");
             });
 
@@ -207,13 +191,12 @@ namespace Papu
                 {
                     StaticFilesConfiguration headers = options.Value;
 
-                    //Pobieranie konfiguracji pamięci podręcznej z pliku appsettings.json
-                    context.Context.Response.Headers["Cache-Control"] =
-                    headers.CacheControl;
-                    context.Context.Response.Headers["Pragma"] =
-                    headers.Pragma;
-                    context.Context.Response.Headers["Expires"] =
-                    headers.Expires;
+                    /// <summary>
+                    /// Pobieranie konfiguracji pamięci podręcznej z pliku appsettings.json
+                    /// </summary>
+                    context.Context.Response.Headers["Cache-Control"] = headers.CacheControl;
+                    context.Context.Response.Headers["Pragma"] = headers.Pragma;
+                    context.Context.Response.Headers["Expires"] = headers.Expires;
                 }
             });
 
@@ -228,8 +211,10 @@ namespace Papu
 
             app.UseIdentityServer();
 
-            //Nasze api będzie w stanie autoryzować użytkowników, ale samo to nie wystarczy
-            //pod każdą akcją należy dodać atrybut autoryzacji 
+            /// <summary>
+            /// Nasze api będzie w stanie autoryzować użytkowników, ale samo to nie wystarczy
+            /// pod każdą akcją należy dodać atrybut autoryzacji 
+            /// </summary>
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
@@ -241,9 +226,10 @@ namespace Papu
 
             app.UseSpa(spa =>
             {
-                // To learn more about options for serving an Angular SPA from ASP.NET Core,
-                // see https://go.microsoft.com/fwlink/?linkid=864501
-
+                /// <summary>
+                /// Aby dowiedzieć się więcej na temat opcji obsługi aplikacji Angular SPA w środowisku ASP.NET Core,
+                /// zobacz https://go.microsoft.com/fwlink/?linkid=864501
+                /// </summary>
                 spa.Options.SourcePath = "ClientApp";
                 spa.Options.StartupTimeout = new TimeSpan(0, 5, 0);
 
@@ -252,6 +238,92 @@ namespace Papu
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+        }
+
+        private void ConfigurateAuthentication(IServiceCollection services)
+        {
+            var authenticationSettings = new AuthenticationSettings();
+
+            /// <summary>
+            /// Pobieranie informacji zapisanych w pliku appsettings.json
+            /// bind czyli połączenie wartości z pliku ze zmienną authenticationSettings
+            /// </summary>
+            Configuration.GetSection("Authentication").Bind(authenticationSettings);
+
+            /// <summary>
+            /// Abyśmy mogli wstrzyknąć konfigurację do api
+            /// </summary>
+            services.AddSingleton(authenticationSettings);
+
+            /// <summary>
+            /// Konfiguracja autentykacji, przekazujemy opcje autentykacji
+            /// dla tych opcji domyślny schemat autentykacji będzie równy Bearer
+            /// </summary>
+            services.AddAuthentication(option =>
+            {
+                option.DefaultAuthenticateScheme = "Bearer";
+                option.DefaultScheme = "Bearer";
+                option.DefaultChallengeScheme = "Bearer";
+
+                /// <summary>
+                /// Aby dodać konfigurację JWT, przekazujemy konfigurację
+                /// </summary>
+            }).AddJwtBearer(cfg =>
+            {
+                /// <summary>
+                /// Nie wymuszamy od klienta protokołu https
+                /// </summary>
+                cfg.RequireHttpsMetadata = false;
+
+                /// <summary>
+                /// Dany token powinien zostać zapisany po stronie serwera do celów autentykacji 
+                /// </summary>
+                cfg.SaveToken = true;
+
+                /// <summary>
+                /// Parametry walidacji po to aby sprawdzić czy dany token wysłany przez klienta
+                /// jest zgodny z tym co wie serwer
+                /// </summary>
+                cfg.TokenValidationParameters = new TokenValidationParameters
+                {
+                    /// <summary>
+                    /// Wydawca danego tokenu
+                    /// </summary>
+                    ValidIssuer = authenticationSettings.JwtIssuer,
+
+                    /// <summary>
+                    /// Jakie podmioty mogą używać tego tokenu
+                    /// </summary>
+                    ValidAudience = authenticationSettings.JwtIssuer,
+
+                    /// <summary>
+                    /// Klucz prywatny wygenerowany na podstawie wartości z pliku appsettings.json
+                    /// </summary>
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authenticationSettings.JwtKey)),
+                };
+            });
+        }
+
+        private static void ConfigureAuthorization(IServiceCollection services)
+        {
+            var authorizationHandlers = typeof(Startup).Assembly.GetTypes()
+                .Where(t => t.GetInterfaces().Contains(typeof(IAuthorizationHandler)))
+                .Where(t => t.IsClass && !t.IsAbstract)
+                .ToList();
+
+            foreach (var handler in authorizationHandlers)
+            {
+                services.AddScoped(typeof(IAuthorizationHandler), handler);
+            }
+        }
+
+        private static void ConfigureFluentValidation(IServiceCollection services)
+        {
+            /// <summary>
+            /// W ten sposób dodajemy walidację do projektu
+            /// </summary>
+            services.AddControllers().AddFluentValidation();
+            services.AddScoped<IValidator<RegisterUserDto>, RegisterUserDtoValidator>();
         }
     }
 }

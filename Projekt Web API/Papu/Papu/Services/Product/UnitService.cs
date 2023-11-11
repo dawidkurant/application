@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.Extensions.Logging;
 using Papu.Entities;
 using Papu.Exceptions;
 using Papu.Models.Product;
@@ -24,14 +23,8 @@ namespace Papu.Services
         {
             Unit unit =
                 _dbContext.Units
-                .FirstOrDefault(c => c.UnitId == id);
-
-
-            if (unit is null)
-            {
-                throw new NotFoundException("Unit not found");
-            }
-
+                .FirstOrDefault(c => c.UnitId == id) ?? throw new NotFoundException("Unit not found");
+            
             var result = _mapper.Map<UnitDto>(unit);
 
             return result;

@@ -1,5 +1,4 @@
-﻿using Papu.Entities;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Papu.Models
 {

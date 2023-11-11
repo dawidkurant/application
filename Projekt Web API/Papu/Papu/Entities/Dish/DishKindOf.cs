@@ -1,5 +1,4 @@
-﻿
-namespace Papu.Entities
+﻿namespace Papu.Entities
 {
     public class DishKindOf
     {

@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.Extensions.Logging;
 using Papu.Entities;
 using Papu.Exceptions;
 using Papu.Models.Dish;
@@ -24,14 +23,8 @@ namespace Papu.Services
         {
             Type type =
             _dbContext.Types
-            .FirstOrDefault(c => c.TypeId == id);
-
-
-            if (type is null)
-            {
-                throw new NotFoundException("Type not found");
-            }
-
+            .FirstOrDefault(c => c.TypeId == id) ?? throw new NotFoundException("Type not found");
+            
             var result = _mapper.Map<TypeDto>(type);
 
             return result;

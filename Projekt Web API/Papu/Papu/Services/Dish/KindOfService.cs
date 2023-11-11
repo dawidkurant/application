@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.Extensions.Logging;
 using Papu.Entities;
 using Papu.Exceptions;
 using Papu.Models.Dish;
@@ -24,14 +23,8 @@ namespace Papu.Services
         {
             KindOf kindOf =
             _dbContext.KindsOf
-            .FirstOrDefault(c => c.KindOfId == id);
-
-
-            if (kindOf is null)
-            {
-                throw new NotFoundException("Kind of not found");
-            }
-
+            .FirstOrDefault(c => c.KindOfId == id) ?? throw new NotFoundException("Kind of not found");
+            
             var result = _mapper.Map<KindOfDto>(kindOf);
 
             return result;

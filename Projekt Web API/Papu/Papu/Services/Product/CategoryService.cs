@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.Extensions.Logging;
 using Papu.Entities;
 using Papu.Exceptions;
 using Papu.Models.Product;
@@ -24,13 +23,7 @@ namespace Papu.Services
         {
             Category category =
                 _dbContext.Categories
-                .FirstOrDefault(c => c.CategoryId == id);
-
-
-            if (category is null)
-            {
-                throw new NotFoundException("Category not found");
-            }
+                .FirstOrDefault(c => c.CategoryId == id) ?? throw new NotFoundException("Category not found");
 
             var result = _mapper.Map<CategoryDto>(category);
 

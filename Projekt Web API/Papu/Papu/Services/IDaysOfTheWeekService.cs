@@ -1,7 +1,6 @@
 ﻿using Papu.Models;
 using Papu.Models.Update.DayOfTheWeek;
 using System.Collections.Generic;
-using System.Security.Claims;
 
 namespace Papu.Services
 {

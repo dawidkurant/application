@@ -1,20 +1,14 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Papu.Entities;
 using Papu.Models;
 using Papu.Services;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
 
 namespace Papu.Controllers
 {
     [Route("api/product")]
     [ApiController]
     //Atrybut potrzebny aby dane akcje były zablokowane przed niezalogowanymi użytkownikami
-    [Authorize]
+    //[Authorize]
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
@@ -38,7 +32,7 @@ namespace Papu.Controllers
         //Pobranie wszystkich produktów z bazy i zwrócenie ich do klienta z kodem 200 czyli OK
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult<IEnumerable<ProductDto>> GetAllProducts()
+        public ActionResult<ProductDto> GetAllProducts()
         {
             var productsDtos = _productService.GetAllProducts();
 
@@ -47,6 +41,7 @@ namespace Papu.Controllers
 
         //Tworzenie nowego produktu
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult CreateProduct([FromBody] CreateProductDto dto)
         {
             var newProductId = _productService.CreateProduct(dto);
@@ -58,6 +53,7 @@ namespace Papu.Controllers
 
         //Edycja produktu
         [HttpPut("{id}")]
+        [AllowAnonymous]
         public ActionResult UpdateProduct([FromBody] UpdateProductDto dto, [FromRoute] int id)
         {
             _productService.UpdateProduct(id, dto);

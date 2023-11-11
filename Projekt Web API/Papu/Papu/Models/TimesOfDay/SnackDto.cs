@@ -1,18 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using Papu.Models.TimesOfDay;
 
 namespace Papu.Models
 {
-    public class SnackDto
+    public class SnackDto : TimesOfDayDto
     {
         //Podstawowe informacje dotyczące podwieczorka dostępne dla klienta
 
         //Id podwieczorka
         public int SnackId { get; set; }
-
-        //Produkty wchodzące w skład podwieczorka
-        public virtual ICollection<ProductDto> Products { get; set; }
-
-        //Potrawy wchodzące w skład podwieczorka
-        public virtual ICollection<DishDto> Dishes { get; set; }
     }
 }

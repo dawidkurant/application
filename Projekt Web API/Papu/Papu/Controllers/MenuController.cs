@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Papu.Models;
-using Papu.Models.Update;
 using Papu.Services;
 using System.Collections.Generic;
-using System.Security.Claims;
 
 namespace Papu.Controllers
 {
@@ -27,7 +25,7 @@ namespace Papu.Controllers
         [AllowAnonymous]
         public ActionResult<MenuDto> GetMenu([FromRoute] int id)
         {
-            var menu = _menuService.GetByIdMenu(id);
+            var menu = _menuService.GetMenuById(id);
 
             return Ok(menu);
         }

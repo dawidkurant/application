@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace Papu.Entities
+﻿namespace Papu.Entities
 {
     public class ProductDish
     {

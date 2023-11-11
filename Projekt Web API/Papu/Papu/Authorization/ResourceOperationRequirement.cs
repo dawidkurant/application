@@ -2,7 +2,9 @@
 
 namespace Papu.Authorization
 {
-    //Klasa określająca jaką akcję chce wykonać dany użytkownik
+    /// <summary>
+    /// Klasa określająca jaką akcję chce wykonać dany użytkownik
+    /// </summary>
     public enum ResourceOperation
     {
         Create,
@@ -11,7 +13,9 @@ namespace Papu.Authorization
         Delete
     }
 
-    //Klasa reperezentująca nasze wymagania oraz typ konkrentej akcji 
+    /// <summary>
+    /// Klasa reperezentująca nasze wymagania oraz typ konkrentej akcji 
+    /// </summary>
     public class ResourceOperationRequirement : IAuthorizationRequirement
     {
         public ResourceOperationRequirement(ResourceOperation resourceOperation)
@@ -19,7 +23,9 @@ namespace Papu.Authorization
             ResourceOperation = resourceOperation;
         }
 
-        //Pobieranie konkretnej akcji 
+        /// <summary>
+        /// Pobieranie konkretnej akcji 
+        /// </summary>
         public ResourceOperation ResourceOperation { get; }
     }
 }

@@ -62,6 +62,5 @@ namespace Papu.Entities
 
         //Dania zawierające się w kolacji
         public virtual ICollection<DinnerDish> DinnerDishes { get; set; }
-
     }
 }
