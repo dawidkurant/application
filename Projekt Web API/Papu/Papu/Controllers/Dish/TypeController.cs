@@ -16,7 +16,7 @@ namespace Papu.Controllers.Dish
             _typeService = typeService;
         }
 
-        //Pobranie konkretnego typu
+        // Pobranie konkretnego typu
         [HttpGet("{id}")]
         public ActionResult<TypeDto> GetType([FromRoute] int id)
         {
@@ -25,7 +25,7 @@ namespace Papu.Controllers.Dish
             return Ok(type);
         }
 
-        //Pobranie wszystkich typów z bazy i zwrócenie ich do klienta z kodem 200 czyli OK
+        // Pobranie wszystkich typów z bazy i zwrócenie ich do klienta z kodem 200 czyli OK
         [HttpGet]
         public ActionResult<IEnumerable<TypeDto>> GetAllTypes()
         {

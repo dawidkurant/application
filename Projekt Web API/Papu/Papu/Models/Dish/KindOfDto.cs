@@ -2,12 +2,12 @@
 {
     public class KindOfDto
     {
-        //Podstawowe informacje dotyczące rodzaju dostępne dla klienta
+        // Podstawowe informacje dotyczące rodzaju dostępne dla klienta
 
-        //Id
+        // Id
         public int KindOfId { get; set; }
 
-        //Nazwa
+        // Nazwa
         public string KindOfName { get; set; }
     }
 }

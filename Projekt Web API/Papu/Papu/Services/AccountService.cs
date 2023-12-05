@@ -13,7 +13,7 @@ using System.Text;
 
 namespace Papu.Services
 {
-    //Jest odpowiedzialny za tworzenie i logowanie nowych użytkowników
+    // Jest odpowiedzialny za tworzenie i logowanie nowych użytkowników
     public class AccountService : IAccountService
     {
         private readonly PapuDbContext _context;
@@ -30,8 +30,8 @@ namespace Papu.Services
 
         public void RegisterUser(RegisterUserDto dto)
         {
-            //Na początku dodawaliśmy użytkownika bez hasła,
-            //ponieważ trzeba było je odpowiednio zhashować
+            // Na początku dodawaliśmy użytkownika bez hasła,
+            // ponieważ trzeba było je odpowiednio zhashować
             var newUser = new User()
             {
                 Email = dto.Email,
@@ -40,10 +40,10 @@ namespace Papu.Services
                 RoleId = dto.RoleId
             };
 
-            //Hasło jest hashowane przed dodaniem użytkownika
+            // Hasło jest hashowane przed dodaniem użytkownika
             var hashedPassword = _passwordHasher.HashPassword(newUser, dto.Password);
 
-            //Zhashowane hasło jest dodawane do użytkownika
+            // Zhashowane hasło jest dodawane do użytkownika
             newUser.PasswordHash = hashedPassword;
             _context.Users.Add(newUser);
             _context.SaveChanges();
@@ -76,14 +76,14 @@ namespace Papu.Services
                 new Claim("Nationality", user.Nationality)
             };
 
-            //Przekazujemy nasz klucz prywatny jako tablicę bajtów
+            // Przekazujemy nasz klucz prywatny jako tablicę bajtów
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_authenticationSettings.JwtKey));
-            //Credential potrzebny do podpisania tokenu JWT
+            // Credential potrzebny do podpisania tokenu JWT
             var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            //Data do której ten token będzie poprawny
+            // Data do której ten token będzie poprawny
             var expires = DateTime.Now.AddDays(_authenticationSettings.JwtExpireDays);
 
-            //Utworzenie tokenu
+            // Utworzenie tokenu
             var token = new JwtSecurityToken(_authenticationSettings.JwtIssuer,
                 _authenticationSettings.JwtIssuer,
                 claims,
@@ -91,7 +91,7 @@ namespace Papu.Services
                 signingCredentials: cred);
 
             var tokenHandler = new JwtSecurityTokenHandler();
-            //Generowanie tokenu
+            // Generowanie tokenu
             return tokenHandler.WriteToken(token);
         }
 

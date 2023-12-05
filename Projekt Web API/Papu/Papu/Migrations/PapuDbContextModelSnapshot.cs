@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Papu.Entities;
 
+#nullable disable
+
 namespace Papu.Migrations
 {
     [DbContext(typeof(PapuDbContext))]
@@ -15,63 +17,18 @@ namespace Papu.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.13")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "6.0.24")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            modelBuilder.Entity("Papu.Entities.Breakfast", b =>
-                {
-                    b.Property<int>("BreakfastId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("CreatedById")
-                        .HasColumnType("int");
-
-                    b.HasKey("BreakfastId");
-
-                    b.HasIndex("CreatedById");
-
-                    b.ToTable("Breakfasts");
-                });
-
-            modelBuilder.Entity("Papu.Entities.BreakfastDish", b =>
-                {
-                    b.Property<int>("BreakfastId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DishId")
-                        .HasColumnType("int");
-
-                    b.HasKey("BreakfastId", "DishId");
-
-                    b.HasIndex("DishId");
-
-                    b.ToTable("DishBreakfasts");
-                });
-
-            modelBuilder.Entity("Papu.Entities.BreakfastProduct", b =>
-                {
-                    b.Property<int>("BreakfastId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.HasKey("BreakfastId", "ProductId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ProductBreakfasts");
-                });
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
             modelBuilder.Entity("Papu.Entities.Category", b =>
                 {
                     b.Property<int>("CategoryId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"), 1L, 1);
 
                     b.Property<string>("CategoryName")
                         .HasColumnType("nvarchar(max)");
@@ -81,59 +38,34 @@ namespace Papu.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("Papu.Entities.Dinner", b =>
+            modelBuilder.Entity("Papu.Entities.DayMenu", b =>
                 {
-                    b.Property<int>("DinnerId")
+                    b.Property<int>("DayMenuId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DayMenuId"), 1L, 1);
 
                     b.Property<int?>("CreatedById")
                         .HasColumnType("int");
 
-                    b.HasKey("DinnerId");
+                    b.Property<int>("DayOfWeek")
+                        .HasColumnType("int");
+
+                    b.HasKey("DayMenuId");
 
                     b.HasIndex("CreatedById");
 
-                    b.ToTable("Dinners");
-                });
-
-            modelBuilder.Entity("Papu.Entities.DinnerDish", b =>
-                {
-                    b.Property<int>("DinnerId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DishId")
-                        .HasColumnType("int");
-
-                    b.HasKey("DinnerId", "DishId");
-
-                    b.HasIndex("DishId");
-
-                    b.ToTable("DinnerDishes");
-                });
-
-            modelBuilder.Entity("Papu.Entities.DinnerProduct", b =>
-                {
-                    b.Property<int>("DinnerId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.HasKey("DinnerId", "ProductId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("DinnerProducts");
+                    b.ToTable("DaysMenu");
                 });
 
             modelBuilder.Entity("Papu.Entities.Dish", b =>
                 {
                     b.Property<int>("DishId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DishId"), 1L, 1);
 
                     b.Property<int?>("CreatedById")
                         .HasColumnType("int");
@@ -190,6 +122,21 @@ namespace Papu.Migrations
                     b.ToTable("DishKindsOf");
                 });
 
+            modelBuilder.Entity("Papu.Entities.DishMeal", b =>
+                {
+                    b.Property<int>("DishId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MealId")
+                        .HasColumnType("int");
+
+                    b.HasKey("DishId", "MealId");
+
+                    b.HasIndex("MealId");
+
+                    b.ToTable("DishMeals");
+                });
+
             modelBuilder.Entity("Papu.Entities.DishType", b =>
                 {
                     b.Property<int>("DishId")
@@ -205,64 +152,13 @@ namespace Papu.Migrations
                     b.ToTable("DishTypes");
                 });
 
-            modelBuilder.Entity("Papu.Entities.Friday", b =>
-                {
-                    b.Property<int>("FridayId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("BreakfastId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CreatedById")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("DinnerId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("LunchId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SecondBreakfastId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SnackId")
-                        .HasColumnType("int");
-
-                    b.HasKey("FridayId");
-
-                    b.HasIndex("BreakfastId")
-                        .IsUnique()
-                        .HasFilter("[BreakfastId] IS NOT NULL");
-
-                    b.HasIndex("CreatedById");
-
-                    b.HasIndex("DinnerId")
-                        .IsUnique()
-                        .HasFilter("[DinnerId] IS NOT NULL");
-
-                    b.HasIndex("LunchId")
-                        .IsUnique()
-                        .HasFilter("[LunchId] IS NOT NULL");
-
-                    b.HasIndex("SecondBreakfastId")
-                        .IsUnique()
-                        .HasFilter("[SecondBreakfastId] IS NOT NULL");
-
-                    b.HasIndex("SnackId")
-                        .IsUnique()
-                        .HasFilter("[SnackId] IS NOT NULL");
-
-                    b.ToTable("Fridays");
-                });
-
             modelBuilder.Entity("Papu.Entities.Group", b =>
                 {
                     b.Property<int>("GroupId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GroupId"), 1L, 1);
 
                     b.Property<string>("GroupName")
                         .HasColumnType("nvarchar(max)");
@@ -276,8 +172,9 @@ namespace Papu.Migrations
                 {
                     b.Property<int>("KindOfId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("KindOfId"), 1L, 1);
 
                     b.Property<string>("KindOfName")
                         .HasColumnType("nvarchar(max)");
@@ -287,187 +184,39 @@ namespace Papu.Migrations
                     b.ToTable("KindsOf");
                 });
 
-            modelBuilder.Entity("Papu.Entities.Lunch", b =>
+            modelBuilder.Entity("Papu.Entities.Meal", b =>
                 {
-                    b.Property<int>("LunchId")
+                    b.Property<int>("MealId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MealId"), 1L, 1);
 
                     b.Property<int?>("CreatedById")
                         .HasColumnType("int");
 
-                    b.HasKey("LunchId");
+                    b.Property<int?>("DayMenuId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MealType")
+                        .HasColumnType("int");
+
+                    b.HasKey("MealId");
 
                     b.HasIndex("CreatedById");
 
-                    b.ToTable("Lunches");
-                });
+                    b.HasIndex("DayMenuId");
 
-            modelBuilder.Entity("Papu.Entities.LunchDish", b =>
-                {
-                    b.Property<int>("LunchId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DishId")
-                        .HasColumnType("int");
-
-                    b.HasKey("LunchId", "DishId");
-
-                    b.HasIndex("DishId");
-
-                    b.ToTable("LunchDishes");
-                });
-
-            modelBuilder.Entity("Papu.Entities.LunchProduct", b =>
-                {
-                    b.Property<int>("LunchId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.HasKey("LunchId", "ProductId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("LunchProducts");
-                });
-
-            modelBuilder.Entity("Papu.Entities.Menu", b =>
-                {
-                    b.Property<int>("MenuId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("CreatedById")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("FridayId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("MenuDescription")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("MenuName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<int?>("MondayId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SaturdayId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SundayId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ThursdayId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TuesdayId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("WednesdayId")
-                        .HasColumnType("int");
-
-                    b.HasKey("MenuId");
-
-                    b.HasIndex("CreatedById");
-
-                    b.HasIndex("FridayId")
-                        .IsUnique()
-                        .HasFilter("[FridayId] IS NOT NULL");
-
-                    b.HasIndex("MondayId")
-                        .IsUnique()
-                        .HasFilter("[MondayId] IS NOT NULL");
-
-                    b.HasIndex("SaturdayId")
-                        .IsUnique()
-                        .HasFilter("[SaturdayId] IS NOT NULL");
-
-                    b.HasIndex("SundayId")
-                        .IsUnique()
-                        .HasFilter("[SundayId] IS NOT NULL");
-
-                    b.HasIndex("ThursdayId")
-                        .IsUnique()
-                        .HasFilter("[ThursdayId] IS NOT NULL");
-
-                    b.HasIndex("TuesdayId")
-                        .IsUnique()
-                        .HasFilter("[TuesdayId] IS NOT NULL");
-
-                    b.HasIndex("WednesdayId")
-                        .IsUnique()
-                        .HasFilter("[WednesdayId] IS NOT NULL");
-
-                    b.ToTable("Menus");
-                });
-
-            modelBuilder.Entity("Papu.Entities.Monday", b =>
-                {
-                    b.Property<int>("MondayId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("BreakfastId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CreatedById")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("DinnerId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("LunchId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SecondBreakfastId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SnackId")
-                        .HasColumnType("int");
-
-                    b.HasKey("MondayId");
-
-                    b.HasIndex("BreakfastId")
-                        .IsUnique()
-                        .HasFilter("[BreakfastId] IS NOT NULL");
-
-                    b.HasIndex("CreatedById");
-
-                    b.HasIndex("DinnerId")
-                        .IsUnique()
-                        .HasFilter("[DinnerId] IS NOT NULL");
-
-                    b.HasIndex("LunchId")
-                        .IsUnique()
-                        .HasFilter("[LunchId] IS NOT NULL");
-
-                    b.HasIndex("SecondBreakfastId")
-                        .IsUnique()
-                        .HasFilter("[SecondBreakfastId] IS NOT NULL");
-
-                    b.HasIndex("SnackId")
-                        .IsUnique()
-                        .HasFilter("[SnackId] IS NOT NULL");
-
-                    b.ToTable("Mondays");
+                    b.ToTable("Meals");
                 });
 
             modelBuilder.Entity("Papu.Entities.Product", b =>
                 {
                     b.Property<int>("ProductId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"), 1L, 1);
 
                     b.Property<decimal>("AssimilableCarbohydrates")
                         .HasMaxLength(8)
@@ -575,12 +324,28 @@ namespace Papu.Migrations
                     b.ToTable("ProductGroups");
                 });
 
+            modelBuilder.Entity("Papu.Entities.ProductMeal", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MealId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProductId", "MealId");
+
+                    b.HasIndex("MealId");
+
+                    b.ToTable("ProductMeals");
+                });
+
             modelBuilder.Entity("Papu.Entities.Role", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -591,314 +356,13 @@ namespace Papu.Migrations
                     b.ToTable("Roles");
                 });
 
-            modelBuilder.Entity("Papu.Entities.Saturday", b =>
-                {
-                    b.Property<int>("SaturdayId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("BreakfastId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CreatedById")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("DinnerId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("LunchId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SecondBreakfastId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SnackId")
-                        .HasColumnType("int");
-
-                    b.HasKey("SaturdayId");
-
-                    b.HasIndex("BreakfastId")
-                        .IsUnique()
-                        .HasFilter("[BreakfastId] IS NOT NULL");
-
-                    b.HasIndex("CreatedById");
-
-                    b.HasIndex("DinnerId")
-                        .IsUnique()
-                        .HasFilter("[DinnerId] IS NOT NULL");
-
-                    b.HasIndex("LunchId")
-                        .IsUnique()
-                        .HasFilter("[LunchId] IS NOT NULL");
-
-                    b.HasIndex("SecondBreakfastId")
-                        .IsUnique()
-                        .HasFilter("[SecondBreakfastId] IS NOT NULL");
-
-                    b.HasIndex("SnackId")
-                        .IsUnique()
-                        .HasFilter("[SnackId] IS NOT NULL");
-
-                    b.ToTable("Saturdays");
-                });
-
-            modelBuilder.Entity("Papu.Entities.SecondBreakfast", b =>
-                {
-                    b.Property<int>("SecondBreakfastId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("CreatedById")
-                        .HasColumnType("int");
-
-                    b.HasKey("SecondBreakfastId");
-
-                    b.HasIndex("CreatedById");
-
-                    b.ToTable("SecondBreakfasts");
-                });
-
-            modelBuilder.Entity("Papu.Entities.SecondBreakfastDish", b =>
-                {
-                    b.Property<int>("SecondBreakfastId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DishId")
-                        .HasColumnType("int");
-
-                    b.HasKey("SecondBreakfastId", "DishId");
-
-                    b.HasIndex("DishId");
-
-                    b.ToTable("DishSecondBreakfasts");
-                });
-
-            modelBuilder.Entity("Papu.Entities.SecondBreakfastProduct", b =>
-                {
-                    b.Property<int>("SecondBreakfastId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.HasKey("SecondBreakfastId", "ProductId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ProductSecondBreakfasts");
-                });
-
-            modelBuilder.Entity("Papu.Entities.Snack", b =>
-                {
-                    b.Property<int>("SnackId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("CreatedById")
-                        .HasColumnType("int");
-
-                    b.HasKey("SnackId");
-
-                    b.HasIndex("CreatedById");
-
-                    b.ToTable("Snacks");
-                });
-
-            modelBuilder.Entity("Papu.Entities.SnackDish", b =>
-                {
-                    b.Property<int>("SnackId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DishId")
-                        .HasColumnType("int");
-
-                    b.HasKey("SnackId", "DishId");
-
-                    b.HasIndex("DishId");
-
-                    b.ToTable("SnackDishes");
-                });
-
-            modelBuilder.Entity("Papu.Entities.SnackProduct", b =>
-                {
-                    b.Property<int>("SnackId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.HasKey("SnackId", "ProductId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("SnackProducts");
-                });
-
-            modelBuilder.Entity("Papu.Entities.Sunday", b =>
-                {
-                    b.Property<int>("SundayId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("BreakfastId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CreatedById")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("DinnerId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("LunchId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SecondBreakfastId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SnackId")
-                        .HasColumnType("int");
-
-                    b.HasKey("SundayId");
-
-                    b.HasIndex("BreakfastId")
-                        .IsUnique()
-                        .HasFilter("[BreakfastId] IS NOT NULL");
-
-                    b.HasIndex("CreatedById");
-
-                    b.HasIndex("DinnerId")
-                        .IsUnique()
-                        .HasFilter("[DinnerId] IS NOT NULL");
-
-                    b.HasIndex("LunchId")
-                        .IsUnique()
-                        .HasFilter("[LunchId] IS NOT NULL");
-
-                    b.HasIndex("SecondBreakfastId")
-                        .IsUnique()
-                        .HasFilter("[SecondBreakfastId] IS NOT NULL");
-
-                    b.HasIndex("SnackId")
-                        .IsUnique()
-                        .HasFilter("[SnackId] IS NOT NULL");
-
-                    b.ToTable("Sundays");
-                });
-
-            modelBuilder.Entity("Papu.Entities.Thursday", b =>
-                {
-                    b.Property<int>("ThursdayId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("BreakfastId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CreatedById")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("DinnerId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("LunchId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SecondBreakfastId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SnackId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ThursdayId");
-
-                    b.HasIndex("BreakfastId")
-                        .IsUnique()
-                        .HasFilter("[BreakfastId] IS NOT NULL");
-
-                    b.HasIndex("CreatedById");
-
-                    b.HasIndex("DinnerId")
-                        .IsUnique()
-                        .HasFilter("[DinnerId] IS NOT NULL");
-
-                    b.HasIndex("LunchId")
-                        .IsUnique()
-                        .HasFilter("[LunchId] IS NOT NULL");
-
-                    b.HasIndex("SecondBreakfastId")
-                        .IsUnique()
-                        .HasFilter("[SecondBreakfastId] IS NOT NULL");
-
-                    b.HasIndex("SnackId")
-                        .IsUnique()
-                        .HasFilter("[SnackId] IS NOT NULL");
-
-                    b.ToTable("Thursdays");
-                });
-
-            modelBuilder.Entity("Papu.Entities.Tuesday", b =>
-                {
-                    b.Property<int>("TuesdayId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("BreakfastId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CreatedById")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("DinnerId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("LunchId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SecondBreakfastId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SnackId")
-                        .HasColumnType("int");
-
-                    b.HasKey("TuesdayId");
-
-                    b.HasIndex("BreakfastId")
-                        .IsUnique()
-                        .HasFilter("[BreakfastId] IS NOT NULL");
-
-                    b.HasIndex("CreatedById");
-
-                    b.HasIndex("DinnerId")
-                        .IsUnique()
-                        .HasFilter("[DinnerId] IS NOT NULL");
-
-                    b.HasIndex("LunchId")
-                        .IsUnique()
-                        .HasFilter("[LunchId] IS NOT NULL");
-
-                    b.HasIndex("SecondBreakfastId")
-                        .IsUnique()
-                        .HasFilter("[SecondBreakfastId] IS NOT NULL");
-
-                    b.HasIndex("SnackId")
-                        .IsUnique()
-                        .HasFilter("[SnackId] IS NOT NULL");
-
-                    b.ToTable("Tuesdays");
-                });
-
             modelBuilder.Entity("Papu.Entities.Type", b =>
                 {
                     b.Property<int>("TypeId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TypeId"), 1L, 1);
 
                     b.Property<string>("TypeName")
                         .HasColumnType("nvarchar(max)");
@@ -912,8 +376,9 @@ namespace Papu.Migrations
                 {
                     b.Property<int>("UnitId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UnitId"), 1L, 1);
 
                     b.Property<string>("UnitName")
                         .HasColumnType("nvarchar(max)");
@@ -927,8 +392,9 @@ namespace Papu.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime?>("DateOfBirth")
                         .HasColumnType("datetime2");
@@ -959,150 +425,13 @@ namespace Papu.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Papu.Entities.Wednesday", b =>
-                {
-                    b.Property<int>("WednesdayId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("BreakfastId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CreatedById")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("DinnerId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("LunchId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SecondBreakfastId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SnackId")
-                        .HasColumnType("int");
-
-                    b.HasKey("WednesdayId");
-
-                    b.HasIndex("BreakfastId")
-                        .IsUnique()
-                        .HasFilter("[BreakfastId] IS NOT NULL");
-
-                    b.HasIndex("CreatedById");
-
-                    b.HasIndex("DinnerId")
-                        .IsUnique()
-                        .HasFilter("[DinnerId] IS NOT NULL");
-
-                    b.HasIndex("LunchId")
-                        .IsUnique()
-                        .HasFilter("[LunchId] IS NOT NULL");
-
-                    b.HasIndex("SecondBreakfastId")
-                        .IsUnique()
-                        .HasFilter("[SecondBreakfastId] IS NOT NULL");
-
-                    b.HasIndex("SnackId")
-                        .IsUnique()
-                        .HasFilter("[SnackId] IS NOT NULL");
-
-                    b.ToTable("Wednesdays");
-                });
-
-            modelBuilder.Entity("Papu.Entities.Breakfast", b =>
+            modelBuilder.Entity("Papu.Entities.DayMenu", b =>
                 {
                     b.HasOne("Papu.Entities.User", "CreatedBy")
                         .WithMany()
                         .HasForeignKey("CreatedById");
 
                     b.Navigation("CreatedBy");
-                });
-
-            modelBuilder.Entity("Papu.Entities.BreakfastDish", b =>
-                {
-                    b.HasOne("Papu.Entities.Breakfast", "Breakfast")
-                        .WithMany("Dishes")
-                        .HasForeignKey("BreakfastId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Papu.Entities.Dish", "Dish")
-                        .WithMany("BreakfastDishes")
-                        .HasForeignKey("DishId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Breakfast");
-
-                    b.Navigation("Dish");
-                });
-
-            modelBuilder.Entity("Papu.Entities.BreakfastProduct", b =>
-                {
-                    b.HasOne("Papu.Entities.Breakfast", "Breakfast")
-                        .WithMany("Products")
-                        .HasForeignKey("BreakfastId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Papu.Entities.Product", "Product")
-                        .WithMany("BreakfastProducts")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Breakfast");
-
-                    b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("Papu.Entities.Dinner", b =>
-                {
-                    b.HasOne("Papu.Entities.User", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById");
-
-                    b.Navigation("CreatedBy");
-                });
-
-            modelBuilder.Entity("Papu.Entities.DinnerDish", b =>
-                {
-                    b.HasOne("Papu.Entities.Dinner", "Dinner")
-                        .WithMany("Dishes")
-                        .HasForeignKey("DinnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Papu.Entities.Dish", "Dish")
-                        .WithMany("DinnerDishes")
-                        .HasForeignKey("DishId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Dinner");
-
-                    b.Navigation("Dish");
-                });
-
-            modelBuilder.Entity("Papu.Entities.DinnerProduct", b =>
-                {
-                    b.HasOne("Papu.Entities.Dinner", "Dinner")
-                        .WithMany("Products")
-                        .HasForeignKey("DinnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Papu.Entities.Product", "Product")
-                        .WithMany("DinnerProducts")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Dinner");
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Papu.Entities.Dish", b =>
@@ -1133,6 +462,25 @@ namespace Papu.Migrations
                     b.Navigation("KindOf");
                 });
 
+            modelBuilder.Entity("Papu.Entities.DishMeal", b =>
+                {
+                    b.HasOne("Papu.Entities.Dish", "Dish")
+                        .WithMany("DishMeals")
+                        .HasForeignKey("DishId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Papu.Entities.Meal", "Meal")
+                        .WithMany("DishMeals")
+                        .HasForeignKey("MealId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Dish");
+
+                    b.Navigation("Meal");
+                });
+
             modelBuilder.Entity("Papu.Entities.DishType", b =>
                 {
                     b.HasOne("Papu.Entities.Dish", "Dish")
@@ -1152,197 +500,20 @@ namespace Papu.Migrations
                     b.Navigation("Type");
                 });
 
-            modelBuilder.Entity("Papu.Entities.Friday", b =>
-                {
-                    b.HasOne("Papu.Entities.Breakfast", "Breakfast")
-                        .WithOne("Friday")
-                        .HasForeignKey("Papu.Entities.Friday", "BreakfastId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("Papu.Entities.User", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById");
-
-                    b.HasOne("Papu.Entities.Dinner", "Dinner")
-                        .WithOne("Friday")
-                        .HasForeignKey("Papu.Entities.Friday", "DinnerId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("Papu.Entities.Lunch", "Lunch")
-                        .WithOne("Friday")
-                        .HasForeignKey("Papu.Entities.Friday", "LunchId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("Papu.Entities.SecondBreakfast", "SecondBreakfast")
-                        .WithOne("Friday")
-                        .HasForeignKey("Papu.Entities.Friday", "SecondBreakfastId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("Papu.Entities.Snack", "Snack")
-                        .WithOne("Friday")
-                        .HasForeignKey("Papu.Entities.Friday", "SnackId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.Navigation("Breakfast");
-
-                    b.Navigation("CreatedBy");
-
-                    b.Navigation("Dinner");
-
-                    b.Navigation("Lunch");
-
-                    b.Navigation("SecondBreakfast");
-
-                    b.Navigation("Snack");
-                });
-
-            modelBuilder.Entity("Papu.Entities.Lunch", b =>
+            modelBuilder.Entity("Papu.Entities.Meal", b =>
                 {
                     b.HasOne("Papu.Entities.User", "CreatedBy")
                         .WithMany()
                         .HasForeignKey("CreatedById");
 
-                    b.Navigation("CreatedBy");
-                });
-
-            modelBuilder.Entity("Papu.Entities.LunchDish", b =>
-                {
-                    b.HasOne("Papu.Entities.Dish", "Dish")
-                        .WithMany("LunchDishes")
-                        .HasForeignKey("DishId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Papu.Entities.Lunch", "Lunch")
-                        .WithMany("Dishes")
-                        .HasForeignKey("LunchId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Dish");
-
-                    b.Navigation("Lunch");
-                });
-
-            modelBuilder.Entity("Papu.Entities.LunchProduct", b =>
-                {
-                    b.HasOne("Papu.Entities.Lunch", "Lunch")
-                        .WithMany("Products")
-                        .HasForeignKey("LunchId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Papu.Entities.Product", "Product")
-                        .WithMany("LunchProducts")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Lunch");
-
-                    b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("Papu.Entities.Menu", b =>
-                {
-                    b.HasOne("Papu.Entities.User", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById");
-
-                    b.HasOne("Papu.Entities.Friday", "Friday")
-                        .WithOne("Menu")
-                        .HasForeignKey("Papu.Entities.Menu", "FridayId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("Papu.Entities.Monday", "Monday")
-                        .WithOne("Menu")
-                        .HasForeignKey("Papu.Entities.Menu", "MondayId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("Papu.Entities.Saturday", "Saturday")
-                        .WithOne("Menu")
-                        .HasForeignKey("Papu.Entities.Menu", "SaturdayId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("Papu.Entities.Sunday", "Sunday")
-                        .WithOne("Menu")
-                        .HasForeignKey("Papu.Entities.Menu", "SundayId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("Papu.Entities.Thursday", "Thursday")
-                        .WithOne("Menu")
-                        .HasForeignKey("Papu.Entities.Menu", "ThursdayId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("Papu.Entities.Tuesday", "Tuesday")
-                        .WithOne("Menu")
-                        .HasForeignKey("Papu.Entities.Menu", "TuesdayId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("Papu.Entities.Wednesday", "Wednesday")
-                        .WithOne("Menu")
-                        .HasForeignKey("Papu.Entities.Menu", "WednesdayId")
+                    b.HasOne("Papu.Entities.DayMenu", "DayMenu")
+                        .WithMany("Meals")
+                        .HasForeignKey("DayMenuId")
                         .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("CreatedBy");
 
-                    b.Navigation("Friday");
-
-                    b.Navigation("Monday");
-
-                    b.Navigation("Saturday");
-
-                    b.Navigation("Sunday");
-
-                    b.Navigation("Thursday");
-
-                    b.Navigation("Tuesday");
-
-                    b.Navigation("Wednesday");
-                });
-
-            modelBuilder.Entity("Papu.Entities.Monday", b =>
-                {
-                    b.HasOne("Papu.Entities.Breakfast", "Breakfast")
-                        .WithOne("Monday")
-                        .HasForeignKey("Papu.Entities.Monday", "BreakfastId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("Papu.Entities.User", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById");
-
-                    b.HasOne("Papu.Entities.Dinner", "Dinner")
-                        .WithOne("Monday")
-                        .HasForeignKey("Papu.Entities.Monday", "DinnerId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("Papu.Entities.Lunch", "Lunch")
-                        .WithOne("Monday")
-                        .HasForeignKey("Papu.Entities.Monday", "LunchId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("Papu.Entities.SecondBreakfast", "SecondBreakfast")
-                        .WithOne("Monday")
-                        .HasForeignKey("Papu.Entities.Monday", "SecondBreakfastId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("Papu.Entities.Snack", "Snack")
-                        .WithOne("Monday")
-                        .HasForeignKey("Papu.Entities.Monday", "SnackId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.Navigation("Breakfast");
-
-                    b.Navigation("CreatedBy");
-
-                    b.Navigation("Dinner");
-
-                    b.Navigation("Lunch");
-
-                    b.Navigation("SecondBreakfast");
-
-                    b.Navigation("Snack");
+                    b.Navigation("DayMenu");
                 });
 
             modelBuilder.Entity("Papu.Entities.Product", b =>
@@ -1406,269 +577,23 @@ namespace Papu.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Papu.Entities.Saturday", b =>
+            modelBuilder.Entity("Papu.Entities.ProductMeal", b =>
                 {
-                    b.HasOne("Papu.Entities.Breakfast", "Breakfast")
-                        .WithOne("Saturday")
-                        .HasForeignKey("Papu.Entities.Saturday", "BreakfastId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("Papu.Entities.User", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById");
-
-                    b.HasOne("Papu.Entities.Dinner", "Dinner")
-                        .WithOne("Saturday")
-                        .HasForeignKey("Papu.Entities.Saturday", "DinnerId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("Papu.Entities.Lunch", "Lunch")
-                        .WithOne("Saturday")
-                        .HasForeignKey("Papu.Entities.Saturday", "LunchId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("Papu.Entities.SecondBreakfast", "SecondBreakfast")
-                        .WithOne("Saturday")
-                        .HasForeignKey("Papu.Entities.Saturday", "SecondBreakfastId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("Papu.Entities.Snack", "Snack")
-                        .WithOne("Saturday")
-                        .HasForeignKey("Papu.Entities.Saturday", "SnackId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.Navigation("Breakfast");
-
-                    b.Navigation("CreatedBy");
-
-                    b.Navigation("Dinner");
-
-                    b.Navigation("Lunch");
-
-                    b.Navigation("SecondBreakfast");
-
-                    b.Navigation("Snack");
-                });
-
-            modelBuilder.Entity("Papu.Entities.SecondBreakfast", b =>
-                {
-                    b.HasOne("Papu.Entities.User", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById");
-
-                    b.Navigation("CreatedBy");
-                });
-
-            modelBuilder.Entity("Papu.Entities.SecondBreakfastDish", b =>
-                {
-                    b.HasOne("Papu.Entities.Dish", "Dish")
-                        .WithMany("SecondBreakfastDishes")
-                        .HasForeignKey("DishId")
+                    b.HasOne("Papu.Entities.Meal", "Meal")
+                        .WithMany("ProductMeals")
+                        .HasForeignKey("MealId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Papu.Entities.SecondBreakfast", "SecondBreakfast")
-                        .WithMany("Dishes")
-                        .HasForeignKey("SecondBreakfastId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Dish");
-
-                    b.Navigation("SecondBreakfast");
-                });
-
-            modelBuilder.Entity("Papu.Entities.SecondBreakfastProduct", b =>
-                {
                     b.HasOne("Papu.Entities.Product", "Product")
-                        .WithMany("SecondBreakfastProducts")
+                        .WithMany("ProductMeals")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Papu.Entities.SecondBreakfast", "SecondBreakfast")
-                        .WithMany("Products")
-                        .HasForeignKey("SecondBreakfastId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Meal");
 
                     b.Navigation("Product");
-
-                    b.Navigation("SecondBreakfast");
-                });
-
-            modelBuilder.Entity("Papu.Entities.Snack", b =>
-                {
-                    b.HasOne("Papu.Entities.User", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById");
-
-                    b.Navigation("CreatedBy");
-                });
-
-            modelBuilder.Entity("Papu.Entities.SnackDish", b =>
-                {
-                    b.HasOne("Papu.Entities.Dish", "Dish")
-                        .WithMany("SnackDishes")
-                        .HasForeignKey("DishId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Papu.Entities.Snack", "Snack")
-                        .WithMany("Dishes")
-                        .HasForeignKey("SnackId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Dish");
-
-                    b.Navigation("Snack");
-                });
-
-            modelBuilder.Entity("Papu.Entities.SnackProduct", b =>
-                {
-                    b.HasOne("Papu.Entities.Product", "Product")
-                        .WithMany("SnackProducts")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Papu.Entities.Snack", "Snack")
-                        .WithMany("Products")
-                        .HasForeignKey("SnackId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-
-                    b.Navigation("Snack");
-                });
-
-            modelBuilder.Entity("Papu.Entities.Sunday", b =>
-                {
-                    b.HasOne("Papu.Entities.Breakfast", "Breakfast")
-                        .WithOne("Sunday")
-                        .HasForeignKey("Papu.Entities.Sunday", "BreakfastId");
-
-                    b.HasOne("Papu.Entities.User", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById");
-
-                    b.HasOne("Papu.Entities.Dinner", "Dinner")
-                        .WithOne("Sunday")
-                        .HasForeignKey("Papu.Entities.Sunday", "DinnerId");
-
-                    b.HasOne("Papu.Entities.Lunch", "Lunch")
-                        .WithOne("Sunday")
-                        .HasForeignKey("Papu.Entities.Sunday", "LunchId");
-
-                    b.HasOne("Papu.Entities.SecondBreakfast", "SecondBreakfast")
-                        .WithOne("Sunday")
-                        .HasForeignKey("Papu.Entities.Sunday", "SecondBreakfastId");
-
-                    b.HasOne("Papu.Entities.Snack", "Snack")
-                        .WithOne("Sunday")
-                        .HasForeignKey("Papu.Entities.Sunday", "SnackId");
-
-                    b.Navigation("Breakfast");
-
-                    b.Navigation("CreatedBy");
-
-                    b.Navigation("Dinner");
-
-                    b.Navigation("Lunch");
-
-                    b.Navigation("SecondBreakfast");
-
-                    b.Navigation("Snack");
-                });
-
-            modelBuilder.Entity("Papu.Entities.Thursday", b =>
-                {
-                    b.HasOne("Papu.Entities.Breakfast", "Breakfast")
-                        .WithOne("Thursday")
-                        .HasForeignKey("Papu.Entities.Thursday", "BreakfastId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("Papu.Entities.User", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById");
-
-                    b.HasOne("Papu.Entities.Dinner", "Dinner")
-                        .WithOne("Thursday")
-                        .HasForeignKey("Papu.Entities.Thursday", "DinnerId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("Papu.Entities.Lunch", "Lunch")
-                        .WithOne("Thursday")
-                        .HasForeignKey("Papu.Entities.Thursday", "LunchId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("Papu.Entities.SecondBreakfast", "SecondBreakfast")
-                        .WithOne("Thursday")
-                        .HasForeignKey("Papu.Entities.Thursday", "SecondBreakfastId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("Papu.Entities.Snack", "Snack")
-                        .WithOne("Thursday")
-                        .HasForeignKey("Papu.Entities.Thursday", "SnackId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.Navigation("Breakfast");
-
-                    b.Navigation("CreatedBy");
-
-                    b.Navigation("Dinner");
-
-                    b.Navigation("Lunch");
-
-                    b.Navigation("SecondBreakfast");
-
-                    b.Navigation("Snack");
-                });
-
-            modelBuilder.Entity("Papu.Entities.Tuesday", b =>
-                {
-                    b.HasOne("Papu.Entities.Breakfast", "Breakfast")
-                        .WithOne("Tuesday")
-                        .HasForeignKey("Papu.Entities.Tuesday", "BreakfastId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("Papu.Entities.User", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById");
-
-                    b.HasOne("Papu.Entities.Dinner", "Dinner")
-                        .WithOne("Tuesday")
-                        .HasForeignKey("Papu.Entities.Tuesday", "DinnerId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("Papu.Entities.Lunch", "Lunch")
-                        .WithOne("Tuesday")
-                        .HasForeignKey("Papu.Entities.Tuesday", "LunchId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("Papu.Entities.SecondBreakfast", "SecondBreakfast")
-                        .WithOne("Tuesday")
-                        .HasForeignKey("Papu.Entities.Tuesday", "SecondBreakfastId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("Papu.Entities.Snack", "Snack")
-                        .WithOne("Tuesday")
-                        .HasForeignKey("Papu.Entities.Tuesday", "SnackId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.Navigation("Breakfast");
-
-                    b.Navigation("CreatedBy");
-
-                    b.Navigation("Dinner");
-
-                    b.Navigation("Lunch");
-
-                    b.Navigation("SecondBreakfast");
-
-                    b.Navigation("Snack");
                 });
 
             modelBuilder.Entity("Papu.Entities.User", b =>
@@ -1682,119 +607,25 @@ namespace Papu.Migrations
                     b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("Papu.Entities.Wednesday", b =>
-                {
-                    b.HasOne("Papu.Entities.Breakfast", "Breakfast")
-                        .WithOne("Wednesday")
-                        .HasForeignKey("Papu.Entities.Wednesday", "BreakfastId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("Papu.Entities.User", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById");
-
-                    b.HasOne("Papu.Entities.Dinner", "Dinner")
-                        .WithOne("Wednesday")
-                        .HasForeignKey("Papu.Entities.Wednesday", "DinnerId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("Papu.Entities.Lunch", "Lunch")
-                        .WithOne("Wednesday")
-                        .HasForeignKey("Papu.Entities.Wednesday", "LunchId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("Papu.Entities.SecondBreakfast", "SecondBreakfast")
-                        .WithOne("Wednesday")
-                        .HasForeignKey("Papu.Entities.Wednesday", "SecondBreakfastId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("Papu.Entities.Snack", "Snack")
-                        .WithOne("Wednesday")
-                        .HasForeignKey("Papu.Entities.Wednesday", "SnackId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.Navigation("Breakfast");
-
-                    b.Navigation("CreatedBy");
-
-                    b.Navigation("Dinner");
-
-                    b.Navigation("Lunch");
-
-                    b.Navigation("SecondBreakfast");
-
-                    b.Navigation("Snack");
-                });
-
-            modelBuilder.Entity("Papu.Entities.Breakfast", b =>
-                {
-                    b.Navigation("Dishes");
-
-                    b.Navigation("Friday");
-
-                    b.Navigation("Monday");
-
-                    b.Navigation("Products");
-
-                    b.Navigation("Saturday");
-
-                    b.Navigation("Sunday");
-
-                    b.Navigation("Thursday");
-
-                    b.Navigation("Tuesday");
-
-                    b.Navigation("Wednesday");
-                });
-
             modelBuilder.Entity("Papu.Entities.Category", b =>
                 {
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("Papu.Entities.Dinner", b =>
+            modelBuilder.Entity("Papu.Entities.DayMenu", b =>
                 {
-                    b.Navigation("Dishes");
-
-                    b.Navigation("Friday");
-
-                    b.Navigation("Monday");
-
-                    b.Navigation("Products");
-
-                    b.Navigation("Saturday");
-
-                    b.Navigation("Sunday");
-
-                    b.Navigation("Thursday");
-
-                    b.Navigation("Tuesday");
-
-                    b.Navigation("Wednesday");
+                    b.Navigation("Meals");
                 });
 
             modelBuilder.Entity("Papu.Entities.Dish", b =>
                 {
-                    b.Navigation("BreakfastDishes");
-
-                    b.Navigation("DinnerDishes");
-
                     b.Navigation("DishKindsOf");
+
+                    b.Navigation("DishMeals");
 
                     b.Navigation("DishProducts");
 
                     b.Navigation("DishTypes");
-
-                    b.Navigation("LunchDishes");
-
-                    b.Navigation("SecondBreakfastDishes");
-
-                    b.Navigation("SnackDishes");
-                });
-
-            modelBuilder.Entity("Papu.Entities.Friday", b =>
-                {
-                    b.Navigation("Menu");
                 });
 
             modelBuilder.Entity("Papu.Entities.Group", b =>
@@ -1807,109 +638,20 @@ namespace Papu.Migrations
                     b.Navigation("DishKindsOf");
                 });
 
-            modelBuilder.Entity("Papu.Entities.Lunch", b =>
+            modelBuilder.Entity("Papu.Entities.Meal", b =>
                 {
-                    b.Navigation("Dishes");
+                    b.Navigation("DishMeals");
 
-                    b.Navigation("Friday");
-
-                    b.Navigation("Monday");
-
-                    b.Navigation("Products");
-
-                    b.Navigation("Saturday");
-
-                    b.Navigation("Sunday");
-
-                    b.Navigation("Thursday");
-
-                    b.Navigation("Tuesday");
-
-                    b.Navigation("Wednesday");
-                });
-
-            modelBuilder.Entity("Papu.Entities.Monday", b =>
-                {
-                    b.Navigation("Menu");
+                    b.Navigation("ProductMeals");
                 });
 
             modelBuilder.Entity("Papu.Entities.Product", b =>
                 {
-                    b.Navigation("BreakfastProducts");
-
-                    b.Navigation("DinnerProducts");
-
                     b.Navigation("DishProducts");
-
-                    b.Navigation("LunchProducts");
 
                     b.Navigation("ProductGroups");
 
-                    b.Navigation("SecondBreakfastProducts");
-
-                    b.Navigation("SnackProducts");
-                });
-
-            modelBuilder.Entity("Papu.Entities.Saturday", b =>
-                {
-                    b.Navigation("Menu");
-                });
-
-            modelBuilder.Entity("Papu.Entities.SecondBreakfast", b =>
-                {
-                    b.Navigation("Dishes");
-
-                    b.Navigation("Friday");
-
-                    b.Navigation("Monday");
-
-                    b.Navigation("Products");
-
-                    b.Navigation("Saturday");
-
-                    b.Navigation("Sunday");
-
-                    b.Navigation("Thursday");
-
-                    b.Navigation("Tuesday");
-
-                    b.Navigation("Wednesday");
-                });
-
-            modelBuilder.Entity("Papu.Entities.Snack", b =>
-                {
-                    b.Navigation("Dishes");
-
-                    b.Navigation("Friday");
-
-                    b.Navigation("Monday");
-
-                    b.Navigation("Products");
-
-                    b.Navigation("Saturday");
-
-                    b.Navigation("Sunday");
-
-                    b.Navigation("Thursday");
-
-                    b.Navigation("Tuesday");
-
-                    b.Navigation("Wednesday");
-                });
-
-            modelBuilder.Entity("Papu.Entities.Sunday", b =>
-                {
-                    b.Navigation("Menu");
-                });
-
-            modelBuilder.Entity("Papu.Entities.Thursday", b =>
-                {
-                    b.Navigation("Menu");
-                });
-
-            modelBuilder.Entity("Papu.Entities.Tuesday", b =>
-                {
-                    b.Navigation("Menu");
+                    b.Navigation("ProductMeals");
                 });
 
             modelBuilder.Entity("Papu.Entities.Type", b =>
@@ -1920,11 +662,6 @@ namespace Papu.Migrations
             modelBuilder.Entity("Papu.Entities.Unit", b =>
                 {
                     b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("Papu.Entities.Wednesday", b =>
-                {
-                    b.Navigation("Menu");
                 });
 #pragma warning restore 612, 618
         }

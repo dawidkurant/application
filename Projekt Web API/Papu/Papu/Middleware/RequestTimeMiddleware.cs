@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace Papu.Middleware
 {
-    //Obsługa zasady, która zapisuje stosowną informację do pliku request-time.log
-    //jeśli jakiekolwiek zapytanie trwało dłużej niż 4 sekundy
+    // Obsługa zasady, która zapisuje stosowną informację do pliku request-time.log
+    // jeśli jakiekolwiek zapytanie trwało dłużej niż 4 sekundy
     public class RequestTimeMiddleware : IMiddleware
     {
         private readonly ILogger<RequestTimeMiddleware> _logger;

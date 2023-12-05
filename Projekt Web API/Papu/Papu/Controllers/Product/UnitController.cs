@@ -16,7 +16,7 @@ namespace Papu.Controllers
             _unitService = unitService;
         }
 
-        //Pobranie konkretnej jednostki
+        // Pobranie konkretnej jednostki
         [HttpGet("{id}")]
         public ActionResult<UnitDto> GetUnit([FromRoute] int id)
         {
@@ -25,7 +25,7 @@ namespace Papu.Controllers
             return Ok(unit);
         }
 
-        //Pobranie wszystkich jednostek z bazy i zwrócenie ich do klienta z kodem 200 czyli OK
+        // Pobranie wszystkich jednostek z bazy i zwrócenie ich do klienta z kodem 200 czyli OK
         [HttpGet]
         public ActionResult<IEnumerable<UnitDto>> GetAllUnits()
         {

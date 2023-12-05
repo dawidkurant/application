@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace PapuAPI.IntegrationTests
 {
-    //Fejkowy użytkownik z konkretnymi claimami, aby testy z autentykacją mogły być realizowane  
+    // Fejkowy użytkownik z konkretnymi claimami, aby testy z autentykacją mogły być realizowane  
     public class FakeUserFilter : IAsyncActionFilter
     {
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)

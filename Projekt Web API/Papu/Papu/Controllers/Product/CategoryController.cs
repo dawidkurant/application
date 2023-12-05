@@ -16,7 +16,7 @@ namespace Papu.Controllers
             _categoryService = categoryService;
         }
 
-        //Pobranie konkretnej kategorii
+        // Pobranie konkretnej kategorii
         [HttpGet("{id}")]
         public ActionResult<CategoryDto> GetCategory([FromRoute] int id)
         {
@@ -25,7 +25,7 @@ namespace Papu.Controllers
             return Ok(category);
         }
 
-        //Pobranie wszystkich kategorii z bazy i zwrócenie ich do klienta z kodem 200 czyli OK
+        // Pobranie wszystkich kategorii z bazy i zwrócenie ich do klienta z kodem 200 czyli OK
         [HttpGet]
         public ActionResult<IEnumerable<CategoryDto>> GetAllCategories()
         {

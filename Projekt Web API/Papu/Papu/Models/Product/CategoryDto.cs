@@ -2,12 +2,12 @@
 {
     public class CategoryDto
     {
-        //Podstawowe informacje dotyczące kategorii dostępne dla klienta
+        // Podstawowe informacje dotyczące kategorii dostępne dla klienta
 
-        //Id
+        // Id
         public int CategoryId { get; set; }
 
-        //Nazwa
+        // Nazwa
         public string CategoryName { get; set; }
     }
 }

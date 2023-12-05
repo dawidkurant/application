@@ -2,12 +2,12 @@
 {
     public class UnitDto
     {
-        //Podstawowe informacje dotyczące jednostki dostępne dla klienta
+        // Podstawowe informacje dotyczące jednostki dostępne dla klienta
 
-        //Id
+        // Id
         public int UnitId { get; set; }
 
-        //Nazwa
+        // Nazwa
         public string UnitName { get; set; }
     }
 }

@@ -7,7 +7,6 @@ using Newtonsoft.Json;
 using Papu;
 using Papu.Entities;
 using Papu.Models;
-using Papu.Models.Update;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -20,23 +19,22 @@ namespace PapuAPI.IntegrationTests
     {
         private readonly HttpClient _client;
 
-        //Konstruktor po to, aby nie tworzyć klienta oddzielnie dla każdego testu
-        //jeśli chcemy aby kontekst był współdzielony między testami (czyli obiekt Dish
-        //ControllerTests był stworzony raz, a nie za każdym razem, kiedy uruchamia się test)
+        // Konstruktor po to, aby nie tworzyć klienta oddzielnie dla każdego testu
+        // jeśli chcemy aby kontekst był współdzielony między testami (czyli obiekt Dish
+        // ControllerTests był stworzony raz, a nie za każdym razem, kiedy uruchamia się test)
         public DishControllerTests(WebApplicationFactory<Startup> factory)
         {
-            //Tutaj chcemy uruchomić nasze Api po to abyśmy byli w stanie wysłać zapytanie http jakimś
-            //klientem http z kodu 
-            //należy dodać zależność, aby startup działał
-            //Wykorzystujemy fabrykę aby zwróciła nam odpowiedniego klienta http
-            //z pomocą klienta odwołujemy się do metod z naszego api
+            // Tutaj chcemy uruchomić nasze Api po to abyśmy byli w stanie wysłać zapytanie http jakimś
+            // klientem http z kodu należy dodać zależność, aby startup działał
+            // Wykorzystujemy fabrykę aby zwróciła nam odpowiedniego klienta http
+            // z pomocą klienta odwołujemy się do metod z naszego api
             _client = factory
-                //Umożliwia nam modyfikację wbudowanego webhosta, aby podczas testów nie korzystać z bazy danych sql
+                // Umożliwia nam modyfikację wbudowanego webhosta, aby podczas testów nie korzystać z bazy danych sql
                 .WithWebHostBuilder(builder =>
                 {
                     builder.ConfigureServices(services =>
                     {
-                        //Szukamy zarejestrowanego już serwisu dla istniejących opcji dbcontext
+                        // Szukamy zarejestrowanego już serwisu dla istniejących opcji dbcontext
                         var dbContextOptions = services
                         .SingleOrDefault(service => service.ServiceType == typeof(DbContextOptions<PapuDbContext>));
 
@@ -44,7 +42,7 @@ namespace PapuAPI.IntegrationTests
 
                         services.AddDbContext<PapuDbContext>(options => options.UseInMemoryDatabase("PapuDb"));
 
-                        //Rejestrujemy żeby uniknąć autentykacji podczas testów
+                        // Rejestrujemy żeby uniknąć autentykacji podczas testów
                         services.AddSingleton<IPolicyEvaluator, FakePolicyEvaluator>();
                         services.AddMvc(option => option.Filters.Add(new FakeUserFilter()));
                     });
@@ -52,81 +50,81 @@ namespace PapuAPI.IntegrationTests
                 .CreateClient();
         }
 
-        //getOneDish
+        // getOneDish
         [Fact]
         public async Task GetDish_WithParameter_ReturnsOkResult()
         {
-            //arrange
+            // arrange
 
-            //act
+            // act
 
             var response = await _client.GetAsync("https://localhost:5001/api/dish/1");
 
-            //assert
+            // assert
 
-            //sprawdzamy czy status kod z tej odpowiedzi jest równy ok
+            // sprawdzamy czy status kod z tej odpowiedzi jest równy ok
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
         }
 
-        //getAnotherOneDish
+        // getAnotherOneDish
         [Theory]
         [InlineData("77")]
         [InlineData("73")]
         public async Task AnotherGetDish_WithParameter_ReturnsOkResult(string queryParams)
         {
-            //arrange
+            // arrange
 
-            //act
+            // act
 
             var response = await _client.GetAsync("https://localhost:5001/api/dish/" + queryParams);
 
-            //assert
+            // assert
 
-            //sprawdzamy czy status kod z tej odpowiedzi jest równy ok
+            // sprawdzamy czy status kod z tej odpowiedzi jest równy ok
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
         }
 
-        //getAnotherOneDish
+        // getAnotherOneDish
         [Theory]
         [InlineData("1000")]
         [InlineData("2000")]
         public async Task AnotherGetDish_WithInvalidParameter_ReturnsNotFound(string queryParams)
         {
-            //arrange
+            // arrange
 
-            //act
+            // act
 
             var response = await _client.GetAsync("https://localhost:5001/api/dish/" + queryParams);
 
-            //assert
+            // assert
 
-            //sprawdzamy czy status kod z tej odpowiedzi jest równy not found
+            // sprawdzamy czy status kod z tej odpowiedzi jest równy not found
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
         }
 
-        //getAllDishes
+        // getAllDishes
         [Fact]
         public async Task GetAllDishes_WithParameter_ReturnsOkResult()
         {
-            //arrange
+            // arrange
 
             //act
 
             var response = await _client.GetAsync("https://localhost:5001/api/dish");
 
-            //assert
+            // assert
 
-            //sprawdzamy czy status kod z tej odpowiedzi jest równy ok
+            // sprawdzamy czy status kod z tej odpowiedzi jest równy ok
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
         }
 
-        //createDish
+        // createDish
         [Fact]
         public async Task CreateDish_WithValidModel_ReturnsCreated()
         {
-            //arrange
+            // arrange
 
-            //Tworzymy model, ktory chcemy wysłać na serwer
+            // Tworzymy model, ktory chcemy wysłać na serwer
 
             var model = new CreateDishDto
             {
@@ -141,32 +139,32 @@ namespace PapuAPI.IntegrationTests
                 KindOfId = new int[] { 1 }
             };
 
-            //Serializujemy model do formatu json
+            // Serializujemy model do formatu json
             var json = JsonConvert.SerializeObject(model);
 
             StringContent httpContent = new(json, Encoding.UTF8, "application/json");
 
-            //act
+            // act
 
-            //Wysyłamy model na serwer
+            // Wysyłamy model na serwer
             var response = await _client.PostAsync("https://localhost:5001/api/dish", httpContent);
 
-            //assert
+            // assert
 
-            //Sprawdzamy czy status kod z tej odpowiedzi jest równy created
+            // Sprawdzamy czy status kod z tej odpowiedzi jest równy created
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.Created);
 
-            //Sprawdzamy czy odpowiedź serwera zawiera nagłówek z lokacją
+            // Sprawdzamy czy odpowiedź serwera zawiera nagłówek z lokacją
             response.Headers.Location.Should().NotBeNull();
         }
 
-        //createAnotherDish
+        // createAnotherDish
         [Fact]
         public async Task CreateAnotherDish_WithInvalidModel_ReturnsBadRequest()
         {
-            //arrange
+            // arrange
 
-            //Tworzymy model, ktory chcemy wysłać na serwer
+            // Tworzymy model, ktory chcemy wysłać na serwer
 
             var model = new CreateDishDto
             {
@@ -174,32 +172,32 @@ namespace PapuAPI.IntegrationTests
                 Portions = 200
             };
 
-            //Serializujemy model do formatu json
+            // Serializujemy model do formatu json
             var json = JsonConvert.SerializeObject(model);
 
             StringContent httpContent = new(json, Encoding.UTF8, "application/json");
 
-            //act
+            // act
 
-            //Wysyłamy model na serwer
+            // Wysyłamy model na serwer
             var response = await _client.PostAsync("https://localhost:5001/api/dish", httpContent);
 
-            //assert
+            // assert
 
-            //Sprawdzamy czy status kod z tej odpowiedzi jest równy created
+            // Sprawdzamy czy status kod z tej odpowiedzi jest równy created
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.BadRequest);
 
-            //Sprawdzamy czy odpowiedź serwera zawiera nagłówek z lokacją
+            // Sprawdzamy czy odpowiedź serwera zawiera nagłówek z lokacją
             response.Headers.Location.Should().BeNull();
         }
 
-        //updateDish
+        // updateDish
         [Fact]
         public async Task UpdateDish_WithValidModel_ReturnsOKResult()
         {
-            //arrange
+            // arrange
 
-            //Tworzymy model, ktory chcemy edytować i wysłać na serwer
+            // Tworzymy model, ktory chcemy edytować i wysłać na serwer
 
             var model = new CreateDishDto
             {
@@ -214,15 +212,15 @@ namespace PapuAPI.IntegrationTests
                 KindOfId = new int[] { 1 }
             };
 
-            //Serializujemy model do formatu json
+            // Serializujemy model do formatu json
             var json = JsonConvert.SerializeObject(model);
 
             StringContent httpContent = new(json, Encoding.UTF8, "application/json");
 
-            //Wysyłamy model na serwer
+            // Wysyłamy model na serwer
             await _client.PostAsync("https://localhost:5001/api/dish", httpContent);
 
-            //Edytujemy model
+            // Edytujemy model
 
             var modelUpdated = new UpdateDishDto
             {
@@ -237,28 +235,28 @@ namespace PapuAPI.IntegrationTests
                 KindOfId = new int[] { 1 }
             };
 
-            //Serializujemy model do formatu json
+            // Serializujemy model do formatu json
             var json2 = JsonConvert.SerializeObject(modelUpdated);
 
             StringContent httpContent2 = new(json2, Encoding.UTF8, "application/json");
 
-            //act
+            // act
 
             var response2 = await _client.PutAsync("https://localhost:5001/api/dish/149", httpContent2);
 
-            //assert
+            // assert
 
-            //sprawdzamy czy status kod z tej odpowiedzi jest równy OK
+            // sprawdzamy czy status kod z tej odpowiedzi jest równy OK
             response2.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
         }
 
-        //updateAnotherDish
+        // updateAnotherDish
         [Fact]
         public async Task UpdateDish_WithInvalidModel_ReturnsMethodNotAllowedResult()
         {
-            //arrange
+            // arrange
 
-            //Tworzymy model, ktory chcemy edytować i wysłać na serwer
+            // Tworzymy model, ktory chcemy edytować i wysłać na serwer
 
             var model = new UpdateDishDto
             {
@@ -273,28 +271,28 @@ namespace PapuAPI.IntegrationTests
                 KindOfId = new int[] { 1 }
             };
 
-            //Serializujemy model do formatu json
+            // Serializujemy model do formatu json
             var json = JsonConvert.SerializeObject(model);
 
             StringContent httpContent = new(json, Encoding.UTF8, "application/json");
 
-            //act
+            // act
 
             var response = await _client.PatchAsync("https://localhost:5001/api/dish/1", httpContent);
 
-            //assert
+            // assert
 
-            //sprawdzamy czy status kod z tej odpowiedzi jest równy method not allowed
+            // sprawdzamy czy status kod z tej odpowiedzi jest równy method not allowed
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.MethodNotAllowed);
         }
 
-        //deleteDish
+        // deleteDish
         [Fact]
         public async Task DeleteDish_WithParameter_ReturnsNoContentResult()
         {
-            //arrange
+            // arrange
 
-            //Tworzymy model, ktory chcemy wysłać na serwer
+            // Tworzymy model, ktory chcemy wysłać na serwer
 
             var model = new CreateDishDto
             {
@@ -303,37 +301,37 @@ namespace PapuAPI.IntegrationTests
                 DishImagePath = "LinkTestowy"
             };
 
-            //Serializujemy model do formatu json
+            // Serializujemy model do formatu json
             var json = JsonConvert.SerializeObject(model);
 
             StringContent httpContent = new(json, Encoding.UTF8, "application/json");
 
-            //Wysyłamy model na serwer
+            // Wysyłamy model na serwer
             await _client.PostAsync("https://localhost:5001/api/dish", httpContent);
 
-            //act
+            // act
 
             var response2 = await _client.DeleteAsync("https://localhost:5001/api/dish/145");
 
-            //assert
+            // assert
 
-            //sprawdzamy czy status kod z tej odpowiedzi jest równy no content
+            // sprawdzamy czy status kod z tej odpowiedzi jest równy no content
             response2.StatusCode.Should().Be(System.Net.HttpStatusCode.NoContent);
         }
 
-        //deleteAnotherDish
+        // deleteAnotherDish
         [Fact]
         public async Task DeleteDish_WithParameter_ReturnsForbiddenResult()
         {
-            //arrange
+            // arrange
 
-            //act
+            // act
 
             var response = await _client.DeleteAsync("https://localhost:5001/api/dish/71");
 
-            //assert
+            // assert
 
-            //sprawdzamy czy status kod z tej odpowiedzi jest równy no content
+            // sprawdzamy czy status kod z tej odpowiedzi jest równy no content
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.Forbidden);
         }
     }

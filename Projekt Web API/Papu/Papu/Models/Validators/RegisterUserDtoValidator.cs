@@ -9,21 +9,17 @@ namespace Papu.Models.Validators
         public RegisterUserDtoValidator(PapuDbContext dbContext)
         {
             RuleFor(x => x.Email)
+                .NotEmpty()             // Nie może być to pole puste
+                .EmailAddress();        // To pole musi być w formacie adresu email
 
-                //Nie może być to pole puste
-                .NotEmpty()
-
-                //To pole musi być w formacie adresu email
-                .EmailAddress();
-
-            //Musi mieć conajmniej 6 znaków
+            // Musi mieć conajmniej 6 znaków
             RuleFor(x => x.Password).MinimumLength(6);
 
-            //Drugi raz podane hasło będzie porównywane z hasłem podanym za pierwszym razem
+            // Drugi raz podane hasło będzie porównywane z hasłem podanym za pierwszym razem
             RuleFor(x => x.ConfirmPassword).Equal(e => e.Password);
 
-            //Sprawdzamy czy wartość email jest unikalna, czyli czy nie istnieje już użytkownik
-            //z takim samym adresem email
+            // Sprawdzamy czy wartość email jest unikalna, czyli czy nie istnieje już użytkownik
+            // z takim samym adresem email
             RuleFor(x => x.Email)
                 .Custom((value, context) =>
                 {

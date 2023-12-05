@@ -5,7 +5,7 @@ namespace Papu.Entities
 {
     public class KindOf
     {
-        //Id i Nazwa rodzaju do którego należy danie
+        // Id i Nazwa rodzaju do którego należy danie
         public int KindOfId { get; set; }
         public string KindOfName { get; set; }
 

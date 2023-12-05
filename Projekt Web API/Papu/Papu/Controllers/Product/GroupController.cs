@@ -16,7 +16,7 @@ namespace Papu.Controllers
             _groupService = groupService;
         }
 
-        //Pobranie konkretnej grupy
+        // Pobranie konkretnej grupy
         [HttpGet("{id}")]
         public ActionResult<GroupDto> GetGroup([FromRoute] int id)
         {
@@ -25,7 +25,7 @@ namespace Papu.Controllers
             return Ok(group);
         }
 
-        //Pobranie wszystkich grup z bazy i zwrócenie ich do klienta z kodem 200 czyli OK
+        // Pobranie wszystkich grup z bazy i zwrócenie ich do klienta z kodem 200 czyli OK
         [HttpGet]
         public ActionResult<IEnumerable<GroupDto>> GetAllCategories()
         {

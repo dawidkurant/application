@@ -16,7 +16,7 @@ namespace Papu.Controllers.Dish
             _kindOfService = kindOfService;
         }
 
-        //Pobranie konkretnego rodzaju
+        // Pobranie konkretnego rodzaju
         [HttpGet("{id}")]
         public ActionResult<KindOfDto> GetKindOf([FromRoute] int id)
         {
@@ -25,7 +25,7 @@ namespace Papu.Controllers.Dish
             return Ok(kindOf);
         }
 
-        //Pobranie wszystkich rodzajów z bazy i zwrócenie ich do klienta z kodem 200 czyli OK
+        // Pobranie wszystkich rodzajów z bazy i zwrócenie ich do klienta z kodem 200 czyli OK
         [HttpGet]
         public ActionResult<IEnumerable<KindOfDto>> GetAllKindsOf()
         {

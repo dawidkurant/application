@@ -2,12 +2,12 @@
 {
     public class GroupDto
     {
-        //Podstawowe informacje dotyczące grupy dostępne dla klienta
+        // Podstawowe informacje dotyczące grupy dostępne dla klienta
 
-        //Id
+        // Id
         public int GroupId { get; set; }
 
-        //Nazwa
+        // Nazwa
         public string GroupName { get; set; }
     }
 }

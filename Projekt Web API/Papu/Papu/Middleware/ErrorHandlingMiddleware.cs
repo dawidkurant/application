@@ -38,8 +38,8 @@ namespace Papu.Middleware
             }
             catch (NotFoundException notFoundException)
             {
-                //Jeśli do naszego api przyjdzie jakiekolwiek zapytanie, dla którego istnieje
-                //walidacja modelu, to if (!ModelState.IsValid) zostanie wywołany automatycznie
+                // Jeśli do naszego api przyjdzie jakiekolwiek zapytanie, dla którego istnieje
+                // walidacja modelu, to if (!ModelState.IsValid) zostanie wywołany automatycznie
                 context.Response.StatusCode = 404;
                 await context.Response.WriteAsync(notFoundException.Message);
             }
@@ -47,9 +47,9 @@ namespace Papu.Middleware
             {
                 _logger.LogError(e, e.Message);
 
-                //Aby obsłużyć zapytanie, w którym wystąpi wyjątek możemy również do odpowiedzi
-                //dla klienta wypisać jakis generyczny tekst po to aby nie miał on informacji
-                //bezpośrednio z kodu czyli kod statusu
+                // Aby obsłużyć zapytanie, w którym wystąpi wyjątek możemy również do odpowiedzi
+                // dla klienta wypisać jakis generyczny tekst po to aby nie miał on informacji
+                // bezpośrednio z kodu czyli kod statusu
                 context.Response.StatusCode = 500;
                 await context.Response.WriteAsync("Something went wrong");
             }

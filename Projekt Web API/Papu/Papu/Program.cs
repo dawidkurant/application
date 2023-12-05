@@ -1,9 +1,6 @@
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using NLog.Web;
-using System;
 namespace Papu
 {
     public class Program
@@ -19,7 +16,6 @@ namespace Papu
                 {
                     webBuilder.UseStartup<Startup>();
                 })
-            //wskazujemy naszemu web hostowi aby u¿ywa³ nloga w nastêpuj¹cy sposób
-            .UseNLog();
+            .UseNLog(); // wskazujemy naszemu web hostowi aby u¿ywa³ nloga w nastêpuj¹cy sposób
     }
 }

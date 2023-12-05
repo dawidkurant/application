@@ -2,12 +2,12 @@
 {
     public class TypeDto
     {
-        //Podstawowe informacje dotyczące typu dostępne dla klienta
+        // Podstawowe informacje dotyczące typu dostępne dla klienta
 
-        //Id
+        // Id
         public int TypeId { get; set; }
 
-        //Nazwa
+        // Nazwa
         public string TypeName { get; set; }
     }
 }
