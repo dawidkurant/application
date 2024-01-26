@@ -25,6 +25,7 @@ namespace Papu.Entities
         public DbSet<DishMeal> DishMeals { get; set; }
         public DbSet<ProductMeal> ProductMeals { get; set; }
         public DbSet<DayMenu> DaysMenu { get; set; }
+        public DbSet<Menu> Menus { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
 
@@ -245,6 +246,15 @@ namespace Papu.Entities
                 .HasOne(p => p.DayMenu)
                 .WithMany(c => c.Meals)
                 .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Menu>()
+                .HasMany(c => c.Days)
+                .WithOne(p => p.Menu);
+            modelBuilder.Entity<DayMenu>()
+                .HasOne(p => p.Menu)
+                .WithMany(c => c.Days)
+                .OnDelete(DeleteBehavior.SetNull);
+
         }
     }
 }

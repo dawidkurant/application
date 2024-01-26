@@ -15,14 +15,14 @@ using Xunit;
 
 namespace PapuAPI.IntegrationTests
 {
-    public class MenuControllerTests : IClassFixture<WebApplicationFactory<Startup>>
+    public class DayMenuControllerTests
     {
         private readonly HttpClient _client;
 
         // Konstruktor po to, aby nie tworzyć klienta oddzielnie dla każdego testu
-        // jeśli chcemy aby kontekst był współdzielony między testami (czyli obiekt Menu
+        // jeśli chcemy aby kontekst był współdzielony między testami (czyli obiekt DayMenu
         // ControllerTests był stworzony raz, a nie za każdym razem, kiedy uruchamia się test)
-        public MenuControllerTests(WebApplicationFactory<Startup> factory)
+        public DayMenuControllerTests(WebApplicationFactory<Startup> factory)
         {
             // Tutaj chcemy uruchomić nasze Api po to abyśmy byli w stanie wysłać zapytanie http jakimś
             // klientem http z kodu należy dodać zależność, aby startup działał
@@ -50,15 +50,15 @@ namespace PapuAPI.IntegrationTests
                 .CreateClient();
         }
 
-        // getOneMenu
+        // getOneDayMenu
         [Fact]
-        public async Task GetMenu_WithParameter_ReturnsOkResult()
+        public async Task GetDayMenu_WithParameter_ReturnsOkResult()
         {
             // arrange
 
             // act
 
-            var response = await _client.GetAsync("https://localhost:5001/api/menu/1");
+            var response = await _client.GetAsync("https://localhost:5001/api/daymenu/1");
 
             // assert
 
@@ -66,17 +66,17 @@ namespace PapuAPI.IntegrationTests
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
         }
 
-        // getAnotherOneMenu
+        // getAnotherOneDayMenu
         [Theory]
         [InlineData("1")]
         [InlineData("2")]
-        public async Task AnotherGetMenu_WithParameter_ReturnsOkResult(string queryParams)
+        public async Task AnotherGetDayMenu_WithParameter_ReturnsOkResult(string queryParams)
         {
             // arrange
 
             // act
 
-            var response = await _client.GetAsync("https://localhost:5001/api/menu/" + queryParams);
+            var response = await _client.GetAsync("https://localhost:5001/api/daymenu/" + queryParams);
 
             // assert
 
@@ -84,17 +84,17 @@ namespace PapuAPI.IntegrationTests
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
         }
 
-        // getAnotherOneMenu
+        // getAnotherOneDayMenu
         [Theory]
         [InlineData("100")]
         [InlineData("200")]
-        public async Task AnotherGetMenu_WithInvalidParameter_ReturnsNotFound(string queryParams)
+        public async Task AnotherGetDayMenu_WithInvalidParameter_ReturnsNotFound(string queryParams)
         {
             // arrange
 
             // act
 
-            var response = await _client.GetAsync("https://localhost:5001/api/menu/" + queryParams);
+            var response = await _client.GetAsync("https://localhost:5001/api/daymenu/" + queryParams);
 
             // assert
 
@@ -102,15 +102,15 @@ namespace PapuAPI.IntegrationTests
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
         }
 
-        // getAllMenus
+        // getAllDaysMenu
         [Fact]
-        public async Task GetAllMenus_WithParameter_ReturnsOkResult()
+        public async Task GetAllDaysMenu_WithParameter_ReturnsOkResult()
         {
             // arrange
 
             // act
 
-            var response = await _client.GetAsync("https://localhost:5001/api/menu");
+            var response = await _client.GetAsync("https://localhost:5001/api/daymenu");
 
             // assert
 
@@ -118,17 +118,17 @@ namespace PapuAPI.IntegrationTests
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
         }
 
-        // createMenu
+        // createDayMenu
         [Fact]
-        public async Task CreateMenu_WithValidModel_ReturnsCreated()
+        public async Task CreateDayMenu_WithValidModel_ReturnsCreated()
         {
             // arrange
 
             // Tworzymy model, ktory chcemy wysłać na serwer
 
-            var model = new CreateMenuDto
+            var model = new CreateDayMenuDto
             {
-                DayMenuId = new int[] { 1 }
+                MealId = new int[] { 1 }
             };
 
             // Serializujemy model do formatu json
@@ -139,7 +139,7 @@ namespace PapuAPI.IntegrationTests
             // act
 
             // Wysyłamy model na serwer
-            var response = await _client.PostAsync("https://localhost:5001/api/createmenu", httpContent);
+            var response = await _client.PostAsync("https://localhost:5001/api/createdaymenu", httpContent);
 
             // assert
 
@@ -152,15 +152,15 @@ namespace PapuAPI.IntegrationTests
 
         // updateMenu
         [Fact]
-        public async Task UpdateMenu_WithValidModel_ReturnsOKResult()
+        public async Task UpdatedayMenu_WithValidModel_ReturnsOKResult()
         {
             // arrange
 
             // Tworzymy model, ktory chcemy edytować i wysłać na serwer
 
-            var model = new CreateMenuDto
+            var model = new CreateDayMenuDto
             {
-                DayMenuId = new int[] { 1 }
+                MealId = new int[] { 1 }
             };
 
             // Serializujemy model do formatu json
@@ -169,13 +169,13 @@ namespace PapuAPI.IntegrationTests
             StringContent httpContent = new(json, Encoding.UTF8, "application/json");
 
             // Wysyłamy model na serwer
-            await _client.PostAsync("https://localhost:5001/api/createmenu", httpContent);
+            await _client.PostAsync("https://localhost:5001/api/createdaymenu", httpContent);
 
             // Edytujemy model
 
-            var modelUpdated = new UpdateMenuDto
+            var modelUpdated = new UpdateDayMenuDto
             {
-                DayMenuId = new int[] { 1 }
+                MealId = new int[] { 1 }
             };
 
             // Serializujemy model do formatu json
@@ -185,7 +185,7 @@ namespace PapuAPI.IntegrationTests
 
             // act
 
-            var response2 = await _client.PutAsync("https://localhost:5001/api/menu/2", httpContent2);
+            var response2 = await _client.PutAsync("https://localhost:5001/api/daymenu/22", httpContent2);
 
             // assert
 
@@ -193,17 +193,17 @@ namespace PapuAPI.IntegrationTests
             response2.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
         }
 
-        // updateAnotherMenu
+        // updateAnotherDayMenu
         [Fact]
-        public async Task UpdateMenu_WithInvalidModel_ReturnsMethodNotAllowedResult()
+        public async Task UpdateDayMenu_WithInvalidModel_ReturnsMethodNotAllowedResult()
         {
             // arrange
 
             // Tworzymy model, ktory chcemy edytować i wysłać na serwer
 
-            var model = new UpdateMenuDto
+            var model = new UpdateDayMenuDto
             {
-                DayMenuId = new int[] { 1 }
+                MealId = new int[] { 1 }
             };
 
             // Serializujemy model do formatu json
@@ -213,7 +213,7 @@ namespace PapuAPI.IntegrationTests
 
             // act
 
-            var response = await _client.PatchAsync("https://localhost:5001/api/menu/2", httpContent);
+            var response = await _client.PatchAsync("https://localhost:5001/api/daymenu/2", httpContent);
 
             // assert
 
@@ -221,17 +221,17 @@ namespace PapuAPI.IntegrationTests
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.MethodNotAllowed);
         }
 
-        // deleteMenu
+        // deleteDayMenu
         [Fact]
-        public async Task DeleteMenu_WithParameter_ReturnsNoContentResult()
+        public async Task DeleteDayMenu_WithParameter_ReturnsNoContentResult()
         {
             // arrange
 
             // Tworzymy model, ktory chcemy wysłać na serwer
 
-            var model = new CreateMenuDto
+            var model = new CreateDayMenuDto
             {
-                DayMenuId = new int[] { 1 }
+                MealId = new int[] { 1 }
             };
 
             // Serializujemy model do formatu json
@@ -240,11 +240,11 @@ namespace PapuAPI.IntegrationTests
             StringContent httpContent = new(json, Encoding.UTF8, "application/json");
 
             // Wysyłamy model na serwer
-            await _client.PostAsync("https://localhost:5001/api/createmenu", httpContent);
+            await _client.PostAsync("https://localhost:5001/api/createdaymenu", httpContent);
 
             // act
 
-            var response2 = await _client.DeleteAsync("https://localhost:5001/api/menu/2");
+            var response2 = await _client.DeleteAsync("https://localhost:5001/api/daymenu/22");
 
             // assert
 
@@ -252,15 +252,15 @@ namespace PapuAPI.IntegrationTests
             response2.StatusCode.Should().Be(System.Net.HttpStatusCode.NoContent);
         }
 
-        // deleteAnotherMenu
+        // deleteAnotherDayMenu
         [Fact]
-        public async Task DeleteMenu_WithParameter_ReturnsForbiddenResult()
+        public async Task DeleteDayMenu_WithParameter_ReturnsForbiddenResult()
         {
             // arrange
 
             // act
 
-            var response = await _client.DeleteAsync("https://localhost:5001/api/menu/2");
+            var response = await _client.DeleteAsync("https://localhost:5001/api/daymenu/22");
 
             // assert
 

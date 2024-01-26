@@ -39,22 +39,22 @@ namespace Papu
                 .ForMember(x => x.Dishes, c => c.MapFrom(x => x.DishMeals.Select(cs => cs.Dish)));
 
             CreateMap<DayMenu, DayMenuDto>()
-                .ForMember(dest => dest.Meals, opt => opt.MapFrom(src => src.Meals));
+                .ForMember(x => x.Meals, c => c.MapFrom(cs => cs.Meals));
+
+            CreateMap<Menu, MenuDto>()
+                .ForMember(x => x.Days, c => c.MapFrom(cs => cs.Days));
 
             CreateMap<UpdateProductDto, Product>();
             CreateMap<UpdateDishDto, Dish>();
-
             CreateMap<UpdateMealDto, Meal>();
-
             CreateMap<UpdateDayMenuDto, DayMenu>();
+            CreateMap<UpdateMenuDto, Menu>();
 
             CreateMap<CreateProductDto, Product>();
-
             CreateMap<CreateDishDto, Dish>();
-
             CreateMap<CreateMealDto, Meal>();
-
             CreateMap<CreateDayMenuDto, DayMenu>();
+            CreateMap<CreateMenuDto, Menu>();
         }
     }
 }

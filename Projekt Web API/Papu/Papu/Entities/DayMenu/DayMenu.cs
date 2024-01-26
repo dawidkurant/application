@@ -13,6 +13,9 @@ namespace Papu.Entities
         // Pory dnia zawierające się w dniu
         public virtual ICollection<Meal> Meals { get; set; }
 
+        // Zmienna reprezentująca jadłospis
+        public virtual Menu Menu { get; set; }
+
         //Twórca danego dnia
         public int? CreatedById { get; set; }
 

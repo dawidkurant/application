@@ -7,7 +7,7 @@ namespace Papu.Models
         // Informacje, które może podać klient, aby edytować potrawę
 
         // Nazwa
-        // Nazwa jadłospisu jest wymagana
+        // Nazwa potrawy jest wymagana
         [Required]
         // Maksymalna długość łańucha nazwy potrawy wynosi 200
         [MaxLength(200)]

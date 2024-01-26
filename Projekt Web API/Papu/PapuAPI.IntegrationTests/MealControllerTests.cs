@@ -102,7 +102,7 @@ namespace PapuAPI.IntegrationTests
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
         }
 
-        // getAllBreakfast
+        // getAllMeals
         [Fact]
         public async Task GetAllMeals_WithParameter_ReturnsOkResult()
         {
@@ -188,7 +188,7 @@ namespace PapuAPI.IntegrationTests
 
             // act
 
-            var response2 = await _client.PutAsync("https://localhost:5001/api/meal/17", httpContent2);
+            var response2 = await _client.PutAsync("https://localhost:5001/api/meal/14", httpContent2);
 
             // assert
 
@@ -249,7 +249,7 @@ namespace PapuAPI.IntegrationTests
 
             // act
 
-            var response2 = await _client.DeleteAsync("https://localhost:5001/api/meal/5");
+            var response2 = await _client.DeleteAsync("https://localhost:5001/api/meal/14");
 
             // assert
 
@@ -265,7 +265,7 @@ namespace PapuAPI.IntegrationTests
 
             // act
 
-            var response = await _client.DeleteAsync("https://localhost:5001/api/meal/2");
+            var response = await _client.DeleteAsync("https://localhost:5001/api/meal/10");
 
             // assert
 

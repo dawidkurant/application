@@ -100,6 +100,7 @@ namespace Papu
             services.AddScoped<ITypeService, TypeService>();
             services.AddScoped<IMealService, MealService>();
             services.AddScoped<IDayMenuService, DayMenuService>();
+            services.AddScoped<IMenuService, MenuService>();
             services.AddScoped<IAccountService, AccountService>();
 
             /// <summary>

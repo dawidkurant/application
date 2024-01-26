@@ -33,8 +33,7 @@ namespace Papu
             SeedTable<Category>(() => Categories);
             SeedTable<Unit>(() => Units);
             SeedTable<Group>(() => Groups);
-            SeedTable<Meal>(() => GetMeals());
-            SeedTable<DayMenu>(() => GetDaysMenu());
+            SeedTable<Menu>(() => GetMenus());
         }
 
         private void MigrateDatabase()
@@ -223,239 +222,21 @@ namespace Papu
         }
 
         /// <summary>
-        /// Metoda zwracająca kolekcję pór dnia, które będą zawsze istnieć w tabeli meal
+        /// Metoda zwracająca jadłospis, który będzie zawsze istnieć w tabeli menu,
+        /// zwraca kolekcję dni, które będą zawsze istnieć w tabeli dayMenu,
+        /// zwraca kolekcję pór dnia, które będą zawsze istnieć w tabeli meal,
+        /// 
         /// baza automatycznie przydzieli id
         /// </summary>
-        private static IEnumerable<Meal> GetMeals()
+        private static IEnumerable<Menu> GetMenus()
         {
-            return new List<Meal>()
+            return new List<Menu>()
             {
-                new Meal()
+                new Menu()
                 {
-                    MealType = MealType.Breakfast,
-                    DishMeals = new List<DishMeal>()
+                    Days = new List<DayMenu>()
                     {
-                        new DishMeal()
-                        {
-                            Dish = new Dish()
-                            {
-                                DishName = "Krem pomidorowy z grzankami z mozzarellą",
-                                DishProducts = new List<ProductDish>()
-                                {
-                                    new ProductDish()
-                                    {
-                                        Product = new Product()
-                                        {
-                                            ProductName = "Pomidory w puszce",
-                                            Weight = 500
-                                        }
-                                    }
-                                },
-                                DishDescription = "Ulubiona zupa wszystkich dzieci w jeszcze smaczniejszej odsłonie. W końcu kto się oprze grzankom z mozzarellą? Ten pyszny krem sprawi, że zapomnicie o pomidorowej z makaronem. Jeśli szukacie prostego i jednocześnie wyrafinowanego przepisu na szybki obiad, ta propozycja jest dla was! Na rancie talerza z zupą ułóżcie grzanki i udekorujcie ją odrobiną pesto i oliwą.",
-                                Size = 3,
-                                MethodOfPeparation = "Na patelni rozpuszczamy masło i oliwę, dodajemy posiekany ząbek czosnku oraz drobno pokrojoną cebulę. Smażymy chwilę, aż cebula się zeszkli. Dodajemy pomidory i smażymy przez jeszcze kilka minut, aż smaki się połączą. Dolewamy 2 szklanki bulionu, dobrze mieszamy i gotujemy przez chwilę. Energicznie mieszając, wsypujemy do zupy semolinę i gotujemy, aż zupa zgęstnieje. Przyprawiamy do smaku cukrem, solą i pieprzem.",
-                                PreparationTime = 30,
-                                Portions = 3
-                            }
-                        }
-                    }
-                },
-                new Meal()
-                {
-                    MealType = MealType.SecondBreakfast,
-                    DishMeals = new List<DishMeal>()
-                    {
-                        new DishMeal()
-                        {
-                            Dish = new Dish()
-                            {
-                                DishName = "Pierogi ruskie",
-                                DishProducts = new List<ProductDish>()
-                                {
-                                    new ProductDish()
-                                    {
-                                        Product = new Product()
-                                        {
-                                            ProductName = "Ziemniaki",
-                                            Weight = 600
-                                        }
-                                    },
-                                    new ProductDish()
-                                    {
-                                        Product = new Product()
-                                        {
-                                            ProductName = "Twaróg",
-                                            Weight = 300
-                                        }
-                                    }
-                                },
-                                DishDescription = "Klasyczne, polskie pierogi z nadzieniem z ziemniaków i twarogu.",
-                                MethodOfPeparation = "Ugotuj ziemniaki, rozgnieć je i wymieszaj z twarogiem. Przygotuj ciasto, rozwałkuj je i wytnij kółka. Nałóż nadzienie, zlep pierogi i gotuj je we wrzącej wodzie aż wypłyną.",
-                                Portions = 5,
-                                PreparationTime = 60,
-                                Size = 5,
-                            }
-                        }
-                    }
-                },
-                new Meal()
-                {
-                    MealType = MealType.Lunch,
-                    DishMeals = new List<DishMeal>()
-                    {
-                        new DishMeal()
-                        {
-                            Dish = new Dish()
-                            {
-                                DishName = "Sałatka grecka",
-                                DishDescription = "Tradycyjna sałatka z Grecji z oliwkami, pomidorami, ogórkiem, fetą i sosem z oliwy z oliwek.",
-                                MethodOfPeparation = "Pokrój pomidory, ogórki, cebulę i oliwki. Wymieszaj składniki w misce, dodaj fetę, posyp świeżymi ziołami. Skrop sosem z oliwy z oliwek i dopraw solą oraz pieprzem.",
-                                Portions = 4,
-                                PreparationTime = 20,
-                                Size = 4,
-                                DishProducts = new List<ProductDish>()
-                                {
-                                    new ProductDish()
-                                    {
-                                        Product = new Product()
-                                        {
-                                            ProductName = "Pomidory",
-                                            Weight = 300
-                                        }
-                                    },
-                                    new ProductDish()
-                                    {
-                                        Product = new Product()
-                                        {
-                                            ProductName = "Ogórki",
-                                            Weight = 200
-                                        }
-                                    },
-                                    new ProductDish()
-                                    {
-                                        Product = new Product()
-                                        {
-                                            ProductName = "Oliwki",
-                                            Weight = 150
-                                        }
-                                    },
-                                    new ProductDish()
-                                    {
-                                        Product = new Product()
-                                        {
-                                            ProductName = "Feta",
-                                            Weight = 200
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                new Meal()
-                {
-                    MealType = MealType.Snack,
-                    DishMeals = new List<DishMeal>()
-                    {
-                        new DishMeal()
-                        {
-                            Dish = new Dish()
-                            {
-                                DishName = "Kurczak curry z ryżem basmati",
-                                DishDescription = "Kurczak w aromatycznym sosie curry podawany z ryżem basmati.",
-                                MethodOfPeparation = "Pokrój kurczaka na kawałki, podsmaż na patelni. Dodaj pokrojoną cebulę, czosnek i przyprawy. Kiedy składniki się przesmażą, dodaj pomidory i bulion. Dus przez kilka minut, aż kurczak będzie miękki. Podawaj z ugotowanym ryżem basmati.",
-                                Portions = 3,
-                                PreparationTime = 40,
-                                Size = 3,
-                                DishProducts = new List<ProductDish>()
-                                {
-                                    new ProductDish()
-                                    {
-                                        Product = new Product()
-                                        {
-                                            ProductName = "Filet z kurczaka",
-                                            Weight = 500
-                                        }
-                                    },
-                                    new ProductDish()
-                                    {
-                                        Product = new Product()
-                                        {
-                                            ProductName = "Ryż basmati",
-                                            Weight = 300
-                                        }
-                                    },
-                                    new ProductDish()
-                                    {
-                                        Product = new Product()
-                                        {
-                                            ProductName = "Pomidory",
-                                            Weight = 200
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                new Meal()
-                {
-                    MealType = MealType.Dinner,
-                    DishMeals = new List<DishMeal>()
-                    {
-                        new DishMeal()
-                        {
-                            Dish = new Dish()
-                            {
-                                DishName = "Sałatka z grillowanym kurczakiem",
-                                DishDescription = "Świeża sałatka z grillowanym kurczakiem, pomidorami i awokado.",
-                                MethodOfPeparation = "Przygotuj kurczaka i grilluj go na patelni. Pokrój pomidory i awokado. Ułóż wszystkie składniki na talerzu i skrop sosem winegret.",
-                                Portions = 2,
-                                PreparationTime = 25,
-                                Size = 2,
-                                DishProducts = new List<ProductDish>()
-                                {
-                                    new ProductDish()
-                                    {
-                                        Product = new Product()
-                                        {
-                                            ProductName = "Piersi z kurczaka",
-                                            Weight = 300
-                                        }
-                                    },
-                                    new ProductDish()
-                                    {
-                                        Product = new Product()
-                                        {
-                                            ProductName = "Pomidory",
-                                            Weight = 150
-                                        }
-                                    },
-                                    new ProductDish()
-                                    {
-                                        Product = new Product()
-                                        {
-                                            ProductName = "Awokado",
-                                            Weight = 100
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            };
-        }
-
-        /// <summary>
-        /// Metoda zwracająca kolekcję dni, które będą zawsze istnieć w tabeli dayMenu
-        /// baza automatycznie przydzieli id
-        /// </summary>
-        private static IEnumerable<DayMenu> GetDaysMenu()
-        {
-            return new List<DayMenu>()
-            {
-                new DayMenu()
+                        new DayMenu()
                 {
                     DayOfWeek = Entities.DayOfWeek.Monday,
                     Meals = new List<Meal>()
@@ -808,6 +589,8 @@ namespace Papu
                                 }
                             }
                         }
+                    }
+                }
                     }
                 }
             };

@@ -21,7 +21,7 @@ namespace Papu.Authorization
             // Przypisujemy id użytkownika 
             var userId = context.User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier).Value;
 
-            // Sprawdzamy czy pobrane id pokrywa się z twórcą danego śniadania 
+            // Sprawdzamy czy pobrane id pokrywa się z twórcą danej pory dnia 
             if (meal.CreatedById == int.Parse(userId))
             {
                 context.Succeed(requirement);
